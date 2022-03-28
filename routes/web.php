@@ -49,11 +49,8 @@ All Admin Routes List
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
-    // Route::get('/admin/company', function () {
-    //     $company = DB::table('company_details')->first();    
-    //     return view('layouts.admin.company.basicinfo', ['company' => $company]);
-    // })->name('company.basic');
     Route::get('/admin/company', [CompanyController::class, 'index'])->name('company.basic');
+    Route::get('/admin/company/update/{$id}', [CompanyController::class, 'update'])->name('company.update');
 });
 
 /*------------------------------------------
