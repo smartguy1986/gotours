@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2022 at 01:26 PM
+-- Generation Time: Mar 28, 2022 at 09:45 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -24,6 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `company_banners`
+--
+
+CREATE TABLE `company_banners` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `company_details`
 --
 
@@ -33,7 +48,7 @@ CREATE TABLE `company_details` (
   `company_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `company_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `company_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_bio` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_bio` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -43,7 +58,7 @@ CREATE TABLE `company_details` (
 --
 
 INSERT INTO `company_details` (`id`, `company_name`, `company_address`, `company_phone`, `company_email`, `company_bio`, `created_at`, `updated_at`) VALUES
-(1, 'GoTours Pvt. Ltd.', '1/23 A.B.C. Road, Kolkata - 700001', '+91 9856365892', 'contact@gotours.com', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia volupta', NULL, NULL);
+(1, 'GoTours Pvt. Ltd.', '1/23 A.B.C. Road, Kolkata - 700001', '+91 9856365892', 'contact@gotours.com', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia volupta.', NULL, '2022-03-28 09:04:34');
 
 -- --------------------------------------------------------
 
@@ -84,7 +99,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_03_27_110311_add_profileimage_to_users_table', 2),
 (6, '2022_03_27_110637_add_multiple_to_users_table', 3),
-(7, '2022_03_28_065850_create_company_details_table', 4);
+(7, '2022_03_28_065850_create_company_details_table', 4),
+(8, '2022_03_28_193751_create_company_banners_table', 5);
 
 -- --------------------------------------------------------
 
@@ -160,6 +176,12 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 --
 
 --
+-- Indexes for table `company_banners`
+--
+ALTER TABLE `company_banners`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `company_details`
 --
 ALTER TABLE `company_details`
@@ -204,6 +226,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `company_banners`
+--
+ALTER TABLE `company_banners`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `company_details`
 --
 ALTER TABLE `company_details`
@@ -219,7 +247,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
