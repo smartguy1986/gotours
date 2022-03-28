@@ -113,7 +113,7 @@
                 <ul>
                 <li>
                   @if (\Auth::user()->type == "admin")
-                    <a href="admin/dashboard.html">Admin Dashboard</a>
+                    <a href="{{ URL::route('admin.dashboard') }}">Admin Dashboard</a>
                   @elseif (\Auth::user()->type == "manager")
                      <a href="admin/dashboard.html">Manager Dashboard</a>
                   @else 

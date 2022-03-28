@@ -17,6 +17,19 @@
                     </li>
                 </ul>
             </li>
+            <li><a><i class="fas fa-user"></i>Company Details</a>
+                <ul>
+                    <li>
+                        <a href="{{ URL::route('company.basic') }}">Basic Info</a>
+                    </li>
+                    <li>
+                        <a href="#">Social Network</a>
+                    </li>
+                    <li>
+                        <a href="#">Home Page Banners</a>
+                    </li>
+                </ul>
+            </li>
             <li><a href="db-add-package.html"><i class="fas fa-umbrella-beach"></i>Add Package</a></li>
             <li>
                 <a><i class="fas fa-hotel"></i></i>packages</a>
