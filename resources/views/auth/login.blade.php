@@ -4,6 +4,11 @@
 
 <div class="login-page" style="background-image: url({{asset('admin_assets/images/bg.jpg')}})">
     <div class="login-from-wrap">
+        @error('error')
+        <span class="invalid-feedback" role="alert">
+            <strong>{{ $message }}</strong>
+        </span>
+        @enderror
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="form-group">

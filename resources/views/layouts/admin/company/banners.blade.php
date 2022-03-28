@@ -21,7 +21,12 @@
                 </div>
                 <p></p>
                 @endif
-                @foreach ($company as $cmp)
+
+                <p></p>
+                {{ $banners }}
+                <p></p>
+
+                {{-- @foreach ($company as $cmp)
                 <form class="form-horizontal" method="POST" action="{{ route('company.update', [$cmp->id]) }}">
                     @csrf   
                     @method('PUT')                 
@@ -60,7 +65,7 @@
                     <br>
                     <input type="submit" name="Submit" value="Update Details">
                 </form>
-                @endforeach
+                @endforeach --}}
             </div>
         </div>  
     </div>

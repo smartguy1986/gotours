@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CompanyDetails;
 use Illuminate\Http\Request;
-use App\company_details;
 use DB;
 
-class CompanyController extends Controller
+class CompanyDetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -23,6 +22,12 @@ class CompanyController extends Controller
     {
         $data['company'] = DB::table('company_details')->select('*')->get();
         return view('layouts.admin.company.basicinfo', $data);
+    }
+
+    public function banners()
+    {
+        $data['banners'] = DB::table('company_banners')->select('*')->get();
+        return view('layouts.admin.company.banners', $data);
     }
 
     /**
@@ -43,16 +48,16 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\CompanyDetails  $companyDetails
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CompanyDetails $companyDetails)
     {
         //
     }
@@ -60,10 +65,10 @@ class CompanyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\CompanyDetails  $companyDetails
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CompanyDetails $companyDetails)
     {
         //
     }
@@ -72,7 +77,7 @@ class CompanyController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\CompanyDetails  $companyDetails
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -93,17 +98,17 @@ class CompanyController extends Controller
         $company->company_bio = $request->company_bio;
         $company->save();
 
-        return redirect()->route('admin.dashboard')
+        return redirect()->route('company.basic')
         ->with('success','Company Has Been updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\CompanyDetails  $companyDetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(CompanyDetails $companyDetails)
     {
         //
     }

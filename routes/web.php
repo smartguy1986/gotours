@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyDetailsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,8 +50,9 @@ All Admin Routes List
 
 Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
-    Route::get('/admin/company', [CompanyController::class, 'index'])->name('company.basic');
-    Route::get('/admin/company/update/{$id}', [CompanyController::class, 'update'])->name('company.update');
+    Route::get('/admin/company', [CompanyDetailsController::class, 'index'])->name('company.basic');
+    Route::put('/admin/company/update/{id}', [CompanyDetailsController::class, 'update'])->name('company.update');
+    Route::get('/admin/company/banners', [CompanyDetailsController::class, 'banners'])->name('company.banners');
 });
 
 /*------------------------------------------

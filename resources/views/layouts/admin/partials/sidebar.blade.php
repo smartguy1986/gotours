@@ -3,7 +3,7 @@
     <div id="dashboard-Navigation" class="slick-nav"></div>
     <div id="navigation" class="navigation-container">
         <ul>
-            <li class="active-menu"><a href="{{ URL::route('admin.dashboard') }}"><i class="far fa-chart-bar"></i> Dashboard</a></li>
+            <li class="@if (\Request::is('*dashboard')) active-menu  @endif"><a href="{{ URL::route('admin.dashboard') }}"><i class="far fa-chart-bar"></i> Dashboard</a></li>
             <li><a><i class="fas fa-user"></i>Users</a>
                 <ul>
                     <li>
@@ -17,16 +17,16 @@
                     </li>
                 </ul>
             </li>
-            <li><a><i class="fas fa-user"></i>Company Details</a>
+            <li class="@if (\Request::is('*company')) active-menu slicknav_open @endif"><a><i class="fas fa-user"></i>Company Details</a>
                 <ul>
-                    <li>
+                    <li class="@if (\Request::is('company')) active-menu  @endif">
                         <a href="{{ URL::route('company.basic') }}">Basic Info</a>
                     </li>
-                    <li>
+                    <li class="@if (\Request::is('social')) active-menu  @endif">
                         <a href="#">Social Network</a>
                     </li>
-                    <li>
-                        <a href="#">Home Page Banners</a>
+                    <li class="@if (\Request::is('banners')) active-menu  @endif">
+                        <a href="{{ URL::route('company.banners') }}">Home Page Banners</a>
                     </li>
                 </ul>
             </li>
