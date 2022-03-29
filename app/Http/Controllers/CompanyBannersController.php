@@ -38,7 +38,9 @@ class CompanyBannersController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
+            'tagline' => 'required',
             'banner_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'description' => 'required'
         ]);
     
         if ($validatedData->fails()) {
@@ -51,8 +53,8 @@ class CompanyBannersController extends Controller
         // $imageName = time().'.'.$request->banner_image->extension();
         // $request->banner_image->move(public_path('public/images/banners'), $imageName);
 
-        $save = new company_banners;
-        $save->imageURL = $path.'/'.$name;
+        $save = new CompanyBanners;
+        $save->imageURL = $name;
         $save->tagline = $request->tagline;
         $save->description = $request->description;
         $save->status = 1;

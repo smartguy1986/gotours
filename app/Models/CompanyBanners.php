@@ -8,5 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class CompanyBanners extends Model
 {
     use HasFactory;
-    protected $table="company_banners";
 }
