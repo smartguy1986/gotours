@@ -7,6 +7,31 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## How to run this project
+
+Make sure you have Node.js installed in your system and the path is added to the environment variable. <br/>
+Create a new folder and open terminal or command promt from that folder. <br/>
+copy and paste **git clone https://github.com/smartguy1986/gotours.git** <br/> <br/>
+
+Once its installed, go inside the ***gotours*** folder <br/> <br/>
+
+You will find a folder **DB**, inside that the latest database is copied, take it and make a database in your local system. Name the database **"mylaravel"** <br/> <br/>
+
+Then import the database from DB folder to your local phpmyadmin. <br/> <br/>
+
+Then go to terminal or command prompt and make sure you are inside the gotours folder. <br/>
+Type ***npm install*** <br/> <br/>
+
+once its done, type ***php artisan serve*** and run the project in browser. <br/> <br/>
+
+For admin purpose use <br/>
+username : **admin@gotours.com** <br/>
+password : 123456 <br/> <br/>
+
+Thanks, <br/>
+Arijit
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
