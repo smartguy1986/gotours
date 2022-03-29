@@ -22,17 +22,16 @@
                 <p></p>
                 @endif
 
-                <p></p>
+                {{-- <p></p>
                 {{ $banners }}
-                <p></p>
+                <p></p> --}}
 
-                {{-- @foreach ($banners as $bnn) --}}
                 <div class="cart-list-inner">
                     <div class="table-responsive table-striped">
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th></th>
+                                    <th>Image</th>
                                     <th>Tagline</th>
                                     <th>Description</th>
                                     <th>Status</th>
@@ -41,38 +40,24 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($banners as $bnn)
                                 <tr>
-                                    <td class=""><span class="cartImage"><img src="assets/images/img5.jpg" alt="image"></span></td>
-                                    <td data-column="tagline">Sunset view of beautiful lakeside resident</td>
-                                    <td data-column="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                    <td data-column="status" class="count-input">Active</td>
-                                    <td data-column="added_on">20th Mar, 2022</td>
+                                    <td class=""><span class="cartImage"><img src="{{URL::asset('/images/banners/'.$bnn->imageURL)}}" alt="image" width="200"></span></td>
+                                    <td data-column="tagline">{{ $bnn->tagline }}</td>
+                                    <td data-column="description">{{ $bnn->description }}</td>
+                                    <td data-column="status" class="count-input">@if($bnn->status == 1) Active @else Inactive @endif</td>
+                                    <td data-column="added_on">{{ date('dS M, Y', strtotime($bnn->created_at)) }}</td>
                                     <td data-column="action"><a href="#"><i class="fas fa-edit"></i></a> | <a href="#"><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
-                                <tr>
-                                    <td class=""><span class="cartImage"><img src="assets/images/img5.jpg" alt="image"></span></td>
-                                    <td data-column="tagline">Sunset view of beautiful lakeside resident</td>
-                                    <td data-column="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                    <td data-column="status" class="count-input">Active</td>
-                                    <td data-column="added_on">20th Mar, 2022</td>
-                                    <td data-column="action"><a href="#"><i class="fas fa-edit"></i></a> | <a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td class=""><span class="cartImage"><img src="assets/images/img5.jpg" alt="image"></span></td>
-                                    <td data-column="tagline">Sunset view of beautiful lakeside resident</td>
-                                    <td data-column="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                    <td data-column="status" class="count-input">Active</td>
-                                    <td data-column="added_on">20th Mar, 2022</td>
-                                    <td data-column="action"><a href="#"><i class="fas fa-edit"></i></a> | <a href="#"><i class="fas fa-trash-alt"></i></a></td>
-                                </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
-                  {{-- @endforeach --}}
+                  
                 <p></p>
                 <h4>Add New Banners</h4>
-                <form class="form-horizontal" method="POST" action="{{ route('company.banners.store') }}">
+                <form class="form-horizontal" method="POST" action="{{ route('company.banners.store') }}" enctype="multipart/form-data">
                     @csrf               
                     <div class="row">
                         <div class="col-sm-6">
@@ -84,7 +69,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Banner Image</label>
-                                <input name="banner_image" class="form-control" type="file">
+                                <input type="file" name="banner_image" class="form-control">
                                 <label>*Image must be less than 2MB in size, and upload only jpg, png, gif only</label>
                             </div>
                         </div>

@@ -75,7 +75,7 @@
                <div class="container d-flex justify-content-between align-items-center">
                   <div class="site-identity">
                      <h1 class="site-title">
-                        <a href="index.html">
+                        <a href="{{ URL::to('/') }}">
                            <img src="{{asset('assets/images/travele-logo.png')}}" alt="logo">
                         </a>
                      </h1>

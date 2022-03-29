@@ -1,7 +1,7 @@
 <nav id="navigation" class="navigation">
     <ul>
        <li class="menu-item">
-          <a href="index.html">Home</a>
+          <a href="{{ URL::to('/') }}">Home</a>
        </li>
        <li class="menu-item-has-children">
           <a href="#">Tour</a>

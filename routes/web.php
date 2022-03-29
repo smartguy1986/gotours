@@ -17,7 +17,8 @@ use App\Http\Controllers\CompanyDetailsController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
+    return view('home')->with($data);
 });
 Route::get('/home', function () {
     return view('home');

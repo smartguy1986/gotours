@@ -39,28 +39,28 @@ class CompanyBannersController extends Controller
     {
         $validatedData = $request->validate([
             'tagline' => 'required',
-            'banner_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'banner_image' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'description' => 'required'
         ]);
     
-        if ($validatedData->fails()) {
-            return redirect('company.banners')->with('error', 'Image type is not supported or the size is greater than 2MB');
-        }
+        // if ($validatedData->fails()) {
+        //     return redirect('company.banners')->with('error', 'Image type is not supported or the size is greater than 2MB');
+        // }
 
-        $name = $request->file('banner_image')->getClientOriginalName();
-        $path = $request->file('banner_image')->store('public/images/banners');
+        // $name = $request->file('banner_image')->getClientOriginalName();
+        // $path = $request->file('banner_image')->store('public/images/banners');
 
-        // $imageName = time().'.'.$request->banner_image->extension();
-        // $request->banner_image->move(public_path('public/images/banners'), $imageName);
+        $fileName = time().'.'.$request->banner_image->extension();  
+        $request->banner_image->move(public_path('images/banners'), $fileName);
 
         $save = new CompanyBanners;
-        $save->imageURL = $name;
-        $save->tagline = $request->tagline;
+        $save->imageURL = $fileName;
+        $save->tagline = strtoupper($request->tagline);
         $save->description = $request->description;
         $save->status = 1;
         $save->save();
     
-        return redirect('company.banners')->with('success', 'Banner Has been uploaded');
+        return redirect('/admin/company/banners')->with('success', 'Banner Has been uploaded');
     }
 
     /**
