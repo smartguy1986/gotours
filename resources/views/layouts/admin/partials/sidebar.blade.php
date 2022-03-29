@@ -22,9 +22,9 @@
                     <li class="@if (\Request::is('company')) active-menu  @endif">
                         <a href="{{ URL::route('company.basic') }}">Basic Info</a>
                     </li>
-                    <li class="@if (\Request::is('social')) active-menu  @endif">
+                    {{-- <li class="@if (\Request::is('social')) active-menu  @endif">
                         <a href="#">Social Network</a>
-                    </li>
+                    </li> --}}
                     <li class="@if (\Request::is('banners')) active-menu  @endif">
                         <a href="{{ URL::route('company.banners') }}">Home Page Banners</a>
                     </li>
@@ -39,6 +39,7 @@
                     <li><a href="db-package-expired.html">Expired</a></li>
                 </ul>   
             </li>
+            <li class="@if (\Request::is('*destinations')) active-menu  @endif"><a href="{{ URL::route('destinations.list') }}"><i class="fas fa-globe"></i> Destinations</a></li>
             <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
             <li><a href="db-wishlist.html"><i class="far fa-heart"></i>Wishlist</a></li>
             <li><a href="db-comment.html"><i class="fas fa-comments"></i>Comments</a></li>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanyBanners;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File; 
 use DB;
 
 class CompanyBannersController extends Controller
@@ -17,16 +18,6 @@ class CompanyBannersController extends Controller
     {
         $data['banners'] = DB::table('company_banners')->select('*')->get();
         return view('layouts.admin.company.banners', $data);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -63,48 +54,11 @@ class CompanyBannersController extends Controller
         return redirect('/admin/company/banners')->with('success', 'Banner Has been uploaded');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\CompanyBanners  $companyBanners
-     * @return \Illuminate\Http\Response
-     */
-    public function show(CompanyBanners $companyBanners)
+    public function delete_banners(Request $request, $id, $filename)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\CompanyBanners  $companyBanners
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(CompanyBanners $companyBanners)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\CompanyBanners  $companyBanners
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, CompanyBanners $companyBanners)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\CompanyBanners  $companyBanners
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CompanyBanners $companyBanners)
-    {
-        //
+        DB::table('company_banners')->where('id', $id)->delete();
+        $file_path = public_path().'/images/banners/'.$filename;
+        unlink($file_path);
+        return redirect('/admin/company/banners')->with('success', 'Banner Has been deleted');
     }
 }

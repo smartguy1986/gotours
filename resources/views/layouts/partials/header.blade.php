@@ -40,17 +40,20 @@
                   <div class="row">
                      <div class="col-lg-8 d-none d-lg-block">
                         <div class="header-contact-info">
+                           {{-- {{ $company_details }} --}}
+                           @foreach ($company_details as $cmpd)
                            <ul>
                               <li>
-                                 <a href="#"><i class="fas fa-phone-alt"></i> +01 (977) 2599 12</a>
+                                 <a href="#"><i class="fas fa-phone-alt"></i> {{ $cmpd->company_phone }}</a>
                               </li>
                               <li>
-                                 <a href="mailto:info@Travel.com"><i class="fas fa-envelope"></i> company@domain.com</a>
+                                 <a href="mailto:{{ $cmpd->company_email }}"><i class="fas fa-envelope"></i> {{ $cmpd->company_email }}</a>
                               </li>
                               <li>
-                                 <i class="fas fa-map-marker-alt"></i> 3146 Koontz Lane, California
+                                 <i class="fas fa-map-marker-alt"></i> {{ $cmpd->company_address }}
                               </li>
                            </ul>
+                           @endforeach
                         </div>
                      </div>
                      <div class="col-lg-4 d-flex justify-content-lg-end justify-content-between">
