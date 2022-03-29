@@ -15,7 +15,7 @@ class DestinationsController extends Controller
      */
     public function index()
     {
-        $data['banners'] = DB::table('destinations')->select('*')->get();
+        $data['destinations'] = DB::table('destinations')->select('*')->get();
         return view('layouts.admin.destinations.lists', $data);
     }
 
@@ -37,7 +37,29 @@ class DestinationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'tagline' => 'required',
+            'dst_image' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'description' => 'required',
+            'head_office_phone' => 'required',
+            'head_office_address' => 'required'
+        ]);
+    
+        $fileName = time().'.'.$request->dst_image->extension();  
+        $request->dst_image->move(public_path('images/destinations'), $fileName);
+
+        $save = new Destinations;
+        $save->name = strtoupper($request->name);
+        $save->imageURL = $fileName;
+        $save->tagline = $request->tagline;
+        $save->description = $request->description;
+        $save->head_office_phone = $request->head_office_phone;
+        $save->head_office_address = $request->head_office_address;
+        $save->status = 1;
+        $save->save();
+    
+        return redirect('/admin/destinations')->with('success', 'Destination Has been uploaded');
     }
 
     /**
