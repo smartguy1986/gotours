@@ -62,3 +62,27 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## How to run this project
+
+Make sure you have Node.js installed in your system and the path is added to the environment variable. 
+Create a new folder and open terminal or command promt from that folder.
+copy and paste git clone https://github.com/smartguy1986/gotours.git
+
+Once its installed, go inside the gotours folder
+
+You will find a folder DB, inside that the latest database is copied, take it and make a database in your local system. Name the database "mylaravel"
+
+Then import the database from DB folder to your local phpmyadmin.
+
+Then go to terminal or command prompt and make sure you are inside the gotours folder.
+Type *npm install*
+
+once its done, type *php artisan serve* and run the project in browser.
+
+For admin purpose use
+username : **admin@gotours.com**
+password : 123456
+
+Thanks,
+Arijit
