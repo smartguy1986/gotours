@@ -65,7 +65,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## How to run this project
 
-Make sure you have Node.js installed in your system and the path is added to the environment variable. 
+Make sure you have Node.js installed in your system and the path is added to the environment variable. <br/>
 Create a new folder and open terminal or command promt from that folder.
 copy and paste git clone https://github.com/smartguy1986/gotours.git
 
