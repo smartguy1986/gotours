@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2022 at 09:45 PM
+-- Generation Time: Mar 29, 2022 at 11:55 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -32,9 +32,18 @@ CREATE TABLE `company_banners` (
   `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `company_banners`
+--
+
+INSERT INTO `company_banners` (`id`, `tagline`, `description`, `imageURL`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'TRAVELLING AROUND THE WORLD', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648546204.jpg', '1', '2022-03-29 04:00:04', '2022-03-29 04:00:04'),
+(2, 'EXPERIENCE THE NATUR\'S BEAUTY', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648546742.jpg', '1', '2022-03-29 04:09:02', '2022-03-29 04:09:02');
 
 -- --------------------------------------------------------
 
@@ -100,7 +109,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (5, '2022_03_27_110311_add_profileimage_to_users_table', 2),
 (6, '2022_03_27_110637_add_multiple_to_users_table', 3),
 (7, '2022_03_28_065850_create_company_details_table', 4),
-(8, '2022_03_28_193751_create_company_banners_table', 5);
+(8, '2022_03_28_193751_create_company_banners_table', 5),
+(9, '2022_03_29_052529_add_status_to_company_banners_table', 6);
 
 -- --------------------------------------------------------
 
@@ -229,7 +239,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `company_banners`
 --
 ALTER TABLE `company_banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `company_details`
@@ -247,7 +257,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
