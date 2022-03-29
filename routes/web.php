@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\CompanyBannersController;
 use App\Http\Controllers\CompanyDetailsController;
 /*
 |--------------------------------------------------------------------------
@@ -52,7 +53,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/dashboard', [HomeController::class, 'adminHome'])->name('admin.dashboard');
     Route::get('/admin/company', [CompanyDetailsController::class, 'index'])->name('company.basic');
     Route::put('/admin/company/update/{id}', [CompanyDetailsController::class, 'update'])->name('company.update');
-    Route::get('/admin/company/banners', [CompanyDetailsController::class, 'banners'])->name('company.banners');
+    Route::get('/admin/company/banners', [CompanyBannersController::class, 'index'])->name('company.banners');
+    Route::post('/admin/company/banners/store', [CompanyBannersController::class, 'store'])->name('company.banners.store');
 });
 
 /*------------------------------------------

@@ -13,13 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('company_banners', function (Blueprint $table) {
-            $table->id();
-            $table->string('tagline');
-            $table->longtext('description');
-            $table->string('imageURL');
-            $table->enum('status', ['1','0']);
-            $table->timestamps();
+        Schema::table('company_banners', function (Blueprint $table) {
+            $table->enum('status', ['1', '0']);
         });
     }
 
@@ -30,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('company_banners');
+        Schema::table('company_banners', function (Blueprint $table) {
+            //
+        });
     }
 };
