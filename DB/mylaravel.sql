@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 29, 2022 at 11:55 AM
+-- Generation Time: Mar 29, 2022 at 03:52 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -43,7 +43,7 @@ CREATE TABLE `company_banners` (
 
 INSERT INTO `company_banners` (`id`, `tagline`, `description`, `imageURL`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'TRAVELLING AROUND THE WORLD', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648546204.jpg', '1', '2022-03-29 04:00:04', '2022-03-29 04:00:04'),
-(2, 'EXPERIENCE THE NATUR\'S BEAUTY', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648546742.jpg', '1', '2022-03-29 04:09:02', '2022-03-29 04:09:02');
+(3, 'EXPERIENCE THE NATUR\'S BEAUTY', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648552562.jpg', '1', '2022-03-29 05:46:02', '2022-03-29 05:46:02');
 
 -- --------------------------------------------------------
 
@@ -68,6 +68,35 @@ CREATE TABLE `company_details` (
 
 INSERT INTO `company_details` (`id`, `company_name`, `company_address`, `company_phone`, `company_email`, `company_bio`, `created_at`, `updated_at`) VALUES
 (1, 'GoTours Pvt. Ltd.', '1/23 A.B.C. Road, Kolkata - 700001', '+91 9856365892', 'contact@gotours.com', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia volupta.', NULL, '2022-03-28 09:04:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `destinations`
+--
+
+CREATE TABLE `destinations` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `head_office_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `head_office_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `destinations`
+--
+
+INSERT INTO `destinations` (`id`, `name`, `head_office_address`, `head_office_phone`, `tagline`, `imageURL`, `status`, `description`, `created_at`, `updated_at`) VALUES
+(1, 'NORWAY', '2/76 M.L.P Road, Norway', '8574265410', 'Powered by Nature', '1648559729.jpg', '1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2022-03-29 07:45:29', '2022-03-29 07:45:29'),
+(2, 'JAPAN', '82/9 H.G. Road, Japan', '8574265455', 'Japan. EndlessDiscovery', '1648560588.jpg', '1', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.', '2022-03-29 07:59:48', '2022-03-29 07:59:48'),
+(3, 'INDIA', '14/63 R.P.J Road, India', '5634265455', 'Incredible India', '1648561390.jpg', '1', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '2022-03-29 08:13:10', '2022-03-29 08:13:10'),
+(4, 'DUBAI', '7/9 M.B S.T Road, Dubai', '4785265455', 'Only in Dubai', '1648561518.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '2022-03-29 08:15:18', '2022-03-29 08:15:18');
 
 -- --------------------------------------------------------
 
@@ -110,7 +139,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (6, '2022_03_27_110637_add_multiple_to_users_table', 3),
 (7, '2022_03_28_065850_create_company_details_table', 4),
 (8, '2022_03_28_193751_create_company_banners_table', 5),
-(9, '2022_03_29_052529_add_status_to_company_banners_table', 6);
+(9, '2022_03_29_052529_add_status_to_company_banners_table', 6),
+(10, '2022_03_29_115940_create_destinations_table', 7);
 
 -- --------------------------------------------------------
 
@@ -198,6 +228,12 @@ ALTER TABLE `company_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `destinations`
+--
+ALTER TABLE `destinations`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -239,13 +275,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `company_banners`
 --
 ALTER TABLE `company_banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `company_details`
 --
 ALTER TABLE `company_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `destinations`
+--
+ALTER TABLE `destinations`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -257,7 +299,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
