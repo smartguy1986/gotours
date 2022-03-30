@@ -22,6 +22,30 @@
                 <p></p>
                 @endif
 
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Launch demo modal
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+  
                 <div class="cart-list-inner">
                     <div class="table-responsive table-striped">
                         <table class="table">
@@ -34,6 +58,7 @@
                                     <th>H/O Address</th>
                                     <th>H/O Phone</th>
                                     <th>Status</th>
+                                    <th>Featured</th>
                                     <th>Added On</th>
                                     <th>Action</th>
                                 </tr>
@@ -48,10 +73,11 @@
                                     <td data-column="tagline">{{ $dnn->head_office_address }}</td>
                                     <td data-column="description">{{ $dnn->head_office_phone }}</td>
                                     <td data-column="status" class="count-input">@if($dnn->status == 1) Active @else Inactive @endif</td>
+                                    <td data-column="featured" class="count-input">@if($dnn->featured == 1) Yes @else No @endif</td>
                                     <td data-column="added_on">{{ date('dS M, Y', strtotime($dnn->created_at)) }}</td>
                                     <td data-column="action">
-                                        {{-- <a href="#"><i class="fas fa-edit"></i></a> |  --}}
-                                        <a href="{{ URL:: route('company.banners.delete', [$dnn->id, $dnn->imageURL])}}"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ URL:: route('destinations.edit', [$dnn->id])}}"><i class="fas fa-edit"></i></a> | 
+                                        <a href="{{ URL:: route('destinations.disable', [$dnn->id])}}"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -90,12 +116,19 @@
                                 <input name="head_office_phone" class="form-control" type="text">
                             </div>
                         </div>
-                        <div class="col-sm-12">
+                        <div class="col-sm-9">
                             <div class="form-group">
                                 <label>H/O Address</label>
                                 <input name="head_office_address" class="form-control" type="text">
                             </div>
-                        </div>                        
+                        </div> 
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label>Featured ?</label>
+                                Yes <input class="form-input-control" type="radio" name="featured" value="1" style="width: auto !important;"> | 
+                                No <input class="form-input-control" type="radio" name="featured" value="0" style="width: auto !important;">
+                            </div>
+                        </div>                   
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>

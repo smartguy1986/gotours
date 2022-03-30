@@ -3693,7 +3693,7 @@ input[type=submit]:focus {
   position: relative;
 }
 .home .subscribe-section {
-  padding: 195px 0 75px;
+  padding: 75px 0 75px;
   margin-top: -100px;
 }
 .subscribe-section:before {
@@ -8528,6 +8528,8 @@ product checkout css
 
   .prtr .desti-image img {
     height: 460px;
+    object-fit: cover;
+    object-position: center;
   }
 
   .lnds {

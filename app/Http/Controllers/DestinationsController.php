@@ -57,6 +57,7 @@ class DestinationsController extends Controller
         $save->head_office_phone = $request->head_office_phone;
         $save->head_office_address = $request->head_office_address;
         $save->status = 1;
+        $save->featured = $request->featured;
         $save->save();
     
         return redirect('/admin/destinations')->with('success', 'Destination Has been uploaded');
@@ -79,9 +80,10 @@ class DestinationsController extends Controller
      * @param  \App\Models\Destinations  $destinations
      * @return \Illuminate\Http\Response
      */
-    public function edit(Destinations $destinations)
+    public function edit(Destinations $destinations, $id)
     {
-        //
+        $data['destinations'] = DB::table('destinations')->select('*')->where('id', $id)->get();
+        return view('layouts.admin.destinations.edit', $data);
     }
 
     /**

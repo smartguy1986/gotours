@@ -52,7 +52,7 @@
     </section>
     <!-- destination section html start -->
     <!-- subscribe section html start -->
-    <section class="subscribe-section" style="background-image: url(assets/images/img16.jpg);">
+    <section class="subscribe-section" style="background-image: url({{ asset('assets/images/default/announcement-back.jpg') }});">
        <div class="container">
           <div class="row">
              <div class="col-lg-7">
