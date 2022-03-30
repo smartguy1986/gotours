@@ -19,7 +19,7 @@
             <div class="col-lg-7">
                <div class="row">
                   @foreach($destinations as $dst)
-                  <div class="col-sm-6">
+                  <div class="col-sm-6 prtr">
                      <div class="desti-item overlay-desti-item">
                         <figure class="desti-image">
                            <img src="{{asset('images/destinations/'.$dst->imageURL)}}" alt="">
@@ -45,7 +45,7 @@
             <div class="col-lg-5">
                <div class="row">
                   @foreach($destinations2 as $dst2)
-                  <div class="col-md-6 col-xl-12">
+                  <div class="col-md-6 col-xl-12 lnds">
                      <div class="desti-item overlay-desti-item">
                         <figure class="desti-image">
                            <img src="{{asset('images/destinations/'.$dst2->imageURL)}}" alt="">

@@ -4549,7 +4549,7 @@ Due to the split circle of progress-left and progress right, we must use the ani
 .inner-baner-container {
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: bottom center;
+  background-position: center;
   padding: 190px 0 150px;
   text-align: center;
   position: relative;
@@ -8511,3 +8511,42 @@ product checkout css
 }
 
 /*# sourceMappingURL=style.css.map */
+
+@media screen and (min-width: 1200px) {
+/* custom CSS */
+  .prtr {
+    height: 480px;
+  }
+
+  .prtr .overlay-desti-item {
+    height: 480px;
+  }
+
+  .prtr .desti-image {
+    height: 460px;
+  }
+
+  .prtr .desti-image img {
+    height: 460px;
+  }
+
+  .lnds {
+    height: 235px;
+    margin-bottom: 5px;
+  }
+
+  .lnds .overlay-desti-item {
+    height: 240px;
+  }
+
+  .lnds .desti-image {
+    height: 226px;
+  }
+
+  .lnds .desti-image img {
+    height: 225px;
+    width: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}

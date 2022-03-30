@@ -7,7 +7,7 @@
           <a href="#">Tour</a>
           <ul>
              <li>
-                <a href="destination.html">Destination</a>
+                <a href="{{ URL::route('destinations') }}">Destination</a>
              </li>
              <li>
                 <a href="tour-packages.html">Tour Packages</a>

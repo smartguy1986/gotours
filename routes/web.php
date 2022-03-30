@@ -29,11 +29,16 @@ Route::get('/home', function () {
     return view('home');
 });
 
+Route::get('/destinations', function () {
+    $data['company_details'] = DB::table('company_details')->select('*')->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->get();
+    return view('layouts.pages.destinations')->with($data);
+})->name('destinations');
+
 Route::get('logout', function ()
 {
     auth()->logout();
     Session()->flush();
-
     return Redirect::to('/login');
 })->name('logout');
 
