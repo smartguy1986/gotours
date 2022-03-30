@@ -39,7 +39,17 @@
                     <li><a href="db-package-expired.html">Expired</a></li>
                 </ul>   
             </li>
-            <li class="@if (\Request::is('*destinations')) active-menu  @endif"><a href="{{ URL::route('destinations.list') }}"><i class="fas fa-globe"></i> Destinations</a></li>
+
+            <li class="@if (\Request::is('*destinations')) active-menu  @endif"><a><i class="fas fa-globe"></i> Destinations</a>
+                <ul>
+                    <li class="@if (\Request::is('*destination*')) active-menu  @endif">
+                        <a href="{{ URL::route('destinations.list') }}">Destination List</a>
+                    </li>
+                    <li class="@if (\Request::is('*destination*')) active-menu  @endif">
+                        <a href="{{ URL::route('destinations.add') }}">Add Destination</a>
+                    </li>
+                </ul>
+            </li>
             <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
             <li><a href="db-wishlist.html"><i class="far fa-heart"></i>Wishlist</a></li>
             <li><a href="db-comment.html"><i class="fas fa-comments"></i>Comments</a></li>

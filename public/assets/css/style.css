@@ -8530,6 +8530,7 @@ product checkout css
     height: 460px;
     object-fit: cover;
     object-position: center;
+    width: 100%;
   }
 
   .lnds {

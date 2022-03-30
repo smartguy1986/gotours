@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Destinations;
 use Illuminate\Http\Request;
 use DB;
+use File;
 
 class DestinationsController extends Controller
 {
@@ -17,6 +18,11 @@ class DestinationsController extends Controller
     {
         $data['destinations'] = DB::table('destinations')->select('*')->get();
         return view('layouts.admin.destinations.lists', $data);
+    }
+
+    public function add()
+    {
+        return view('layouts.admin.destinations.adddest');
     }
 
     /**
@@ -83,7 +89,7 @@ class DestinationsController extends Controller
     public function edit(Destinations $destinations, $id)
     {
         $data['destinations'] = DB::table('destinations')->select('*')->where('id', $id)->get();
-        return view('layouts.admin.destinations.edit', $data);
+        return view('layouts.admin.destinations.editdest', $data);
     }
 
     /**
@@ -93,9 +99,36 @@ class DestinationsController extends Controller
      * @param  \App\Models\Destinations  $destinations
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Destinations $destinations)
-    {
-        //
+    public function update(Request $request)
+    {   
+
+        //$User_Update = User::where("id", '2')->update(["member_type" => $plan]);
+        if(isset($request->dst_image))
+        {
+            $fileName = time().'.'.$request->dst_image->extension();  
+            $request->dst_image->move(public_path('images/destinations'), $fileName);
+            $file_path = public_path().'/images/destinations/'.$request->old_image;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        else
+        {
+            $fileName = $request->old_image;
+        }
+
+        $values = array('name' => strtoupper($request->name), 'tagline' => $request->tagline, 'head_office_address' => $request->head_office_address, 'head_office_phone' => $request->head_office_phone, 'description' => $request->description, 'featured' => $request->featured, 'imageURL' => $fileName);
+
+        $affected_row = Destinations::where('id', $request->dstid)->update($values);
+        
+        if($affected_row)
+        {
+            return redirect('/admin/destinations')->with('success', 'Destination successfully updated');
+        }
+        else
+        {
+            return redirect('/admin/destinations')->with('error', 'Destination not updated');
+        }
     }
 
     /**

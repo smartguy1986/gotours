@@ -31,7 +31,7 @@ Route::get('/home', function () {
 
 Route::get('/destinations', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
     return view('layouts.pages.destinations')->with($data);
 })->name('destinations');
 
@@ -71,9 +71,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/company/banners/{id}/{filename}', [CompanyBannersController::class, 'delete_banners'])->name('company.banners.delete');
 
     Route::get('/admin/destinations', [DestinationsController::class, 'index'])->name('destinations.list');
+    Route::get('/admin/destinations/add', [DestinationsController::class, 'add'])->name('destinations.add');
     Route::post('/admin/destinations/create', [DestinationsController::class, 'store'])->name('destinations.create');
-    Route::post('/admin/destinations/edit/{id}', [DestinationsController::class, 'store'])->name('destinations.edit');
-    Route::post('/admin/destinations/disable', [DestinationsController::class, 'store'])->name('destinations.disable');
+    Route::get('/admin/destinations/edit/{id}', [DestinationsController::class, 'edit'])->name('destinations.edit');
+    Route::post('/admin/destinations/update', [DestinationsController::class, 'update'])->name('destinations.update');
+    Route::get('/admin/destinations/disable/{id}', [DestinationsController::class, 'disable'])->name('destinations.disable');
 });
 
 /*------------------------------------------

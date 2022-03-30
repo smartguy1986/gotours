@@ -68,7 +68,7 @@
             </div>
          </div>
          <div class="btn-wrap text-center">
-            <a href="#" class="button-primary">MORE DESTINATION</a>
+            <a href="{{ URL::route('destinations') }}" class="button-primary">MORE DESTINATION</a>
          </div>
       </div>
    </div>
