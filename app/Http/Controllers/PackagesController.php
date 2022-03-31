@@ -45,6 +45,12 @@ class PackagesController extends Controller
         //
     }
 
+    public function add(Request $request)
+    {
+        $data['categories'] = DB::table('package_category')->select('*')->get();
+        return view('layouts.admin.packages.addpackage', $data);
+    }
+
     public function save_category(Request $request)
     {
         $validatedData = $request->validate([
