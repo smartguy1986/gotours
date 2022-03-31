@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 30, 2022 at 10:06 PM
+-- Generation Time: Mar 31, 2022 at 08:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -144,7 +144,87 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2022_03_28_193751_create_company_banners_table', 5),
 (9, '2022_03_29_052529_add_status_to_company_banners_table', 6),
 (10, '2022_03_29_115940_create_destinations_table', 7),
-(11, '2022_03_30_091501_add_featured_to_destinations_table', 8);
+(11, '2022_03_30_091501_add_featured_to_destinations_table', 8),
+(12, '2022_03_31_053108_create_package_category_table', 9),
+(13, '2022_03_31_053322_create_packages_table', 10),
+(14, '2022_03_31_053940_create_package_gallery_table', 11),
+(15, '2022_03_31_054942_add_programme_to_packages_table', 12),
+(16, '2022_03_31_055019_create_package_programme_table', 13);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `packages`
+--
+
+CREATE TABLE `packages` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `duration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mingroup` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `destination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_person` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `is_sale` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sale_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `discount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `programme` longtext COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_category`
+--
+
+CREATE TABLE `package_category` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `cat_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_gallery`
+--
+
+CREATE TABLE `package_gallery` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `package_id` int(11) NOT NULL,
+  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_programme`
+--
+
+CREATE TABLE `package_programme` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `package_id` int(11) NOT NULL,
+  `day` int(11) NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -251,6 +331,30 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `packages`
+--
+ALTER TABLE `packages`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package_category`
+--
+ALTER TABLE `package_category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package_gallery`
+--
+ALTER TABLE `package_gallery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `package_programme`
+--
+ALTER TABLE `package_programme`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -303,7 +407,31 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `packages`
+--
+ALTER TABLE `packages`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_category`
+--
+ALTER TABLE `package_category`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_gallery`
+--
+ALTER TABLE `package_gallery`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `package_programme`
+--
+ALTER TABLE `package_programme`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

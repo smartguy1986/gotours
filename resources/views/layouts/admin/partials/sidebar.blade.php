@@ -33,7 +33,7 @@
             <li class="@if (\Request::is('*packages*')) active-menu  @endif"><i class="fas fa-umbrella-beach"></i>Manage Packages</a>
                 <ul>
                     <li class="@if (\Request::is('*packages*')) active-menu  @endif">
-                        <a href="{{ URL::route('package.add_cat') }}">Add Category</a>
+                        <a href="">Add Category</a>
                     </li>
                     <li class="@if (\Request::is('*packages*')) active-menu  @endif">
                         <a href="{{ URL::route('destinations.add') }}">Add Packages</a>
