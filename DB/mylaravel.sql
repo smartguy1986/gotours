@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 08:45 AM
+-- Generation Time: Mar 31, 2022 at 03:31 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -149,7 +149,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (13, '2022_03_31_053322_create_packages_table', 10),
 (14, '2022_03_31_053940_create_package_gallery_table', 11),
 (15, '2022_03_31_054942_add_programme_to_packages_table', 12),
-(16, '2022_03_31_055019_create_package_programme_table', 13);
+(16, '2022_03_31_055019_create_package_programme_table', 13),
+(17, '2022_03_31_093937_add_banner_to_packages_table', 14);
 
 -- --------------------------------------------------------
 
@@ -161,6 +162,7 @@ CREATE TABLE `packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `duration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mingroup` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -195,6 +197,17 @@ CREATE TABLE `package_category` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `package_category`
+--
+
+INSERT INTO `package_category` (`id`, `cat_name`, `cat_image`, `cat_tagline`, `cat_description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Honeymoon', '1648732502.png', 'Excepteur sint occaecat cupidatat non proident', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 18:30:00', NULL),
+(2, 'Vacation', '1648732670.png', 'Excepteur sint occaecat cupidatat non proident', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 18:30:00', NULL),
+(3, 'Weekend', '1648732738.png', 'Excepteur sint occaecat cupidatat non proident', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 18:30:00', NULL),
+(4, 'New Year', '1648732754.png', 'Excepteur sint occaecat cupidatat non proident', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 18:30:00', NULL),
+(5, 'Family', '1648732769.png', 'Excepteur sint occaecat cupidatat non proident', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 18:30:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -407,7 +420,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -419,7 +432,7 @@ ALTER TABLE `packages`
 -- AUTO_INCREMENT for table `package_category`
 --
 ALTER TABLE `package_category`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `package_gallery`

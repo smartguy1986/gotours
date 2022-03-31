@@ -6,6 +6,7 @@ use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CompanyBannersController;
 use App\Http\Controllers\CompanyDetailsController;
 use App\Http\Controllers\DestinationsController;
+use App\Http\Controllers\PackagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/destinations/edit/{id}', [DestinationsController::class, 'edit'])->name('destinations.edit');
     Route::post('/admin/destinations/update', [DestinationsController::class, 'update'])->name('destinations.update');
     Route::get('/admin/destinations/disable/{id}', [DestinationsController::class, 'disable'])->name('destinations.disable');
+
+    Route::get('/admin/packages', [PackagesController::class, 'index'])->name('packages.list');
+    Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');
+    Route::get('/admin/packages/add/category', [PackagesController::class, 'category'])->name('packages.add.category');
+    Route::post('/admin/packages/save/category', [PackagesController::class, 'save_category'])->name('packages.save.category');
+
+    Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
+    Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');
+    
 });
 
 /*------------------------------------------

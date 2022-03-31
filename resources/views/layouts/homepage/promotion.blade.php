@@ -3,9 +3,9 @@
     <div class="container">
        <div class="row no-gutters align-items-center">
           <div class="col-lg-5">
-             <div class="callback-img" style="background-image: url(assets/images/img8.jpg);">
+             <div class="callback-img" style="background-image: url({{ asset('assets/images/default/promotion.jpg') }});">
                 <div class="video-button">
-                   <a id="video-container" data-video-id="IUN664s7N-c">
+                   <a id="video-container" data-video-id="cRkFYSlTPnE">
                       <i class="fas fa-play"></i>
                    </a>
                 </div>
