@@ -30,15 +30,28 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="db-add-package.html"><i class="fas fa-umbrella-beach"></i>Add Package</a></li>
-            <li>
-                <a><i class="fas fa-hotel"></i></i>packages</a>
+            <li class="@if (\Request::is('*packages*')) active-menu  @endif"><i class="fas fa-umbrella-beach"></i>Manage Packages</a>
+                <ul>
+                    <li class="@if (\Request::is('*packages*')) active-menu  @endif">
+                        <a href="{{ URL::route('package.add_cat') }}">Add Category</a>
+                    </li>
+                    <li class="@if (\Request::is('*packages*')) active-menu  @endif">
+                        <a href="{{ URL::route('destinations.add') }}">Add Packages</a>
+                    </li>
+                    <li class="@if (\Request::is('*packages*')) active-menu  @endif">
+                        <a href="{{ URL::route('destinations.add') }}">Packages List</a>
+                    </li>
+                </ul>
+            </li>
+            {{-- <li><a href="db-add-package.html"><i class="fas fa-umbrella-beach"></i>Add Package</a></li> --}}
+            {{-- <li>
+                <a><i class="fas fa-hotel"></i></i>Package Lists</a>
                 <ul>
                     <li><a href="db-package-active.html">Active</a></li>
                     <li><a href="db-package-pending.html">Pending</a></li>
                     <li><a href="db-package-expired.html">Expired</a></li>
                 </ul>   
-            </li>
+            </li> --}}
 
             <li class="@if (\Request::is('*destinations')) active-menu  @endif"><a><i class="fas fa-globe"></i> Destinations</a>
                 <ul>
