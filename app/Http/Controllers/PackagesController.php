@@ -95,30 +95,50 @@ class PackagesController extends Controller
             'days' => 'required',
             'nights' => 'required',
             'mingroup' => 'required',
-            'destination' => 'required',
-            'description' => 'required',
+            'destinations' => 'required',
+            'descriptions' => 'required',
             'contact_person' => 'required',
             'phone' => 'required',
             'address' => 'required',
             'price' => 'required',
             'is_sale' => 'required',
-            'sale_price' => 'required',
-            'status' => 'required'
-        ])->with('Error', 'Check Input');
+            'status' => 'required',
+            'category' => 'required'
+        ]);
     
-        $fileName1 = time().'.'.$request->banner->extension();  
+        $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+        $fileName1 = time().$pass.'.'.$request->banner->extension();  
         $request->banner->move(public_path('images/packages'), $fileName1);
-        $fileName2 = time().'.'.$request->imageURL->extension();  
+
+        $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+        $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
         $request->imageURL->move(public_path('images/packages'), $fileName2);
+
+        // echo "<br>".$request->title;
+        // echo "<br>".$request->tagline;
+        // echo "<br>".$fileName1;
+        // echo "<br>".$fileName2;
+        // echo "<br>".$request->days." Days / ".$request->nights." Nights";
+        // echo "<br>".$request->mingroup;
+        // echo "<br>".$request->destinations;
+        // echo "<br>".$request->contact_person;
+        // echo "<br>".$request->phone;
+        // echo "<br>".$request->address;
+        // echo "<br>".$request->price;
+        // echo "<br>".$request->is_sale;
+        // echo "<br>".$request->sale_price;
+        // echo "<br>".$request->status;
 
         $save = new Packages;
         $save->title = strtoupper($request->title);
         $save->tagline = $request->tagline;
         $save->banner = $fileName1;
         $save->imageURL = $fileName2;
-        $save->duration = $request->days." Days / ".$request->nights." Nights";
-        $save->mingroup = $request->minigroup;
-        $save->destination = $request->destination;
+        $save->days = $request->days;
+        $save->nights = $request->nights;
+        $save->mingroup = $request->mingroup;
+        $save->destination = $request->destinations;
+        $save->descriptions = $request->descriptions;
         $save->contact_person = $request->contact_person;
         $save->phone = $request->phone;
         $save->address = $request->address;
@@ -126,9 +146,10 @@ class PackagesController extends Controller
         $save->is_sale = $request->is_sale;
         $save->sale_price = $request->sale_price;
         $save->status = $request->status;
+        $save->category = $request->category;
         $save->save();
     
-        return redirect('/admin/packages/programme/add/'.$data->id)->with('pid', $data->id);
+        return redirect('/admin/packages/programme/add/'.$save->id)->with('pid', $save->id);
     }
 
     public function programme(Request $request, $id)
@@ -137,6 +158,10 @@ class PackagesController extends Controller
         return view('layouts.admin.packages.addprogramme', $data);
     }
     
+    public function save_programme(Request $request)
+    {
+
+    }
     /**
      * Display the specified resource.
      *

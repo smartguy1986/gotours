@@ -27,7 +27,11 @@ Route::get('/', function () {
     return view('home')->with($data);
 });
 Route::get('/home', function () {
-    return view('home');
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
+    $data['company_details'] = DB::table('company_details')->select('*')->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
+    $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
+    return view('home')->with($data);
 });
 
 Route::get('/destinations', function () {
@@ -83,7 +87,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/packages/add/category', [PackagesController::class, 'category'])->name('packages.add.category');
     Route::post('/admin/packages/save/category', [PackagesController::class, 'save_category'])->name('packages.save.category');
     Route::post('/admin/packages/save/package', [PackagesController::class, 'save_package'])->name('packages.save');
-    Route::post('/admin/packages/programme/add/{id}', [PackagesController::class, 'programme'])->name('packages.programme.add');
+    Route::get('/admin/packages/programme/add/{id}', [PackagesController::class, 'programme'])->name('packages.programme.add');
+    Route::post('/admin/packages/programme/save', [PackagesController::class, 'save_programme'])->name('packages.programme.save');
 
     Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
     Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');

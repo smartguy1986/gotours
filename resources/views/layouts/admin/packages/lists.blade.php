@@ -39,7 +39,6 @@
                                     <th>Price</th>
                                     <th>Is Sale</th>
                                     <th>Sale Price</th>
-                                    <th>Discount</th>
                                     <th>Status</th>
                                     <th>Programme</th>
                                     <th>Gallery</th>
@@ -54,21 +53,20 @@
                                     <td class=""><span class="cartImage"><img src="{{URL::asset('/images/packages/'.$pck->imageURL)}}" alt="image" width="200"></span></td>
                                     <td data-column="tagline">{{ $pck->title }}</td>
                                     <td data-column="tagline">{{ $pck->tagline }}</td>
-                                    <td data-column="tagline">{{ $pck->description }}</td>
-                                    <td data-column="tagline">{{ $pck->duration }}</td>
-                                    <td data-column="tagline">{{ $pck->group }}</td>
+                                    <td data-column="tagline">{{ $pck->descriptions }}</td>
+                                    <td data-column="tagline">{{ $pck->days }} Days / {{ $pck->nights }} Nights</td>
+                                    <td data-column="tagline">{{ $pck->mingroup }}</td>
                                     <td data-column="tagline">{{ $pck->contact_person }} <br> ({{ $pck->address }}) <br> {{ $pck->phone }}</td>
                                     <td data-column="description">{{ $pck->price }}</td>
                                     <td data-column="status" class="count-input">@if($pck->is_sale == 1) Yes @else No @endif</td>
                                     <td data-column="description">{{ $pck->sale_price }}</td>
-                                    <td data-column="description">{{ $pck->discount }}</td>
                                     <td data-column="featured" class="count-input">@if($pck->status == 1) Active @else Inactive @endif</td>
-                                    <td data-column="description"><a href="{{ URL:: route('destinations.edit', [$dnn->id])}}"><i class="fa-solid fa-list-check"></i> Programme</a></td>
-                                    <td data-column="description"><a href="{{ URL:: route('destinations.edit', [$dnn->id])}}"><i class="fa-solid fa-gallery-thumbnails"></i> Gallery</a></td>
-                                    <td data-column="added_on">{{ date('dS M, Y', strtotime($dnn->created_at)) }}</td>
+                                    <td data-column="description"><a href="{{ URL:: route('destinations.edit', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Programme</a></td>
+                                    <td data-column="description"><a href="{{ URL:: route('destinations.edit', [$pck->id])}}"><i class="fa-solid fa-gallery-thumbnails"></i> Gallery</a></td>
+                                    <td data-column="added_on">{{ date('dS M, Y', strtotime($pck->created_at)) }}</td>
                                     <td data-column="action">
-                                        <a href="{{ URL:: route('destinations.edit', [$dnn->id])}}"><i class="fas fa-edit"></i></a> | 
-                                        <a href="{{ URL:: route('destinations.disable', [$dnn->id])}}"><i class="fas fa-trash-alt"></i></a>
+                                        <a href="{{ URL:: route('destinations.edit', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
+                                        <a href="{{ URL:: route('destinations.disable', [$pck->id])}}"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

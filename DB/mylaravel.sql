@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2022 at 09:41 AM
+-- Generation Time: Apr 01, 2022 at 01:51 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -151,7 +151,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (15, '2022_03_31_054942_add_programme_to_packages_table', 12),
 (16, '2022_03_31_055019_create_package_programme_table', 13),
 (17, '2022_03_31_093937_add_banner_to_packages_table', 14),
-(18, '2022_04_01_064221_add_multiple_to_packages_table', 15);
+(18, '2022_04_01_064221_add_multiple_to_packages_table', 15),
+(19, '2022_04_01_091750_remove_multiple_to_packages_table', 16),
+(20, '2022_04_01_104243_remove_multiple_to_packages_table', 17);
 
 -- --------------------------------------------------------
 
@@ -161,28 +163,33 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `category` int(11) NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `duration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `mingroup` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `destination` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `destination` int(11) NOT NULL,
+  `descriptions` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `days` int(11) NOT NULL,
+  `nights` int(11) NOT NULL,
   `contact_person` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `is_sale` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL,
   `sale_price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `discount` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `programme` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` int(11) NOT NULL,
-  `tags` longtext COLLATE utf8mb4_unicode_ci NOT NULL
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `packages`
+--
+
+INSERT INTO `packages` (`id`, `category`, `title`, `tagline`, `banner`, `imageURL`, `mingroup`, `destination`, `descriptions`, `days`, `nights`, `contact_person`, `phone`, `address`, `price`, `is_sale`, `sale_price`, `status`, `created_at`, `updated_at`) VALUES
+(2, 2, 'EXPERIENCE THE NATURAL BEAUTY OF ISLAND', 'Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat.', '1648810019lg0nir.jpg', '1648810019tfvwqp.jpg', 'Couple', 3, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 4, 3, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Himachal Pradesh - 900052', '19500', '1', '17850', '1', '2022-04-01 05:16:59', '2022-04-01 05:16:59');
 
 -- --------------------------------------------------------
 
@@ -423,13 +430,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `package_category`
