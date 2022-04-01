@@ -17,7 +17,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="@if (\Request::is('*company')) active-menu slicknav_open @endif"><a><i class="fas fa-user"></i>Company Details</a>
+            <li class="@if (\Request::is('*company')) active-menu slicknav_open @endif"><i class="fas fa-user"></i>Company Details
                 <ul>
                     <li class="@if (\Request::is('company')) active-menu  @endif">
                         <a href="{{ URL::route('company.basic') }}">Basic Info</a>
@@ -30,7 +30,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="@if (\Request::is('*packages*')) active-menu  @endif"><i class="fas fa-umbrella-beach"></i>Manage Packages</a>
+            <li class="@if (\Request::is('*packages*')) active-menu  @endif"><i class="fas fa-umbrella-beach"></i>Manage Packages
                 <ul>
                     <li class="@if (\Request::is('*packages*')) active-menu  @endif">
                         <a href="{{ URL::route('packages.add.category') }}">Add Category</a>

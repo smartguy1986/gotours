@@ -103,24 +103,40 @@ class PackagesController extends Controller
             'price' => 'required',
             'is_sale' => 'required',
             'sale_price' => 'required',
-            'status' => 'required',
-            'tags' => 'required',
+            'status' => 'required'
         ])->with('Error', 'Check Input');
     
-        $fileName = time().'.'.$request->cat_image->extension();  
-        $request->cat_image->move(public_path('images/categories'), $fileName);
+        $fileName1 = time().'.'.$request->banner->extension();  
+        $request->banner->move(public_path('images/packages'), $fileName1);
+        $fileName2 = time().'.'.$request->imageURL->extension();  
+        $request->imageURL->move(public_path('images/packages'), $fileName2);
 
-        // $save = new Packages;
-        // $save->cat_name = strtoupper($request->cat_name);
-        // $save->cat_image = $fileName;
-        // $save->cat_tagline = $request->cat_tagline;
-        // $save->cat_description = $request->cat_description;
-        // $save->status = 1;
-        // $save->save();
+        $save = new Packages;
+        $save->title = strtoupper($request->title);
+        $save->tagline = $request->tagline;
+        $save->banner = $fileName1;
+        $save->imageURL = $fileName2;
+        $save->duration = $request->days." Days / ".$request->nights." Nights";
+        $save->mingroup = $request->minigroup;
+        $save->destination = $request->destination;
+        $save->contact_person = $request->contact_person;
+        $save->phone = $request->phone;
+        $save->address = $request->address;
+        $save->price = $request->price;
+        $save->is_sale = $request->is_sale;
+        $save->sale_price = $request->sale_price;
+        $save->status = $request->status;
+        $save->save();
     
-        return redirect('/admin/packages')->with('success', 'Package Has been uploaded');
+        return redirect('/admin/packages/programme/add/'.$data->id)->with('pid', $data->id);
     }
 
+    public function programme(Request $request, $id)
+    {
+        $data['packages'] = DB::table('packages')->select('*')->where('id', $id)->get();
+        return view('layouts.admin.packages.addprogramme', $data);
+    }
+    
     /**
      * Display the specified resource.
      *
