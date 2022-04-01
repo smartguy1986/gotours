@@ -47,6 +47,7 @@ class PackagesController extends Controller
 
     public function add(Request $request)
     {
+        $data['destinations'] = DB::table('destinations')->select('*')->get();
         $data['categories'] = DB::table('package_category')->select('*')->get();
         return view('layouts.admin.packages.addpackage', $data);
     }
@@ -82,6 +83,42 @@ class PackagesController extends Controller
                 ));
     
         return redirect('/admin/packages/add/category')->with('success', 'Destination Has been uploaded');
+    }
+
+    public function save_package(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'tagline' => 'required',
+            'banner' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'imageURL' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'days' => 'required',
+            'nights' => 'required',
+            'mingroup' => 'required',
+            'destination' => 'required',
+            'description' => 'required',
+            'contact_person' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'is_sale' => 'required',
+            'sale_price' => 'required',
+            'status' => 'required',
+            'tags' => 'required',
+        ])->with('Error', 'Check Input');
+    
+        $fileName = time().'.'.$request->cat_image->extension();  
+        $request->cat_image->move(public_path('images/categories'), $fileName);
+
+        // $save = new Packages;
+        // $save->cat_name = strtoupper($request->cat_name);
+        // $save->cat_image = $fileName;
+        // $save->cat_tagline = $request->cat_tagline;
+        // $save->cat_description = $request->cat_description;
+        // $save->status = 1;
+        // $save->save();
+    
+        return redirect('/admin/packages')->with('success', 'Package Has been uploaded');
     }
 
     /**

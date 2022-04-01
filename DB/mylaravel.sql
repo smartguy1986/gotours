@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 04:01 PM
+-- Generation Time: Apr 01, 2022 at 09:41 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -150,7 +150,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2022_03_31_053940_create_package_gallery_table', 11),
 (15, '2022_03_31_054942_add_programme_to_packages_table', 12),
 (16, '2022_03_31_055019_create_package_programme_table', 13),
-(17, '2022_03_31_093937_add_banner_to_packages_table', 14);
+(17, '2022_03_31_093937_add_banner_to_packages_table', 14),
+(18, '2022_04_01_064221_add_multiple_to_packages_table', 15);
 
 -- --------------------------------------------------------
 
@@ -178,7 +179,9 @@ CREATE TABLE `packages` (
   `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `programme` longtext COLLATE utf8mb4_unicode_ci NOT NULL
+  `programme` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `category` int(11) NOT NULL,
+  `tags` longtext COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -420,7 +423,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `packages`

@@ -82,6 +82,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');
     Route::get('/admin/packages/add/category', [PackagesController::class, 'category'])->name('packages.add.category');
     Route::post('/admin/packages/save/category', [PackagesController::class, 'save_category'])->name('packages.save.category');
+    Route::post('/admin/packages/save/package', [PackagesController::class, 'save_package'])->name('packages.save');
 
     Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
     Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');
