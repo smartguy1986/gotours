@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="dashboard-box">
-                {{ $packages }}
+                {{-- {{ $packages }} --}}
                 <h4>Add Programme</h4>
                 <p>Here add the programme schedule of <strong>{{ $packages[0]->title }}</strong></p>                
                 <p></p>
@@ -39,7 +39,7 @@
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Day</label>
-                                    <input name="day[]" class="form-control" type="number" value="{{ $i }}">
+                                    <input name="day[]" class="form-control" type="number" value="{{ $i }}" readonly>
                                 </div>
                             </div>
                             <div class="col-sm-4">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 01, 2022 at 01:51 PM
+-- Generation Time: Apr 05, 2022 at 08:59 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -249,6 +249,16 @@ CREATE TABLE `package_programme` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `package_programme`
+--
+
+INSERT INTO `package_programme` (`id`, `package_id`, `day`, `title`, `description`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, 'Ancient Rome Visit', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', NULL, NULL),
+(2, 2, 2, 'Classic Rome Sightseeing', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', NULL, NULL),
+(3, 2, 3, 'Vatican City Visit', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', NULL, NULL),
+(4, 2, 4, 'Italian Food Tour', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', NULL, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -454,7 +464,7 @@ ALTER TABLE `package_gallery`
 -- AUTO_INCREMENT for table `package_programme`
 --
 ALTER TABLE `package_programme`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`

@@ -16,7 +16,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->select('*')->get();
+        $data['packages'] = DB::table('packages')->select('packages.*', 'count(package_programme.package_id) as totp')->leftJoin('package_programme', 'package_programme.package_id', '=', 'packages.id')->where('packages.id', 2)->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
@@ -114,21 +114,6 @@ class PackagesController extends Controller
         $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
         $request->imageURL->move(public_path('images/packages'), $fileName2);
 
-        // echo "<br>".$request->title;
-        // echo "<br>".$request->tagline;
-        // echo "<br>".$fileName1;
-        // echo "<br>".$fileName2;
-        // echo "<br>".$request->days." Days / ".$request->nights." Nights";
-        // echo "<br>".$request->mingroup;
-        // echo "<br>".$request->destinations;
-        // echo "<br>".$request->contact_person;
-        // echo "<br>".$request->phone;
-        // echo "<br>".$request->address;
-        // echo "<br>".$request->price;
-        // echo "<br>".$request->is_sale;
-        // echo "<br>".$request->sale_price;
-        // echo "<br>".$request->status;
-
         $save = new Packages;
         $save->title = strtoupper($request->title);
         $save->tagline = $request->tagline;
@@ -160,7 +145,20 @@ class PackagesController extends Controller
     
     public function save_programme(Request $request)
     {
-
+        $total_loop = $request->total_loop;
+        for ($i=0; $i<$total_loop; $i++){
+            $data[] = array(
+                'package_id' => $request->package_id,    
+                'day' => $request->input('day')[$i],
+                'title' => $request->input('title')[$i],
+                'description' => $request->input('description')[$i]
+            );
+        }
+    
+        if(DB::table('package_programme')->insert($data))
+        {
+            return redirect('/admin/packages')->with('success', 'Programme successfully added');
+        }
     }
     /**
      * Display the specified resource.
