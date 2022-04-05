@@ -2,8 +2,22 @@
 
 @section('content')
 
+<style>
+.login-page .login-from-wrap{
+    width:40%;
+    background: rgba(22,232,225,0.6);
+}
+.btn-link{
+    color: #021716 !important;
+    border: 2px solid #021716;
+    text-decoration: none !important;
+}
+</style>
+
 <div class="login-page" style="background-image: url({{asset('admin_assets/images/bg.jpg')}})">
     <div class="login-from-wrap">
+        <h2>Welcome to GoTours</h2>
+        <h4>Login to your account</h4>
         @error('error')
         <span class="invalid-feedback" role="alert">
             <strong>{{ $message }}</strong>
@@ -14,7 +28,7 @@
             <div class="form-group">
                 <label for="exampleInputEmail1">Email address</label>
                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" aria-describedby="emailHelp" value="{{ old('email') }}" placeholder="Enter your email" required autocomplete="email" autofocus>
-                <small id="emailHelp" class="form-text text-muted">*We'll never share your email with anyone else.</small>
+                <small id="emailHelp" class="form-text text-muted align-right">*We'll never share your email with anyone else.</small>
                 @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -34,12 +48,12 @@
             <p class="text-right text-muted">
             @if (Route::has('password.request'))
                 <a class="btn btn-link" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
+                    {{ __('Forgot?') }}
                 </a>
             @endif
             @if (Route::has('register'))
                 <a class="btn btn-link" href="{{ route('register') }}">
-                    {{ __('Not registered yet?') }}
+                    {{ __('Sign Up') }}
                 </a>
             @endif
             </p>
