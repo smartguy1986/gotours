@@ -61,7 +61,7 @@
                                     <td data-column="status" class="count-input">@if($pck->is_sale == 1) Yes @else No @endif</td>
                                     <td data-column="description">{{ $pck->sale_price }}</td>
                                     <td data-column="featured" class="count-input">@if($pck->status == 1) Active @else Inactive @endif</td>
-                                    <td data-column="description"><a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Programme</a></td>
+                                    <td data-column="description">@if($pck->totp<1) <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Programme</a> @else <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View Programme</a> @endif</td>
                                     <td data-column="description"><a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-gallery-thumbnails"></i> Gallery</a></td>
                                     <td data-column="added_on">{{ date('dS M, Y', strtotime($pck->created_at)) }}</td>
                                     <td data-column="action">
