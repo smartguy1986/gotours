@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 30, 2022 at 02:53 PM
+-- Generation Time: Apr 30, 2022 at 03:17 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -189,7 +189,7 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`id`, `category`, `title`, `tagline`, `banner`, `imageURL`, `mingroup`, `destination`, `descriptions`, `days`, `nights`, `contact_person`, `phone`, `address`, `price`, `is_sale`, `sale_price`, `status`, `created_at`, `updated_at`) VALUES
-(2, 2, 'EXPERIENCE THE NATURAL BEAUTY OF ISLAND', 'Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat.', '1651323045z5qmik.jpg', '1651323045e3fn98.jpg', 'Couple', 0, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 4, 3, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Himachal Pradesh - 900052', '19500', '1', '17850', '1', '2022-04-01 05:16:59', '2022-04-01 05:16:59');
+(2, 2, 'EXPERIENCE THE NATURAL BEAUTY OF ISLAND', 'Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat.', '1651323289c8efh0.jpg', '1651323045e3fn98.jpg', 'Couple', 0, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 4, 3, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Himachal Pradesh - 900052', '19500', '1', '17850', '1', '2022-04-01 05:16:59', '2022-04-01 05:16:59');
 
 -- --------------------------------------------------------
 
@@ -258,6 +258,23 @@ INSERT INTO `package_programme` (`id`, `package_id`, `day`, `title`, `descriptio
 (2, 2, 2, 'Classic Rome Sightseeing', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', NULL, NULL),
 (3, 2, 3, 'Vatican City Visit', 'Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium. Nostra semper ultricies eu leo eros orci porta provident, fugit?', NULL, '2022-04-30 11:06:03'),
 (19, 2, 4, 'Italian Food Tour', 'Nostra semper ultricies eu leo eros orci porta provident, fugit? Pariatur interdum assumenda, qui aliquip ipsa! Dictum natus potenti pretium.', '2022-04-30 10:24:44', '2022-04-30 11:09:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `package_review`
+--
+
+CREATE TABLE `package_review` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `package_id` int(11) NOT NULL,
+  `review` longtext NOT NULL,
+  `star_rate` int(11) NOT NULL,
+  `status` enum('1','0') NOT NULL,
+  `added_on` datetime NOT NULL DEFAULT current_timestamp(),
+  `updated_on` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -388,6 +405,12 @@ ALTER TABLE `package_programme`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `package_review`
+--
+ALTER TABLE `package_review`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
@@ -465,6 +488,12 @@ ALTER TABLE `package_gallery`
 --
 ALTER TABLE `package_programme`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `package_review`
+--
+ALTER TABLE `package_review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
