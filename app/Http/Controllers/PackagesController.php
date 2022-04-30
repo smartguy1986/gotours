@@ -17,7 +17,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->leftjoin('package_programme', 'package_programme.package_id', '=', 'packages.id')->selectRaw('COUNT(package_programme.package_id) as totp, packages.*')->get();
+        $data['packages'] = DB::table('packages')->leftjoin('package_programme', 'package_programme.package_id', '=', 'packages.id')->leftjoin('package_gallery', 'package_gallery.package_id', '=', 'packages.id')->selectRaw('COUNT(package_programme.package_id) as totp, COUNT(package_gallery.package_id) as totg, packages.*')->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
