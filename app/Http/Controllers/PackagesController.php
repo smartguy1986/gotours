@@ -6,6 +6,7 @@ use App\Models\Packages;
 use Illuminate\Http\Request;
 use DB;
 use File;
+use Illuminate\Support\Str;
 
 class PackagesController extends Controller
 {
@@ -16,7 +17,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->join('package_programme', 'package_programme.package_id', '=', 'packages.id')->select('packages.*')->selectRaw('COUNT(package_programme.package_id) as totp')->where('package_programme.package_id', '2')->get();
+        $data['packages'] = DB::table('packages')->leftjoin('package_programme', 'package_programme.package_id', '=', 'packages.id')->selectRaw('COUNT(package_programme.package_id) as totp, packages.*')->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
@@ -52,6 +53,18 @@ class PackagesController extends Controller
         return view('layouts.admin.packages.addpackage', $data);
     }
 
+    public function editprog(Request $request, $id)
+    {
+        $data['packages'] = DB::table('packages')->select('*')->where('id', $id)->get();
+        // $data['destinations'] = DB::table('destinations')->select('*')->get();
+        // $data['categories'] = DB::table('package_category')->select('*')->get();
+        $data['programms'] = DB::table('package_programme')->select('*')->where('package_id', $id)->get();
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        return view('layouts.admin.packages.editprogramme', $data);
+    }
+
     public function save_category(Request $request)
     {
         $validatedData = $request->validate([
@@ -64,14 +77,6 @@ class PackagesController extends Controller
     
         $fileName = time().'.'.$request->cat_image->extension();  
         $request->cat_image->move(public_path('images/categories'), $fileName);
-
-        // $save = new Packages;
-        // $save->cat_name = strtoupper($request->cat_name);
-        // $save->cat_image = $fileName;
-        // $save->cat_tagline = $request->cat_tagline;
-        // $save->cat_description = $request->cat_description;
-        // $save->status = 1;
-        // $save->save();
   
         $check = DB::table('package_category')->insertGetId(array(
                     'cat_name'      => $request->cat_name,
@@ -160,6 +165,33 @@ class PackagesController extends Controller
             return redirect('/admin/packages')->with('success', 'Programme successfully added');
         }
     }
+
+    public function update_programme(Request $request)
+    {
+        // dd($request);
+        // die();
+        $total_loop = $request->total_loop;
+        for ($i=0; $i<$total_loop; $i++){
+            //echo $request->input('progid')[$i];
+            $data = array(
+                'package_id' => $request->package_id,    
+                'day' => $request->input('day')[$i],
+                'title' => $request->input('title')[$i],
+                'description' => $request->input('description')[$i]
+            );
+            if($request->input('progid')[$i]==null){
+                echo "empty";
+                DB::table('package_programme')->insert($data);
+            }
+            else {
+                echo "not Empty";
+                DB::table('package_programme')->where("id", $request->input('progid')[$i])->update($data);
+            }
+            $data = array();
+        }
+    
+        return redirect('/admin/packages')->with('success', 'Programme successfully added');
+    }
     /**
      * Display the specified resource.
      *
@@ -177,9 +209,12 @@ class PackagesController extends Controller
      * @param  \App\Models\Packages  $packages
      * @return \Illuminate\Http\Response
      */
-    public function edit(Packages $packages)
+    public function edit(Packages $packages, $pid)
     {
-        //
+        $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
+        $data['destinations'] = DB::table('destinations')->select('*')->get();
+        $data['categories'] = DB::table('package_category')->select('*')->get();
+        return view('layouts.admin.packages.editpackage', $data);
     }
 
     /**
@@ -191,7 +226,74 @@ class PackagesController extends Controller
      */
     public function update(Request $request, Packages $packages)
     {
-        //
+        //dd($request);
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'tagline' => 'required',
+            'banner' => 'mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'imageURL' => 'mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'days' => 'required',
+            'nights' => 'required',
+            'mingroup' => 'required',
+            'destinations' => 'required',
+            'descriptions' => 'required',
+            'contact_person' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'is_sale' => 'required',
+            'status' => 'required',
+            'category' => 'required'
+        ]);
+    
+        if(isset($request->banner))
+        {
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+            $fileName1 = time().$pass.'.'.$request->banner->extension();  
+            $request->banner->move(public_path('images/packages'), $fileName1);
+            $banner = $fileName1;
+        }
+        else
+        {
+            $banner = $request->oldbanner;
+        }
+
+        if(isset($request->imageURL))
+        {
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+            $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
+            $request->imageURL->move(public_path('images/packages'), $fileName2);
+            $imageURL = $fileName2;
+        }
+        else
+        {
+            $imageURL = $request->oldimage;
+        }
+
+        $data = array(
+            'title' => $request->title,    
+            'tagline' => $request->tagline,
+            'banner' => $banner,
+            'imageURL' => $imageURL,
+            'days' => $request->days,    
+            'nights' => $request->nights,
+            'mingroup' => $request->mingroup,
+            'destination' => $request->destination,
+            'descriptions' => $request->descriptions,
+            'contact_person' => $request->contact_person,    
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'price' => $request->price,
+            'is_sale' => $request->is_sale,
+            'contact_person' => $request->contact_person,    
+            'sale_price' => $request->sale_price,
+            'status' => $request->status,
+            'category' => $request->category
+        );
+
+        DB::table('packages')->where("id", $request->package_id)->update($data);
+
+        return redirect('/admin/packages/');
     }
 
     /**

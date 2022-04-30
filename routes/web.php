@@ -84,11 +84,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::get('/admin/packages', [PackagesController::class, 'index'])->name('packages.list');
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');
+    Route::get('/admin/packages/edit/{id}', [PackagesController::class, 'edit'])->name('packages.edit');
+    Route::post('/admin/packages/update', [PackagesController::class, 'update'])->name('packages.update');
     Route::get('/admin/packages/add/category', [PackagesController::class, 'category'])->name('packages.add.category');
     Route::post('/admin/packages/save/category', [PackagesController::class, 'save_category'])->name('packages.save.category');
     Route::post('/admin/packages/save/package', [PackagesController::class, 'save_package'])->name('packages.save');
     Route::get('/admin/packages/programme/add/{id}', [PackagesController::class, 'programme'])->name('packages.programme.add');
+    Route::get('/admin/packages/programme/edit/{id}', [PackagesController::class, 'editprog'])->name('packages.programme.editprog');
     Route::post('/admin/packages/programme/save', [PackagesController::class, 'save_programme'])->name('packages.programme.save');
+    Route::post('/admin/packages/programme/update', [PackagesController::class, 'update_programme'])->name('packages.programme.update');
 
     Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
     Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');

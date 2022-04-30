@@ -21,7 +21,7 @@
                 </div>
                 <p></p>
                 @endif
-                {{ $packages }}
+                {{-- {{ $packages }} --}}
                 <p></p>
                 <div class="cart-list-inner">
                     <div class="table-responsive table-striped">
@@ -53,7 +53,7 @@
                                     <td class=""><span class="cartImage"><img src="{{URL::asset('/images/packages/'.$pck->imageURL)}}" alt="image" width="200"></span></td>
                                     <td data-column="tagline">{{ $pck->title }}</td>
                                     <td data-column="tagline">{{ $pck->tagline }}</td>
-                                    <td data-column="tagline">{{ $pck->descriptions }}</td>
+                                    <td data-column="tagline">{{ Str::of($pck->descriptions)->words(20, '...') }}</td>
                                     <td data-column="tagline">{{ $pck->days }} Days / {{ $pck->nights }} Nights</td>
                                     <td data-column="tagline">{{ $pck->mingroup }}</td>
                                     <td data-column="tagline">{{ $pck->contact_person }} <br> ({{ $pck->address }}) <br> {{ $pck->phone }}</td>
@@ -61,11 +61,11 @@
                                     <td data-column="status" class="count-input">@if($pck->is_sale == 1) Yes @else No @endif</td>
                                     <td data-column="description">{{ $pck->sale_price }}</td>
                                     <td data-column="featured" class="count-input">@if($pck->status == 1) Active @else Inactive @endif</td>
-                                    <td data-column="description">@if($pck->totp<1) <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Programme</a> @else <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Programme</a> @endif</td>
+                                    <td data-column="description">@if($pck->totp<1) <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Add Programme</a> @else <a href="{{ URL:: route('packages.programme.editprog', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Programme</a> @endif</td>
                                     <td data-column="description"><a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-gallery-thumbnails"></i> Gallery</a></td>
                                     <td data-column="added_on">{{ date('dS M, Y', strtotime($pck->created_at)) }}</td>
                                     <td data-column="action">
-                                        <a href="{{ URL:: route('destinations.edit', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
+                                        <a href="{{ URL:: route('packages.edit', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
                                         <a href="{{ URL:: route('destinations.disable', [$pck->id])}}"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
