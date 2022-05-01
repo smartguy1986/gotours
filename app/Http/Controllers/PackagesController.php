@@ -17,7 +17,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->leftjoin('package_programme', 'package_programme.package_id', '=', 'packages.id')->leftjoin('package_gallery', 'package_gallery.package_id', '=', 'packages.id')->selectRaw('COUNT(package_programme.package_id) as totp, COUNT(package_gallery.package_id) as totg, packages.*')->get();
+        $data['packages'] = DB::table('packages')->select('package_programme.* AS prg, package_gallery.* as glr, packages.*')->join('package_programme', 'package_programme.package_id', '=', 'packages.id')->join('package_gallery', 'package_gallery.package_id', '=', 'packages.id')->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
@@ -224,7 +224,7 @@ class PackagesController extends Controller
      * @param  \App\Models\Packages  $packages
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Packages $packages)
+    public function update(Request $request)
     {
         //dd($request);
         $validatedData = $request->validate([
@@ -285,8 +285,7 @@ class PackagesController extends Controller
             'address' => $request->address,
             'price' => $request->price,
             'is_sale' => $request->is_sale,
-            'contact_person' => $request->contact_person,    
-            'sale_price' => $request->sale_price,
+            'contact_person' => $request->contact_person,
             'status' => $request->status,
             'category' => $request->category
         );
@@ -296,6 +295,35 @@ class PackagesController extends Controller
         return redirect('/admin/packages/');
     }
 
+    public function show_gallery(Request $request, $pid)
+    {
+        $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
+        $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', '=', $pid)->orderBy('id', 'DESC')->get();
+        return view('layouts.admin.packages.addpackagegallery', $data);
+    }
+
+    public function save_gallery(Request $request)
+    {
+        // dd($request->gallery);
+        // echo count($request->gallery);
+        $validatedData = $request->validate([
+            'gallery' => 'required'
+        ]);
+        
+        foreach ($request->gallery as $gallerydata)
+        {
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+            $fileName = time().$pass.'.'.$gallerydata->extension();  
+            $gallerydata->move(public_path('images/packages/gallery'), $fileName);
+            $data = array(
+                "package_id" => $request->packageid,
+                "imageURL" => $fileName,
+            );
+            DB::table('package_gallery')->insert($data);
+        }
+
+        return redirect('/admin/packages/gallery/show/'.$request->packageid)->with('success', 'Gallery Images successfully added');
+    }
     /**
      * Remove the specified resource from storage.
      *

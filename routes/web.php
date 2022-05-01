@@ -24,6 +24,7 @@ Route::get('/', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
+    $data['packages'] = DB::table('packages')->select('*')->where('status', '=', '1')->orderBy('created_at', 'desc')->skip(0)->take(3)->get();
     return view('home')->with($data);
 });
 Route::get('/home', function () {
@@ -93,7 +94,7 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/packages/programme/edit/{id}', [PackagesController::class, 'editprog'])->name('packages.programme.editprog');
     Route::post('/admin/packages/programme/save', [PackagesController::class, 'save_programme'])->name('packages.programme.save');
     Route::post('/admin/packages/programme/update', [PackagesController::class, 'update_programme'])->name('packages.programme.update');
-    Route::post('/admin/packages/gallery/show/{id}', [PackagesController::class, 'show_gallery'])->name('packages.gallery.show');
+    Route::get('/admin/packages/gallery/show/{id}', [PackagesController::class, 'show_gallery'])->name('packages.gallery.show');
     Route::post('/admin/packages/gallery/save', [PackagesController::class, 'save_gallery'])->name('packages.gallery.save');
     Route::post('/admin/packages/gallery/edit/{id}', [PackagesController::class, 'edit_gallery'])->name('packages.gallery.edit');
     Route::post('/admin/packages/gallery/update', [PackagesController::class, 'update_gallery'])->name('packages.gallery.update');

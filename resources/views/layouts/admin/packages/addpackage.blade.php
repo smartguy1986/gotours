@@ -189,7 +189,7 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Sale Price</label>
-                                <input name="sale_price" class="form-control" type="number">
+                                <input name="sale_price" class="form-control" type="number" min="0">
                                 @error('sale_price')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -208,7 +208,7 @@
                         </div>                        
                     </div>
                     <br>
-                    <input type="submit" name="Submit" value="Upload Banner">
+                    <input type="submit" name="Submit" value="Create Package">
                 </form>
                 
             </div>

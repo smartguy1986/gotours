@@ -21,7 +21,7 @@
                 </div>
                 <p></p>
                 @endif
-                {{-- {{ $packages }} --}}
+                {{ $packages }}
                 <p></p>
                 <div class="cart-list-inner">
                     <div class="table-responsive table-striped">
@@ -62,7 +62,7 @@
                                     <td data-column="description">{{ $pck->sale_price }}</td>
                                     <td data-column="featured" class="count-input">@if($pck->status == 1) Active @else Inactive @endif</td>
                                     <td data-column="description">@if($pck->totp<1) <a href="{{ URL:: route('packages.programme.add', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Add Programme</a> @else <a href="{{ URL:: route('packages.programme.editprog', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Programme</a> @endif</td>
-                                    <td data-column="description">@if($pck->totg<1) <a href="{{ URL:: route('packages.gallery.show', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Add Gallery</a> @else <a href="{{ URL:: route('packages.gallery.edit', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Gallery</a> @endif</td>
+                                    <td data-column="description">@if($pck->totg<1) <a href="{{ URL:: route('packages.gallery.show', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> Add Gallery</a> @else <a href="{{ URL:: route('packages.gallery.show', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Gallery</a> @endif</td>
                                     <td data-column="added_on">{{ date('dS M, Y', strtotime($pck->created_at)) }}</td>
                                     <td data-column="action">
                                         <a href="{{ URL:: route('packages.edit', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
