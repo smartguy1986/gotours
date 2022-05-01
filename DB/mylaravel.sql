@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 01, 2022 at 03:19 PM
+-- Generation Time: May 01, 2022 at 03:24 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -245,7 +245,12 @@ INSERT INTO `package_gallery` (`id`, `package_id`, `imageURL`, `created_at`, `up
 (4, 2, '1651406474qls3ey.jpg', NULL, NULL),
 (9, 2, '16514071732kxqlh.jpg', NULL, NULL),
 (10, 2, '1651408044cvif3t.jpg', NULL, NULL),
-(11, 2, '1651408099y46otn.jpg', NULL, NULL);
+(11, 2, '1651408099y46otn.jpg', NULL, NULL),
+(12, 5, '1651411465vysen1.jpg', NULL, NULL),
+(13, 5, '16514114658mby2x.jpg', NULL, NULL),
+(14, 5, '1651411465n0mpl6.jpg', NULL, NULL),
+(15, 5, '1651411465j70e9y.jpg', NULL, NULL),
+(16, 5, '1651411465p1t95m.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -501,7 +506,7 @@ ALTER TABLE `package_category`
 -- AUTO_INCREMENT for table `package_gallery`
 --
 ALTER TABLE `package_gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `package_programme`

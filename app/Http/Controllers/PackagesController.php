@@ -17,7 +17,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->select('package_programme.* AS prg, package_gallery.* as glr, packages.*')->join('package_programme', 'package_programme.package_id', '=', 'packages.id')->join('package_gallery', 'package_gallery.package_id', '=', 'packages.id')->get();
+        $data['packages'] = DB::table('packages')->select('packages.*')->orderBy('id', 'DESC')->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
