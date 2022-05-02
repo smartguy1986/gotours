@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2022 at 02:39 PM
+-- Generation Time: May 02, 2022 at 03:40 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -189,8 +189,9 @@ CREATE TABLE `packages` (
 --
 
 INSERT INTO `packages` (`id`, `category`, `title`, `tagline`, `banner`, `imageURL`, `mingroup`, `destination`, `descriptions`, `days`, `nights`, `contact_person`, `phone`, `address`, `price`, `is_sale`, `sale_price`, `status`, `created_at`, `updated_at`) VALUES
-(2, 2, 'EXPERIENCE THE NATURAL BEAUTY OF ISLAND', 'Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat.', '1651323289c8efh0.jpg', '1651323045e3fn98.jpg', 'Couple', 0, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 4, 3, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Himachal Pradesh - 900052', '19500', '1', '17850', '1', '2022-04-01 05:16:59', '2022-04-01 05:16:59'),
-(5, 5, 'FABULOUS KASHMIR VACATION', 'Excepteur sint occaecat cupidatat non proident', '1651410248571a3w.jpg', '16514102480j9zge.jpg', 'People : 4', 3, 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', 6, 5, 'Abdul Hamid', '8574256352', '1/3 Bulhamia, Jammu & Kashmir - 370004', '32965', '0', '0', '1', '2022-05-01 07:34:08', '2022-05-01 07:34:08');
+(2, 2, 'EXPERIENCE THE NATURAL BEAUTY OF ISLAND', 'Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat.', '1651323289c8efh0.jpg', '1651323045e3fn98.jpg', 'Couple', 1, 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', 4, 3, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Himachal Pradesh - 900052', '19500', '1', '17850', '1', '2022-04-01 05:16:59', '2022-04-01 05:16:59'),
+(5, 5, 'FABULOUS KASHMIR VACATION', 'Excepteur sint occaecat cupidatat non proident', '1651410248571a3w.jpg', '16514102480j9zge.jpg', 'People : 4', 3, 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', 6, 5, 'Abdul Hamid', '8574256352', '1/3 Bulhamia, Jammu & Kashmir - 370004', '32965', '0', '0', '1', '2022-05-01 07:34:08', '2022-05-01 07:34:08'),
+(6, 2, 'GLORIOUS KERALA FLIGHT INCLUSIVE DEAL', 'Et harum quidem rerum facilis est et expedita distinction.', '16514966253689fb.jpg', '1651496625cnmo9e.jpg', 'Family', 3, 'Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.', 7, 6, 'Gagon Boral', '8574236594', '1/3 Bulhamia, Meghalaya - 370004', '29133', '1', '27750', '1', '2022-05-02 07:33:45', '2022-05-02 07:33:45');
 
 -- --------------------------------------------------------
 
@@ -250,7 +251,11 @@ INSERT INTO `package_gallery` (`id`, `package_id`, `imageURL`, `created_at`, `up
 (15, 5, '1651411465j70e9y.jpg', NULL, NULL),
 (18, 5, '1651488219e7f5iy.jpg', NULL, NULL),
 (19, 5, '1651488219hk4p1w.jpg', NULL, NULL),
-(21, 5, '1651488507l8fvnm.jpg', NULL, NULL);
+(21, 5, '1651488507l8fvnm.jpg', NULL, NULL),
+(24, 6, '1651496731mtgeb9.jpg', NULL, NULL),
+(25, 6, '1651496731fx5jso.jpg', NULL, NULL),
+(26, 6, '1651496731q73myw.jpg', NULL, NULL),
+(27, 6, '16514967312jf9ph.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,7 +287,14 @@ INSERT INTO `package_programme` (`id`, `package_id`, `day`, `title`, `descriptio
 (23, 5, 3, 'Gulmarg to Pahalgam', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.', '2022-05-01 13:05:49', '2022-05-01 13:05:49'),
 (24, 5, 4, 'Pahalgam', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.', '2022-05-01 13:05:49', '2022-05-01 13:05:49'),
 (25, 5, 5, 'Pahalgam to Srinagar', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.', '2022-05-01 13:05:49', '2022-05-01 13:05:49'),
-(26, 5, 6, 'Departure from Srinagar', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.', '2022-05-01 13:05:49', '2022-05-01 13:05:49');
+(26, 5, 6, 'Departure from Srinagar', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae.', '2022-05-01 13:05:49', '2022-05-01 13:05:49'),
+(27, 6, 1, 'Arrival in Kochi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(28, 6, 2, 'Munnar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(29, 6, 3, 'Munnar to Thekkady', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(30, 6, 4, 'Thekkady to Kovalam and Poovar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(31, 6, 5, 'Kovalam and Poovar', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(32, 6, 6, 'Kovalam and Poovar to Allepey', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14'),
+(33, 6, 7, 'Departure from Kochi', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '2022-05-02 13:05:14', '2022-05-02 13:05:14');
 
 -- --------------------------------------------------------
 
@@ -494,7 +506,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `package_category`
@@ -506,13 +518,13 @@ ALTER TABLE `package_category`
 -- AUTO_INCREMENT for table `package_gallery`
 --
 ALTER TABLE `package_gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `package_programme`
 --
 ALTER TABLE `package_programme`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `package_review`
