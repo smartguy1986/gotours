@@ -10,7 +10,7 @@
             </div>
          </div>
       </div>
-      {{ $packages }}
+      {{-- {{ $packages }} --}}
       <div class="package-inner">
          <div class="row">
             @foreach ( $packages as $pckg)
@@ -18,7 +18,7 @@
                   <div class="package-wrap">
                      <figure class="feature-image">
                         <a href="{{ URL::route('packages.details',$pckg->id) }}">
-                           <img src="{{asset('images/packages/'.$pckg->imageURL)}}" alt="">
+                           <img src="{{asset('images/packages/'.$pckg->imageURL)}}" alt="{{ $pckg->title }}" class="package-image">
                         </a>
                      </figure>
                      <div class="package-price">
@@ -53,7 +53,7 @@
                                  <span style="width: 60%"></span>
                               </div>
                            </div>
-                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit luctus nec ullam. Ut elit tellus, luctus nec ullam elit tellpus.</p>
+                           <p>{{ Str::limit($pckg->descriptions, 200) }}</p>
                            <div class="btn-wrap">
                               <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
                               <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>

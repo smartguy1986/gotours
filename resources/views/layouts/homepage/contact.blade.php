@@ -3,7 +3,7 @@
     <div class="container">
        <div class="row">
           <div class="col-lg-4">
-             <div class="contact-img" style="background-image: url(assets/images/img24.jpg);">
+             <div class="contact-img" style="background-image: url(assets/images/contact-image.jpg);">
              </div>
           </div>
           <div class="col-lg-8">

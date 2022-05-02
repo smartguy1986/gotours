@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 02, 2022 at 03:40 PM
+-- Generation Time: May 02, 2022 at 09:23 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -20,6 +20,44 @@ SET time_zone = "+00:00";
 --
 -- Database: `mylaravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog`
+--
+
+CREATE TABLE `blog` (
+  `id` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `author` int(11) NOT NULL,
+  `blog_image` varchar(255) NOT NULL,
+  `tags` longtext NOT NULL,
+  `short_desc` longtext NOT NULL,
+  `blog_content` longtext NOT NULL,
+  `blog_banner` varchar(255) NOT NULL,
+  `status` enum('P','D','R','D') NOT NULL,
+  `published_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `last_updated` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `views` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_comment`
+--
+
+CREATE TABLE `blog_comment` (
+  `id` int(11) NOT NULL,
+  `blog_id` int(11) NOT NULL,
+  `comment` longtext NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `status` enum('1','0') NOT NULL,
+  `flagged` int(11) NOT NULL,
+  `published_on` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -387,6 +425,18 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 --
 
 --
+-- Indexes for table `blog`
+--
+ALTER TABLE `blog`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_comment`
+--
+ALTER TABLE `blog_comment`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `company_banners`
 --
 ALTER TABLE `company_banners`
@@ -471,6 +521,18 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `blog`
+--
+ALTER TABLE `blog`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `blog_comment`
+--
+ALTER TABLE `blog_comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `company_banners`

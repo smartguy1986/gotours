@@ -7,6 +7,8 @@ use App\Http\Controllers\CompanyBannersController;
 use App\Http\Controllers\CompanyDetailsController;
 use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\BlogController;
+use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ Route::get('/', function () {
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     return view('home')->with($data);
 });
 Route::get('/home', function () {
@@ -32,6 +35,8 @@ Route::get('/home', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
+    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     return view('home')->with($data);
 });
 
@@ -108,6 +113,11 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
 
     Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
     Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');
+
+    Route::get('/admin/blog', [BlogController::class, 'index'])->name('blog');
+    Route::get('/admin/blog/add', [BlogController::class, 'add'])->name('blog.add');
+    Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::get('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
     
 });
 

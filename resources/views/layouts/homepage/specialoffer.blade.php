@@ -10,86 +10,37 @@
             </div>
          </div>
       </div>
+      {{-- {{ $packagesoffers }} --}}
       <div class="special-inner">
          <div class="row">
+            @foreach ( $packagesoffers as $pckg)
             <div class="col-md-6 col-lg-4">
                <div class="special-item">
                   <figure class="special-img">
-                     <img src="{{asset('assets/images/img9.jpg')}}" alt="">
+                     <img src="{{asset('images/packages/'.$pckg->imageURL)}}" alt="{{ $pckg->title }}">
                   </figure>
                   <div class="badge-dis">
                      <span>
-                        <strong>20%</strong>
+                        <strong>{{ number_format(((($pckg->price-$pckg->sale_price)/$pckg->price)*100),2) }}%</strong>
                         off
                      </span>
                   </div>
                   <div class="special-content">
                      <div class="meta-cat">
-                        <a href="#">CANADA</a>
+                        <a href="#">{{ $pckg->name }}</a>
                      </div>
                      <h3>
-                        <a href="#">Experience the natural beauty of glacier</a>
+                        <a href="#">{{ $pckg->title }}</a>
                      </h3>
                      <div class="package-price">
                         Price:
-                        <del>$1500</del>
-                        <ins>$1200</ins>
+                        <del>${{ number_format($pckg->price) }}</del>
+                        <ins>${{ number_format($pckg->sale_price) }}</ins>
                      </div>
                   </div>
                </div>
             </div>
-            <div class="col-md-6 col-lg-4">
-               <div class="special-item">
-                  <figure class="special-img">
-                     <img src="{{asset('assets/images/img10.jpg')}}" alt="">
-                  </figure>
-                  <div class="badge-dis">
-                     <span>
-                        <strong>15%</strong>
-                        off
-                     </span>
-                  </div>
-                  <div class="special-content">
-                     <div class="meta-cat">
-                        <a href="#">NEW ZEALAND</a>
-                     </div>
-                     <h3>
-                        <a href="#">Trekking to the mountain camp site</a>
-                     </h3>
-                     <div class="package-price">
-                        Price:
-                        <del>$1300</del>
-                        <ins>$1105</ins>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div class="col-md-6 col-lg-4">
-               <div class="special-item">
-                  <figure class="special-img">
-                     <img src="{{asset('assets/images/img11.jpg')}}" alt="">
-                  </figure>
-                  <div class="badge-dis">
-                     <span>
-                        <strong>15%</strong>
-                        off
-                     </span>
-                  </div>
-                  <div class="special-content">
-                     <div class="meta-cat">
-                        <a href="#">MALAYSIA</a>
-                     </div>
-                     <h3>
-                        <a href="#">Sunset view of beautiful lakeside city</a>
-                     </h3>
-                     <div class="package-price">
-                        Price:
-                        <del>$1800</del>
-                        <ins>$1476</ins>
-                     </div>
-                  </div>
-               </div>
-            </div>
+            @endforeach            
          </div>
       </div>
    </div>

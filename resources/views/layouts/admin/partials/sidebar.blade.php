@@ -63,6 +63,18 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="@if (\Request::is('*blog')) active-menu  @endif"><a><i class="fas fa-book"></i> Blog Articles</a>
+                <ul>
+                    <li class="@if (\Request::is('*blog*')) active-menu  @endif">
+                        <a href="{{ URL::route('blog') }}">Blog List</a>
+                    </li>
+                    <li class="@if (\Request::is('*blog*')) active-menu  @endif">
+                        <a href="{{ URL::route('blog.add') }}">Add Blog</a>
+                    </li>
+                </ul>
+            </li>
+
             <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
             <li><a href="db-wishlist.html"><i class="far fa-heart"></i>Wishlist</a></li>
             <li><a href="db-comment.html"><i class="fas fa-comments"></i>Comments</a></li>

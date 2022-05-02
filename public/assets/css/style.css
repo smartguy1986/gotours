@@ -8554,4 +8554,21 @@ product checkout css
   }
 }
 
+.package-image {
+	max-height: 250px;
+	height: 250px;
+	overflow: hidden;
+	object-fit: cover;
+	width: 100%;
+}
 
+.special-img {
+	height: 450px;
+}
+
+.special-img img {
+	height: 450px;
+	object-fit: cover;
+	width: 100%;
+	min-height: 450px;
+}
