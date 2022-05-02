@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="dashboard-box">
                 {{-- {{ $packages }} --}}
-                <h4>Add Programme</h4>
+                <h4><a href="{{ URL:: route('packages.list') }}" class="orange-link">Packages</a> <i class="fas fa-angle-double-left"></i>  Add Programme</h4>
                 <p>Here add the programme schedule of <strong>{{ $packages[0]->title }}</strong></p>                
                 <p></p>
 

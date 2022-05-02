@@ -1,5 +1,5 @@
 <!-- Home subscribe section html start -->
-<section class="subscribe-section" style="background-image: url(assets/images/img16.jpg);">
+<section class="subscribe-section" style="background-image: url(assets/images/announcement.jpg);">
    <div class="container">
       <div class="row">
          <div class="col-lg-7">

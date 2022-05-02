@@ -151,6 +151,6 @@
 <script src="{{asset('assets/vendors/lightbox/dist/js/lightbox.min.js')}}"></script>
 <script src="{{asset('assets/vendors/slick/slick.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
-<script src="{{asset('assets/js/custom.min.js')}}"></script>
+<script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 </html>

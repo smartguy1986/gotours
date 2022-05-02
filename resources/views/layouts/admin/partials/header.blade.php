@@ -154,4 +154,4 @@
                     </div>
                 </div>
             </div>
-            @include('layouts.admin.partials.sidebar');
+            @include('layouts.admin.partials.sidebar')

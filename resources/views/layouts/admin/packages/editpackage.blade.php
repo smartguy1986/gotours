@@ -14,7 +14,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
                 </ul>
-                <h4>Edit Packages</h4>
+                <h4><a href="{{ URL:: route('packages.list') }}" class="orange-link">Packages</a> <i class="fas fa-angle-double-left"></i>  Edit Packages</h4>
                 {{ $packages }}
                 <form class="form-horizontal" method="POST" action="{{ route('packages.update') }}" enctype="multipart/form-data">
                     @csrf    

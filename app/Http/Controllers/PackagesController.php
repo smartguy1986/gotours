@@ -252,6 +252,10 @@ class PackagesController extends Controller
             $fileName1 = time().$pass.'.'.$request->banner->extension();  
             $request->banner->move(public_path('images/packages'), $fileName1);
             $banner = $fileName1;
+            $file_path = public_path().'/images/packages/'.$request->banner;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
         }
         else
         {
@@ -264,6 +268,10 @@ class PackagesController extends Controller
             $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
             $request->imageURL->move(public_path('images/packages'), $fileName2);
             $imageURL = $fileName2;
+            $file_path = public_path().'/images/packages/'.$request->imageURL;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
         }
         else
         {
@@ -324,6 +332,24 @@ class PackagesController extends Controller
 
         return redirect('/admin/packages/gallery/show/'.$request->packageid)->with('success', 'Gallery Images successfully added');
     }
+
+    public function delete_gallery(Request $request)
+    {
+        //dd($request);
+        foreach($request->galid as $gmg)
+        {
+            $imgdata = DB::table('package_gallery')->select('*')->where('id', '=', $gmg)->get();
+            //echo $imgdata[0]->imageURL;
+            DB::table('package_gallery')->where('id', $gmg)->delete();
+            $file_path = public_path().'/images/packages/gallery/'.$imgdata[0]->imageURL;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }   
+        }
+
+        return redirect('/admin/packages/gallery/show/'.$request->pid)->with('success', 'Images Deleted successfully');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

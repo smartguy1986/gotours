@@ -15,6 +15,16 @@
 <script src="{{ asset('admin_assets/js/counterup.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/jquery.slicknav.js') }}"></script>
 <script src="{{ asset('admin_assets/js/dashboard-custom.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                $(this).remove(); 
+            });
+        }, 4000);
+    });
+</script>
+
 </body>
 
 </html>

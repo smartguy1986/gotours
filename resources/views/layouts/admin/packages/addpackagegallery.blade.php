@@ -1,12 +1,17 @@
 @extends('layouts.admin.adminLayout')
 
 @section('content')
-
+<style>
+    input[type="checkbox"] {
+	z-index: 1;
+	opacity: 1;
+}
+</style>
 <div class="db-info-wrap">
     <div class="row">
         <div class="col-lg-12">
             <div class="dashboard-box">
-                <h4>Gallery </h4>
+                <h4><a href="{{ URL:: route('packages.list') }}" class="orange-link">Packages</a> <i class="fas fa-angle-double-left"></i>  Gallery </h4>
                 <p>Here add the images of a Package <strong>GoTours</strong></p>                
                 <p></p>
                 @if ($message = Session::get('success'))
@@ -46,13 +51,31 @@
                 {{-- {{ $gallery }} --}}
                 <div class="row">
                     <div class="container-fluid">
-                        <div class="row">
-                            @foreach ($gallery as $galimg)
-                                <div class="col-sm-3">
-                                    <img src="{{URL::asset('/images/packages/gallery/'.$galimg->imageURL)}}" alt="image" class="backend-gallery-image">
+                        <form class="form-horizontal" method="POST" action="{{ route('packages.gallery.delete') }}" enctype="multipart/form-data" style="width:100%; display:contents;">
+                            @csrf 
+                            <input type="hidden" name="pid" value="{{ $packages[0]->id }}">
+                            <div class="row">
+                                <div class="container-fluid">              
+                                    @foreach ($gallery as $galimg)        
+                                    <div class="card-container">
+                                        <div class="img-container">
+                                            <img src="{{URL::asset('/images/packages/gallery/'.$galimg->imageURL)}}" alt="image" class="backend-gallery-image">
+                                        </div>
+                                        <div class="action-container">
+                                            Delete ? <input type="checkbox" name="galid[]" value="{{ $galimg->id }}">
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                            <div class="row">
+                                <div class="container-fluid">
+                                    <div class="gallery-delete-container text-end">
+                                        <input class="float-right" type="submit" name="Submit" value="Delete Selected">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <br>                
