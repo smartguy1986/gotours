@@ -24,7 +24,7 @@ Route::get('/', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
-    $data['packages'] = DB::table('packages')->select('*')->where('status', '=', '1')->orderBy('created_at', 'desc')->skip(0)->take(3)->get();
+    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     return view('home')->with($data);
 });
 Route::get('/home', function () {
@@ -40,6 +40,12 @@ Route::get('/destinations', function () {
     $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
     return view('layouts.pages.destinations')->with($data);
 })->name('destinations');
+
+Route::get('/packages/details/{id}', function () {
+    $data['company_details'] = DB::table('company_details')->select('*')->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
+    return view('layouts.pages.destinations')->with($data);
+})->name('packages.details');
 
 Route::get('logout', function ()
 {

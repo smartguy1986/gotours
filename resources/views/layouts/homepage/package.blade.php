@@ -17,13 +17,13 @@
                <div class="col-lg-4 col-md-6">
                   <div class="package-wrap">
                      <figure class="feature-image">
-                        <a href="#">
-                           <img src="{{asset('assets/images/img5.jpg')}}" alt="">
+                        <a href="{{ URL::route('packages.details',$pckg->id) }}">
+                           <img src="{{asset('images/packages/'.$pckg->imageURL)}}" alt="">
                         </a>
                      </figure>
                      <div class="package-price">
                         <h6>
-                           <span>$1,900 </span> / per person
+                           <span>$ {{ number_format($pckg->price) }}</span> / per person
                         </h6>
                      </div>
                      <div class="package-content-wrap">
@@ -31,21 +31,21 @@
                            <ul>
                               <li>
                                  <i class="far fa-clock"></i>
-                                 7D/6N
+                                 {{$pckg->days}}D/{{$pckg->days}}N
                               </li>
                               <li>
                                  <i class="fas fa-user-friends"></i>
-                                 People: 5
+                                 {{$pckg->mingroup}}
                               </li>
                               <li>
                                  <i class="fas fa-map-marker-alt"></i>
-                                 Malaysia
+                                 {{$pckg->name}}
                               </li>
                            </ul>
                         </div>
                         <div class="package-content">
                            <h3>
-                              <a href="#">Sunset view of beautiful lakeside resident</a>
+                              <a href="{{ URL::route('packages.details',$pckg->id) }}">{{$pckg->title}}</a>
                            </h3>
                            <div class="review-area">
                               <span class="review-text">(25 reviews)</span>
@@ -55,8 +55,8 @@
                            </div>
                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit luctus nec ullam. Ut elit tellus, luctus nec ullam elit tellpus.</p>
                            <div class="btn-wrap">
-                              <a href="#" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                              <a href="#" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
+                              <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+                              <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
                            </div>
                         </div>
                      </div>

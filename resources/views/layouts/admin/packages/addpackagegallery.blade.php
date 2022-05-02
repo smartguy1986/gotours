@@ -71,7 +71,9 @@
                             <div class="row">
                                 <div class="container-fluid">
                                     <div class="gallery-delete-container text-end">
-                                        <input class="float-right" type="submit" name="Submit" value="Delete Selected">
+                                        @if (COUNT($gallery)>0)
+                                            <input class="float-right" type="submit" name="Submit" value="Delete Selected">
+                                        @endif                                        
                                     </div>
                                 </div>
                             </div>
