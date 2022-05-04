@@ -17,8 +17,8 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->select('packages.*')->orderBy('id', 'DESC')->get();
-        return view('layouts.admin.packages.lists', $data);
+        $data['packages'] = DB::table('blog')->select('*')->orderBy('id', 'DESC')->get();
+        return view('layouts.admin.blogs.lists', $data);
     }
 
     /**

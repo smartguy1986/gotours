@@ -15,6 +15,10 @@
 <script src="{{ asset('admin_assets/js/counterup.min.js') }}"></script>
 <script src="{{ asset('admin_assets/js/jquery.slicknav.js') }}"></script>
 <script src="{{ asset('admin_assets/js/dashboard-custom.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
+<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+</body>
 <script>
     $(document).ready(function() {
         window.setTimeout(function() {
@@ -22,6 +26,11 @@
                 $(this).remove(); 
             });
         }, 4000);
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.ckeditor').ckeditor();
     });
 </script>
 

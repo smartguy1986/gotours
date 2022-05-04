@@ -17,6 +17,7 @@
         rel="stylesheet">
     <!-- Custom CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/css/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" />
     <title>GoTours | Travel & Tour Organiser </title>
 </head>
 

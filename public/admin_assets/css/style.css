@@ -2136,3 +2136,25 @@ login form css
 	right: 4%;
 	top: 14%;
 }
+
+.bootstrap-tagsinput .tag {
+	margin-right: 2px;
+	color: white;
+	background-color: #ff5638;
+	padding: 4px 8px;
+	border-radius: 3px;
+	font-size: 14px;
+}
+
+.bootstrap-tagsinput {
+	display: block ruby !important;
+}
+
+.warning-error {
+	border: 2px solid lightslategray;
+	color: #f00002;
+	padding: 20px !important;
+	margin-bottom: 20px !important;
+	border-radius: 5px;
+	line-height: 20px;
+}
