@@ -10,29 +10,36 @@
             </div>
          </div>
       </div>
-      {{ $blogs }}
+      {{-- {{ $blogs }} --}}
       <div class="row">
          @foreach ($blogs as $article)
             <div class="col-md-6 col-lg-4">
                <article class="post">
                   <figure class="feature-image">
-                     <a href="#">
-                        <img src="{{asset('assets/images/img17.jpg')}}" alt="">
+                     <a href="{{URL::route('blog.details',$article->id)}}">
+                        <img src="{{URL::asset('/images/blogs/'.$article->blog_image)}}" alt="" class="home-blog-img">
                      </a>
                   </figure>
                   <div class="entry-content">
                      <h3>
-                        <a href="#">Life is a beautiful journey not a destination</a>
+                        <a href="{{URL::route('blog.details',$article->id)}}">{{ $article->title }}</a>
                      </h3>
+                     <p>
+                        {{ $article->short_desc }}
+                     </p>
                      <div class="entry-meta">
                         <span class="byline">
-                           <a href="#">Demoteam</a>
+                           <a href="#">{{ $article->name }}</a>
                         </span>
                         <span class="posted-on">
-                           <a href="#">August 17, 2021</a>
+                           <a href="#">{{ date('dS M, Y', strtotime($article->created_at)) }}</a>
                         </span>
                         <span class="comments-link">
-                           <a href="#">No Comments</a>
+                           <a href="#">@if ($article->totcm>0)
+                              {{ $article->totcm }} Comment(s)                             
+                           @else
+                              No Comments
+                           @endif</a>
                         </span>
                      </div>
                   </div>

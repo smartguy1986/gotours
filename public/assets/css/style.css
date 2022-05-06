@@ -8573,3 +8573,30 @@ product checkout css
 	min-height: 450px;
 }
 
+.single-content-wrap{
+  font-size: 16px !important;
+}
+
+.single-content-wrap img{
+  object-fit: cover !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.home-blog-img{
+  height: 250px;
+	object-fit: cover;
+	width: 100%;
+	min-height: 250px;
+}
+
+.feature-image img{
+  width: 100% !important;
+}
+
+.widget_latest_post{
+  -webkit-transition: position 0.4s ease;
+  -moz-transition: position 0.4s ease;
+  -o-transition: position 0.4s ease;
+  transition: position 0.4s ease;
+}
