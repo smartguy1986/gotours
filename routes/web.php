@@ -22,59 +22,42 @@ use Illuminate\Support\Str;
 */
 
 Route::get('/', function () {
-    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
-    
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();    
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
-
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
-
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-
     $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-    
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();    
     return view('home')->with($data);
 });
 Route::get('/home', function () {
-    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
-    
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();    
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
-
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
-
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-
     $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();
-    
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();    
     return view('home')->with($data);
 });
 
 Route::get('/destinations', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-
     $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
-
     return view('layouts.pages.destinations')->with($data);
-
 })->name('destinations');
 
-Route::get('/packages/details/{id}', function () {
+Route::get('/packages/details/{link}', function ($link) {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
+    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['packages.slug', '=', $link]])->get();
+    $data['programme'] = DB::table('package_programme')->select('*')->where('package_id', $data['packages'][0]->id)->get();
+    $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', $data['packages'][0]->id)->get();
 
-    $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
-
-    return view('layouts.pages.destinations')->with($data);
-    
+    return view('layouts.pages.packagedetails')->with($data);    
 })->name('packages.details');
 
-Route::get('/blog/details/{id}', [BlogController::class, 'showfront'])->name('blog.details');
+Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 // Route::get('/blog/details/{id}', function () {
 //     $data['blogs'] = DB::table('blogs')->select('*')->get();
@@ -128,7 +111,8 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');
     Route::get('/admin/packages/edit/{id}', [PackagesController::class, 'edit'])->name('packages.edit');
     Route::post('/admin/packages/update', [PackagesController::class, 'update'])->name('packages.update');
-    Route::get('/admin/packages/add/category', [PackagesController::class, 'category'])->name('packages.add.category');
+    Route::get('/admin/packages/categories', [PackagesController::class, 'category'])->name('packages.catlist');
+    Route::get('/admin/packages/add/category', [PackagesController::class, 'addcategory'])->name('packages.add.category');
     Route::post('/admin/packages/save/category', [PackagesController::class, 'save_category'])->name('packages.save.category');
     Route::post('/admin/packages/save/package', [PackagesController::class, 'save_package'])->name('packages.save');
     Route::get('/admin/packages/programme/add/{id}', [PackagesController::class, 'programme'])->name('packages.programme.add');
@@ -141,14 +125,15 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::post('/admin/packages/gallery/update', [PackagesController::class, 'update_gallery'])->name('packages.gallery.update');
     Route::post('/admin/packages/gallery/delete', [PackagesController::class, 'delete_gallery'])->name('packages.gallery.delete');
 
-    Route::post('/admin/packages/category/edit', [PackagesController::class, 'index'])->name('categories.edit');
-    Route::post('/admin/packages/category/disable', [PackagesController::class, 'index'])->name('categories.disable');
+    Route::get('/admin/packages/category/edit/{id}', [PackagesController::class, 'edit_category'])->name('categories.edit');
+    Route::post('/admin/packages/update_category', [PackagesController::class, 'update_category'])->name('packages.update.category');
+    Route::get('/admin/packages/category/disable{id}', [PackagesController::class, 'index'])->name('categories.disable');
 
     Route::get('/admin/blog', [BlogController::class, 'index'])->name('blog');
     Route::get('/admin/blog/add', [BlogController::class, 'create'])->name('blog.add');
     Route::post('/admin/blog/save', [BlogController::class, 'store'])->name('blog.save');
     Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
-    Route::get('/admin/blog/update', [BlogController::class, 'update'])->name('blog.update');
+    Route::post('/admin/blog/update', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
     
 });

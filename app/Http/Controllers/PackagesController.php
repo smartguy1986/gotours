@@ -17,8 +17,8 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('blog')->select('*')->orderBy('id', 'DESC')->get();
-        return view('layouts.admin.blogs.lists', $data);
+        $data['packages'] = DB::table('packages')->select('*')->orderBy('id', 'DESC')->get();
+        return view('layouts.admin.packages.lists', $data);
     }
 
     /**
@@ -31,6 +31,12 @@ class PackagesController extends Controller
         //
     }
     public function category()
+    {
+        $data['categories'] = DB::table('package_category')->select('*')->get();
+        return view('layouts.admin.packages.catlists', $data);
+    }
+
+    public function addcategory()
     {
         $data['categories'] = DB::table('package_category')->select('*')->get();
         return view('layouts.admin.packages.addcat', $data);
@@ -80,6 +86,7 @@ class PackagesController extends Controller
   
         $check = DB::table('package_category')->insertGetId(array(
                     'cat_name'      => $request->cat_name,
+                    'slug'          => Str::slug($request->cat_name, '-'),
                     'cat_tagline'     => $request->cat_tagline,
                     'cat_image'      => $fileName,
                     'cat_description'   => $request->cat_description,
@@ -87,7 +94,7 @@ class PackagesController extends Controller
                     'created_at' => date("Y-m-d")
                 ));
     
-        return redirect('/admin/packages/add/category')->with('success', 'Destination Has been uploaded');
+        return redirect('/admin/packages/categories')->with('success', 'Destination Has been uploaded');
     }
 
     public function save_package(Request $request)
@@ -121,6 +128,7 @@ class PackagesController extends Controller
 
         $save = new Packages;
         $save->title = strtoupper($request->title);
+        $save->slug = Str::slug($request->title, '-');
         $save->tagline = $request->tagline;
         $save->banner = $fileName1;
         $save->imageURL = $fileName2;
@@ -209,6 +217,54 @@ class PackagesController extends Controller
      * @param  \App\Models\Packages  $packages
      * @return \Illuminate\Http\Response
      */
+    public function edit_category(Packages $packages, $cid)
+    {
+        // $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
+        // $data['destinations'] = DB::table('destinations')->select('*')->get();
+        $data['categories'] = DB::table('package_category')->select('*')->where('id', '=', $cid)->get();
+        return view('layouts.admin.packages.editcat', $data);
+    }
+     
+    public function update_category(Request $request)
+    {
+        $validatedData = $request->validate([
+            'cat_name' => 'required',
+            'cat_tagline' => 'required',
+            'cat_description' => 'required',
+            'status' => 'required',
+        ]);
+    
+        if(isset($request->cat_image))
+        {
+            $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+            $fileName1 = time().$pass.'.'.$request->cat_image->extension();  
+            $request->cat_image->move(public_path('images/categories'), $fileName1);
+            $cat_image = $fileName1;
+            $file_path = public_path().'/images/categories/'.$request->old_cat_image;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        else
+        {
+            $cat_image = $request->old_cat_image;
+        }
+  
+        $data = array(
+            'cat_name'      => $request->cat_name,
+            'slug'          => Str::slug($request->cat_name, '-'),
+            'cat_tagline'     => $request->cat_tagline,
+            'cat_image'      => $cat_image,
+            'cat_description'   => $request->cat_description,
+            'status'    => $request->status,
+            'created_at' => date("Y-m-d")
+        );
+
+        DB::table('package_category')->where("id", $request->id)->update($data);
+    
+        return redirect('/admin/packages/categories')->with('success', 'Package Category has been Updated');
+    }
+
     public function edit(Packages $packages, $pid)
     {
         $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
@@ -280,13 +336,14 @@ class PackagesController extends Controller
 
         $data = array(
             'title' => $request->title,    
+            'slug' => Str::slug($request->title, '-'),
             'tagline' => $request->tagline,
             'banner' => $banner,
             'imageURL' => $imageURL,
             'days' => $request->days,    
             'nights' => $request->nights,
             'mingroup' => $request->mingroup,
-            'destination' => $request->destination,
+            'destination' => $request->destinations,
             'descriptions' => $request->descriptions,
             'contact_person' => $request->contact_person,    
             'phone' => $request->phone,

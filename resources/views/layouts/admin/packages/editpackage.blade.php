@@ -15,7 +15,7 @@
                 @endforeach
                 </ul>
                 <h4><a href="{{ URL:: route('packages.list') }}" class="orange-link">Packages</a> <i class="fas fa-angle-double-left"></i>  Edit Packages</h4>
-                {{ $packages }}
+                {{-- {{ $packages }} --}}
                 <form class="form-horizontal" method="POST" action="{{ route('packages.update') }}" enctype="multipart/form-data">
                     @csrf    
                     <input type="hidden" name="package_id" value="{{ $packages[0]->id }}">           
@@ -125,7 +125,7 @@
                                 <label>Destination</label>
                                 <select class="form-control dropdown" name="destinations">
                                     @foreach ($destinations as $dst)
-                                        <option {{ ($packages[0]->destination==$dst->id) ? 'selected' : '' }} value="{{ $dst->id }}">{{ $dst->name }}</option>
+                                        <option @if($packages[0]->destination==$dst->id) selected @endif value="{{ $dst->id }}">{{ $dst->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('destinations')
@@ -201,8 +201,8 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Status</label>
-                                Active <input class="form-input-control" type="radio" name="status" value="1" style="width: auto !important;" {{ $packages[0]->status=='1'?'checked':null }}> | 
-                                Inactive <input class="form-input-control" type="radio" name="status" value="0" style="width: auto !important;" {{ $packages[0]->status=='0'?'checked':null }}>
+                                Active <input class="form-input-control" type="radio" name="status" value="1" style="width: auto !important;" @if($packages[0]->status==1) checked @endif> | 
+                                Inactive <input class="form-input-control" type="radio" name="status" value="0" style="width: auto !important;" @if($packages[0]->status==0) checked @endif>
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -210,7 +210,7 @@
                         </div>                        
                     </div>
                     <br>
-                    <input type="submit" name="Submit" value="Upload Banner">
+                    <input type="submit" name="Submit" value="Update Package">
                 </form>
                 
             </div>

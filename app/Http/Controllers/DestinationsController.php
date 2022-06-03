@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Destinations;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use DB;
 use File;
 
@@ -57,6 +58,7 @@ class DestinationsController extends Controller
 
         $save = new Destinations;
         $save->name = strtoupper($request->name);
+        $save->slug = Str::slug($request->name, '-');
         $save->imageURL = $fileName;
         $save->tagline = $request->tagline;
         $save->description = $request->description;
@@ -117,7 +119,7 @@ class DestinationsController extends Controller
             $fileName = $request->old_image;
         }
 
-        $values = array('name' => strtoupper($request->name), 'tagline' => $request->tagline, 'head_office_address' => $request->head_office_address, 'head_office_phone' => $request->head_office_phone, 'description' => $request->description, 'featured' => $request->featured, 'imageURL' => $fileName);
+        $values = array('name' => strtoupper($request->name), 'slug' => Str::slug($request->name, '-'), 'tagline' => $request->tagline, 'head_office_address' => $request->head_office_address, 'head_office_phone' => $request->head_office_phone, 'description' => $request->description, 'featured' => $request->featured, 'imageURL' => $fileName);
 
         $affected_row = Destinations::where('id', $request->dstid)->update($values);
         

@@ -21,16 +21,17 @@
                 </div>
                 <p></p>
                 @endif
- 
+                {{-- {{ $categories }} --}}
                 <p></p>
-                <h4>Add Packages Categories</h4>
-                <form class="form-horizontal" method="POST" action="{{ route('packages.save.category') }}" enctype="multipart/form-data">
+                <h4>Edit Packages Category</h4>
+                <form class="form-horizontal" method="POST" action="{{ route('packages.update.category') }}" enctype="multipart/form-data">
                     @csrf               
                     <div class="row">
+                        <input type="hidden" name="id" value="{{ $categories[0]->id }}">
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Category Name</label>
-                                <input name="cat_name" class="form-control" type="text">
+                                <input name="cat_name" class="form-control" type="text" value="{{ $categories[0]->cat_name }}">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -40,23 +41,24 @@
                                 <label>*Image must be less than 2MB in size, and upload only jpg, png, gif only</label>
                             </div>
                         </div>
+                        <input type="hidden" name="old_cat_image" value="{{ $categories[0]->cat_image }}">
                         <div class="col-sm-9">
                             <div class="form-group">
                                 <label>Tagline</label>
-                                <input name="cat_tagline" class="form-control" type="text">
+                                <input name="cat_tagline" class="form-control" type="text" value="{{ $categories[0]->cat_tagline }}">
                             </div>
                         </div>   
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Status</label>
-                                Active <input class="form-input-control" type="radio" name="status" value="1" style="width: auto !important;"> | 
-                                Inactive <input class="form-input-control" type="radio" name="status" value="0" style="width: auto !important;">
+                                Active <input class="form-input-control" type="radio" name="status" value="1" style="width: auto !important;" @if ($categories[0]->status==1) checked @endif > | 
+                                Inactive <input class="form-input-control" type="radio" name="status" value="0" style="width: auto !important;" @if ($categories[0]->status==0) checked @endif>
                             </div>
                         </div>                
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea name="cat_description" class="form-control"></textarea>
+                                <textarea name="cat_description" class="form-control">{{ $categories[0]->cat_description }}</textarea>
                             </div>
                         </div>
                         

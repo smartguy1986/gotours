@@ -36,6 +36,9 @@
                         <a href="{{ URL::route('packages.add.category') }}">Add Category</a>
                     </li>
                     <li class="@if (\Request::is('*packages*')) active-menu  @endif">
+                        <a href="{{ URL::route('packages.catlist') }}">Categories</a>
+                    </li>
+                    <li class="@if (\Request::is('*packages*')) active-menu  @endif">
                         <a href="{{ URL::route('packages.add') }}">Add Packages</a>
                     </li>
                     <li class="@if (\Request::is('*packages*')) active-menu  @endif">

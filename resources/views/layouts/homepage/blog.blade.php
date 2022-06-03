@@ -16,13 +16,13 @@
             <div class="col-md-6 col-lg-4">
                <article class="post">
                   <figure class="feature-image">
-                     <a href="{{URL::route('blog.details',$article->id)}}">
+                     <a href="{{URL::route('blog.details',$article->slug)}}">
                         <img src="{{URL::asset('/images/blogs/'.$article->blog_image)}}" alt="" class="home-blog-img">
                      </a>
                   </figure>
                   <div class="entry-content">
                      <h3>
-                        <a href="{{URL::route('blog.details',$article->id)}}">{{ $article->title }}</a>
+                        <a href="{{URL::route('blog.details',$article->slug)}}">{{ $article->title }}</a>
                      </h3>
                      <p>
                         {{ $article->short_desc }}

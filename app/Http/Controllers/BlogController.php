@@ -66,6 +66,7 @@ class BlogController extends Controller
         $save = new Blog;
         $save->blog_category = $request->blog_category;
         $save->title = $request->title;
+        $save->slug = Str::slug($request->title, '-');
         $save->short_desc = $request->short_desc;
         if(!empty($request->blog_banner)) { $save->blog_banner = $fileName1; }
         $save->blog_image = $fileName2;
@@ -87,15 +88,15 @@ class BlogController extends Controller
         
     }
 
-    public function showfront(Request $request, $id)
+    public function showfront(Request $request, $link)
     {
         $data['company_details'] = DB::table('company_details')->select('*')->get();
 
-        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id','=','blogs.author')->where('blogs.id','=',$id)->get();
+        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id','=','blogs.author')->where('blogs.slug','=',$link)->get();
 
-        $data['blog_comments'] = DB::table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id','=',$id)->get();
+        $data['blog_comments'] = DB::table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id','=',$data['blogs'][0]->id)->get();
 
-        $data['related_blogs'] = DB::table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
+        $data['related_blogs'] = DB::table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $data['blogs'][0]->id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
         return view('layouts.pages.blogdetails', $data);
     }
 
@@ -118,7 +119,15 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data['company_details'] = DB::table('company_details')->select('*')->get();
+
+        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id','=','blogs.author')->where('blogs.id','=',$id)->get();
+
+        $data['blog_comments'] = DB::table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id','=',$id)->get();
+
+        $data['related_blogs'] = DB::table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
+
+        return view('layouts.admin.blogs.editblog', $data);
     }
 
     /**
@@ -128,9 +137,60 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'short_desc' => 'required',
+            'blog_content' => 'required',
+            'tags' => 'required'
+        ]);
+    
+        if(isset($request->blog_banner))
+        {
+            $fileName = time().'.'.$request->blog_banner->extension();  
+            $request->blog_banner->move(public_path('images/blogs'), $fileName);
+            $file_path = public_path().'/images/blogs/'.$request->old_blog_banner;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        else
+        {
+            $fileName = $request->old_blog_banner;
+        }
+
+        if(isset($request->blog_image))
+        {
+            $fileName2 = time().'.'.$request->blog_image->extension();  
+            $request->blog_image->move(public_path('images/blogs'), $fileName2);
+            $file_path = public_path().'/images/blogs/'.$request->old_blog_image;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
+        }
+        else
+        {
+            $fileName2 = $request->old_blog_image;
+        }
+
+        $trimtag = trim($request->tags[0],'"');
+        
+        $data = array(
+            'blog_category' => $request->blog_category, 
+            'blog_banner' => $fileName,
+            'blog_image' => $fileName2,   
+            'title' => $request->title,  
+            'slug' => Str::slug($request->title, '-'),
+            'author' => '1',
+            'tags' => json_encode(explode(",", $trimtag)),
+            'short_desc' => $request->short_desc,
+            'blog_content' => $request->blog_content
+        );
+
+        DB::table('blogs')->where("id", $request->id)->update($data);
+
+        return redirect('/admin/blog')->with('success', 'Blog updated Successfully');
     }
 
     /**
