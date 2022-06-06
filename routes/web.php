@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyDetailsController;
 use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Str;
 
 /*
@@ -58,6 +59,10 @@ Route::get('/packages/details/{link}', function ($link) {
 })->name('packages.details');
 
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
+
+// ============ AJAX Controller ===================================
+Route::post('subscribeuser',[AjaxController::class, 'subscription']);
+// ================================================================
 
 // Route::get('/blog/details/{id}', function () {
 //     $data['blogs'] = DB::table('blogs')->select('*')->get();

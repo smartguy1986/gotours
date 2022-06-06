@@ -6,6 +6,7 @@
              <div class="contact-img" style="background-image: url(assets/images/contact-image.jpg);">
              </div>
           </div>
+          {{ $company_details }}
           <div class="col-lg-8">
              <div class="contact-details-wrap">
                 <div class="row">
@@ -16,13 +17,13 @@
                          </div>
                          <ul>
                             <li>
-                               <a href="#">support@gmail.com</a>
+                               <a href="mailto:support@gotours.com">support@gotours.com</a>
                             </li>
                             <li>
-                               <a href="#">info@domain.com</a>
+                               <a href="mailto:info@gotours.com">info@gotours.com</a>
                             </li>
                             <li>
-                               <a href="#">name@company.com</a>
+                               <a href="mailto:name@gotours.com">name@gotours.com</a>
                             </li>
                          </ul>
                       </div>

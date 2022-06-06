@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 03, 2022 at 10:34 PM
+-- Generation Time: Jun 06, 2022 at 04:10 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -413,6 +413,28 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscriber_list`
+--
+
+CREATE TABLE `subscriber_list` (
+  `id` int(11) NOT NULL,
+  `usermail` varchar(255) NOT NULL,
+  `status` enum('1','0') NOT NULL DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `subscriber_list`
+--
+
+INSERT INTO `subscriber_list` (`id`, `usermail`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'abcd@example.com', '1', '2022-06-06 14:05:59', '2022-06-06 14:05:59'),
+(3, 'arijit.nandi@outlook.com', '1', '2022-06-06 14:09:55', '2022-06-06 14:09:55');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -535,6 +557,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `subscriber_list`
+--
+ALTER TABLE `subscriber_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -622,6 +650,12 @@ ALTER TABLE `package_review`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `subscriber_list`
+--
+ALTER TABLE `subscriber_list`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
