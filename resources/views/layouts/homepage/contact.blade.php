@@ -6,7 +6,7 @@
              <div class="contact-img" style="background-image: url(assets/images/contact-image.jpg);">
              </div>
           </div>
-          {{ $company_details }}
+          {{-- {{ $company_details }} --}}
           <div class="col-lg-8">
              <div class="contact-details-wrap">
                 <div class="row">

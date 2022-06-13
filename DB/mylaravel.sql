@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 06, 2022 at 04:10 PM
+-- Generation Time: Jun 13, 2022 at 10:10 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -152,12 +152,13 @@ CREATE TABLE `destinations` (
 --
 
 INSERT INTO `destinations` (`id`, `name`, `slug`, `head_office_address`, `head_office_phone`, `tagline`, `imageURL`, `status`, `description`, `featured`, `created_at`, `updated_at`) VALUES
-(1, 'NORWAY', 'norway', '2/76 M.L.P Road, Norway', '8574265410', 'Powered by Nature', '1648559729.jpg', '1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '0', '2022-03-29 07:45:29', '2022-04-28 04:31:23'),
-(2, 'JAPAN', 'japan', '82/9 H.G. Road, Japan', '8574265455', 'Japan. EndlessDiscovery', '1648560588.jpg', '1', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.', '1', '2022-03-29 07:59:48', '2022-04-22 01:59:01'),
-(3, 'INDIA', 'india', '14/63 R.P.J Road, India', '5634265455', 'Incredible India', '1648561390.jpg', '1', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '1', '2022-03-29 08:13:10', '2022-03-30 14:31:32'),
-(4, 'DUBAI', 'dubai', '7/9 M.B S.T Road, Dubai', '4785265411', 'Only in Dubai', '1648670460.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '1', '2022-03-29 08:15:18', '2022-06-03 08:18:46'),
-(5, 'SINGAPORE', 'singapore', '11/63 Hang XII Road, Singapore', '2563584788', 'Passion Made Possible', '1648633875.jpg', '1', 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '0', '2022-03-30 04:21:15', '2022-06-03 08:19:05'),
-(6, 'MALDIVES', 'maldives', '4/13 L.K. Road, Maldives', '6352415263', 'Maldives - Always Natural', '1648634444.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 04:30:44', '2022-06-03 08:19:10');
+(1, 'MAHARASHTRA', 'maharashtra', '2/76 M.L.P Road, Maharashtra', '8574265410', 'Satyamev Jayate', '1655148199.jpg', '1', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '0', '2022-03-29 07:45:29', '2022-06-13 13:56:09'),
+(2, 'TAMIL NADU', 'tamil-nadu', '82/9 H.G. Road, Tamil Nadu', '8574265455', 'Truth Alone Triumphs', '1655148348.jpg', '1', 'Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.', '1', '2022-03-29 07:59:48', '2022-06-13 13:55:48'),
+(3, 'WEST BENGAL', 'west-bengal', '14/63 R.P.J Road, West Bengal', '5634265455', 'The Game is On', '1655148700.jpg', '1', 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.', '1', '2022-03-29 08:13:10', '2022-06-13 14:01:40'),
+(4, 'UTTAR PRADESH', 'uttar-pradesh', '7/9 M.B S.T Road, Dubai', '4785265411', 'Amazing Heritage, Grand Experience', '1655148804.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.', '1', '2022-03-29 08:15:18', '2022-06-13 14:03:24'),
+(5, 'DELHI', 'delhi', '11/63 Hang XII Road, Delhi', '2563584788', 'Truth Alone Triumphs', '1655148977.jpg', '1', 'Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?', '0', '2022-03-30 04:21:15', '2022-06-13 14:06:17'),
+(6, 'RAJASTHAN', 'rajasthan', '4/13 L.K. Road, Rajasthan', '6352415263', 'padharo mhare desh', '1655149082.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', '1', '2022-03-30 04:30:44', '2022-06-13 14:08:02'),
+(7, 'KERALA', 'kerala', '14/63 R.P.J Road, Kerala', '2563584784', 'God\'s Own Country', '1655149614.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '0', '2022-06-13 14:16:54', '2022-06-13 14:16:54');
 
 -- --------------------------------------------------------
 
@@ -601,7 +602,7 @@ ALTER TABLE `company_details`
 -- AUTO_INCREMENT for table `destinations`
 --
 ALTER TABLE `destinations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`

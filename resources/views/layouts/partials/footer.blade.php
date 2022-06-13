@@ -143,6 +143,7 @@
 <script src="{{asset('assets/vendors/slick/slick.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
 <script>
    // function getMessage() {
    //    $.ajax({
@@ -159,22 +160,31 @@
  });
 </script>
 <script>
-      function subsMyForm() {         
-         $('#submit').html('Please Wait...');
-         $("#submit").attr("disabled", true);
-         $.ajax({
-            url: "subscribeuser",
-            type: "POST",
-            data: $('#footersubscribe').serialize(),
-               success: function( response ) {
-                  $('#submit').html(response.msg);
-                  // $("#submit").attr("disabled", false);
-                  //alert('Ajax form has been submitted successfully');
-                  document.getElementById("footersubscribe").reset(); 
-            }
-         });
-         return false;
-      }
-   </script>
+   function subsMyForm() {         
+      $('#submit').html('Please Wait...');
+      $("#submit").attr("disabled", true);
+      $.ajax({
+         url: "subscribeuser",
+         type: "POST",
+         data: $('#footersubscribe').serialize(),
+            success: function( response ) {
+               $('#submit').html(response.msg);
+               // $("#submit").attr("disabled", false);
+               //alert('Ajax form has been submitted successfully');
+               document.getElementById("footersubscribe").reset(); 
+         }
+      });
+      return false;
+   }
+</script>
+<script>
+   $(document).ready(function() {
+         window.setTimeout(function() {
+            $(".alert").fadeTo(500, 0).slideUp(500, function(){
+               $(this).remove(); 
+            });
+         }, 4000);
+   });
+</script>
 </body>
 </html>

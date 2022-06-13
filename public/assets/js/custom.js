@@ -213,3 +213,15 @@
       }
     });
 })(jQuery);
+
+$(document).ready(function() {
+  $(".alert").delay(4000).slideUp(200, function() {
+      $(this).alert('close');
+  });
+});
+
+$('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: 160,
+  gutter: 20
+});

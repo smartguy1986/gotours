@@ -22,10 +22,10 @@
                   </figure>
                   <div class="entry-content">
                      <h3>
-                        <a href="{{URL::route('blog.details',$article->slug)}}">{{ $article->title }}</a>
+                        <a href="{{URL::route('blog.details',$article->slug)}}">{{ Str::substr($article->title, 0, 50) }}...</a>
                      </h3>
                      <p>
-                        {{ $article->short_desc }}
+                        {{ Str::substr($article->short_desc, 0, 250) }}...
                      </p>
                      <div class="entry-meta">
                         <span class="byline">
