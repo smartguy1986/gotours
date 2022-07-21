@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <br>
-                    <input type="submit" name="Submit" value="Upload Banner">
+                    <input type="submit" name="Submit" value="Create Destination">
                 </form>
                 
             </div>

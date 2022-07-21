@@ -185,6 +185,20 @@
             });
          }, 4000);
    });
+
+   $(window).scroll(function(){
+      var sticky = $('.sticky'),
+            scroll = $(window).scrollTop();
+
+      if (scroll >= 100) sticky.addClass('fixed blur-back');
+      else sticky.removeClass('fixed blur-back');
+
+      var sticky2 = $('.sticky2'),
+            scroll2 = $(window).scrollTop();
+
+      if (scroll2 >= 100) sticky2.addClass('fixed2 blur-back');
+      else sticky2.removeClass('fixed2 blur-back');
+   });
 </script>
 </body>
 </html>

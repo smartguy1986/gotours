@@ -24,34 +24,137 @@
     <section class="destination-section destination-page">
         <div class="container">
             <div class="destination-inner destination-three-column">
-                <div class="masonry">
-                    @foreach ( $destinations as $dst)
-                    <div class="item">
-                        <div class="desti-item overlay-desti-item">
-                            <figure class="desti-image">
-                                <img src="{{ asset('images/destinations/'.$dst->imageURL)}}" alt="">
-                            </figure>
-                            <div class="meta-cat bg-meta-cat">
-                                <a href="#">{{ $dst->name }}</a>
-                            </div>
-                            <div class="desti-content">
-                                <h3>
-                                    <a href="#">{{ $dst->tagline }}</a>
-                                </h3>
-                                <div class="rating-start" title="Rated 5 out of 4">
-                                    <span style="width: 53%"></span>
-                                </div>
-                            </div>
+                @php
+                $i = 1
+                @endphp
+                @foreach ( $destinations->chunk(4) as $dst)
+                    @if ($i % 2 == 0)
+                        @php $j=0; @endphp
+                        <div class="row fixed-row-600">
+                            @foreach ( $dst->chunk(2) as $destination_data)
+                                @if ($j<1)
+                                    <div class="col-lg-5">
+                                        <div class="row">
+                                            @foreach ($destination_data as $dest)
+                                                <div class="col-md-6 col-xl-12">
+                                                    <div class="desti-item overlay-desti-item">
+                                                        <figure class="desti-image">
+                                                            <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
+                                                        </figure>
+                                                        <div class="meta-cat bg-meta-cat">
+                                                            <a href="#">{{ $dest->name }}</a>
+                                                        </div>
+                                                        <div class="desti-content">
+                                                            <h3>
+                                                                <a href="#">{{ $dest->tagline }}</a>
+                                                            </h3>
+                                                            <div class="rating-start" title="Rated 5 out of 5">
+                                                                <span style="width: 100%"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-lg-7">
+                                        <div class="row">
+                                            @foreach ($destination_data as $dest)
+                                                <div class="col-sm-6">
+                                                    <div class="desti-item overlay-desti-item item-455">
+                                                        <figure class="desti-image">
+                                                            <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
+                                                        </figure>
+                                                        <div class="meta-cat bg-meta-cat">
+                                                            <a href="#">{{ $dest->name }}</a>
+                                                        </div>
+                                                        <div class="desti-content">
+                                                            <h3>
+                                                                <a href="#">{{ $dest->tagline }}</a>
+                                                            </h3>
+                                                            <div class="rating-start" title="Rated 5 out of 4">
+                                                                <span style="width: 53%"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                                @php $j++; @endphp                                
+                            @endforeach
                         </div>
-                    </div>
-                    @endforeach
-                </div>
+                    @else
+                        @php $j=0; @endphp
+                        <div class="row fixed-row-600">
+                            @foreach ( $dst->chunk(2) as $destination_data)
+                                @if ($j<1)
+                                    <div class="col-lg-7">
+                                        <div class="row">
+                                            @foreach ($destination_data as $dest)
+                                                <div class="col-sm-6">
+                                                    <div class="desti-item overlay-desti-item item-455">
+                                                        <figure class="desti-image">
+                                                            <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
+                                                        </figure>
+                                                        <div class="meta-cat bg-meta-cat">
+                                                            <a href="#">{{ $dest->name }}</a>
+                                                        </div>
+                                                        <div class="desti-content">
+                                                            <h3>
+                                                                <a href="#">{{ $dest->tagline }}</a>
+                                                            </h3>
+                                                            <div class="rating-start" title="Rated 5 out of 4">
+                                                                <span style="width: 53%"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="col-lg-5">
+                                        <div class="row">
+                                            @foreach ($destination_data as $dest)
+                                                <div class="col-md-6 col-xl-12">
+                                                    <div class="desti-item overlay-desti-item">
+                                                        <figure class="desti-image">
+                                                            <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
+                                                        </figure>
+                                                        <div class="meta-cat bg-meta-cat">
+                                                            <a href="#">{{ $dest->name }}</a>
+                                                        </div>
+                                                        <div class="desti-content">
+                                                            <h3>
+                                                                <a href="#">{{ $dest->tagline }}</a>
+                                                            </h3>
+                                                            <div class="rating-start" title="Rated 5 out of 5">
+                                                                <span style="width: 100%"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                @endif
+                                @php $j++; @endphp                                
+                            @endforeach
+                        </div> 
+                    @endif
+                    @php
+                        $i++;
+                    @endphp
+                @endforeach
             </div>
         </div>
     </section>
     <!-- destination section html start -->
     <!-- subscribe section html start -->
-    <section class="subscribe-section" style="background-image: url(assets/images/img16.jpg);">
+    <section class="subscribe-section" style="background-image: url(assets/images/announcement.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">

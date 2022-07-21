@@ -18,6 +18,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.js"></script>
 <script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
 </body>
 <script>
     $(document).ready(function() {
@@ -31,6 +33,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('.ckeditor').ckeditor();
+    });
+    $(document).ready(function () {
+    $('.table').DataTable();
     });
 </script>
 

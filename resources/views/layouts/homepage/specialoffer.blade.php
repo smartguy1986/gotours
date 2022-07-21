@@ -34,8 +34,8 @@
                      </h3>
                      <div class="package-price">
                         Price:
-                        <del>${{ number_format($pckg->price) }}</del>
-                        <ins>${{ number_format($pckg->sale_price) }}</ins>
+                        <del>&#8377;{{ number_format($pckg->price) }}</del>
+                        <ins>&#8377;{{ number_format($pckg->sale_price) }}</ins>
                      </div>
                   </div>
                </div>

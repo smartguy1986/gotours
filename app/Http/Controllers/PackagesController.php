@@ -101,7 +101,6 @@ class PackagesController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'tagline' => 'required',
             'banner' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'imageURL' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'days' => 'required',
@@ -119,11 +118,11 @@ class PackagesController extends Controller
         ]);
     
         $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-        $fileName1 = time().$pass.'.'.$request->banner->extension();  
+        $fileName1 = time().$pass.'.'.$request->banner->extension();
         $request->banner->move(public_path('images/packages'), $fileName1);
 
         $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-        $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
+        $fileName2 = time().$pass.'.'.$request->imageURL->extension();
         $request->imageURL->move(public_path('images/packages'), $fileName2);
 
         $save = new Packages;
@@ -350,6 +349,7 @@ class PackagesController extends Controller
             'address' => $request->address,
             'price' => $request->price,
             'is_sale' => $request->is_sale,
+            'sale_price' => $request->sale_price,
             'contact_person' => $request->contact_person,
             'status' => $request->status,
             'category' => $request->category

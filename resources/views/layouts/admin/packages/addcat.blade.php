@@ -62,7 +62,7 @@
                         
                     </div>
                     <br>
-                    <input type="submit" name="Submit" value="Upload Banner">
+                    <input type="submit" name="Submit" value="Add Category">
                 </form>
                 <p></p>
                 {{-- <div class="cart-list-inner">

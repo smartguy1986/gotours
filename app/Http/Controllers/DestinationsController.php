@@ -17,7 +17,7 @@ class DestinationsController extends Controller
      */
     public function index()
     {
-        $data['destinations'] = DB::table('destinations')->select('*')->get();
+        $data['destinations'] = DB::table('destinations')->select('*')->orderBy('id', 'DESC')->get();
         return view('layouts.admin.destinations.lists', $data);
     }
 

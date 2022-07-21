@@ -74,7 +74,7 @@
                   </div>
                </div>
             </div>
-            <div class="bottom-header">
+            <div class="bottom-header sticky">
                <div class="container d-flex justify-content-between align-items-center">
                   <div class="site-identity">
                      <h1 class="site-title">
@@ -91,5 +91,5 @@
                   </div>
                </div>
             </div>
-            <div class="mobile-menu-container"></div>
+            <div class="mobile-menu-container sticky2"></div>
          </header>

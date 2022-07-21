@@ -46,7 +46,7 @@ Route::get('/home', function () {
 Route::get('/destinations', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();    
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();        
     return view('layouts.pages.destinations')->with($data);
 })->name('destinations');
 

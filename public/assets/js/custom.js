@@ -1,5 +1,4 @@
-; (function ($) {
-
+(function ($) {
   /* Show or Hide Search field on clicking search icon */
   $(document).on('click', '.header-search-icon .search-icon', function (e) {
     e.preventDefault();
@@ -94,7 +93,6 @@
   $(document).ready(function () {
     /* Count down */
     loopcounter('time-counter');
-
   });
 
   /* Tour detail slider */
@@ -137,6 +135,7 @@
     fade: true,
     asNavFor: '.product-thumb-nav'
   });
+
   $('.product-thumb-nav').slick({
     slidesToShow: 4,
     slidesToScroll: 1,

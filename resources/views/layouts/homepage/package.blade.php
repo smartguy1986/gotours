@@ -23,7 +23,7 @@
                      </figure>
                      <div class="package-price">
                         <h6>
-                           <span>$ {{ number_format($pckg->price) }}</span> / per person
+                           <span>&#8377; {{ number_format($pckg->price) }}</span> / per person
                         </h6>
                      </div>
                      <div class="package-content-wrap">
@@ -31,7 +31,7 @@
                            <ul>
                               <li>
                                  <i class="far fa-clock"></i>
-                                 {{$pckg->days}}D/{{$pckg->days}}N
+                                 {{$pckg->days}}D/{{$pckg->nights}}N
                               </li>
                               <li>
                                  <i class="fas fa-user-friends"></i>
