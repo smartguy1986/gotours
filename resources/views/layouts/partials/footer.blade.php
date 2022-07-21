@@ -143,7 +143,7 @@
 <script src="{{asset('assets/vendors/slick/slick.min.js')}}"></script>
 <script src="{{asset('assets/js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
-<script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script> --}}
 <script>
    // function getMessage() {
    //    $.ajax({
@@ -199,6 +199,40 @@
       if (scroll2 >= 100) sticky2.addClass('fixed2 blur-back');
       else sticky2.removeClass('fixed2 blur-back');
    });
+</script>
+<script>
+   var paginate = 1;
+   loadMoreData(paginate);
+
+   $('#load-more').click(function() {
+      var page = $(this).data('paginate');
+      loadMoreData(page);
+      $(this).data('paginate', page+1);
+   });
+   // run function when user click load more button
+   function loadMoreData(paginate) {
+      $.ajax({
+            url: '/packages?page=' + paginate,
+            type: 'get',
+            datatype: 'html',
+            beforeSend: function() {
+               $('#load-more').text('Loading...');
+            }
+      })
+      .done(function(data) {
+            if(data.length == 0) {
+               $('.invisible').removeClass('invisible');
+               $('#load-more').hide();
+               return;
+            } else {
+               $('#load-more').text('Load more...');
+               $('#post').append(data);
+            }
+      })
+      .fail(function(jqXHR, ajaxOptions, thrownError) {
+         alert('Something went wrong.');
+      });
+   }
 </script>
 </body>
 </html>
