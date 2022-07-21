@@ -20,11 +20,11 @@
     </section>
     <!-- Inner Banner html end-->
     <!-- destination field html end -->
-    {{ $packages }}
+    {{-- {{ $packages }} --}}
     <div class="package-section">
         <div class="container">
             <div class="package-inner">
-                <div class="row">
+                <div class="row" id="post">
                     {{-- @foreach ($packages as $pckg)
                     <div class="col-lg-4 col-md-6">
                         <div class="package-wrap">
@@ -75,15 +75,12 @@
                         </div>
                     </div>
                     @endforeach --}}
-                    <span id="post">
-                        {{-- here loads posts --}}
-                    </span>
-                    <div class="text-center m-3">
-                        <button class="btn btn-primary" id="load-more" data-paginate="2">Load more...</button>
-                        <p class="invisible">No more posts...</p>
-                    </div>
                 </div>
             </div>
+        </div>
+        <div class="text-center m-3">
+            <button class="btn btn-primary" id="load-more" data-paginate="2">Load more...</button>
+            <p class="invisible">No more posts...</p>
         </div>
     </div>
     <!-- destination section html start -->
