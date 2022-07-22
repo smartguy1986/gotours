@@ -9,7 +9,7 @@
                   <div class="banner-content text-center">
                      <h2 class="banner-title">{{ $bnn->tagline }}</h2>
                      <p>{{ $bnn->description }}</p>
-                     <a href="#" class="button-primary">CONTINUE READING</a>
+                     <a href="{{ URL::route('packages') }}" class="button-primary">EXPLORING PACKAGES</a>
                   </div>
                </div>
             </div>

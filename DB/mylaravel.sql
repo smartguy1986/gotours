@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 21, 2022 at 04:29 PM
+-- Generation Time: Jul 22, 2022 at 02:35 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -268,7 +268,7 @@ INSERT INTO `packages` (`id`, `category`, `title`, `slug`, `tagline`, `banner`, 
 (13, 3, 'NEEMRANA TOUR', 'neemrana-tour', '(EX – Delhi)', '1658394638i7gb4n.jpg', '1658394638in91x6.jpg', 'Solo', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 3, 2, 'Niraj Kumar', '8574236594', '1/3 Bulhamia, Meghalaya - 370004', '8499', '0', NULL, '1', '2022-07-21 03:40:38', '2022-07-21 03:40:38'),
 (14, 3, 'SARISKA TOUR', 'sariska-tour', '(EX – Delhi)', '1658394786ahy7j2.jpg', '1658394786m1zqfe.jpg', 'Solo', 6, 'Sariska Tiger Reserve is a tiger reserve in Alwar district, Rajasthan, India. It stretches over an area of 881 km² comprising scrub-thorn arid forests, dry deciduous forests, grasslands, and rocky hills. This area was a hunting preserve of the Alwar state and was declared a wildlife sanctuary in 1958', 3, 2, 'Arijit Nandi', '8574256352', '1/3 Bulhamia, Jammu & Kashmir - 370004', '9499', '0', NULL, '1', '2022-07-21 03:43:06', '2022-07-21 03:43:06'),
 (15, 1, 'ROMANTIC HONEYMOON', 'romantic-honeymoon', 'With Photo shoot', '1658395095xsh1br.jpg', '1658395095lvr06z.jpg', 'Couple', 13, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 5, 4, 'Arijit Nandi', '8574256352', '1/3 Bulhamia, Himachal Pradesh - 900052', '18599', '1', '15399', '1', '2022-07-21 03:48:15', '2022-07-21 03:48:15'),
-(16, 7, 'LADAKH', 'ladakh', 'Solo Tour', '1658395413xb1y6p.jpg', '1658395413093xky.jpg', 'Solo', 13, 'There is no place like Ladakh in the world. In fact, due to its varied landscape and exotic natural beauty, Ladakh is often referred to as broken moon land. EaseMyTrip.com brings this exclusive 5 nights and 6 days holiday package of Ladakh through which you will get to explore the exotic beauty of Ladakh. The tour includes visits to many prominent attractions like ancient monasteries, palaces and highest mountain passes in the world', 6, 5, 'Arijit Nandi', '965748596', '1/3 Bulhamia, Himachal Pradesh - 900052', '65999', '0', '60999', '1', '2022-07-21 03:53:33', '2022-07-21 03:53:33');
+(16, 7, 'LADAKH', 'ladakh', 'Solo Tour', '1658395413xb1y6p.jpg', '1658395413093xky.jpg', 'Solo', 14, 'There is no place like Ladakh in the world. In fact, due to its varied landscape and exotic natural beauty, Ladakh is often referred to as broken moon land. EaseMyTrip.com brings this exclusive 5 nights and 6 days holiday package of Ladakh through which you will get to explore the exotic beauty of Ladakh. The tour includes visits to many prominent attractions like ancient monasteries, palaces and highest mountain passes in the world', 6, 5, 'Arijit Nandi', '965748596', '1/3 Bulhamia, Himachal Pradesh - 900052', '65999', '1', '60999', '1', '2022-07-21 03:53:33', '2022-07-21 03:53:33');
 
 -- --------------------------------------------------------
 
@@ -334,7 +334,15 @@ INSERT INTO `package_gallery` (`id`, `package_id`, `imageURL`, `created_at`, `up
 (24, 6, '1651496731mtgeb9.jpg', NULL, NULL),
 (25, 6, '1651496731fx5jso.jpg', NULL, NULL),
 (26, 6, '1651496731q73myw.jpg', NULL, NULL),
-(27, 6, '16514967312jf9ph.jpg', NULL, NULL);
+(27, 6, '16514967312jf9ph.jpg', NULL, NULL),
+(28, 16, '1658470960jcmhr2.jpg', NULL, NULL),
+(29, 16, '16584709600c2m8d.jpg', NULL, NULL),
+(30, 16, '1658470960epzsh2.jpg', NULL, NULL),
+(31, 16, '1658470960c9r8s2.jpg', NULL, NULL),
+(32, 16, '1658470960yvlxib.jpg', NULL, NULL),
+(33, 16, '1658470960hiwdva.jpg', NULL, NULL),
+(34, 16, '1658470960ejl8md.jpg', NULL, NULL),
+(35, 16, '1658470960wmgrh1.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -693,7 +701,7 @@ ALTER TABLE `package_category`
 -- AUTO_INCREMENT for table `package_gallery`
 --
 ALTER TABLE `package_gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `package_programme`

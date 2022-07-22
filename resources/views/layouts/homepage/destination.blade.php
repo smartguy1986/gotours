@@ -25,7 +25,7 @@
                            <img src="{{asset('images/destinations/'.$dst->imageURL)}}" alt="">
                         </figure>
                         <div class="meta-cat bg-meta-cat">
-                           <a href="#">{{ $dst->name }}</a>
+                           <a href="{{ URL::route('packages-by-destination',$dst->slug) }}">{{ $dst->name }}</a>
                         </div>
                         <div class="desti-content">
                            <h3>

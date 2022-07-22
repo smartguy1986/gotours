@@ -24,19 +24,19 @@
     <div class="package-section">
         <div class="container">
             <div class="package-inner">
-                <div class="row" id="post">
+                <div class="row" id="post2">
                     {{-- Ajax responses will be displayed here --}}
                 </div>
             </div>
         </div>
         <div class="text-center m-3">
-            <button class="btn btn-primary" id="load-more" data-paginate="2">Load more...</button>
+            <button class="btn btn-primary" id="load-more2" data-paginate2="2">Load more...</button>
             <p class="invisible">No more posts...</p>
         </div>
     </div>
     <!-- destination section html start -->
     <!-- subscribe section html start -->
-    <section class="subscribe-section" style="background-image: url(assets/images/announcement.jpg);">
+    <section class="subscribe-section" style="background-image: url(/assets/images/announcement.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">

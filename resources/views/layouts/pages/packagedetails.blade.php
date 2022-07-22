@@ -26,16 +26,16 @@
       </section>
       <!-- Inner Banner html end-->
       <!-- destination field html end -->
-      {{-- {{ $packages }} --}}
-      {{-- {{ $programme }} --}}
-      {{-- {{ $gallery }} --}}
+      {{-- {{ $packages }}
+      {{ $programme }}
+      {{ $gallery }} --}}
       
       <div class="single-tour-section">
          <div class="container">
             <div class="row">
                <div class="col-lg-8">
                   <div class="single-tour-inner">
-                     <h2>{{ $packages[0]->tagline}}</h2>
+                     <div class="titlesec"><h2>{{ $packages[0]->title}}</h2><h4>{{ $packages[0]->tagline}}</h4></div>
                      <figure class="feature-image">
                         <img src="{{ asset('images/packages/'.$packages[0]->imageURL)}}" alt="">
                         <div class="package-meta text-center">
@@ -154,26 +154,6 @@
                                           </ol>
                                        </li>
                                     </ol>
-                                    <ol>
-                                       <li>
-                                          <figure class="comment-thumb">
-                                             <img src="assets/images/img22.jpg" alt="">
-                                          </figure>
-                                          <div class="comment-content">
-                                             <div class="comment-header">
-                                                <h5 class="author-name">Jaan Smith</h5>
-                                                <span class="post-on">Jana 10 2020</span>
-                                                <div class="rating-wrap">
-                                                   <div class="rating-start" title="Rated 5 out of 5">
-                                                      <span></span>
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <p>Officia amet posuere voluptates, mollit montes eaque accusamus laboriosam quisque cupidatat dolor pariatur, pariatur auctor.</p>
-                                             <a href="#" class="reply"><i class="fas fa-reply"></i>Reply</a>
-                                          </div>
-                                       </li>
-                                    </ol>
                                  </div>
                                  <div class="comment-form-wrap">
                                     <h3 class="comment-title">Leave a Review</h3>
@@ -202,7 +182,7 @@
                                        <p>
                                           <input type="submit" name="submit" value="Submit">
                                        </p>
-                                    </form>
+                                    </form> 
                                  </div>
                               </div>
                            </div>
@@ -214,16 +194,20 @@
                         </div>
                      </div>
                      <div class="single-tour-gallery">
+                        @if (count($gallery)>0)
                         <h3>GALLERY / PHOTOS</h3>
                         <div class="single-tour-slider">
                            @foreach ($gallery as $tphoto)
                               <div class="single-tour-item">
                                  <figure class="feature-image">
-                                    <img src="{{ asset('images/packages/gallery/'.$tphoto->imageURL) }}" alt="">
+                                    <a href="{{ asset('images/packages/gallery/'.$tphoto->imageURL) }}" data-lightbox="photos">
+                                       <img class="img-fluid" src="{{ asset('images/packages/gallery/'.$tphoto->imageURL) }}" alt="{{ $packages[0]->title }}">
+                                    </a>
                                  </figure>
                               </div>
                            @endforeach                           
                         </div>
+                        @endif                        
                      </div>
                   </div>
                </div>

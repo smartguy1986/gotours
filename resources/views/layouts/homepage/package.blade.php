@@ -23,7 +23,11 @@
                      </figure>
                      <div class="package-price">
                         <h6>
-                           <span>&#8377; {{ number_format($pckg->price) }}</span> / per person
+                           @if ($pckg->is_sale==1)
+                              <span>&#8377; {{ number_format($pckg->sale_price, 2) }}</span> / per person
+                           @else
+                              <span>&#8377; {{ number_format($pckg->price, 2) }}</span> / per person
+                           @endif
                         </h6>
                      </div>
                      <div class="package-content-wrap">
@@ -55,7 +59,7 @@
                            </div>
                            <p>{{ Str::limit($pckg->descriptions, 200) }}</p>
                            <div class="btn-wrap">
-                              <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+                              <a href="{{ URL::route('packages.details', $pckg->slug) }}" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
                               <a href="{{ URL::route('packages.details',$pckg->id) }}" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
                            </div>
                         </div>

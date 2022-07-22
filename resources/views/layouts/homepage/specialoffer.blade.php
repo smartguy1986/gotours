@@ -30,7 +30,7 @@
                         <a href="#">{{ $pckg->name }}</a>
                      </div>
                      <h3>
-                        <a href="#">{{ $pckg->title }}</a>
+                        <a href="{{ URL::route('packages.details', $pckg->slug) }}">{{ $pckg->title }}</a>
                      </h3>
                      <div class="package-price">
                         Price:

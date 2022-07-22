@@ -42,7 +42,7 @@
                                                             <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
                                                         </figure>
                                                         <div class="meta-cat bg-meta-cat">
-                                                            <a href="#">{{ $dest->name }}</a>
+                                                            <a href="{{ URL::route('packages-by-destination',$dest->slug) }}">{{ $dest->name }}</a>
                                                         </div>
                                                         <div class="desti-content">
                                                             <h3>
@@ -67,7 +67,7 @@
                                                             <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
                                                         </figure>
                                                         <div class="meta-cat bg-meta-cat">
-                                                            <a href="#">{{ $dest->name }}</a>
+                                                            <a href="{{ URL::route('packages-by-destination',$dest->slug) }}">{{ $dest->name }}</a>
                                                         </div>
                                                         <div class="desti-content">
                                                             <h3>
@@ -100,7 +100,7 @@
                                                             <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
                                                         </figure>
                                                         <div class="meta-cat bg-meta-cat">
-                                                            <a href="#">{{ $dest->name }}</a>
+                                                            <a href="{{ URL::route('packages-by-destination',$dest->slug) }}">{{ $dest->name }}</a>
                                                         </div>
                                                         <div class="desti-content">
                                                             <h3>
@@ -125,7 +125,7 @@
                                                             <img src="{{ asset('images/destinations/'.$dest->imageURL)}}" alt="gotours">
                                                         </figure>
                                                         <div class="meta-cat bg-meta-cat">
-                                                            <a href="#">{{ $dest->name }}</a>
+                                                            <a href="{{ URL::route('packages-by-destination',$dest->slug) }}">{{ $dest->name }}</a>
                                                         </div>
                                                         <div class="desti-content">
                                                             <h3>

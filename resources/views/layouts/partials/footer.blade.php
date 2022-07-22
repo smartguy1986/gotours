@@ -201,38 +201,88 @@
    });
 </script>
 <script>
-   var paginate = 1;
-   loadMoreData(paginate);
+   if (window.location.pathname == "/packages") {
+      var paginate = 1;
+      loadMoreData(paginate);
 
-   $('#load-more').click(function() {
-      var page = $(this).data('paginate');
-      loadMoreData(page);
-      $(this).data('paginate', page+1);
-   });
-   // run function when user click load more button
-   function loadMoreData(paginate) {
-      $.ajax({
-            url: '/packages?page=' + paginate,
-            type: 'get',
-            datatype: 'html',
-            beforeSend: function() {
-               $('#load-more').text('Loading...');
-            }
-      })
-      .done(function(data) {
-            if(data.length == 0) {
-               $('.invisible').removeClass('invisible');
-               $('#load-more').hide();
-               return;
-            } else {
-               $('#load-more').text('Load more...');
-               $('#post').append(data);
-            }
-      })
-      .fail(function(jqXHR, ajaxOptions, thrownError) {
-         alert('Something went wrong.');
+      $('#load-more').click(function() {
+         var page = $(this).data('paginate');
+         loadMoreData(page);
+         $(this).data('paginate', page+1);
       });
+      // run function when user click load more button
+      function loadMoreData(paginate) {
+         $.ajax({
+               url: '/packages?page=' + paginate,
+               type: 'get',
+               datatype: 'html',
+               beforeSend: function() {
+                  $('#load-more').text('Loading...');
+               }
+         })
+         .done(function(data) {
+               if(data.length == 0) {
+                  $('.invisible').removeClass('invisible');
+                  $('#load-more').hide();
+                  return;
+               } 
+               else if(data.length <= 6) {
+                  $('#load-more').hide();
+                  return;
+               }
+               else {
+                  $('#load-more').text('Load more...');
+                  $('#post').append(data);
+               }
+         })
+         .fail(function(jqXHR, ajaxOptions, thrownError) {
+            alert('Something went wrong.');
+         });
+      }
    }
 </script>
+<script>
+   if ((window.location.pathname).indexOf('packages-by-destination')>-1) {
+      // /alert(window.location.pathname);
+      var paginate2 = 1;
+      loadMoreData2(paginate2);
+      var urlpath = window.location.pathname;
+      $('#load-more2').click(function() {
+         var page2 = $(this).data('paginate2');
+         loadMoreData2(page2);
+         $(this).data('paginate2', page2+1);
+      });
+      // run function when user click load more button
+      function loadMoreData2(paginate2) {
+         $.ajax({
+               url: '?page=' + paginate2,
+               type: 'get',
+               datatype: 'html',
+               beforeSend: function() {
+                  $('#load-more2').text('Loading...');
+               }
+         })
+         .done(function(data2) {
+               if(data2.length == 0) {
+                  $('.invisible').removeClass('invisible');
+                  $('#load-more2').hide();
+                  return;
+               } 
+               else if(data2.length <= 6) {
+                  $('.invisible').removeClass('invisible');
+                  $('#load-more2').hide();
+                  return;
+               }
+               else {
+                  $('#load-more2').text('Load more...');
+                  $('#post2').append(data2);
+               }
+         })
+         .fail(function(jqXHR, ajaxOptions, thrownError) {
+            alert('Something went wrong.');
+         });
+      }
+   }
+   </script>
 </body>
 </html>

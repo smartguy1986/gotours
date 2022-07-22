@@ -8685,3 +8685,7 @@ product checkout css
   background-color: rgba(7, 145, 190, 0.8)
 
 }
+
+.lb-outerContainer{
+  height: 100% !important;
+}
