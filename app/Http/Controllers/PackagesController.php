@@ -80,20 +80,20 @@ class PackagesController extends Controller
             'cat_description' => 'required',
             'status' => 'required',
         ]);
-    
-        $fileName = time().'.'.$request->cat_image->extension();  
+
+        $fileName = time() . '.' . $request->cat_image->extension();
         $request->cat_image->move(public_path('images/categories'), $fileName);
-  
+
         $check = DB::table('package_category')->insertGetId(array(
-                    'cat_name'      => $request->cat_name,
-                    'slug'          => Str::slug($request->cat_name, '-'),
-                    'cat_tagline'     => $request->cat_tagline,
-                    'cat_image'      => $fileName,
-                    'cat_description'   => $request->cat_description,
-                    'status'    => $request->status,
-                    'created_at' => date("Y-m-d")
-                ));
-    
+            'cat_name'      => $request->cat_name,
+            'slug'          => Str::slug($request->cat_name, '-'),
+            'cat_tagline'     => $request->cat_tagline,
+            'cat_image'      => $fileName,
+            'cat_description'   => $request->cat_description,
+            'status'    => $request->status,
+            'created_at' => date("Y-m-d")
+        ));
+
         return redirect('/admin/packages/categories')->with('success', 'Destination Has been uploaded');
     }
 
@@ -116,13 +116,13 @@ class PackagesController extends Controller
             'status' => 'required',
             'category' => 'required'
         ]);
-    
+
         $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-        $fileName1 = time().$pass.'.'.$request->banner->extension();
+        $fileName1 = time() . $pass . '.' . $request->banner->extension();
         $request->banner->move(public_path('images/packages'), $fileName1);
 
         $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-        $fileName2 = time().$pass.'.'.$request->imageURL->extension();
+        $fileName2 = time() . $pass . '.' . $request->imageURL->extension();
         $request->imageURL->move(public_path('images/packages'), $fileName2);
 
         $save = new Packages;
@@ -145,8 +145,8 @@ class PackagesController extends Controller
         $save->status = $request->status;
         $save->category = $request->category;
         $save->save();
-    
-        return redirect('/admin/packages/programme/add/'.$save->id)->with('pid', $save->id);
+
+        return redirect('/admin/packages/programme/add/' . $save->id)->with('pid', $save->id);
     }
 
     public function programme(Request $request, $id)
@@ -154,21 +154,20 @@ class PackagesController extends Controller
         $data['packages'] = DB::table('packages')->select('*')->where('id', $id)->get();
         return view('layouts.admin.packages.addprogramme', $data);
     }
-    
+
     public function save_programme(Request $request)
     {
         $total_loop = $request->total_loop;
-        for ($i=0; $i<$total_loop; $i++){
+        for ($i = 0; $i < $total_loop; $i++) {
             $data[] = array(
-                'package_id' => $request->package_id,    
+                'package_id' => $request->package_id,
                 'day' => $request->input('day')[$i],
                 'title' => $request->input('title')[$i],
                 'description' => $request->input('description')[$i]
             );
         }
-    
-        if(DB::table('package_programme')->insert($data))
-        {
+
+        if (DB::table('package_programme')->insert($data)) {
             return redirect('/admin/packages')->with('success', 'Programme successfully added');
         }
     }
@@ -178,25 +177,24 @@ class PackagesController extends Controller
         // dd($request);
         // die();
         $total_loop = $request->total_loop;
-        for ($i=0; $i<$total_loop; $i++){
+        for ($i = 0; $i < $total_loop; $i++) {
             //echo $request->input('progid')[$i];
             $data = array(
-                'package_id' => $request->package_id,    
+                'package_id' => $request->package_id,
                 'day' => $request->input('day')[$i],
                 'title' => $request->input('title')[$i],
                 'description' => $request->input('description')[$i]
             );
-            if($request->input('progid')[$i]==null){
+            if ($request->input('progid')[$i] == null) {
                 echo "empty";
                 DB::table('package_programme')->insert($data);
-            }
-            else {
+            } else {
                 echo "not Empty";
                 DB::table('package_programme')->where("id", $request->input('progid')[$i])->update($data);
             }
             $data = array();
         }
-    
+
         return redirect('/admin/packages')->with('success', 'Programme successfully added');
     }
     /**
@@ -223,7 +221,7 @@ class PackagesController extends Controller
         $data['categories'] = DB::table('package_category')->select('*')->where('id', '=', $cid)->get();
         return view('layouts.admin.packages.editcat', $data);
     }
-     
+
     public function update_category(Request $request)
     {
         $validatedData = $request->validate([
@@ -232,23 +230,20 @@ class PackagesController extends Controller
             'cat_description' => 'required',
             'status' => 'required',
         ]);
-    
-        if(isset($request->cat_image))
-        {
+
+        if (isset($request->cat_image)) {
             $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-            $fileName1 = time().$pass.'.'.$request->cat_image->extension();  
+            $fileName1 = time() . $pass . '.' . $request->cat_image->extension();
             $request->cat_image->move(public_path('images/categories'), $fileName1);
             $cat_image = $fileName1;
-            $file_path = public_path().'/images/categories/'.$request->old_cat_image;
+            $file_path = public_path() . '/images/categories/' . $request->old_cat_image;
             if (File::exists($file_path)) {
                 unlink($file_path);
             }
-        }
-        else
-        {
+        } else {
             $cat_image = $request->old_cat_image;
         }
-  
+
         $data = array(
             'cat_name'      => $request->cat_name,
             'slug'          => Str::slug($request->cat_name, '-'),
@@ -260,7 +255,7 @@ class PackagesController extends Controller
         );
 
         DB::table('package_category')->where("id", $request->id)->update($data);
-    
+
         return redirect('/admin/packages/categories')->with('success', 'Package Category has been Updated');
     }
 
@@ -300,51 +295,45 @@ class PackagesController extends Controller
             'status' => 'required',
             'category' => 'required'
         ]);
-    
-        if(isset($request->banner))
-        {
+
+        if (isset($request->banner)) {
             $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-            $fileName1 = time().$pass.'.'.$request->banner->extension();  
+            $fileName1 = time() . $pass . '.' . $request->banner->extension();
             $request->banner->move(public_path('images/packages'), $fileName1);
             $banner = $fileName1;
-            $file_path = public_path().'/images/packages/'.$request->banner;
+            $file_path = public_path() . '/images/packages/' . $request->banner;
             if (File::exists($file_path)) {
                 unlink($file_path);
             }
-        }
-        else
-        {
+        } else {
             $banner = $request->oldbanner;
         }
 
-        if(isset($request->imageURL))
-        {
+        if (isset($request->imageURL)) {
             $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-            $fileName2 = time().$pass.'.'.$request->imageURL->extension();  
+            $fileName2 = time() . $pass . '.' . $request->imageURL->extension();
             $request->imageURL->move(public_path('images/packages'), $fileName2);
             $imageURL = $fileName2;
-            $file_path = public_path().'/images/packages/'.$request->imageURL;
+            $file_path = public_path() . '/images/packages/' . $request->imageURL;
             if (File::exists($file_path)) {
                 unlink($file_path);
             }
-        }
-        else
-        {
+        } else {
             $imageURL = $request->oldimage;
         }
 
         $data = array(
-            'title' => $request->title,    
+            'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
             'tagline' => $request->tagline,
             'banner' => $banner,
             'imageURL' => $imageURL,
-            'days' => $request->days,    
+            'days' => $request->days,
             'nights' => $request->nights,
             'mingroup' => $request->mingroup,
             'destination' => $request->destinations,
             'descriptions' => $request->descriptions,
-            'contact_person' => $request->contact_person,    
+            'contact_person' => $request->contact_person,
             'phone' => $request->phone,
             'address' => $request->address,
             'price' => $request->price,
@@ -374,11 +363,10 @@ class PackagesController extends Controller
         $validatedData = $request->validate([
             'gallery' => 'required'
         ]);
-        
-        foreach ($request->gallery as $gallerydata)
-        {
+
+        foreach ($request->gallery as $gallerydata) {
             $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
-            $fileName = time().$pass.'.'.$gallerydata->extension();  
+            $fileName = time() . $pass . '.' . $gallerydata->extension();
             $gallerydata->move(public_path('images/packages/gallery'), $fileName);
             $data = array(
                 "package_id" => $request->packageid,
@@ -387,24 +375,23 @@ class PackagesController extends Controller
             DB::table('package_gallery')->insert($data);
         }
 
-        return redirect('/admin/packages/gallery/show/'.$request->packageid)->with('success', 'Gallery Images successfully added');
+        return redirect('/admin/packages/gallery/show/' . $request->packageid)->with('success', 'Gallery Images successfully added');
     }
 
     public function delete_gallery(Request $request)
     {
         //dd($request);
-        foreach($request->galid as $gmg)
-        {
+        foreach ($request->galid as $gmg) {
             $imgdata = DB::table('package_gallery')->select('*')->where('id', '=', $gmg)->get();
             //echo $imgdata[0]->imageURL;
             DB::table('package_gallery')->where('id', $gmg)->delete();
-            $file_path = public_path().'/images/packages/gallery/'.$imgdata[0]->imageURL;
+            $file_path = public_path() . '/images/packages/gallery/' . $imgdata[0]->imageURL;
             if (File::exists($file_path)) {
                 unlink($file_path);
-            }   
+            }
         }
 
-        return redirect('/admin/packages/gallery/show/'.$request->pid)->with('success', 'Images Deleted successfully');
+        return redirect('/admin/packages/gallery/show/' . $request->pid)->with('success', 'Images Deleted successfully');
     }
 
     /**
@@ -417,4 +404,5 @@ class PackagesController extends Controller
     {
         //
     }
+
 }

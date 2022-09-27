@@ -29,13 +29,13 @@
                      </p>
                      <div class="entry-meta">
                         <span class="byline">
-                           <a href="#">{{ $article->name }}</a>
+                           <a href="{{URL::route('blog.details',$article->slug)}}">{{ $article->name }}</a>
                         </span>
                         <span class="posted-on">
-                           <a href="#">{{ date('dS M, Y', strtotime($article->created_at)) }}</a>
+                           <a href="javascript:void(0)">{{ date('dS M, Y', strtotime($article->created_at)) }}</a>
                         </span>
                         <span class="comments-link">
-                           <a href="#">@if ($article->totcm>0)
+                           <a href="javascript:void(0)">@if ($article->totcm>0)
                               {{ $article->totcm }} Comment(s)                             
                            @else
                               No Comments

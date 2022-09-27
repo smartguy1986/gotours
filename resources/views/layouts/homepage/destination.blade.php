@@ -29,7 +29,7 @@
                         </div>
                         <div class="desti-content">
                            <h3>
-                              <a href="#">{{ $dst->tagline }}</a>
+                              <a href="{{ URL::route('packages-by-destination',$dst->slug) }}">{{ $dst->tagline }}</a>
                            </h3>
                            <div class="rating-start" title="Rated 5 out of 4">
                               <span style="width: 53%"></span>
@@ -51,7 +51,7 @@
                            <img src="{{asset('images/destinations/'.$dst2->imageURL)}}" alt="">
                         </figure>
                         <div class="meta-cat bg-meta-cat">
-                           <a href="#">{{ $dst2->name }}</a>
+                           <a href="{{ URL::route('packages-by-destination',$dst2->slug) }}">{{ $dst2->name }}</a>
                         </div>
                         <div class="desti-content">
                            <h3>

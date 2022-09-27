@@ -24,30 +24,34 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();    
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
-    $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
+    $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();    
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
+    $data['categories'] = DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
+
     return view('home')->with($data);
 });
 Route::get('/home', function () {
-    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();    
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
-    $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'],['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
+    $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
+    $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['is_sale','=','1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();    
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();
+    $data['categories'] = DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
+
     return view('home')->with($data);
 });
 
 Route::get('/destinations', function () {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where('status', '1')->orderBy('created_at', 'desc')->get();
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();        
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     return view('layouts.pages.destinations')->with($data);
 })->name('destinations');
 
@@ -57,17 +61,17 @@ Route::get('/packages', function (Request $request) {
     if ($request->ajax()) {
         $html = '';
         foreach ($results as $post) {
-            $html.='
+            $html .= '
             <div class="col-lg-4 col-md-6">
                 <div class="package-wrap">
                 <figure class="feature-image">
-                    <a href="/packages/details/'.$post->slug.'">
-                        <img src="images/packages/'.$post->imageURL.'" alt="'.$post->title.'" class="package-image">
+                    <a href="/packages/details/' . $post->slug . '">
+                        <img src="images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
                     </a>
                 </figure>
                 <div class="package-price">
                     <h6>
-                        <span>&#8377; '.number_format($post->price).'</span> / per person
+                        <span>&#8377; ' . number_format($post->price) . '</span> / per person
                     </h6>
                 </div>
                 <div class="package-content-wrap">
@@ -75,21 +79,21 @@ Route::get('/packages', function (Request $request) {
                         <ul>
                             <li>
                             <i class="far fa-clock"></i>
-                            '.$post->days.' D/'.$post->nights.' N
+                            ' . $post->days . ' D/' . $post->nights . ' N
                             </li>
                             <li>
                             <i class="fas fa-user-friends"></i>
-                            '.$post->mingroup.'
+                            ' . $post->mingroup . '
                             </li>
                             <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            '.$post->name.'
+                            ' . $post->name . '
                             </li>
                         </ul>
                     </div>
                     <div class="package-content">
                         <h3>
-                            <a href="/packages/details/'.$post->slug.'">'.$post->title.'</a>
+                            <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
                         </h3>
                         <div class="review-area">
                             <span class="review-text">(25 reviews)</span>
@@ -97,10 +101,10 @@ Route::get('/packages', function (Request $request) {
                             <span style="width: 60%"></span>
                             </div>
                         </div>
-                        <p>'.substr($post->descriptions, 0, 200).'</p>
+                        <p>' . substr($post->descriptions, 0, 200) . '</p>
                         <div class="btn-wrap">
-                            <a href="/packages/details/'.$post->slug.'" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                            <a href="/packages/details/'.$post->id.'" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
+                            <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+                            <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -112,41 +116,42 @@ Route::get('/packages', function (Request $request) {
         return $html;
     }
     $data['packages'] = $results;
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();        
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     return view('layouts.pages.packages')->with($data);
 })->name('packages');
 
 Route::get('/packages/details/{link}', function ($link) {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'],['packages.slug', '=', $link]])->get();
+    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['packages.slug', '=', $link]])->get();
     $data['programme'] = DB::table('package_programme')->select('*')->where('package_id', $data['packages'][0]->id)->get();
     $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', $data['packages'][0]->id)->get();
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get(); 
-    return view('layouts.pages.packagedetails')->with($data);    
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
+    return view('layouts.pages.packagedetails')->with($data);
 })->name('packages.details');
 
-Route::get('/packages-by-destination/{link}', function ($link, Request $request) {
+Route::get('/packages-by-theme/{link}', function (Request $request, $link) {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $results = DB::table('packages')
-                ->select('packages.*', 'destinations.name', 'destinations.id')
-                ->join('destinations', 'destinations.id', '=', 'packages.destination')
-                ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
-                ->orderBy('packages.created_at', 'desc')
-                ->paginate(6);
+        ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name')
+        ->join('destinations', 'destinations.id', '=', 'packages.destination')
+        ->join('package_category', 'package_category.id', '=', 'packages.category')
+        ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
+        ->orderBy('packages.created_at', 'desc')
+        ->paginate(6);
     if ($request->ajax()) {
         $html = '';
         foreach ($results as $post) {
-            $html.='
+            $html .= '
             <div class="col-lg-4 col-md-6">
                 <div class="package-wrap">
                 <figure class="feature-image">
-                    <a href="/packages/details/'.$post->slug.'">
-                        <img src="/images/packages/'.$post->imageURL.'" alt="'.$post->title.'" class="package-image">
+                    <a href="/packages/details/' . $post->slug . '">
+                        <img src="/images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
                     </a>
                 </figure>
                 <div class="package-price">
                     <h6>
-                        <span>&#8377; '.number_format($post->price).'</span> / per person
+                        <span>&#8377; ' . number_format($post->price) . '</span> / per person
                     </h6>
                 </div>
                 <div class="package-content-wrap">
@@ -154,21 +159,21 @@ Route::get('/packages-by-destination/{link}', function ($link, Request $request)
                         <ul>
                             <li>
                             <i class="far fa-clock"></i>
-                            '.$post->days.' D/'.$post->nights.' N
+                            ' . $post->days . ' D/' . $post->nights . ' N
                             </li>
                             <li>
                             <i class="fas fa-user-friends"></i>
-                            '.$post->mingroup.'
+                            ' . $post->mingroup . '
                             </li>
                             <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            '.$post->name.'
+                            ' . $post->title . '
                             </li>
                         </ul>
                     </div>
                     <div class="package-content">
                         <h3>
-                            <a href="/packages/details/'.$post->slug.'">'.$post->title.'</a>
+                            <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
                         </h3>
                         <div class="review-area">
                             <span class="review-text">(25 reviews)</span>
@@ -176,10 +181,10 @@ Route::get('/packages-by-destination/{link}', function ($link, Request $request)
                             <span style="width: 60%"></span>
                             </div>
                         </div>
-                        <p>'.substr($post->descriptions, 0, 200).'</p>
+                        <p>' . substr($post->descriptions, 0, 200) . '</p>
                         <div class="btn-wrap">
-                            <a href="/packages/details/'.$post->slug.'" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                            <a href="/packages/details/'.$post->id.'" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
+                            <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+                            <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
                         </div>
                     </div>
                 </div>
@@ -191,14 +196,84 @@ Route::get('/packages-by-destination/{link}', function ($link, Request $request)
         return $html;
     }
     $data['packages'] = $results;
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id','=','blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();        
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
+    return view('layouts.pages.themepackages')->with($data);
+})->name('packages-by-theme');
+
+Route::get('/packages-by-destination/{link}', function (Request $request, $link) {
+    $data['company_details'] = DB::table('company_details')->select('*')->get();
+    $results = DB::table('packages')
+        ->select('packages.*', 'destinations.name as dname', 'destinations.id')
+        ->join('destinations', 'destinations.id', '=', 'packages.destination')
+        ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
+        ->orderBy('packages.created_at', 'desc')
+        ->paginate(6);
+    if ($request->ajax()) {
+        $html = '';
+        foreach ($results as $post) {
+            $html .= '
+            <div class="col-lg-4 col-md-6">
+                <div class="package-wrap">
+                <figure class="feature-image">
+                    <a href="/packages/details/' . $post->slug . '">
+                        <img src="/images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
+                    </a>
+                </figure>
+                <div class="package-price">
+                    <h6>
+                        <span>&#8377; ' . number_format($post->price) . '</span> / per person
+                    </h6>
+                </div>
+                <div class="package-content-wrap">
+                    <div class="package-meta text-center">
+                        <ul>
+                            <li>
+                            <i class="far fa-clock"></i>
+                            ' . $post->days . ' D/' . $post->nights . ' N
+                            </li>
+                            <li>
+                            <i class="fas fa-user-friends"></i>
+                            ' . $post->mingroup . '
+                            </li>
+                            <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            ' . $post->title . '
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="package-content">
+                        <h3>
+                            <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
+                        </h3>
+                        <div class="review-area">
+                            <span class="review-text">(25 reviews)</span>
+                            <div class="rating-start" title="Rated 5 out of 5">
+                            <span style="width: 60%"></span>
+                            </div>
+                        </div>
+                        <p>' . substr($post->descriptions, 0, 200) . '</p>
+                        <div class="btn-wrap">
+                            <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
+                            <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            ';
+        }
+
+        return $html;
+    }
+    $data['packages'] = $results;
+    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     return view('layouts.pages.destinationpackages')->with($data);
 })->name('packages-by-destination');
 
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 // ============ AJAX Controller ===================================
-Route::post('subscribeuser',[AjaxController::class, 'subscription']);
+Route::post('subscribeuser', [AjaxController::class, 'subscription']);
 // ================================================================
 
 // Route::get('/blog/details/{id}', function () {
@@ -207,8 +282,7 @@ Route::post('subscribeuser',[AjaxController::class, 'subscription']);
 //     return view('layouts.pages.destinations')->with($data);
 // })->name('blog.details');
 
-Route::get('logout', function ()
-{
+Route::get('logout', function () {
     auth()->logout();
     Session()->flush();
     return Redirect::to('/login');
@@ -277,7 +351,6 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
     Route::post('/admin/blog/update', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
-    
 });
 
 /*------------------------------------------

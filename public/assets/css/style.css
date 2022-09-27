@@ -500,7 +500,7 @@ a {
 }
 a:hover, a:focus, a:active {
   color: #2C75BA;
-  text-decoration: none;
+  text-decoration: none !important;
   outline: 0;
 }
 a:visited {
