@@ -218,6 +218,7 @@
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
+                        $('#preload').show();
                         $('#load-more').text('Loading...');
                     }
                 })
@@ -225,13 +226,16 @@
                     if (data.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more').hide();
+                        $('#preload').hide();
                         return;
                     } else if (data.length <= 6) {
                         $('#load-more').hide();
+                        $('#preload').hide();
                         return;
                     } else {
                         $('#load-more').text('Load more...');
                         $('#post').append(data);
+                        $('#preload').hide();
                     }
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError) {
@@ -258,6 +262,7 @@
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
+                        $('#preload').show();
                         $('#load-more2').text('Loading...');
                     }
                 })
@@ -266,14 +271,17 @@
                     if (data2.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more2').hide();
+                        $('#preload').hide();
                         return;
                     } else if (data2.length <= 6) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more2').hide();
+                        $('#preload').hide();
                         return;
                     } else {
                         $('#load-more2').text('Load more...');
                         $('#post2').append(data2);
+                        $('#preload').hide();
                     }
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError) {
@@ -295,12 +303,13 @@
             $(this).data('paginate3', page3 + 1);
         });
         // run function when user click load more button
-        function loadMoreData2(paginate3) {
+        function loadMoreData3(paginate3) {
             $.ajax({
                     url: '?page=' + paginate3,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
+                        $('#preload').show();
                         $('#load-more3').text('Loading...');
                     }
                 })
@@ -308,14 +317,17 @@
                     if (data3.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more3').hide();
+                        $('#preload').hide();
                         return;
                     } else if (data3.length <= 6) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more3').hide();
+                        $('#preload').hide();
                         return;
                     } else {
                         $('#load-more3').text('Load more...');
                         $('#post3').append(data3);
+                        $('#preload').hide();
                     }
                 })
                 .fail(function(jqXHR, ajaxOptions, thrownError) {

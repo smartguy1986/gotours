@@ -27,7 +27,7 @@
                   </div>
                   <div class="special-content">
                      <div class="meta-cat">
-                        <a href="#">{{ $pckg->name }}</a>
+                        <a href="{{ URL::route('packages-by-destination',$pckg->dname) }}">{{ $pckg->name }}</a>
                      </div>
                      <h3>
                         <a href="{{ URL::route('packages.details', $pckg->slug) }}">{{ $pckg->title }}</a>

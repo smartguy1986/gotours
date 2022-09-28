@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2022 at 02:35 PM
+-- Generation Time: Sep 28, 2022 at 03:26 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -100,7 +100,9 @@ CREATE TABLE `company_banners` (
 
 INSERT INTO `company_banners` (`id`, `tagline`, `description`, `imageURL`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'TRAVELLING AROUND THE WORLD', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648546204.jpg', '1', '2022-03-29 04:00:04', '2022-03-29 04:00:04'),
-(3, 'EXPERIENCE THE NATUR\'S BEAUTY', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648552562.jpg', '1', '2022-03-29 05:46:02', '2022-03-29 05:46:02');
+(3, 'EXPERIENCE THE NATUR\'S BEAUTY', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1648552562.jpg', '1', '2022-03-29 05:46:02', '2022-03-29 05:46:02'),
+(4, 'GO TOURS - A MORE REWARDING WAY TO TRAVEL', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1664358890.jpg', '1', '2022-09-28 04:24:50', '2022-09-28 04:24:50'),
+(5, 'A DESTINATION FOR THE NEW MILLENNIUM', 'Taciti quasi, sagittis excepteur hymenaeos, id temporibus hic proident ullam, eaque donec delectus tempor consectetur nunc, purus congue? Rem volutpat sodales! Mollit. Minus exercitationem wisi.', '1664358860.jpg', '1', '2022-09-28 04:24:20', '2022-09-28 04:24:20');
 
 -- --------------------------------------------------------
 
@@ -268,7 +270,9 @@ INSERT INTO `packages` (`id`, `category`, `title`, `slug`, `tagline`, `banner`, 
 (13, 3, 'NEEMRANA TOUR', 'neemrana-tour', '(EX – Delhi)', '1658394638i7gb4n.jpg', '1658394638in91x6.jpg', 'Solo', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 3, 2, 'Niraj Kumar', '8574236594', '1/3 Bulhamia, Meghalaya - 370004', '8499', '0', NULL, '1', '2022-07-21 03:40:38', '2022-07-21 03:40:38'),
 (14, 3, 'SARISKA TOUR', 'sariska-tour', '(EX – Delhi)', '1658394786ahy7j2.jpg', '1658394786m1zqfe.jpg', 'Solo', 6, 'Sariska Tiger Reserve is a tiger reserve in Alwar district, Rajasthan, India. It stretches over an area of 881 km² comprising scrub-thorn arid forests, dry deciduous forests, grasslands, and rocky hills. This area was a hunting preserve of the Alwar state and was declared a wildlife sanctuary in 1958', 3, 2, 'Arijit Nandi', '8574256352', '1/3 Bulhamia, Jammu & Kashmir - 370004', '9499', '0', NULL, '1', '2022-07-21 03:43:06', '2022-07-21 03:43:06'),
 (15, 1, 'ROMANTIC HONEYMOON', 'romantic-honeymoon', 'With Photo shoot', '1658395095xsh1br.jpg', '1658395095lvr06z.jpg', 'Couple', 13, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 5, 4, 'Arijit Nandi', '8574256352', '1/3 Bulhamia, Himachal Pradesh - 900052', '18599', '1', '15399', '1', '2022-07-21 03:48:15', '2022-07-21 03:48:15'),
-(16, 7, 'LADAKH', 'ladakh', 'Solo Tour', '1658395413xb1y6p.jpg', '1658395413093xky.jpg', 'Solo', 14, 'There is no place like Ladakh in the world. In fact, due to its varied landscape and exotic natural beauty, Ladakh is often referred to as broken moon land. EaseMyTrip.com brings this exclusive 5 nights and 6 days holiday package of Ladakh through which you will get to explore the exotic beauty of Ladakh. The tour includes visits to many prominent attractions like ancient monasteries, palaces and highest mountain passes in the world', 6, 5, 'Arijit Nandi', '965748596', '1/3 Bulhamia, Himachal Pradesh - 900052', '65999', '1', '60999', '1', '2022-07-21 03:53:33', '2022-07-21 03:53:33');
+(16, 7, 'LADAKH', 'ladakh', 'Solo Tour', '1658395413xb1y6p.jpg', '1658395413093xky.jpg', 'Solo', 14, 'There is no place like Ladakh in the world. In fact, due to its varied landscape and exotic natural beauty, Ladakh is often referred to as broken moon land. EaseMyTrip.com brings this exclusive 5 nights and 6 days holiday package of Ladakh through which you will get to explore the exotic beauty of Ladakh. The tour includes visits to many prominent attractions like ancient monasteries, palaces and highest mountain passes in the world', 6, 5, 'Arijit Nandi', '965748596', '1/3 Bulhamia, Himachal Pradesh - 900052', '65999', '1', '60999', '1', '2022-07-21 03:53:33', '2022-07-21 03:53:33'),
+(17, 4, 'Rajasthan New Year 2023', 'rajasthan-new-year-2023', 'Padharo Mhare Desh', '1662703499zysgik.jpg', '1662703499f08vim.jpg', 'Couple', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 9, 8, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Jodhpur- 470004', '32500', '1', '27500', '1', '2022-09-09 00:34:59', '2022-09-09 00:34:59'),
+(18, 7, 'AMAZING SHILLONG TOUR PACKAGE', 'amazing-shillong-tour-package', 'Scotland of the East', '1664349424hxnac1.jpg', '1664349424wdj38g.jpg', 'Customizable Group', 8, 'Looking for an exciting vacation to Shillong? Go Tours has got an amazing holiday package just for you. In this 3 Night and 4 Day Package, you will not only get Shillong to explore but also Cherrapunji and Guwahati. These are such beautiful destinations where you can have a relaxing stay or an adventure holiday as per your desire. Explore Wards Lake, Lady Hyderi Park, Elephant Falls, Single Decker root Bridge, Balancing Rock, Maa Kamakhya Temple, and more with your loved ones. Experience the best of flea markets, picturesque sceneries, beautiful churches, and more on your Shillong Tour. Book your Shillong holiday package with Go Tours and grab the best deal!', 5, 4, 'Rebecca Umnling', '8457965232', '2/9 Gb Bazaar, Shillong, Meghalaya', '43999', '1', '39499', '1', '2022-09-28 01:47:04', '2022-09-28 01:47:04');
 
 -- --------------------------------------------------------
 
@@ -342,7 +346,11 @@ INSERT INTO `package_gallery` (`id`, `package_id`, `imageURL`, `created_at`, `up
 (32, 16, '1658470960yvlxib.jpg', NULL, NULL),
 (33, 16, '1658470960hiwdva.jpg', NULL, NULL),
 (34, 16, '1658470960ejl8md.jpg', NULL, NULL),
-(35, 16, '1658470960wmgrh1.jpg', NULL, NULL);
+(35, 16, '1658470960wmgrh1.jpg', NULL, NULL),
+(36, 18, '1664349511skm72h.jpg', NULL, NULL),
+(37, 18, '16643495115761sp.jpg', NULL, NULL),
+(38, 18, '1664349511zd9ecf.jpg', NULL, NULL),
+(39, 18, '1664349511jil2fz.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -424,7 +432,21 @@ INSERT INTO `package_programme` (`id`, `package_id`, `day`, `title`, `descriptio
 (73, 16, 3, 'Nubra Valley via Khardungla pass', 'After breakfast drive to Nubra Valley via Khardungla pass (Highest Motorable road in the World, 18,380 ft.)We will stop at the pass to admire and click some photographs of the fantastic view, before driving down in the Nubra valley. Arrive at Deskit-the tiny capital of Nubra by afternoon. Rest of the day free to explore Deskit, Hunder Villages and camel Safari in Sand Dunes( at your own cost) between Deskit and HunderVillage.Dinner and overnight in camp', '2022-07-21 09:25:15', '2022-07-21 09:25:15'),
 (74, 16, 4, 'Pangong Lake', 'After breakfast leave for Pangong Lake 14,500 ft, through Changla Pass 17,350 ft. (third Highest Motor-able road in the world.) The drive takes about 3-4 hours to reach. The lake is situated on the borders of India and Tibet. The lake is around 120 kms long and 50 kms in width. The lake is home to a large number of migratory and resident birds. Overnight in camp', '2022-07-21 09:25:15', '2022-07-21 09:25:15'),
 (75, 16, 5, 'Drive back to Leh', 'After breakfast drive back to Leh, Dinner and overnight in hotel', '2022-07-21 09:25:15', '2022-07-21 09:25:15'),
-(76, 16, 6, 'Return', 'Early morning by 06:00 hrs you will be transfer to airport to board flight back to your destination', '2022-07-21 09:25:15', '2022-07-21 09:25:15');
+(76, 16, 6, 'Return', 'Early morning by 06:00 hrs you will be transfer to airport to board flight back to your destination', '2022-07-21 09:25:15', '2022-07-21 09:25:15'),
+(77, 17, 1, 'Arrive Jaipur', 'Pick up from Jaipur Rly Stn. / Airport. Transfer to hotel and check in. Afternoon tour of Jaipur . Jaipur - the capital of Rajasthan was given a colour coat of pink a century ago in honour of a visiting Prince and ever since, it has retained this colour . Built by Maharaja Jai Singh, the notable astronomer, this city is 260 years old. Visit Sisodiya Rani Temple, Laxmi Narayan Temple. Also visit Laxminarayan Temple ( Birla Temple) and photo stop at Hawa Mahal. Evening free and optional visit to Chokhi Dhani resort (Dinner Chargeable Extra on own)- built in ethnical rajasthani style and specially in the evening they organize lot of activities like, camel ride, Puppet show, Snake charmer and handloom cloths etc. alongwith specialized Rajasthani /continental Dinner as well. Overnight Jaipur.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(78, 17, 2, 'Jaipur Local sightseeing', 'Morning visit Amber Fort with an Elephant ride( at extra cost subject to availability) till the main entrance of the fort. Amber Fort was the ancient capital of the State. After photo stop at Jal Mahal, Visit Maharaja\'s City Palace, the Observatory Visit the Sheesh Mahal or the Hall of Victory glittering with mirrors. Evening free for shopping on own. Return to hotel for the overnight stay.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(79, 17, 3, 'Jaipur to Bikaner Local Sightseeing', 'Morning check out & drive to Bikaner. On arrival check in at hotel. Proceed for sightseeing tour of Bikaner. Rao Bikaji, visit the Junagarh Fort, constructed between 1588 and 1593 by Raja Jai Singh, a general in theMoghul Emperor Akbar\'s army. Junagarh Fort includes Anup Mahal, Gaj Temple, Sheesh Mahal, Prachin Museum and Lalgarh Palace. The city is also called the \"Camel Country\". Visit the camel-breeding farm - the only one in Asia (Asia\'s biggest camel breeding farm). Also visit theKarni Mata Temple. BIKANER - Founded in 1488 by a Rathore Prince, Rao Bikaji , a descendant of the founder of Jodhpur, Rao Jodhaji , Bikaner has a glorious past to tell. Situated in the north of Rajasthan, the walled city of Bikaner is famous for its sky touching forts, camel safaris, citadels and the well-known camel festival. Overnight at Bikaner hotel', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(80, 17, 4, 'Bikaner to Jaisalmer', 'Morning check out and proceed to Jaisalmer, the golden city of Rajasthan. In the late afternoon check in at hotel. Proceed to Sam for Camel Ride. Return back to hotel. Stay Overnight at Jaisalmer. Note:- Tents are closed from Mar to Sep. Only Camel ride is available at an additional cost payable directly.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(81, 17, 5, 'Jaisalmer Local sightseeing', 'After breakfast check out from Tent(if stay taken). Proceed for sightseeing tour of The Golden City - Jaisalmer. Visit the 12th century magnificent fort at Jaisalmer (This is the highlight of the tour-Sonar Kella). Also visit the beautifully and magnificently carved Havelis of Salim Singh ki Haveli, Nathmal Ki Haveli and Patwon ki Haveli (Buildings dating from 12th to 15th century) and Gadisar Lake, followed by a visit to the Barabagh Hill (Bada Bagh). Return back to hotel. Overnight stay.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(82, 17, 6, 'Jaisalmer to Jodhpur Local Sightseeing', 'After Breakfast & check out from hotel & drive to Jodhpur. Arrive Jodhpur and check in at hotel. In Afternoon proceed for local city sight seeing tour. Jodhpur, stronghold of the fierce Rathore clan, was founded in 1459 by Prince Jodha. Visit the Mehrangarh Fort, situated on a low sandstone hill. Within the fort, visit Moti Mahal and Phool Mahal. Also visit Jaswant Thada, an imposing marble cenotaph, built in memory of Maharaja Jaswant singh II around 1899 and Umaid Public gardens. Return back to hotel and overnight stay.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(83, 17, 7, 'Jodhpur to Udaipur', 'After Breakfast & check out from hotel. Depart for Udaipur. Arrive at Udaipur and transfer to the hotel. Udaipur, \'the city of lakes\' is admired for its fairy-tale palaces, lakes, temples, and gardens among many more. Evening at leisure. Overnight stay at Udaipur.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(84, 17, 8, 'Udaipur Local Sightseeing', 'Breakfast at hotel. Morning city sight seeing tour. Built in 1559 A.D. by Maharaja Udai Singh, the city has been described as the most romantic spot on the continent of India by Col. James Todd. The places of interest include City Palace which has several carved balconies, arches and decorated pillars, Zenana Mahal, Fateh Prakash, Durbar Hall and Shambhu Niwas. Also visit Jagdish temple, Sahelion-ki-Bari (queen\'s resort for the friends). Evening Motor launch cruise(Cruise ride not included) on the placid waters of Lake Pichola and enjoy scenic view of Sunset. Overnight stay.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(85, 17, 9, 'Udaipur to Jaipur Airport Drop', 'Breakfast at hotel. Check out from hotel and drive back to Jaipur. Drop at Jaipur Airport / Rly Stn for onward Journey.', '2022-09-09 06:07:12', '2022-09-09 06:07:12'),
+(86, 18, 1, 'Arrival', 'Meet and greet on arrival. Later drive to Shillong (Meghalaya). Rest of the day is free at your own', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
+(87, 18, 2, 'City Tour', 'After breakfast, check out from the hotel proceed to Shillong. Photography opportunity at Lake Umiam. Visit Wards Lake & Lady Hyderi Park. Evening free for leisure. City tour of Shillong, Overnight stay at Shillong.', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
+(88, 18, 3, 'Cherrapunjee', 'Today after breakfast check out & drive to Cherrapunjee Enroute visit Elephant Falls. Evening drive to Cherrapunjee and night stay at Cherrapunjee', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
+(89, 18, 4, 'Guwahati', 'Today after breakfast check out the hotel and transfer to Guwahati. Check in to the hotel. Visit Kamakhya Temple, Tirupati Balaji Temple, Nabagraha Temple, Assam State Museum, State Zoo cum Botanical Garden, Regional Science Centre and Sukreswar Temple (The 6th Jyotirlinga of Shiva). Afternoon we suggest an optional tour of Golden sunset cruise on the Brahmaputra (Direct Payment by own). Overnight stay at Guwahati', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
+(90, 18, 5, 'Kamakhya Temple', 'Today after breakfast check out & visit Maa Kamakhya Temple (if time permits). Later drive to Guwahati Airport/Railway Station for your onward destination. Tour ends with everlasting memories', '2022-09-28 07:18:13', '2022-09-28 07:18:13');
 
 -- --------------------------------------------------------
 
@@ -659,7 +681,7 @@ ALTER TABLE `blog_comment`
 -- AUTO_INCREMENT for table `company_banners`
 --
 ALTER TABLE `company_banners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `company_details`
@@ -689,7 +711,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `package_category`
@@ -701,13 +723,13 @@ ALTER TABLE `package_category`
 -- AUTO_INCREMENT for table `package_gallery`
 --
 ALTER TABLE `package_gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `package_programme`
 --
 ALTER TABLE `package_programme`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `package_review`

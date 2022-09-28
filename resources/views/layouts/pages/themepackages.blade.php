@@ -28,11 +28,14 @@
                     <div class="row" id="post2">
                         {{-- Ajax responses will be displayed here --}}
                     </div>
+                    <div id="preload" class="preloader-content" style="display: none;">
+                        <img src="{{ asset('assets/images/loader1.gif') }}" alt="">
+                    </div>
                 </div>
             </div>
             <div class="text-center m-3">
                 <button class="btn btn-primary" id="load-more2" data-paginate2="2">Load more...</button>
-                <p class="invisible">No more posts...</p>
+                <p class="invisible">No more packages found...</p>
             </div>
         </div>
         <!-- destination section html start -->

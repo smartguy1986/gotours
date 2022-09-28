@@ -24,12 +24,12 @@ use Illuminate\Http\Request;
 */
 
 Route::get('/', function () {
-    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->get();
+    $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->orderBy('id', 'DESC')->get();
     $data['company_details'] = DB::table('company_details')->select('*')->get();
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     $data['categories'] = DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
 
@@ -41,7 +41,7 @@ Route::get('/home', function () {
     $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
     $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
     $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+    $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", 2)->groupBy('blogs.id')->orderBy("blogs.created_at", "desc")->take(3)->get();
     $data['categories'] = DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
 
@@ -237,7 +237,7 @@ Route::get('/packages-by-destination/{link}', function (Request $request, $link)
                             </li>
                             <li>
                             <i class="fas fa-map-marker-alt"></i>
-                            ' . $post->title . '
+                            <span class="wraptext">' . $post->title . '</span>
                             </li>
                         </ul>
                     </div>

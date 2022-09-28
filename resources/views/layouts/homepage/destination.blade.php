@@ -55,7 +55,7 @@
                         </div>
                         <div class="desti-content">
                            <h3>
-                              <a href="#">{{ $dst2->tagline }}</a>
+                              <a href="{{ URL::route('packages-by-destination',$dst->slug) }}">{{ $dst2->tagline }}</a>
                            </h3>
                            <div class="rating-start" title="Rated 5 out of 5">
                               <span style="width: 100%"></span>

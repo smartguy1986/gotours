@@ -13,7 +13,11 @@
                 style="background-image: url('{{ asset('assets/images/default/default-tour-banner2.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
-                        <h1 class="inner-title">{{ ucfirst(trans($packages[0]->dname)) }} Packages</h1>
+                        @if (count($packages) > 0)
+                            <h1 class="inner-title">{{ ucfirst(trans($packages[0]->dname)) }} Packages</h1>
+                        @else
+                            <h1 class="inner-title">Tour Packages</h1>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -21,18 +25,21 @@
         </section>
         <!-- Inner Banner html end-->
         <!-- destination field html end -->
-        {{-- {{ $packages }} --}}
+        {{ $packages }}
         <div class="package-section">
             <div class="container">
                 <div class="package-inner">
-                    <div class="row" id="post2">
+                    <div class="row" id="post3">
                         {{-- Ajax responses will be displayed here --}}
+                    </div>
+                    <div id="preload" class="preloader-content" style="display: none;">
+                        <img src="{{ asset('assets/images/loader1.gif') }}" alt="">
                     </div>
                 </div>
             </div>
             <div class="text-center m-3">
-                <button class="btn btn-primary" id="load-more2" data-paginate2="2">Load more...</button>
-                <p class="invisible">No more posts...</p>
+                <button class="btn btn-primary" id="load-more3" data-paginate3="2">Load more...</button>
+                <p class="invisible">No more packages found...</p>
             </div>
         </div>
         <!-- destination section html start -->
