@@ -17,6 +17,7 @@
       </div>
       @endforeach
    </div>
+   <div class="inner-shape"></div>
  </section>
  <!-- slider html start -->
  <!-- Home search field html start -->

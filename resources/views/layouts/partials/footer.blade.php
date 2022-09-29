@@ -336,6 +336,52 @@
         }
     }
 </script>
+
+<script>
+    if ((window.location.pathname).indexOf('package-offers') > -1) {
+        // /alert(window.location.pathname);
+        var paginate4 = 1;
+        loadMoreData4(paginate4);
+        var urlpath4 = window.location.pathname;
+        $('#load-more4').click(function() {
+            var page4 = $(this).data('paginate4');
+            loadMoreData4(page4);
+            $(this).data('paginate4', page4 + 1);
+        });
+        // run function when user click load more button
+        function loadMoreData4(paginate4) {
+            $.ajax({
+                    url: '?page=' + paginate4,
+                    type: 'get',
+                    datatype: 'html',
+                    beforeSend: function() {
+                        $('#preload').show();
+                        $('#load-more4').text('Loading...');
+                    }
+                })
+                .done(function(data4) {
+                    if (data4.length == 0) {
+                        $('.invisible').removeClass('invisible');
+                        $('#load-more4').hide();
+                        $('#preload').hide();
+                        return;
+                    } else if (data4.length <= 6) {
+                        $('.invisible').removeClass('invisible');
+                        $('#load-more4').hide();
+                        $('#preload').hide();
+                        return;
+                    } else {
+                        $('#load-more4').text('Load more...');
+                        $('#post4').append(data4);
+                        $('#preload').hide();
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+        }
+    }
+</script>
 </body>
 
 </html>

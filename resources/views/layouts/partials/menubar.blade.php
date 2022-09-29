@@ -13,7 +13,7 @@
                 <a href="{{ URL::route('packages') }}">Tour Packages</a>
              </li>
              <li>
-                <a href="package-offer.html">Package Offer</a>
+                <a href="{{ URL::route('package-offers') }}">Package Offer</a>
              </li>
           </ul>
        </li>
@@ -21,7 +21,7 @@
           <a href="#">GoTours</a>
           <ul>
              <li>
-                <a href="about.html">About Us</a>
+                <a href="{{ URL::route('about-us') }}">About Us</a>
              </li>
              <li>
                 <a href="service.html">Service</a>
