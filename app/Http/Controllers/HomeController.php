@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DestinationsController;
+use App\Http\Controllers\PackagesController;
+use App\Http\Controllers\BlogController;
 
 
 class HomeController extends Controller
@@ -24,16 +28,16 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
 
-    public function index()
+    public function index(CompanyController $companyController, DestinationsController $destinationsController, PackagesController $packagesController, BlogController $blogController)
     {
         $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->orderBy('id', 'DESC')->get();
-        $data['company_details'] = DB::table('company_details')->select('*')->get();
-        $data['destinations'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(0)->take(2)->get();
-        $data['destinations2'] = DB::table('destinations')->select('*')->where([['status', '=', '1'], ['featured', '=', '1']])->orderBy('created_at', 'desc')->skip(2)->take(2)->get();
-        $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-        $data['packagesoffers'] = DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
-        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-        $data['categories'] = DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
+        $data['company_details'] = $companyController->commonComponent();
+        $data['destinations'] = $destinationsController->alldestinationlist(0,2,1);
+        $data['destinations2'] =  $destinationsController->alldestinationlist(2,2,1);        
+        $data['packages'] = $packagesController->last3package();
+        $data['packagesoffers'] = $packagesController->last3packageoffers();
+        $data['blogs'] = $blogController->last3blogs();
+        $data['categories'] = $packagesController->packagecat();
 
         return view('home')->with($data);
     }

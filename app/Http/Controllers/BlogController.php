@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use Illuminate\Http\Request;
-use DB;
-use File;
+use Illuminate\Support\Facades\DB;
+use Spatie\Backtrace\File;
 use Illuminate\Support\Str;
 
 class BlogController extends Controller
@@ -19,6 +19,11 @@ class BlogController extends Controller
     {
         $data['blogs'] = DB::table('blogs')->select('blogs.*', 'users.name', 'users.email')->join('users', 'users.id','=','blogs.author')->orderBy('blogs.id', 'DESC')->get();
         return view('layouts.admin.blogs.lists', $data);
+    }
+
+    public function last3blogs()
+    {
+        return DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     }
 
     /**

@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Destinations;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use DB;
-use File;
+use Illuminate\Support\Facades\DB;
+use Spatie\Backtrace\File;
 
 class DestinationsController extends Controller
 {
@@ -17,9 +17,42 @@ class DestinationsController extends Controller
      */
     public function index()
     {
+        return $data['destinations'] = DB::table('destinations')->select('*')->orderBy('id', 'DESC')->get();
+    }
+
+    public function adminlist()
+    {
         $data['destinations'] = DB::table('destinations')->select('*')->orderBy('id', 'DESC')->get();
         return view('layouts.admin.destinations.lists', $data);
     }
+
+    public function alldestinationlist($x = 0, $y = 0, $z = 0)
+    {
+        if ($x) {
+            return DB::table('destinations')
+                ->select('*')
+                ->where([
+                    ['status', '=', '1'],
+                    ['featured', '=', $z]
+                ])
+                ->orderBy('created_at', 'desc')
+                ->skip($x)
+                ->take($y)
+                ->get();
+        } else {
+            return DB::table('destinations')
+                ->select('*')
+                ->where([
+                    ['status', '=', '1'],
+                    ['featured', '=', $z]
+                ])
+                ->orderBy('created_at', 'desc')
+                ->skip(0)
+                ->take($y)
+                ->get();
+        }
+    }
+
 
     public function add()
     {
@@ -52,8 +85,8 @@ class DestinationsController extends Controller
             'head_office_phone' => 'required',
             'head_office_address' => 'required'
         ]);
-    
-        $fileName = time().'.'.$request->dst_image->extension();  
+
+        $fileName = time() . '.' . $request->dst_image->extension();
         $request->dst_image->move(public_path('images/destinations'), $fileName);
 
         $save = new Destinations;
@@ -67,7 +100,7 @@ class DestinationsController extends Controller
         $save->status = 1;
         $save->featured = $request->featured;
         $save->save();
-    
+
         return redirect('/admin/destinations')->with('success', 'Destination Has been uploaded');
     }
 
@@ -102,33 +135,27 @@ class DestinationsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    {   
+    {
 
         //$User_Update = User::where("id", '2')->update(["member_type" => $plan]);
-        if(isset($request->dst_image))
-        {
-            $fileName = time().'.'.$request->dst_image->extension();  
+        if (isset($request->dst_image)) {
+            $fileName = time() . '.' . $request->dst_image->extension();
             $request->dst_image->move(public_path('images/destinations'), $fileName);
-            $file_path = public_path().'/images/destinations/'.$request->old_image;
+            $file_path = public_path() . '/images/destinations/' . $request->old_image;
             if (File::exists($file_path)) {
                 unlink($file_path);
             }
-        }
-        else
-        {
+        } else {
             $fileName = $request->old_image;
         }
 
         $values = array('name' => strtoupper($request->name), 'slug' => Str::slug($request->name, '-'), 'tagline' => $request->tagline, 'head_office_address' => $request->head_office_address, 'head_office_phone' => $request->head_office_phone, 'description' => $request->description, 'featured' => $request->featured, 'imageURL' => $fileName);
 
         $affected_row = Destinations::where('id', $request->dstid)->update($values);
-        
-        if($affected_row)
-        {
+
+        if ($affected_row) {
             return redirect('/admin/destinations')->with('success', 'Destination successfully updated');
-        }
-        else
-        {
+        } else {
             return redirect('/admin/destinations')->with('error', 'Destination not updated');
         }
     }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\company_details;
-use DB;
+use Illuminate\Support\Facades\DB;
+use App\Models\CompanyDetails;
 
 class CompanyController extends Controller
 {
@@ -23,6 +23,11 @@ class CompanyController extends Controller
     {
         $data['company'] = DB::table('company_details')->select('*')->get();
         return view('layouts.admin.company.basicinfo', $data);
+    }
+
+    public function commonComponent()
+    {
+        return DB::table('company_details')->select('*')->get();
     }
 
     /**
