@@ -13,11 +13,11 @@
                 style="background-image: url('{{ asset('assets/images/default/default-tour-banner2.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
-                        @if (count($packages) > 0)
+                        {{-- @if (count($packages) > 0)
                             <h1 class="inner-title">{{ ucfirst(trans($packages[0]->dname)) }} Packages</h1>
                         @else
                             <h1 class="inner-title">Tour Packages</h1>
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@
         </section>
         <!-- Inner Banner html end-->
         <!-- destination field html end -->
-        {{ $packages }}
+        {{-- {{ $packages }} --}}
         <div class="package-section">
             <div class="container">
                 <div class="package-inner">

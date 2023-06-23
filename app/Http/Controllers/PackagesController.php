@@ -37,67 +37,59 @@ class PackagesController extends Controller
         return DB::table('package_category')->selectRaw("package_category.*, COUNT('packages.id') AS dest")->join('packages', 'package_category.id', '=', 'packages.category')->where('package_category.status', '=', '1')->groupBy('package_category.id')->skip(0)->take(6)->get();
     }
 
-    public function getpackageswithajax(Request $request)
+    public function getpackageswithajax(Request $request, CompanyController $companyController, BlogController $blogController)
     {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
         $results = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->paginate(6);
-        $html = '';
 
         if ($request->ajax()) {
-            foreach ($results as $post) {
-                $html .= '
-                <div class="col-lg-4 col-md-6">
-                    <div class="package-wrap">
-                    <figure class="feature-image">
-                        <a href="/packages/details/' . $post->slug . '">
-                            <img src="images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
-                        </a>
-                    </figure>
-                    <div class="package-price">
-                        <h6>
-                            <span>&#8377; ' . number_format($post->price) . '</span> / per person
-                        </h6>
-                    </div>
-                    <div class="package-content-wrap">
-                        <div class="package-meta text-center">
-                            <ul>
-                                <li>
-                                <i class="far fa-clock"></i>
-                                ' . $post->days . ' D/' . $post->nights . ' N
-                                </li>
-                                <li>
-                                <i class="fas fa-user-friends"></i>
-                                ' . $post->mingroup . '
-                                </li>
-                                <li>
-                                <i class="fas fa-map-marker-alt"></i>
-                                ' . $post->name . '
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="package-content">
-                            <h3>
-                                <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
-                            </h3>
-                            <div class="review-area">
-                                <span class="review-text">(25 reviews)</span>
-                                <div class="rating-start" title="Rated 5 out of 5">
-                                <span style="width: 60%"></span>
-                                </div>
-                            </div>
-                            <p>' . substr($post->descriptions, 0, 200) . '</p>
-                            <div class="btn-wrap">
-                                <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                                <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                ';
-            }
-            return $html;
+            $view = view('layouts.pages.packagesdata', compact('results'))->render();
+            $data['packages'] = $view;
+            return response()->json(['packages' => $view]);
         }
-        return null;
+
+        return view('layouts.pages.packages')->with($data);
+    }
+
+    public function packagebytheme(Request $request, CompanyController $companyController, BlogController $blogController, $link)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
+        $results = DB::table('packages')
+            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name')
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->join('package_category', 'package_category.id', '=', 'packages.category')
+            ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
+            ->orderBy('packages.created_at', 'desc')
+            ->paginate(6);
+        if ($request->ajax()) {
+            $view = view('layouts.pages.packagebytheme', compact('results'))->render();
+            $data['package'] = $view;
+            return response()->json(['packagetheme' => $view]);
+        }
+        return view('layouts.pages.themepackages')->with($data);
+    }
+
+    public function packagebydestination(Request $request, CompanyController $companyController, BlogController $blogController, $link)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
+        $results = DB::table('packages')
+            ->select('packages.*', 'destinations.name as dname', 'destinations.id')
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
+            ->orderBy('packages.created_at', 'desc')
+            ->paginate(6);
+        if ($request->ajax()) {
+            $view = view('layouts.pages.packagebydestination', compact('results'))->render();
+            $data['packages'] = $view;
+            return response()->json(['packagedesti' => $view]);
+        }
+        return view('layouts.pages.destinationpackages')->with($data);
     }
 
     /**
@@ -163,15 +155,17 @@ class PackagesController extends Controller
         $fileName = time() . '.' . $request->cat_image->extension();
         $request->cat_image->move(public_path('images/categories'), $fileName);
 
-        $check = DB::table('package_category')->insertGetId(array(
-            'cat_name'      => $request->cat_name,
-            'slug'          => Str::slug($request->cat_name, '-'),
-            'cat_tagline'     => $request->cat_tagline,
-            'cat_image'      => $fileName,
-            'cat_description'   => $request->cat_description,
-            'status'    => $request->status,
-            'created_at' => date("Y-m-d")
-        ));
+        $check = DB::table('package_category')->insertGetId(
+            array(
+                'cat_name' => $request->cat_name,
+                'slug' => Str::slug($request->cat_name, '-'),
+                'cat_tagline' => $request->cat_tagline,
+                'cat_image' => $fileName,
+                'cat_description' => $request->cat_description,
+                'status' => $request->status,
+                'created_at' => date("Y-m-d")
+            )
+        );
 
         return redirect('/admin/packages/categories')->with('success', 'Destination Has been uploaded');
     }
@@ -324,12 +318,12 @@ class PackagesController extends Controller
         }
 
         $data = array(
-            'cat_name'      => $request->cat_name,
-            'slug'          => Str::slug($request->cat_name, '-'),
-            'cat_tagline'     => $request->cat_tagline,
-            'cat_image'      => $cat_image,
-            'cat_description'   => $request->cat_description,
-            'status'    => $request->status,
+            'cat_name' => $request->cat_name,
+            'slug' => Str::slug($request->cat_name, '-'),
+            'cat_tagline' => $request->cat_tagline,
+            'cat_image' => $cat_image,
+            'cat_description' => $request->cat_description,
+            'status' => $request->status,
             'created_at' => date("Y-m-d")
         );
 

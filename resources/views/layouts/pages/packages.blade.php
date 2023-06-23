@@ -24,13 +24,13 @@
     <div class="package-section">
         <div class="container">
             <div class="package-inner">
-                <div class="row" id="post">
+                <div class="row" id="packages-post">
                     {{-- Ajax responses will be displayed here --}}
                 </div>
             </div>
         </div>
         <div class="text-center m-3">
-            <button class="btn btn-primary" id="load-more" data-paginate="2">Load more...</button>
+            <button class="btn btn-primary" id="load-more-packages" data-paginate="2">Load more...</button>
             <p class="invisible">No more posts...</p>
         </div>
     </div>
