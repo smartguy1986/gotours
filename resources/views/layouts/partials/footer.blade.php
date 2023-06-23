@@ -203,38 +203,41 @@
 </script>
 <script>
     if (window.location.pathname == "/packages") {
+        var ENDPOINT = "{{ route('packages') }}"
         var paginate = 1;
         loadMoreData(paginate);
 
-        $('#load-more').click(function() {
+        $('#load-more-packages').click(function() {
             var page = $(this).data('paginate');
+            console.log(page);
             loadMoreData(page);
             $(this).data('paginate', page + 1);
         });
         // run function when user click load more button
         function loadMoreData(paginate) {
             $.ajax({
-                    url: '/packages?page=' + paginate,
+                    url: ENDPOINT + '?page=' + paginate,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
                         $('#preload').show();
-                        $('#load-more').text('Loading...');
+                        $('#load-more-packages').text('Loading...');
                     }
                 })
                 .done(function(data) {
-                    if (data.length == 0) {
+                    if (data.packages.length == 0) {
                         $('.invisible').removeClass('invisible');
-                        $('#load-more').hide();
+                        $('#load-more-packages').hide();
                         $('#preload').hide();
                         return;
-                    } else if (data.length <= 6) {
-                        $('#load-more').hide();
+                    } else if (data.packages.length < 6) {
+                        $('.invisible').addClass('invisible');
+                        $('#load-more-packages').hide();
                         $('#preload').hide();
                         return;
                     } else {
-                        $('#load-more').text('Load more...');
-                        $('#post').append(data);
+                        $('#load-more-packages').text('Load more...');
+                        $('#packages-post').append(data.packages);
                         $('#preload').hide();
                     }
                 })
@@ -258,7 +261,7 @@
         // run function when user click load more button
         function loadMoreData2(paginate2) {
             $.ajax({
-                    url: '?page=' + paginate2,
+                    url: urlpath2 + '?page=' + paginate2,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
@@ -267,20 +270,20 @@
                     }
                 })
                 .done(function(data2) {
-                    console.log(data2);
-                    if (data2.length == 0) {
+                    console.log(data2.packagetheme);
+                    if (data2.packagetheme.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more2').hide();
                         $('#preload').hide();
                         return;
-                    } else if (data2.length <= 6) {
-                        $('.invisible').removeClass('invisible');
+                    } else if (data2.packagetheme.length <= 6) {
+                        $('.invisible').addClass('invisible');
                         $('#load-more2').hide();
                         $('#preload').hide();
                         return;
                     } else {
                         $('#load-more2').text('Load more...');
-                        $('#post2').append(data2);
+                        $('#post2').append(data2.packagetheme);
                         $('#preload').hide();
                     }
                 })
@@ -293,10 +296,11 @@
 
 <script>
     if ((window.location.pathname).indexOf('packages-by-destination') > -1) {
-        // /alert(window.location.pathname);
+        
         var paginate3 = 1;
         loadMoreData3(paginate3);
         var urlpath3 = window.location.pathname;
+        //alert(urlpath3);
         $('#load-more3').click(function() {
             var page3 = $(this).data('paginate3');
             loadMoreData3(page3);
@@ -314,19 +318,19 @@
                     }
                 })
                 .done(function(data3) {
-                    if (data3.length == 0) {
+                    if (data3.packagedesti.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more3').hide();
                         $('#preload').hide();
                         return;
-                    } else if (data3.length <= 6) {
-                        $('.invisible').removeClass('invisible');
+                    } else if (data3.packagedesti.length < 6) {
+                        $('.invisible').addClass('invisible');
                         $('#load-more3').hide();
                         $('#preload').hide();
                         return;
                     } else {
                         $('#load-more3').text('Load more...');
-                        $('#post3').append(data3);
+                        $('#post3').append(data3.packagedesti);
                         $('#preload').hide();
                     }
                 })
@@ -351,7 +355,7 @@
         // run function when user click load more button
         function loadMoreData4(paginate4) {
             $.ajax({
-                    url: '?page=' + paginate4,
+                    url: urlpath4 + '?page=' + paginate4,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
@@ -365,8 +369,8 @@
                         $('#load-more4').hide();
                         $('#preload').hide();
                         return;
-                    } else if (data4.length <= 6) {
-                        $('.invisible').removeClass('invisible');
+                    } else if (data4.length < 6) {
+                        $('.invisible').addClass('invisible');
                         $('#load-more4').hide();
                         $('#preload').hide();
                         return;

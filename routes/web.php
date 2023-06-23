@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Redirect;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index']);
 
@@ -36,12 +37,7 @@ Route::get('/destinations', function (CompanyController $companyController, Dest
     return view('layouts.pages.destinations')->with($data);
 })->name('destinations');
 
-Route::get('/packages', function (Request $request, CompanyController $companyController, PackagesController $packagesController, BlogController $blogController) {
-    $data['company_details'] = $companyController->commonComponent();
-    $data['packages'] = $packagesController->getpackageswithajax($request);
-    $data['blogs'] = $blogController->last3blogs();
-    return view('layouts.pages.packages')->with($data);
-})->name('packages');
+Route::get('/packages', [PackagesController::class, 'getpackageswithajax'])->name('packages');
 
 Route::get('/packages/details/{link}', function ($link, BlogController $blogController) {
     $data['company_details'] = DB::table('company_details')->select('*')->get();
@@ -52,146 +48,28 @@ Route::get('/packages/details/{link}', function ($link, BlogController $blogCont
     return view('layouts.pages.packagedetails')->with($data);
 })->name('packages.details');
 
-Route::get('/packages-by-theme/{link}', function (Request $request, $link) {
-    $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $results = DB::table('packages')
-        ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name')
-        ->join('destinations', 'destinations.id', '=', 'packages.destination')
-        ->join('package_category', 'package_category.id', '=', 'packages.category')
-        ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
-        ->orderBy('packages.created_at', 'desc')
-        ->paginate(6);
-    if ($request->ajax()) {
-        $html = '';
-        foreach ($results as $post) {
-            $html .= '
-            <div class="col-lg-4 col-md-6">
-                <div class="package-wrap">
-                <figure class="feature-image">
-                    <a href="/packages/details/' . $post->slug . '">
-                        <img src="/images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
-                    </a>
-                </figure>
-                <div class="package-price">
-                    <h6>
-                        <span>&#8377; ' . number_format($post->price) . '</span> / per person
-                    </h6>
-                </div>
-                <div class="package-content-wrap">
-                    <div class="package-meta text-center">
-                        <ul>
-                            <li>
-                            <i class="far fa-clock"></i>
-                            ' . $post->days . ' D/' . $post->nights . ' N
-                            </li>
-                            <li>
-                            <i class="fas fa-user-friends"></i>
-                            ' . $post->mingroup . '
-                            </li>
-                            <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            ' . $post->title . '
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="package-content">
-                        <h3>
-                            <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
-                        </h3>
-                        <div class="review-area">
-                            <span class="review-text">(25 reviews)</span>
-                            <div class="rating-start" title="Rated 5 out of 5">
-                            <span style="width: 60%"></span>
-                            </div>
-                        </div>
-                        <p>' . substr($post->descriptions, 0, 200) . '</p>
-                        <div class="btn-wrap">
-                            <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                            <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            ';
-        }
+Route::get('/packages-by-theme/{link}', [PackagesController::class, 'packagebytheme'])->name('packages-by-theme');
 
-        return $html;
-    }
-    $data['packages'] = $results;
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-    return view('layouts.pages.themepackages')->with($data);
-})->name('packages-by-theme');
+Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packagebydestination'])->name('packages-by-destination');
 
-Route::get('/packages-by-destination/{link}', function (Request $request, $link) {
-    $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $results = DB::table('packages')
-        ->select('packages.*', 'destinations.name as dname', 'destinations.id')
-        ->join('destinations', 'destinations.id', '=', 'packages.destination')
-        ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
-        ->orderBy('packages.created_at', 'desc')
-        ->paginate(6);
-    if ($request->ajax()) {
-        $html = '';
-        foreach ($results as $post) {
-            $html .= '
-            <div class="col-lg-4 col-md-6">
-                <div class="package-wrap">
-                <figure class="feature-image">
-                    <a href="/packages/details/' . $post->slug . '">
-                        <img src="/images/packages/' . $post->imageURL . '" alt="' . $post->title . '" class="package-image">
-                    </a>
-                </figure>
-                <div class="package-price">
-                    <h6>
-                        <span>&#8377; ' . number_format($post->price) . '</span> / per person
-                    </h6>
-                </div>
-                <div class="package-content-wrap">
-                    <div class="package-meta text-center">
-                        <ul>
-                            <li>
-                            <i class="far fa-clock"></i>
-                            ' . $post->days . ' D/' . $post->nights . ' N
-                            </li>
-                            <li>
-                            <i class="fas fa-user-friends"></i>
-                            ' . $post->mingroup . '
-                            </li>
-                            <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="wraptext">' . $post->title . '</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="package-content">
-                        <h3>
-                            <a href="/packages/details/' . $post->slug . '">' . $post->title . '</a>
-                        </h3>
-                        <div class="review-area">
-                            <span class="review-text">(25 reviews)</span>
-                            <div class="rating-start" title="Rated 5 out of 5">
-                            <span style="width: 60%"></span>
-                            </div>
-                        </div>
-                        <p>' . substr($post->descriptions, 0, 200) . '</p>
-                        <div class="btn-wrap">
-                            <a href="/packages/details/' . $post->slug . '" class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                            <a href="/packages/details/' . $post->id . '" class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-            ';
-        }
+// Route::get('/packages-by-destination/{link}', function (Request $request, $link) {
+//     $data['company_details'] = DB::table('company_details')->select('*')->get();
+//     $results = DB::table('packages')
+//         ->select('packages.*', 'destinations.name as dname', 'destinations.id')
+//         ->join('destinations', 'destinations.id', '=', 'packages.destination')
+//         ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
+//         ->orderBy('packages.created_at', 'desc')
+//         ->paginate(6);
+//     if ($request->ajax()) {
+//         $html = '';
+        
 
-        return $html;
-    }
-    $data['packages'] = $results;
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-    return view('layouts.pages.destinationpackages')->with($data);
-})->name('packages-by-destination');
+//         return $html;
+//     }
+//     $data['packages'] = $results;
+//     $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
+//     return view('layouts.pages.destinationpackages')->with($data);
+// })->name('packages-by-destination');
 
 
 Route::get('/package-offers', function (Request $request) {
