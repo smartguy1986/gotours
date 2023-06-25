@@ -53,39 +53,41 @@ class PackagesController extends Controller
         return view('layouts.pages.packages')->with($data);
     }
 
-    public function packagebytheme(Request $request, CompanyController $companyController, BlogController $blogController, $link)
+    public function packagebytheme($link, Request $request, CompanyController $companyController, BlogController $blogController)
     {
+        // dd($request);
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
 
-        $results = DB::table('packages')
+        $results2 = DB::table('packages')
             ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name')
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->join('package_category', 'package_category.id', '=', 'packages.category')
             ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
+        
         if ($request->ajax()) {
-            $view = view('layouts.pages.packagebytheme', compact('results'))->render();
+            $view = view('layouts.pages.packagebytheme', compact('results2'))->render();
             $data['package'] = $view;
             return response()->json(['packagetheme' => $view]);
         }
         return view('layouts.pages.themepackages')->with($data);
     }
 
-    public function packagebydestination(Request $request, CompanyController $companyController, BlogController $blogController, $link)
+    public function packagedestination(Request $request, CompanyController $companyController, BlogController $blogController, $dslug)
     {
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
 
-        $results = DB::table('packages')
+        $resultsd = DB::table('packages')
             ->select('packages.*', 'destinations.name as dname', 'destinations.id')
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
-            ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
+            ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
         if ($request->ajax()) {
-            $view = view('layouts.pages.packagebydestination', compact('results'))->render();
+            $view = view('layouts.pages.packagebydestination', compact('resultsd'))->render();
             $data['packages'] = $view;
             return response()->json(['packagedesti' => $view]);
         }

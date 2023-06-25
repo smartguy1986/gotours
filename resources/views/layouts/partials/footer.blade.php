@@ -249,10 +249,12 @@
 </script>
 <script>
     if ((window.location.pathname).indexOf('packages-by-theme') > -1) {
-        // /alert(window.location.pathname);
+        // alert(window.location.pathname);
         var paginate2 = 1;
         loadMoreData2(paginate2);
         var urlpath2 = window.location.pathname;
+        console.log(urlpath2);
+        
         $('#load-more2').click(function() {
             var page2 = $(this).data('paginate2');
             loadMoreData2(page2);
@@ -260,8 +262,10 @@
         });
         // run function when user click load more button
         function loadMoreData2(paginate2) {
+            var lastpart = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+            console.log(lastpart);
             $.ajax({
-                    url: urlpath2 + '?page=' + paginate2,
+                    url: '/packages-by-theme/' + lastpart + '?page=' + paginate2,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
@@ -296,10 +300,10 @@
 
 <script>
     if ((window.location.pathname).indexOf('packages-by-destination') > -1) {
-        
+
         var paginate3 = 1;
         loadMoreData3(paginate3);
-        var urlpath3 = window.location.pathname;
+        // var urlpath3 = window.location.pathname;
         //alert(urlpath3);
         $('#load-more3').click(function() {
             var page3 = $(this).data('paginate3');
@@ -308,8 +312,10 @@
         });
         // run function when user click load more button
         function loadMoreData3(paginate3) {
+            var lastpart3 = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+            console.log(lastpart3);
             $.ajax({
-                    url: '?page=' + paginate3,
+                    url: '/packages-by-destination/' + lastpart3 + '?page=' + paginate3,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {
@@ -346,7 +352,7 @@
         // /alert(window.location.pathname);
         var paginate4 = 1;
         loadMoreData4(paginate4);
-        var urlpath4 = window.location.pathname;
+        // var urlpath4 = window.location.pathname;
         $('#load-more4').click(function() {
             var page4 = $(this).data('paginate4');
             loadMoreData4(page4);
@@ -355,7 +361,7 @@
         // run function when user click load more button
         function loadMoreData4(paginate4) {
             $.ajax({
-                    url: urlpath4 + '?page=' + paginate4,
+                    url: 'package-offers?page=' + paginate4,
                     type: 'get',
                     datatype: 'html',
                     beforeSend: function() {

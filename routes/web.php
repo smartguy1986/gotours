@@ -50,7 +50,7 @@ Route::get('/packages/details/{link}', function ($link, BlogController $blogCont
 
 Route::get('/packages-by-theme/{link}', [PackagesController::class, 'packagebytheme'])->name('packages-by-theme');
 
-Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packagebydestination'])->name('packages-by-destination');
+Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packagedestination'])->name('packages-by-destination');
 
 // Route::get('/packages-by-destination/{link}', function (Request $request, $link) {
 //     $data['company_details'] = DB::table('company_details')->select('*')->get();

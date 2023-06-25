@@ -1,10 +1,9 @@
-@foreach ($results as $post)
-    {
+@foreach ($resultsd as $post)
     <div class="col-lg-4 col-md-6">
         <div class="package-wrap">
             <figure class="feature-image">
                 <a href="/packages/details/{{ $post->slug }}">
-                    <img src="{{ assets('/images/packages/' . $post->imageURL) }}" alt="{{ $post->title }}"
+                    <img src={{ url('/images/packages/' . $post->imageURL) }} alt="{{ $post->title }}"
                         class="package-image">
                 </a>
             </figure>
@@ -51,5 +50,4 @@
             </div>
         </div>
     </div>
-    }
 @endforeach
