@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->enum('featured', ['0', '1']);
+        Schema::create('services', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->string('description');
+            $table->string('photo');
+            $table->timestamps();
         });
     }
 
@@ -25,8 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('services');
     }
 };

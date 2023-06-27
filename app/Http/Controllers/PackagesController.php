@@ -66,7 +66,7 @@ class PackagesController extends Controller
             ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
-        
+
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebytheme', compact('results2'))->render();
             $data['package'] = $view;
@@ -93,6 +93,28 @@ class PackagesController extends Controller
         }
         return view('layouts.pages.destinationpackages')->with($data);
     }
+
+    public function packagebyoffer(Request $request, CompanyController $companyController, BlogController $blogController)
+    {
+        // dd($request);
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
+        $results3 = DB::table('packages')
+            ->select('packages.*', 'destinations.name', 'destinations.slug as dname')
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->where([['packages.status', '=', '1'], ['packages.is_sale', '=', '1']])
+            ->orderBy('packages.created_at', 'desc')
+            ->paginate(6);
+
+        if ($request->ajax()) {
+            $view = view('layouts.pages.packagebyoffer', compact('results3'))->render();
+            $data['packages'] = $view;
+            return response()->json(['packageoffer' => $view]);
+        }
+        return view('layouts.pages.packageoffers')->with($data);
+    }
+
 
     /**
      * Show the form for creating a new resource.

@@ -52,77 +52,60 @@ Route::get('/packages-by-theme/{link}', [PackagesController::class, 'packagebyth
 
 Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packagedestination'])->name('packages-by-destination');
 
-// Route::get('/packages-by-destination/{link}', function (Request $request, $link) {
+Route::get('/package-offers', [PackagesController::class, 'packagebyoffer'])->name('package-offers');
+
+// Route::get('/package-offers', function (Request $request) {
 //     $data['company_details'] = DB::table('company_details')->select('*')->get();
 //     $results = DB::table('packages')
-//         ->select('packages.*', 'destinations.name as dname', 'destinations.id')
+//         ->select('packages.*', 'destinations.name', 'destinations.slug as dname')
 //         ->join('destinations', 'destinations.id', '=', 'packages.destination')
-//         ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $link]])
+//         ->where([['packages.status', '=', '1'], ['packages.is_sale', '=', '1']])
 //         ->orderBy('packages.created_at', 'desc')
 //         ->paginate(6);
 //     if ($request->ajax()) {
 //         $html = '';
-        
+//         foreach ($results as $pckg) {
+//             $html .= '
+//             <div class="col-md-6 col-lg-4">
+//                <div class="special-item">
+//                   <figure class="special-img">
+//                      <img src="/images/packages/' . $pckg->imageURL . '" alt="' . $pckg->title . '">
+//                   </figure>
+//                   <div class="badge-dis">
+//                      <span>
+//                         <strong>' . number_format(((($pckg->price - $pckg->sale_price) / $pckg->price) * 100), 0) . ' %</strong>
+//                         off
+//                      </span>
+//                   </div>
+//                   <div class="special-content">
+//                      <div class="meta-cat">
+//                         <a href="/packages-by-destination/' . $pckg->dname . '">' . $pckg->name . '</a>
+//                      </div>
+//                      <h3>
+//                         <a href="/packages/details/' . $pckg->slug . '">' . $pckg->title . '</a>
+//                      </h3>
+//                      <div class="package-price">
+//                         Price:
+//                         <del>&#8377; ' . number_format($pckg->price) . '</del>
+//                         <ins>&#8377; ' . number_format($pckg->sale_price) . '</ins>
+//                      </div>
+//                   </div>
+//                </div>
+//             </div>
+//             ';
+//         }
 
 //         return $html;
 //     }
 //     $data['packages'] = $results;
 //     $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-//     return view('layouts.pages.destinationpackages')->with($data);
-// })->name('packages-by-destination');
-
-
-Route::get('/package-offers', function (Request $request) {
-    $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $results = DB::table('packages')
-        ->select('packages.*', 'destinations.name', 'destinations.slug as dname')
-        ->join('destinations', 'destinations.id', '=', 'packages.destination')
-        ->where([['packages.status', '=', '1'], ['packages.is_sale', '=', '1']])
-        ->orderBy('packages.created_at', 'desc')
-        ->paginate(6);
-    if ($request->ajax()) {
-        $html = '';
-        foreach ($results as $pckg) {
-            $html .= '
-            <div class="col-md-6 col-lg-4">
-               <div class="special-item">
-                  <figure class="special-img">
-                     <img src="/images/packages/' . $pckg->imageURL . '" alt="' . $pckg->title . '">
-                  </figure>
-                  <div class="badge-dis">
-                     <span>
-                        <strong>' . number_format(((($pckg->price - $pckg->sale_price) / $pckg->price) * 100), 0) . ' %</strong>
-                        off
-                     </span>
-                  </div>
-                  <div class="special-content">
-                     <div class="meta-cat">
-                        <a href="/packages-by-destination/' . $pckg->dname . '">' . $pckg->name . '</a>
-                     </div>
-                     <h3>
-                        <a href="/packages/details/' . $pckg->slug . '">' . $pckg->title . '</a>
-                     </h3>
-                     <div class="package-price">
-                        Price:
-                        <del>&#8377; ' . number_format($pckg->price) . '</del>
-                        <ins>&#8377; ' . number_format($pckg->sale_price) . '</ins>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            ';
-        }
-
-        return $html;
-    }
-    $data['packages'] = $results;
-    $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-    return view('layouts.pages.packageoffers')->with($data);
-})->name('package-offers');
+//     return view('layouts.pages.packageoffers')->with($data);
+// })->name('package-offers');
 
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 Route::get('about-us', [PageController::class, 'aboutus'])->name('about-us');
+Route::get('services', [PageController::class, 'aboutus'])->name('about-us');
 
 
 

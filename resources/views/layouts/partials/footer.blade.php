@@ -370,19 +370,19 @@
                     }
                 })
                 .done(function(data4) {
-                    if (data4.length == 0) {
+                    if (data4.packageoffer.length == 0) {
                         $('.invisible').removeClass('invisible');
                         $('#load-more4').hide();
                         $('#preload').hide();
                         return;
-                    } else if (data4.length < 6) {
+                    } else if (data4.packageoffer.length < 6) {
                         $('.invisible').addClass('invisible');
                         $('#load-more4').hide();
                         $('#preload').hide();
                         return;
                     } else {
                         $('#load-more4').text('Load more...');
-                        $('#post4').append(data4);
+                        $('#post4').append(data4.packageoffer);
                         $('#preload').hide();
                     }
                 })

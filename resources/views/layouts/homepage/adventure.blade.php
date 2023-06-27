@@ -16,7 +16,7 @@
             <div class="col-lg-2 col-md-4 col-sm-6">
                <div class="activity-item">
                   <div class="activity-icon">
-                     <a href="#">
+                     <a href="{{URL::route('packages-by-theme',$cat->slug)}}">
                         <img src="{{URL::asset('/images/categories/'.$cat->cat_image)}}" alt="">
                      </a>
                   </div>
