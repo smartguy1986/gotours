@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 28, 2022 at 03:26 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.2
+-- Generation Time: Jun 27, 2023 at 11:07 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,7 @@ CREATE TABLE `blogs` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `views` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `blogs`
@@ -76,7 +76,7 @@ CREATE TABLE `blog_comment` (
   `flagged` int(11) NOT NULL,
   `published_on` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -86,10 +86,10 @@ CREATE TABLE `blog_comment` (
 
 CREATE TABLE `company_banners` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tagline` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `imageURL` varchar(255) NOT NULL,
+  `status` enum('1','0') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -112,11 +112,11 @@ INSERT INTO `company_banners` (`id`, `tagline`, `description`, `imageURL`, `stat
 
 CREATE TABLE `company_details` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `company_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `company_bio` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `company_name` varchar(255) NOT NULL,
+  `company_address` varchar(255) NOT NULL,
+  `company_phone` varchar(255) NOT NULL,
+  `company_email` varchar(255) NOT NULL,
+  `company_bio` longtext NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -136,15 +136,15 @@ INSERT INTO `company_details` (`id`, `company_name`, `company_address`, `company
 
 CREATE TABLE `destinations` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `head_office_address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `head_office_phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `featured` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `head_office_address` varchar(255) NOT NULL,
+  `head_office_phone` varchar(255) NOT NULL,
+  `tagline` varchar(255) NOT NULL,
+  `imageURL` varchar(255) NOT NULL,
+  `status` enum('1','0') NOT NULL,
+  `description` longtext NOT NULL,
+  `featured` enum('0','1') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -177,11 +177,11 @@ INSERT INTO `destinations` (`id`, `name`, `slug`, `head_office_address`, `head_o
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -193,7 +193,7 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -221,7 +221,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2022_03_31_093937_add_banner_to_packages_table', 14),
 (18, '2022_04_01_064221_add_multiple_to_packages_table', 15),
 (19, '2022_04_01_091750_remove_multiple_to_packages_table', 16),
-(20, '2022_04_01_104243_remove_multiple_to_packages_table', 17);
+(20, '2022_04_01_104243_remove_multiple_to_packages_table', 17),
+(21, '2023_06_27_194904_create_services_table', 18),
+(22, '2023_06_27_203835_add_status_column_to_services_table', 19);
 
 -- --------------------------------------------------------
 
@@ -232,23 +234,23 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `packages` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `category` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `banner` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mingroup` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `tagline` varchar(255) NOT NULL,
+  `banner` varchar(255) NOT NULL,
+  `imageURL` varchar(255) NOT NULL,
+  `mingroup` varchar(255) NOT NULL,
   `destination` int(11) NOT NULL,
-  `descriptions` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `descriptions` longtext NOT NULL,
   `days` int(11) NOT NULL,
   `nights` int(11) NOT NULL,
-  `contact_person` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_sale` enum('0','1') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sale_price` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `contact_person` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `price` varchar(255) NOT NULL,
+  `is_sale` enum('0','1') NOT NULL,
+  `sale_price` varchar(255) DEFAULT NULL,
+  `status` enum('1','0') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -282,12 +284,12 @@ INSERT INTO `packages` (`id`, `category`, `title`, `slug`, `tagline`, `banner`, 
 
 CREATE TABLE `package_category` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `cat_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cat_image` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cat_tagline` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cat_description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('1','0') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cat_name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `cat_image` varchar(255) NOT NULL,
+  `cat_tagline` varchar(255) NOT NULL,
+  `cat_description` longtext NOT NULL,
+  `status` enum('1','0') NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -313,7 +315,7 @@ INSERT INTO `package_category` (`id`, `cat_name`, `slug`, `cat_image`, `cat_tagl
 CREATE TABLE `package_gallery` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `package_id` int(11) NOT NULL,
-  `imageURL` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `imageURL` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -362,8 +364,8 @@ CREATE TABLE `package_programme` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `package_id` int(11) NOT NULL,
   `day` int(11) NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -463,7 +465,7 @@ CREATE TABLE `package_review` (
   `status` enum('1','0') NOT NULL,
   `added_on` datetime NOT NULL DEFAULT current_timestamp(),
   `updated_on` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -472,8 +474,8 @@ CREATE TABLE `package_review` (
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -492,15 +494,41 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`id`, `title`, `description`, `photo`, `created_at`, `updated_at`, `status`) VALUES
+(1, 'TRAVEL INSURANCE', '<p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>', '1687898361.jpg', '2023-06-27 15:09:21', '2023-06-27 15:09:21', '0'),
+(2, 'HANDPICKED HOTELS', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis vestibulum molestie. Nulla quis risus sodales, maximus ipsum a, vestibulum mi. Nullam ullamcorper, odio quis tincidunt consectetur, ante diam imperdiet est, non ultricies nunc qua', '1687898974.webp', '2023-06-27 15:19:34', '2023-06-27 15:19:34', '0'),
+(3, 'ACCESSIBILITY', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien', '1687899316.jpg', '2023-06-27 15:25:16', '2023-06-27 15:25:16', '0'),
+(4, '24/7 SUPPORT', '<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam. Morbi porttitor sit am', '1687899355.jpg', '2023-06-27 15:25:55', '2023-06-27 15:25:55', '0');
 
 -- --------------------------------------------------------
 
@@ -514,7 +542,7 @@ CREATE TABLE `subscriber_list` (
   `status` enum('1','0') NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `subscriber_list`
@@ -532,18 +560,18 @@ INSERT INTO `subscriber_list` (`id`, `usermail`, `status`, `created_at`, `update
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(255) NOT NULL,
   `type` tinyint(4) NOT NULL DEFAULT 0,
-  `profileimage` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `profileimage` varchar(255) NOT NULL,
   `dob` datetime NOT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phonenum` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `bio` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('Y','N') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) NOT NULL,
+  `phonenum` varchar(255) NOT NULL,
+  `bio` longtext NOT NULL,
+  `status` enum('Y','N') NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -649,6 +677,12 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `subscriber_list`
 --
 ALTER TABLE `subscriber_list`
@@ -705,7 +739,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -742,6 +776,12 @@ ALTER TABLE `package_review`
 --
 ALTER TABLE `personal_access_tokens`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `services`
+--
+ALTER TABLE `services`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subscriber_list`

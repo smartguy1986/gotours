@@ -115,7 +115,7 @@
                                     <ol>
                                        <li>
                                           <figure class="comment-thumb">
-                                             <img src="assets/images/img20.jpg" alt="">
+                                             <img src="{{ asset('assets/images/img20.jpg') }}" alt="">
                                           </figure>
                                           <div class="comment-content">
                                              <div class="comment-header">
@@ -135,7 +135,7 @@
                                           <ol>
                                              <li>
                                                 <figure class="comment-thumb">
-                                                   <img src="assets/images/img21.jpg" alt="">
+                                                   <img src="{{ asset('assets/images/img21.jpg') }}" alt="">
                                                 </figure>
                                                 <div class="comment-content">
                                                    <div class="comment-header">
@@ -306,7 +306,7 @@
                         <p>Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid blandit, blandit torquent, odit placeat. </p>
                         <a href="#" class="button-primary">GET A QUOTE</a>
                      </div>
-                     <div class="travel-package-content text-center" style="background-image: url(assets/images/img11.jpg);">
+                     <div class="travel-package-content text-center" style="background-image: url({{ asset('assets/images/img11.jpg') }});">
                         <h5>MORE PACKAGES</h5>
                         <h3>OTHER TRAVEL PACKAGES</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus.</p>

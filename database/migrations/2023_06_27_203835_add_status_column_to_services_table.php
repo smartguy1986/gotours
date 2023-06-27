@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('destinations', function (Blueprint $table) {
-            $table->enum('featured', ['0', '1']);
+        Schema::table('services', function (Blueprint $table) {
+            $table->enum('status', [0, 1])->default(1);
         });
     }
 
@@ -25,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('destinations', function (Blueprint $table) {
+        Schema::table('services', function (Blueprint $table) {
             //
         });
     }
