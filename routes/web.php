@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServicesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
@@ -54,54 +55,6 @@ Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packa
 
 Route::get('/package-offers', [PackagesController::class, 'packagebyoffer'])->name('package-offers');
 
-// Route::get('/package-offers', function (Request $request) {
-//     $data['company_details'] = DB::table('company_details')->select('*')->get();
-//     $results = DB::table('packages')
-//         ->select('packages.*', 'destinations.name', 'destinations.slug as dname')
-//         ->join('destinations', 'destinations.id', '=', 'packages.destination')
-//         ->where([['packages.status', '=', '1'], ['packages.is_sale', '=', '1']])
-//         ->orderBy('packages.created_at', 'desc')
-//         ->paginate(6);
-//     if ($request->ajax()) {
-//         $html = '';
-//         foreach ($results as $pckg) {
-//             $html .= '
-//             <div class="col-md-6 col-lg-4">
-//                <div class="special-item">
-//                   <figure class="special-img">
-//                      <img src="/images/packages/' . $pckg->imageURL . '" alt="' . $pckg->title . '">
-//                   </figure>
-//                   <div class="badge-dis">
-//                      <span>
-//                         <strong>' . number_format(((($pckg->price - $pckg->sale_price) / $pckg->price) * 100), 0) . ' %</strong>
-//                         off
-//                      </span>
-//                   </div>
-//                   <div class="special-content">
-//                      <div class="meta-cat">
-//                         <a href="/packages-by-destination/' . $pckg->dname . '">' . $pckg->name . '</a>
-//                      </div>
-//                      <h3>
-//                         <a href="/packages/details/' . $pckg->slug . '">' . $pckg->title . '</a>
-//                      </h3>
-//                      <div class="package-price">
-//                         Price:
-//                         <del>&#8377; ' . number_format($pckg->price) . '</del>
-//                         <ins>&#8377; ' . number_format($pckg->sale_price) . '</ins>
-//                      </div>
-//                   </div>
-//                </div>
-//             </div>
-//             ';
-//         }
-
-//         return $html;
-//     }
-//     $data['packages'] = $results;
-//     $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
-//     return view('layouts.pages.packageoffers')->with($data);
-// })->name('package-offers');
-
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 Route::get('about-us', [PageController::class, 'aboutus'])->name('about-us');
@@ -153,6 +106,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/destinations/edit/{id}', [DestinationsController::class, 'edit'])->name('destinations.edit');
     Route::post('/admin/destinations/update', [DestinationsController::class, 'update'])->name('destinations.update');
     Route::get('/admin/destinations/disable/{id}', [DestinationsController::class, 'disable'])->name('destinations.disable');
+
+    Route::get('/admin/services', [ServicesController::class, 'index'])->name('services.list');
+    Route::get('/admin/services/add', [ServicesController::class, 'add'])->name('services.add');
+    Route::post('/admin/services/create', [ServicesController::class, 'store'])->name('services.create');
+    Route::get('/admin/services/edit/{id}', [ServicesController::class, 'edit'])->name('services.edit');
+    Route::post('/admin/services/update', [ServicesController::class, 'update'])->name('services.update');
+    Route::get('/admin/services/disable/{id}', [ServicesController::class, 'disable'])->name('services.disable');
 
     Route::get('/admin/packages', [PackagesController::class, 'index'])->name('packages.list');
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');

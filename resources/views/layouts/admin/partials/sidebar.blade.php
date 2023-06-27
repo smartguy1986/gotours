@@ -67,6 +67,17 @@
                 </ul>
             </li>
 
+            <li class="@if (\Request::is('*services')) active-menu  @endif"><a><i class="fas fa-globe"></i> Services</a>
+                <ul>
+                    <li class="@if (\Request::is('*services*')) active-menu  @endif">
+                        <a href="{{ URL::route('services.list') }}">Services List</a>
+                    </li>
+                    <li class="@if (\Request::is('*services*')) active-menu  @endif">
+                        <a href="{{ URL::route('services.add') }}">Add Services</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="@if (\Request::is('*blog')) active-menu  @endif"><a><i class="fas fa-book"></i> Blog Articles</a>
                 <ul>
                     <li class="@if (\Request::is('*blog*')) active-menu  @endif">
