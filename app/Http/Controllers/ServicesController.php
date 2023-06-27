@@ -16,6 +16,12 @@ class ServicesController extends Controller
         return view('layouts.admin.services.servicelist', $data);
     }
 
+    public function servicespage()
+    {
+        $data = Services::select('*')->orderBy('id', 'DESC')->get();
+        return $data;
+    }
+
     public function add()
     {
         return view('layouts.admin.services.addservices');

@@ -24,7 +24,7 @@
                 <a href="{{ URL::route('about-us') }}">About Us</a>
              </li>
              <li>
-                <a href="service.html">Service</a>
+                <a href="{{ URL::route('servicesfrontpage') }}">Service</a>
              </li>
              <li>
                 <a href="career.html">Career</a>

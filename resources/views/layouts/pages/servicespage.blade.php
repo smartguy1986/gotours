@@ -13,129 +13,92 @@
                 style="background-image: url('{{ asset('assets/images/default/default-tour-banner3.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
-                        <h1 class="inner-title">About Us</h1>
+                        <h1 class="inner-title">Services</h1>
                     </div>
                 </div>
             </div>
             <div class="inner-shape"></div>
         </section>
+        {{ $services }}
         <section class="about-section about-page-section">
-            <div class="about-service-wrap">
-                <div class="container">
-                    <div class="section-heading">
-                        <div class="row align-items-end">
-                            <div class="col-lg-6">
-                                <h5 class="dash-style">OUR TOUR GALLERY</h5>
-                                <h2>HELLO. OUR AGENCY HAS BEEN PRESENT BEST IN THE MARKET</h2>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="section-disc">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec
-                                        ullamcorper mattis, pulvinar dapibus leo.Placeat nostrud natus tempora justo.
-                                        Laboriosam, eget mus nostrud natus tempora.</p>
-                                    <p>Lorem ipsum dolor sit amet, consec tetur adipiscing eliting dolor sit amet. Placeat
-                                        nostrud natus tempora justo nostrud natus tempora.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-service-container">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="about-service">
-                                    <div class="about-service-icon">
-                                        <img src="assets/images/icon15.png" alt="">
-                                    </div>
-                                    <div class="about-service-content">
-                                        <h4>AFFORDABLE PRICE</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="about-service">
-                                    <div class="about-service-icon">
-                                        <img src="assets/images/icon16.png" alt="">
-                                    </div>
-                                    <div class="about-service-content">
-                                        <h4>BEST DESTINATION</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="about-service">
-                                    <div class="about-service-icon">
-                                        <img src="assets/images/icon17.png" alt="">
-                                    </div>
-                                    <div class="about-service-content">
-                                        <h4>PERSONAL SERVICE</h4>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="about-video-wrap" style="background-image: url('{{ asset('assets/images/default/about-us-video.jpg') }}');">
-                        <div class="video-button">
-                            <a id="video-container" data-video-id="35npVaFGHMY">
-                                <i class="fas fa-play"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- client section html start -->
-            <div class="client-section">
+            <div class="service-page-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-8 offset-lg-2">
-                            <div class="section-heading text-center">
-                                <h5 class="dash-style">OUR ASSOCAITES</h5>
-                                <h2>PARTNER'S AND CLIENTS</h2>
-                                <p>Mollit voluptatem perspiciatis convallis elementum corporis quo veritatis aliquid
-                                    blandit, blandit torquent, odit placeat. Adipiscing repudiandae eius cursus? Nostrum
-                                    magnis maxime curae placeat.</p>
+                        <div class="col-md-6">
+                            <div class="service-content-wrap">
+                                <div class="service-content">
+                                    <div class="service-header">
+                                        <span class="service-count">
+                                            01.
+                                        </span>
+                                        <h3>Travel Insurance</h3>
+                                    </div>
+                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
+                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
+                                </div>
+                                <figure class="service-img">
+                                    <img src="assets/images/img30.jpg" alt="">
+                                </figure>
                             </div>
                         </div>
-                    </div>
-                    <div class="client-wrap client-slider">
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo7.png" alt="">
-                            </figure>
+                        <div class="col-md-6">
+                            <div class="service-content-wrap">
+                                <div class="service-content">
+                                    <div class="service-header">
+                                        <span class="service-count">
+                                            02.
+                                        </span>
+                                        <h3>Handpicked Hotels</h3>
+                                    </div>
+                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
+                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
+                                </div>
+                                <figure class="service-img">
+                                    <img src="assets/images/img31.jpg" alt="">
+                                </figure>
+                            </div>
                         </div>
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo8.png" alt="">
-                            </figure>
+                        <div class="col-md-6">
+                            <div class="service-content-wrap">
+                                <div class="service-content">
+                                    <div class="service-header">
+                                        <span class="service-count">
+                                            03.
+                                        </span>
+                                        <h3>Accessibility</h3>
+                                    </div>
+                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
+                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
+                                </div>
+                                <figure class="service-img">
+                                    <img src="assets/images/img32.jpg" alt="">
+                                </figure>
+                            </div>
                         </div>
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo9.png" alt="">
-                            </figure>
-                        </div>
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo10.png" alt="">
-                            </figure>
-                        </div>
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo11.png" alt="">
-                            </figure>
-                        </div>
-                        <div class="client-item">
-                            <figure>
-                                <img src="assets/images/logo8.png" alt="">
-                            </figure>
+                        <div class="col-md-6">
+                            <div class="service-content-wrap">
+                                <div class="service-content">
+                                    <div class="service-header">
+                                        <span class="service-count">
+                                            04.
+                                        </span>
+                                        <h3>24/7 Support</h3>
+                                    </div>
+                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
+                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
+                                </div>
+                                <figure class="service-img">
+                                    <img src="assets/images/img33.jpg" alt="">
+                                </figure>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- client html end -->
             <!-- callback section html start -->
-            <div class="fullwidth-callback" style="background-image: url({{ asset('assets/images/default/default-tour-banner2.jpg')}});">
+            <div class="fullwidth-callback"
+                style="background-image: url({{ asset('assets/images/default/default-tour-banner2.jpg') }});">
                 <div class="container">
                     <div class="section-heading section-heading-white text-center">
                         <div class="row">

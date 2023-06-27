@@ -48,7 +48,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        
+
     }
 
     /**
@@ -89,7 +89,7 @@ class CompanyController extends Controller
             'company_address' => 'required',
             'company_bio' => 'required',
         ]);
-        
+
         $company = CompanyDetails::find($id);
         $company->company_name = $request->company_name;
         $company->company_email = $request->company_email;
@@ -98,8 +98,7 @@ class CompanyController extends Controller
         $company->company_bio = $request->company_bio;
         $company->save();
 
-        return redirect()->route('admin.dashboard')
-        ->with('success','Company Has Been updated successfully');
+        return redirect()->route('admin.dashboard')->with('success', 'Company Has Been updated successfully');
     }
 
     /**

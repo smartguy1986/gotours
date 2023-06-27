@@ -58,7 +58,13 @@ Route::get('/package-offers', [PackagesController::class, 'packagebyoffer'])->na
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 Route::get('about-us', [PageController::class, 'aboutus'])->name('about-us');
-Route::get('services', [PageController::class, 'aboutus'])->name('about-us');
+Route::get('services', function (ServicesController $servicesController, CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController) {
+    $data['company_details'] = $companyController->commonComponent();
+    $data['destinations'] = $destinationsController->index();
+    $data['blogs'] = $blogController->last3blogs();
+    $data['services'] = $servicesController->servicespage();
+    return view('layouts.pages.servicespage', $data);
+})->name('servicesfrontpage');
 
 
 
