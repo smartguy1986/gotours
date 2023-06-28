@@ -24,14 +24,14 @@
             <div class="service-page-section">
                 <div class="container">
                     <div class="row">
-                        @php($count = 0)
+                        <?php $count = 1; ?>
                         @foreach ($services as $srv)
                             <div class="col-md-6">
                                 <div class="service-content-wrap">
                                     <div class="service-content">
                                         <div class="service-header">
                                             <span class="service-count">
-                                                @php($count++)
+                                                <?php echo $count++; ?>
                                             </span>
                                             <h3>{{ $srv->title }}</h3>
                                         </div>

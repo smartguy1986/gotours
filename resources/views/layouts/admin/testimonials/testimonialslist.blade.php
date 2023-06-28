@@ -63,6 +63,7 @@
                                     <tr>
                                         <th>Image</th>
                                         <th>Name</th>
+                                        <th>Occupation</th>
                                         <th>Description</th>
                                         <th>Rating</th>
                                         <th>Status</th>
@@ -76,8 +77,10 @@
                                             <td class=""><span class="cartImage"><img
                                                         src="{{ URL::asset('/images/testimonials/' . $dnn->photo) }}"
                                                         alt="image" width="200"></span></td>
-                                            <td data-column="name">{{ $dnn->title }}</td>
-                                            <td data-column="description">{{ $dnn->description }}</td>
+                                            <td data-column="name">{{ $dnn->name }}</td>
+                                            <td data-column="occupation">{{ $dnn->occupation }}</td>
+                                            <td data-column="description">{!! html_entity_decode($dnn->description) !!}</td>
+                                            <td data-column="rating">{{ $dnn->rating }} stars / 5</td>
                                             <td data-column="status" class="count-input">
                                                 @if ($dnn->status == 1)
                                                     Active
@@ -88,9 +91,9 @@
                                             <td data-column="added_on">{{ date('dS M, Y', strtotime($dnn->created_at)) }}
                                             </td>
                                             <td data-column="action">
-                                                <a href="{{ URL::route('services.edit', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('testimonials.edit', [$dnn->id]) }}"><i
                                                         class="fas fa-edit"></i></a> |
-                                                <a href="{{ URL::route('services.disable', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('testimonials.disable', [$dnn->id]) }}"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

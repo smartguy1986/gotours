@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Spatie\Backtrace\File;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\BlogController;
 
 class DestinationsController extends Controller
 {
@@ -53,6 +55,13 @@ class DestinationsController extends Controller
         }
     }
 
+    public function destinationlist(CompanyController $companyController, BlogController $blogController, DestinationsController $destinationsController)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['destinations'] = $destinationsController->index();
+        $data['blogs'] = $blogController->last3blogs();
+        return view('layouts.pages.destinations')->with($data);
+    }
 
     public function add()
     {

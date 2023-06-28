@@ -30,25 +30,14 @@ use Illuminate\Support\Facades\Redirect;
 */
 
 Route::get('/', [HomeController::class, 'index']);
+
 Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/destinations', function (CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController) {
-    $data['company_details'] = $companyController->commonComponent();
-    $data['destinations'] = $destinationsController->index();
-    $data['blogs'] = $blogController->last3blogs();
-    return view('layouts.pages.destinations')->with($data);
-})->name('destinations');
+Route::get('/destinations', [DestinationsController::class, 'destinationlist'])->name('destinations');
 
 Route::get('/packages', [PackagesController::class, 'getpackageswithajax'])->name('packages');
 
-Route::get('/packages/details/{link}', function ($link, BlogController $blogController) {
-    $data['company_details'] = DB::table('company_details')->select('*')->get();
-    $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['packages.slug', '=', $link]])->get();
-    $data['programme'] = DB::table('package_programme')->select('*')->where('package_id', $data['packages'][0]->id)->get();
-    $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', $data['packages'][0]->id)->get();
-    $data['blogs'] = $blogController->last3blogs();
-    return view('layouts.pages.packagedetails')->with($data);
-})->name('packages.details');
+Route::get('/packages/details/{link}', [PackagesController::class, 'getpackagedetails'])->name('packages.details');
 
 Route::get('/packages-by-theme/{link}', [PackagesController::class, 'packagebytheme'])->name('packages-by-theme');
 
@@ -59,13 +48,10 @@ Route::get('/package-offers', [PackagesController::class, 'packagebyoffer'])->na
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 Route::get('about-us', [PageController::class, 'aboutus'])->name('about-us');
-Route::get('services', function (ServicesController $servicesController, CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController) {
-    $data['company_details'] = $companyController->commonComponent();
-    $data['destinations'] = $destinationsController->index();
-    $data['blogs'] = $blogController->last3blogs();
-    $data['services'] = $servicesController->servicespage();
-    return view('layouts.pages.servicespage', $data);
-})->name('servicesfrontpage');
+
+Route::get('services', [ServicesController::class, 'servicesfront'])->name('servicesfrontpage');
+
+Route::get('testimonials', [TestimonialController::class, 'frontendlists'])->name('testimonialpage');
 
 
 

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Validator;
 use File;
+use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\DestinationsController;
+use App\Http\Controllers\BlogController;
 
 class ServicesController extends Controller
 {
@@ -21,6 +24,15 @@ class ServicesController extends Controller
     {
         $data = Services::select('*')->orderBy('id', 'DESC')->get();
         return $data;
+    }
+
+    public function servicesfront(CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController, ServicesController $servicesController)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['destinations'] = $destinationsController->index();
+        $data['blogs'] = $blogController->last3blogs();
+        $data['services'] = $servicesController->servicespage();
+        return view('layouts.pages.servicespage', $data);
     }
 
     public function add()

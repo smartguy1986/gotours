@@ -53,6 +53,15 @@ class PackagesController extends Controller
         return view('layouts.pages.packages')->with($data);
     }
 
+    public function getpackagedetails($link, BlogController $blogController)
+    {
+        $data['company_details'] = DB::table('company_details')->select('*')->get();
+        $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['packages.slug', '=', $link]])->get();
+        $data['programme'] = DB::table('package_programme')->select('*')->where('package_id', $data['packages'][0]->id)->get();
+        $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', $data['packages'][0]->id)->get();
+        $data['blogs'] = $blogController->last3blogs();
+        return view('layouts.pages.packagedetails')->with($data);
+    }
     public function packagebytheme($link, Request $request, CompanyController $companyController, BlogController $blogController)
     {
         // dd($request);

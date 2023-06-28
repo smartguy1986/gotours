@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="dashboard-box">
-                    <h4>Services</h4>
-                    <p>Here change the services of <strong>GoTours</strong></p>
+                    <h4>Testimonials</h4>
+                    <p>Here change the testimonials of <strong>GoTours</strong></p>
                     <p></p>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -32,22 +32,40 @@
                     @endif
 
                     <p></p>
-                    <h4>Add New Service</h4>
-                    <form class="form-horizontal" method="POST" action="{{ route('services.create') }}"
+                    <h4>Add New Testimonial</h4>
+                    <form class="form-horizontal" method="POST" action="{{ route('testimonials.create') }}"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Service Name</label>
-                                    <input name="title" class="form-control" type="text">
+                                    <label>Person Name</label>
+                                    <input name="name" class="form-control" type="text">
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label>Service Image</label>
-                                    <input type="file" name="srv_image" class="form-control">
+                                    <label>Occupation</label>
+                                    <input name="occupation" class="form-control" type="text">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Person Image</label>
+                                    <input type="file" name="tst_image" class="form-control">
                                     <label>*Image must be less than 2MB in size, and upload only jpg, png, gif only</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Rating</label>
+                                    <select name="rating" class="form-control">
+                                        <option value="1">*----</option>
+                                        <option value="2">**---</option>
+                                        <option value="3">***--</option>
+                                        <option value="4">****-</option>
+                                        <option value="5">*****</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-sm-12">
@@ -58,7 +76,7 @@
                             </div>
                         </div>
                         <br>
-                        <input type="submit" name="Submit" value="Create Service">
+                        <input type="submit" name="Submit" value="Add Testimonial">
                     </form>
 
                 </div>

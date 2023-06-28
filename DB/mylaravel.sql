@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2023 at 03:59 PM
+-- Generation Time: Jun 28, 2023 at 10:20 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -572,6 +572,15 @@ CREATE TABLE `testimonials` (
   `status` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `testimonials`
+--
+
+INSERT INTO `testimonials` (`id`, `name`, `occupation`, `description`, `rating`, `photo`, `created_at`, `updated_at`, `status`) VALUES
+(1, 'Robert Holland', 'Traveller', '<p>Vulputate vulputate mauris primis viverra quis netus leo voluptates. Placerat, feugiat nascetur placerat pulvinar parturient dis quaerat facilisis? Dignisim felis pretium amet. Donec eros faucibus.</p>', 3, '1687983121.jpg', '2023-06-28 14:42:01', '2023-06-28 14:42:01', '0'),
+(2, 'William Wright', 'Banker', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis vestibulum molestie. Nulla quis risus sodales, maximus ipsum a, vestibulum mi. Nullam ullamcorper, odio quis tincidunt consectetur, ante diam imperdiet est, non ultricies nunc quam eget nulla. Phasellus et tempus urna. Integer nunc nulla, tincidunt lobortis felis eget, vestibulum posuere leo.</p>', 4, '1687983416.jpg', '2023-06-28 14:46:56', '2023-06-28 14:46:56', '0'),
+(3, 'Alison Hobb', 'Traveller', '<p>Pellentesque mollis ullamcorper commodo. Aliquam sit amet quam sed est placerat euismod at in nibh. Nullam volutpat sollicitudin tortor, rutrum imperdiet est interdum vitae. Vivamus tincidunt cursus sem, ac vestibulum odio malesuada sit amet. Quisque aliquam tortor id accumsan vehicula.</p>', 5, '1687983508.jpg', '2023-06-28 14:48:28', '2023-06-28 14:48:28', '0');
+
 -- --------------------------------------------------------
 
 --
@@ -819,7 +828,7 @@ ALTER TABLE `subscriber_list`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`

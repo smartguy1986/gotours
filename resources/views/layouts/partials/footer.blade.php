@@ -159,8 +159,7 @@
     $('#footersubscribe').submit(function(event) {
         event.preventDefault();
     });
-</script>
-<script>
+
     function subsMyForm() {
         $('#submit').html('Please Wait...');
         $("#submit").attr("disabled", true);
@@ -177,8 +176,7 @@
         });
         return false;
     }
-</script>
-<script>
+
     $(document).ready(function() {
         window.setTimeout(function() {
             $(".alert").fadeTo(500, 0).slideUp(500, function() {
@@ -200,8 +198,7 @@
         if (scroll2 >= 100) sticky2.addClass('fixed2 blur-back');
         else sticky2.removeClass('fixed2 blur-back');
     });
-</script>
-<script>
+
     if (window.location.pathname == "/packages") {
         var ENDPOINT = "{{ route('packages') }}"
         var paginate = 1;
@@ -246,15 +243,14 @@
                 });
         }
     }
-</script>
-<script>
+
     if ((window.location.pathname).indexOf('packages-by-theme') > -1) {
         // alert(window.location.pathname);
         var paginate2 = 1;
         loadMoreData2(paginate2);
         var urlpath2 = window.location.pathname;
         console.log(urlpath2);
-        
+
         $('#load-more2').click(function() {
             var page2 = $(this).data('paginate2');
             loadMoreData2(page2);
@@ -296,9 +292,7 @@
                 });
         }
     }
-</script>
 
-<script>
     if ((window.location.pathname).indexOf('packages-by-destination') > -1) {
 
         var paginate3 = 1;
@@ -345,9 +339,7 @@
                 });
         }
     }
-</script>
 
-<script>
     if ((window.location.pathname).indexOf('package-offers') > -1) {
         // /alert(window.location.pathname);
         var paginate4 = 1;
@@ -391,6 +383,51 @@
                 });
         }
     }
+
+    if ((window.location.pathname).indexOf('testimonials') > -1) {
+        // /alert(window.location.pathname);
+        var paginate5 = 1;
+        loadMoreData5(paginate5);
+        // var urlpath4 = window.location.pathname;
+        $('#load-more-testimonials').click(function() {
+            var page5 = $(this).data('paginate5');
+            loadMoreData5(page5);
+            $(this).data('paginate5', page5 + 1);
+        });
+        // run function when user click load more button
+        function loadMoreData5(paginate5) {
+            $.ajax({
+                    url: 'testimonials?page=' + paginate5,
+                    type: 'get',
+                    datatype: 'html',
+                    beforeSend: function() {
+                        $('#preload').show();
+                        $('#load-more-testimonials').text('Loading...');
+                    }
+                })
+                .done(function(data5) {
+                    if (data5.testimonials.length == 0) {
+                        $('.invisible').removeClass('invisible');
+                        $('#load-more-testimonials').hide();
+                        $('#preload').hide();
+                        return;
+                    } else if (data5.testimonials.length < 6) {
+                        $('.invisible').addClass('invisible');
+                        $('#load-more-testimonials').hide();
+                        $('#preload').hide();
+                        return;
+                    } else {
+                        $('#load-more-testimonials').text('Load more...');
+                        $('#testimonials-post').append(data5.testimonials);
+                        $('#preload').hide();
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+        }
+    }
+
 </script>
 </body>
 

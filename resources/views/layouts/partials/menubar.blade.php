@@ -36,7 +36,7 @@
                 <a href="faq.html">FAQ</a>
              </li>
              <li>
-                <a href="testimonial-page.html">Testimonials</a>
+                <a href="{{ URL::route('testimonialpage') }}">Testimonials</a>
              </li>
           </ul>
        </li>
