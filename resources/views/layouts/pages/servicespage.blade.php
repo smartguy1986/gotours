@@ -19,79 +19,30 @@
             </div>
             <div class="inner-shape"></div>
         </section>
-        {{ $services }}
+        {{-- {{ $services }} --}}
         <section class="about-section about-page-section">
             <div class="service-page-section">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="service-content-wrap">
-                                <div class="service-content">
-                                    <div class="service-header">
-                                        <span class="service-count">
-                                            01.
-                                        </span>
-                                        <h3>Travel Insurance</h3>
+                        @php($count = 0)
+                        @foreach ($services as $srv)
+                            <div class="col-md-6">
+                                <div class="service-content-wrap">
+                                    <div class="service-content">
+                                        <div class="service-header">
+                                            <span class="service-count">
+                                                @php($count++)
+                                            </span>
+                                            <h3>{{ $srv->title }}</h3>
+                                        </div>
+                                        {!! html_entity_decode($srv->description) !!}
                                     </div>
-                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
-                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
+                                    <figure class="service-img">
+                                        <img src="{{ asset('images/services/' . $srv->photo) }}" alt="">
+                                    </figure>
                                 </div>
-                                <figure class="service-img">
-                                    <img src="assets/images/img30.jpg" alt="">
-                                </figure>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="service-content-wrap">
-                                <div class="service-content">
-                                    <div class="service-header">
-                                        <span class="service-count">
-                                            02.
-                                        </span>
-                                        <h3>Handpicked Hotels</h3>
-                                    </div>
-                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
-                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
-                                </div>
-                                <figure class="service-img">
-                                    <img src="assets/images/img31.jpg" alt="">
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="service-content-wrap">
-                                <div class="service-content">
-                                    <div class="service-header">
-                                        <span class="service-count">
-                                            03.
-                                        </span>
-                                        <h3>Accessibility</h3>
-                                    </div>
-                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
-                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
-                                </div>
-                                <figure class="service-img">
-                                    <img src="assets/images/img32.jpg" alt="">
-                                </figure>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="service-content-wrap">
-                                <div class="service-content">
-                                    <div class="service-header">
-                                        <span class="service-count">
-                                            04.
-                                        </span>
-                                        <h3>24/7 Support</h3>
-                                    </div>
-                                    <p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida
-                                        porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>
-                                </div>
-                                <figure class="service-img">
-                                    <img src="assets/images/img33.jpg" alt="">
-                                </figure>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

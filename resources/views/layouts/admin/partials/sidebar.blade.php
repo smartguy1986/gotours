@@ -78,6 +78,17 @@
                 </ul>
             </li>
 
+            <li class="@if (\Request::is('*testimonials')) active-menu  @endif"><a><i class="fas fa-globe"></i> Testimonials</a>
+                <ul>
+                    <li class="@if (\Request::is('*testimonials*')) active-menu  @endif">
+                        <a href="{{ URL::route('testimonials.list') }}">Testimonials List</a>
+                    </li>
+                    <li class="@if (\Request::is('*testimonials*')) active-menu  @endif">
+                        <a href="{{ URL::route('testimonials.add') }}">Add Testimonials</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="@if (\Request::is('*blog')) active-menu  @endif"><a><i class="fas fa-book"></i> Blog Articles</a>
                 <ul>
                     <li class="@if (\Request::is('*blog*')) active-menu  @endif">

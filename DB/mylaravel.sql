@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 27, 2023 at 11:07 PM
+-- Generation Time: Jun 28, 2023 at 03:59 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -223,7 +223,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (19, '2022_04_01_091750_remove_multiple_to_packages_table', 16),
 (20, '2022_04_01_104243_remove_multiple_to_packages_table', 17),
 (21, '2023_06_27_194904_create_services_table', 18),
-(22, '2023_06_27_203835_add_status_column_to_services_table', 19);
+(22, '2023_06_27_203835_add_status_column_to_services_table', 19),
+(23, '2023_06_28_133542_create_testimonials_table', 20),
+(24, '2023_06_28_135824_add_status_column_to_services_table', 21);
 
 -- --------------------------------------------------------
 
@@ -513,7 +515,7 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `services` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
   `photo` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -525,10 +527,10 @@ CREATE TABLE `services` (
 --
 
 INSERT INTO `services` (`id`, `title`, `description`, `photo`, `created_at`, `updated_at`, `status`) VALUES
-(1, 'TRAVEL INSURANCE', '<p>Porro ipsum amet eiusmod, quae voluptate, architecto posuere risus imperdiet gravida porttitor, penatibus nemo dictumst quasi habitant ut mollit.</p>', '1687898361.jpg', '2023-06-27 15:09:21', '2023-06-27 15:09:21', '0'),
-(2, 'HANDPICKED HOTELS', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis vestibulum molestie. Nulla quis risus sodales, maximus ipsum a, vestibulum mi. Nullam ullamcorper, odio quis tincidunt consectetur, ante diam imperdiet est, non ultricies nunc qua', '1687898974.webp', '2023-06-27 15:19:34', '2023-06-27 15:19:34', '0'),
-(3, 'ACCESSIBILITY', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien', '1687899316.jpg', '2023-06-27 15:25:16', '2023-06-27 15:25:16', '0'),
-(4, '24/7 SUPPORT', '<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam. Morbi porttitor sit am', '1687899355.jpg', '2023-06-27 15:25:55', '2023-06-27 15:25:55', '0');
+(1, 'TRAVEL INSURANCE', '<p>Sed diam nunc, pulvinar ac iaculis eget, laoreet eu lectus. In venenatis finibus placerat. In maximus nisl odio, vel luctus lectus faucibus eu. Sed pellentesque mi ut orci convallis fringilla. Maecenas vulputate, tellus eu efficitur maximus, dolor massa condimentum lorem, eu suscipit nulla sapien sed sem. Duis porta enim elit. Duis eleifend arcu nec lorem hendrerit vestibulum. Maecenas hendrerit ligula lorem, id scelerisque lacus sodales ut.</p>', '1687898361.jpg', '2023-06-27 15:09:21', '2023-06-28 07:48:44', '0'),
+(2, 'HANDPICKED HOTELS', '<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam. Morbi porttitor sit amet sem id consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed nec faucibus ligula. Curabitur condimentum mattis libero at mollis. Morbi convallis nisl arcu, vel laoreet leo semper nec. Phasellus lacinia metus urna, ut tempus dui varius quis. Donec eget condimentum lacus. Donec ut dui vel elit fermentum gravida. Fusce sed scelerisque lacus, et placerat dolor.</p>', '1687898974.webp', '2023-06-27 15:19:34', '2023-06-28 07:48:24', '0'),
+(3, 'ACCESSIBILITY', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Mauris lobortis vestibulum molestie. Nulla quis risus sodales, maximus ipsum a, vestibulum mi. Nullam ullamcorper, odio quis tincidunt consectetur, ante diam imperdiet est, non ultricies nunc quam eget nulla.</strong> Phasellus et tempus urna. Integer nunc nulla, tincidunt lobortis felis eget, vestibulum posuere leo. Pellentesque mollis ullamcorper commodo. Aliquam sit amet quam sed est placerat euismod at in nibh. Nullam volutpat sollicitudin tortor, rutrum imperdiet est interdum vitae. Vivamus tincidunt cursus sem, ac vestibulum odio malesuada sit amet. Quisque aliquam tortor id accumsan vehicula.</p>', '1687958098.jpg', '2023-06-27 15:25:16', '2023-06-28 07:44:58', '0'),
+(4, '24/7 SUPPORT', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien diam, luctus et metus sollicitudin, ullamcorper porttitor quam. Vestibulum id posuere orci, et eleifend leo. Donec commodo gravida lacus, sit amet fermentum tortor vulputate vel. Mauris tellus eros, semper sed luctus sed, eleifend ut magna. Cras lobortis ex diam, tempus viverra justo suscipit sit amet. Quisque finibus quis sapien id dapibus. Pellentesque efficitur posuere velit. Ut congue gravida lobortis. Nullam euismod rhoncus vestibulum.</p>', '1687899355.jpg', '2023-06-27 15:25:55', '2023-06-28 07:47:59', '0');
 
 -- --------------------------------------------------------
 
@@ -551,6 +553,24 @@ CREATE TABLE `subscriber_list` (
 INSERT INTO `subscriber_list` (`id`, `usermail`, `status`, `created_at`, `updated_at`) VALUES
 (1, 'abcd@example.com', '1', '2022-06-06 14:05:59', '2022-06-06 14:05:59'),
 (3, 'arijit.nandi@outlook.com', '1', '2022-06-06 14:09:55', '2022-06-06 14:09:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `testimonials`
+--
+
+CREATE TABLE `testimonials` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `occupation` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `rating` int(11) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -689,6 +709,12 @@ ALTER TABLE `subscriber_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -739,7 +765,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -788,6 +814,12 @@ ALTER TABLE `services`
 --
 ALTER TABLE `subscriber_list`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `testimonials`
+--
+ALTER TABLE `testimonials`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`

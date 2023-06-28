@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CompanyController;
@@ -119,6 +120,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/services/edit/{id}', [ServicesController::class, 'edit'])->name('services.edit');
     Route::post('/admin/services/update', [ServicesController::class, 'update'])->name('services.update');
     Route::get('/admin/services/disable/{id}', [ServicesController::class, 'disable'])->name('services.disable');
+
+    Route::get('/admin/testimonials', [TestimonialController::class, 'index'])->name('testimonials.list');
+    Route::get('/admin/testimonials/add', [TestimonialController::class, 'add'])->name('testimonials.add');
+    Route::post('/admin/testimonials/create', [TestimonialController::class, 'store'])->name('testimonials.create');
+    Route::get('/admin/testimonials/edit/{id}', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::post('/admin/testimonials/update', [TestimonialController::class, 'update'])->name('testimonials.update');
+    Route::get('/admin/testimonials/disable/{id}', [TestimonialController::class, 'disable'])->name('testimonials.disable');
 
     Route::get('/admin/packages', [PackagesController::class, 'index'])->name('packages.list');
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');
