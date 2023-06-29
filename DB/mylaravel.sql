@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2023 at 10:20 PM
+-- Generation Time: Jun 29, 2023 at 04:19 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -77,6 +77,27 @@ CREATE TABLE `blog_comment` (
   `published_on` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `careers`
+--
+
+CREATE TABLE `careers` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `post` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `salary` varchar(255) NOT NULL,
+  `vacancy` varchar(255) NOT NULL,
+  `photo` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `experience` varchar(255) NOT NULL,
+  `requirement` varchar(255) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -188,6 +209,36 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `faqs`
+--
+
+CREATE TABLE `faqs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category` varchar(255) NOT NULL,
+  `question` longtext NOT NULL,
+  `answer` longtext NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faqs`
+--
+
+INSERT INTO `faqs` (`id`, `category`, `question`, `answer`, `status`, `created_at`, `updated_at`) VALUES
+(1, '1', '<p><strong>HOW WE BECAME BEST AMONG OTHERS?</strong></p>', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</p>', '1', '2023-06-29 04:42:56', '2023-06-29 04:42:56'),
+(2, '1', '<p><strong>WHAT WE OFFER TO YOU?</strong></p>', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>', '1', '2023-06-29 04:43:28', '2023-06-29 04:43:28'),
+(3, '1', '<p><strong>HOW WE PROVIDE SERVICE FOR YOU?</strong></p>', '<p>Quisque sapien diam, luctus et metus sollicitudin, ullamcorper porttitor quam. Vestibulum id posuere orci, et eleifend leo. Donec commodo gravida lacus, sit amet fermentum tortor vulputate vel.</p>', '1', '2023-06-29 04:44:12', '2023-06-29 04:44:12'),
+(4, '1', '<p><strong>ARE WE AFFORDABLE TO HIRE?</strong></p>', '<p>Mauris tellus eros, semper sed luctus sed, eleifend ut magna. Cras lobortis ex diam, tempus viverra justo suscipit sit amet. Quisque finibus quis sapien id dapibus. Pellentesque efficitur posuere velit. Ut congue gravida lobortis. Nullam euismod rhoncus vestibulum.</p>', '1', '2023-06-29 04:44:50', '2023-06-29 04:44:50'),
+(5, '2', '<p><strong>HOW DO YOU MANAGE TO TRAVEL THE WORLD?</strong></p>', '<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam.</p>', '1', '2023-06-29 04:45:49', '2023-06-29 04:45:49'),
+(6, '2', '<p><strong>HOW DID YOU MANAGE YOUR CLIENTS?</strong></p>', '<p>Morbi porttitor sit amet sem id consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed nec faucibus ligula. Curabitur condimentum mattis libero at mollis.</p>', '1', '2023-06-29 04:47:37', '2023-06-29 04:47:37'),
+(7, '2', '<p><strong>HOW TO TRAVEL WITH YOUR TIPS?</strong></p>', '<p>Morbi convallis nisl arcu, vel laoreet leo semper nec. Phasellus lacinia metus urna, ut tempus dui varius quis. Donec eget condimentum lacus. Donec ut dui vel elit fermentum gravida. Fusce sed scelerisque lacus, et placerat dolor.</p>', '1', '2023-06-29 04:50:35', '2023-06-29 05:04:53'),
+(8, '2', '<p><strong>WHAT LOW BUDGET DESTINATIONS DO YOU RECOMMEND?</strong></p>', '<p>Sed diam nunc, pulvinar ac iaculis eget, laoreet eu lectus. In venenatis finibus placerat. In maximus nisl odio, vel luctus lectus faucibus eu. Sed pellentesque mi ut orci convallis fringilla.</p>', '1', '2023-06-29 04:51:13', '2023-06-29 04:51:13');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -225,7 +276,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2023_06_27_194904_create_services_table', 18),
 (22, '2023_06_27_203835_add_status_column_to_services_table', 19),
 (23, '2023_06_28_133542_create_testimonials_table', 20),
-(24, '2023_06_28_135824_add_status_column_to_services_table', 21);
+(24, '2023_06_28_135824_add_status_column_to_services_table', 21),
+(25, '2023_06_29_082336_create_faqs_table', 22),
+(26, '2023_06_29_114043_create_careers_table', 23);
 
 -- --------------------------------------------------------
 
@@ -579,7 +632,10 @@ CREATE TABLE `testimonials` (
 INSERT INTO `testimonials` (`id`, `name`, `occupation`, `description`, `rating`, `photo`, `created_at`, `updated_at`, `status`) VALUES
 (1, 'Robert Holland', 'Traveller', '<p>Vulputate vulputate mauris primis viverra quis netus leo voluptates. Placerat, feugiat nascetur placerat pulvinar parturient dis quaerat facilisis? Dignisim felis pretium amet. Donec eros faucibus.</p>', 3, '1687983121.jpg', '2023-06-28 14:42:01', '2023-06-28 14:42:01', '0'),
 (2, 'William Wright', 'Banker', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris lobortis vestibulum molestie. Nulla quis risus sodales, maximus ipsum a, vestibulum mi. Nullam ullamcorper, odio quis tincidunt consectetur, ante diam imperdiet est, non ultricies nunc quam eget nulla. Phasellus et tempus urna. Integer nunc nulla, tincidunt lobortis felis eget, vestibulum posuere leo.</p>', 4, '1687983416.jpg', '2023-06-28 14:46:56', '2023-06-28 14:46:56', '0'),
-(3, 'Alison Hobb', 'Traveller', '<p>Pellentesque mollis ullamcorper commodo. Aliquam sit amet quam sed est placerat euismod at in nibh. Nullam volutpat sollicitudin tortor, rutrum imperdiet est interdum vitae. Vivamus tincidunt cursus sem, ac vestibulum odio malesuada sit amet. Quisque aliquam tortor id accumsan vehicula.</p>', 5, '1687983508.jpg', '2023-06-28 14:48:28', '2023-06-28 14:48:28', '0');
+(3, 'Alison Hobb', 'Traveller', '<p>Pellentesque mollis ullamcorper commodo. Aliquam sit amet quam sed est placerat euismod at in nibh. Nullam volutpat sollicitudin tortor, rutrum imperdiet est interdum vitae. Vivamus tincidunt cursus sem, ac vestibulum odio malesuada sit amet. Quisque aliquam tortor id accumsan vehicula.</p>', 5, '1687983508.jpg', '2023-06-28 14:48:28', '2023-06-28 14:48:28', '0'),
+(4, 'Scott Harry', 'Photgrapher', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien diam, luctus et metus sollicitudin, ullamcorper porttitor quam. Vestibulum id posuere orci, et eleifend leo</p>', 2, '1688026642.jpg', '2023-06-28 15:16:41', '2023-06-29 02:47:22', '0'),
+(5, 'Mary James', 'Traveller', '<p>Quisque sapien diam, luctus et metus sollicitudin, ullamcorper porttitor quam. Vestibulum id posuere orci, et eleifend leo. Donec commodo gravida lacus, sit amet fermentum tortor vulputate vel. Mauris tellus eros, semper sed luctus sed, eleifend ut magna. Cras lobortis ex diam, tempus viverra justo suscipit sit amet. Quisque finibus quis sapien id dapibus. Pellentesque efficitur posuere velit. Ut congue gravida lobortis. Nullam euismod rhoncus vestibulum.</p>', 4, '1687985238.jpg', '2023-06-28 15:17:18', '2023-06-28 15:17:18', '0'),
+(6, 'Harry Smith', 'Traveller', '<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam.</p>', 3, '1687985267.jpg', '2023-06-28 15:17:47', '2023-06-28 15:17:47', '0');
 
 -- --------------------------------------------------------
 
@@ -631,6 +687,12 @@ ALTER TABLE `blog_comment`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `careers`
+--
+ALTER TABLE `careers`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `company_banners`
 --
 ALTER TABLE `company_banners`
@@ -654,6 +716,12 @@ ALTER TABLE `destinations`
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indexes for table `faqs`
+--
+ALTER TABLE `faqs`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -747,6 +815,12 @@ ALTER TABLE `blog_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `careers`
+--
+ALTER TABLE `careers`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `company_banners`
 --
 ALTER TABLE `company_banners`
@@ -771,10 +845,16 @@ ALTER TABLE `failed_jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `faqs`
+--
+ALTER TABLE `faqs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -828,7 +908,7 @@ ALTER TABLE `subscriber_list`
 -- AUTO_INCREMENT for table `testimonials`
 --
 ALTER TABLE `testimonials`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `users`

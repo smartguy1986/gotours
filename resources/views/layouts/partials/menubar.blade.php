@@ -27,13 +27,13 @@
                 <a href="{{ URL::route('servicesfrontpage') }}">Service</a>
              </li>
              <li>
-                <a href="career.html">Career</a>
+                <a href="{{ URL::route('careerhome') }}">Career</a>
              </li>
              <li>
                 <a href="gallery.html">Gallery</a>
              </li>
              <li>
-                <a href="faq.html">FAQ</a>
+                <a href="{{ URL::route('faqpage') }}">FAQ</a>
              </li>
              <li>
                 <a href="{{ URL::route('testimonialpage') }}">Testimonials</a>

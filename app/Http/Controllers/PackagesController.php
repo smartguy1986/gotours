@@ -75,7 +75,7 @@ class PackagesController extends Controller
             ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
-
+        $data['themename'] = $results2[0]->cat_name;
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebytheme', compact('results2'))->render();
             $data['package'] = $view;
@@ -95,6 +95,7 @@ class PackagesController extends Controller
             ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
+        $data['destname'] = $resultsd[0]->dname;
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebydestination', compact('resultsd'))->render();
             $data['packages'] = $view;

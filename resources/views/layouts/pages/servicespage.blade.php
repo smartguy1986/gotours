@@ -10,7 +10,7 @@
         <!-- Inner Banner html start-->
         <section class="inner-banner-wrap">
             <div class="inner-baner-container"
-                style="background-image: url('{{ asset('assets/images/default/default-tour-banner3.jpg') }}');">
+                style="background-image: url('{{ asset('assets/images/default/services-banner.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
                         <h1 class="inner-title">Services</h1>
@@ -31,7 +31,7 @@
                                     <div class="service-content">
                                         <div class="service-header">
                                             <span class="service-count">
-                                                <?php echo $count++; ?>
+                                                {{ str_pad($count++,2,'0',STR_PAD_LEFT) }}.
                                             </span>
                                             <h3>{{ $srv->title }}</h3>
                                         </div>

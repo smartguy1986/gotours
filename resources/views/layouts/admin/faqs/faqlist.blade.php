@@ -36,26 +36,20 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Occupation</th>
-                                        <th>Description</th>
-                                        <th>Rating</th>
+                                        <th>Category</th>
+                                        <th>Question</th>
+                                        <th>Answer</th>
                                         <th>Status</th>
                                         <th>Added On</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($testimonials as $dnn)
+                                    @foreach ($faqs as $dnn)
                                         <tr>
-                                            <td class=""><span class="cartImage"><img
-                                                        src="{{ URL::asset('/images/testimonials/' . $dnn->photo) }}"
-                                                        alt="image" width="200"></span></td>
-                                            <td data-column="name">{{ $dnn->name }}</td>
-                                            <td data-column="occupation">{{ $dnn->occupation }}</td>
-                                            <td data-column="description">{!! html_entity_decode($dnn->description) !!}</td>
-                                            <td data-column="rating">{{ $dnn->rating }} stars / 5</td>
+                                            <td data-column="category">{{ $dnn->category }}</td>
+                                            <td data-column="question">{!! html_entity_decode($dnn->question) !!}</td>
+                                            <td data-column="answer">{!! html_entity_decode($dnn->answer) !!}</td>
                                             <td data-column="status" class="count-input">
                                                 @if ($dnn->status == 1)
                                                     Active
@@ -66,9 +60,9 @@
                                             <td data-column="added_on">{{ date('dS M, Y', strtotime($dnn->created_at)) }}
                                             </td>
                                             <td data-column="action">
-                                                <a href="{{ URL::route('testimonials.edit', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('faqs.edit', [$dnn->id]) }}"><i
                                                         class="fas fa-edit"></i></a> |
-                                                <a href="{{ URL::route('testimonials.disable', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('faqs.disable', [$dnn->id]) }}"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

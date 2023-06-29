@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
 use Validator;
+use File;
 
 class TestimonialController extends Controller
 {
@@ -109,9 +110,10 @@ class TestimonialController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function edit(Testimonial $testimonial)
+    public function edit(Testimonial $testimonial, $id)
     {
-        //
+        $data['testimonials'] = Testimonial::select('*')->where('id', $id)->get();
+        return view('layouts.admin.testimonials.edittestimonials', $data);
     }
 
     /**
@@ -123,7 +125,38 @@ class TestimonialController extends Controller
      */
     public function update(Request $request, Testimonial $testimonial)
     {
-        //
+        $validatedData = Validator::make($request->all(), [
+            'name' => 'required',
+            'occupation' => 'required',
+            'rating' => 'required',
+            'description' => 'required'
+        ]);
+
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            return redirect('/admin/testimonials')->with('error', $errors);
+        }
+
+        if (isset($request->tst_image)) {
+            $fileName = time() . '.' . $request->tst_image->extension();
+            $request->tst_image->move(public_path('images/testimonials'), $fileName);
+            $file_path = public_path() . '/images/testimonials/' . $request->old_image;
+            if (File::exists($file_path)) {
+                unlink($file_path);
+            }
+        } else {
+            $fileName = $request->old_image;
+        }
+
+        $values = array('name' => $request->name, 'occupation' => $request->occupation, 'rating' => $request->rating, 'description' => $request->description, 'photo' => $fileName);
+
+        $affected_row = Testimonial::where('id', $request->tstid)->update($values);
+
+        if ($affected_row) {
+            return redirect('/admin/testimonials')->with('success', 'testimonials successfully updated');
+        } else {
+            return redirect('/admin/testimonials')->with('error', 'testimonials not updated');
+        }
     }
 
     /**

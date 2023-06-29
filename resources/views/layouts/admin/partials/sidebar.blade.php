@@ -89,6 +89,28 @@
                 </ul>
             </li>
 
+            <li class="@if (\Request::is('*faqs')) active-menu  @endif"><a><i class="fas fa-globe"></i> FAQs</a>
+                <ul>
+                    <li class="@if (\Request::is('*faqs*')) active-menu  @endif">
+                        <a href="{{ URL::route('faqs.list') }}">FAQ List</a>
+                    </li>
+                    <li class="@if (\Request::is('*faqs*')) active-menu  @endif">
+                        <a href="{{ URL::route('faqs.add') }}">Add FAQ</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="@if (\Request::is('*career')) active-menu slicknav_parent slicknav_open @endif"><a><i class="fas fa-globe"></i> Career/Jobs</a>
+                <ul>
+                    <li class="@if (\Request::is('*career*')) active-menu  @endif">
+                        <a href="{{ URL::route('career.list') }}">Jobs List</a>
+                    </li>
+                    <li class="@if (\Request::is('*career*')) active-menu  @endif">
+                        <a href="{{ URL::route('career.add') }}">Add Jobs</a>
+                    </li>
+                </ul>
+            </li>
+
             <li class="@if (\Request::is('*blog')) active-menu  @endif"><a><i class="fas fa-book"></i> Blog Articles</a>
                 <ul>
                     <li class="@if (\Request::is('*blog*')) active-menu  @endif">

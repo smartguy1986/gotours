@@ -14,7 +14,7 @@
 }
 </style>
 
-<div class="login-page" style="background-image: url({{asset('admin_assets/images/bg.jpg')}})">
+<div class="login-page" style="background-image: url({{asset('admin_assets/images/bg2.jpg')}})">
     <div class="login-from-wrap">
         <h2>Welcome to GoTours</h2>
         <h4>Login to your account</h4>

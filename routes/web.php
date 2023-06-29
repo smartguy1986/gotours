@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CareersController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
@@ -12,6 +13,7 @@ use App\Http\Controllers\PackagesController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\FaqsController;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -53,6 +55,9 @@ Route::get('services', [ServicesController::class, 'servicesfront'])->name('serv
 
 Route::get('testimonials', [TestimonialController::class, 'frontendlists'])->name('testimonialpage');
 
+Route::get('faqs', [FaqsController::class, 'faqlists'])->name('faqpage');
+
+Route::get('careers', [CareersController::class, 'index'])->name('careerhome');
 
 
 // ============ AJAX Controller ===================================
@@ -113,6 +118,20 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/testimonials/edit/{id}', [TestimonialController::class, 'edit'])->name('testimonials.edit');
     Route::post('/admin/testimonials/update', [TestimonialController::class, 'update'])->name('testimonials.update');
     Route::get('/admin/testimonials/disable/{id}', [TestimonialController::class, 'disable'])->name('testimonials.disable');
+
+    Route::get('/admin/faqs', [FaqsController::class, 'index'])->name('faqs.list');
+    Route::get('/admin/faqs/add', [FaqsController::class, 'create'])->name('faqs.add');
+    Route::post('/admin/faqs/create', [FaqsController::class, 'store'])->name('faqs.create');
+    Route::get('/admin/faqs/edit/{id}', [FaqsController::class, 'edit'])->name('faqs.edit');
+    Route::post('/admin/faqs/update', [FaqsController::class, 'update'])->name('faqs.update');
+    Route::get('/admin/faqs/disable/{id}', [FaqsController::class, 'disable'])->name('faqs.disable');
+
+    Route::get('/admin/career', [CareersController::class, 'joblist'])->name('career.list');
+    Route::get('/admin/career/add', [CareersController::class, 'create'])->name('career.add');
+    Route::post('/admin/career/create', [CareersController::class, 'store'])->name('career.create');
+    Route::get('/admin/career/edit/{id}', [CareersController::class, 'edit'])->name('career.edit');
+    Route::post('/admin/career/update', [CareersController::class, 'update'])->name('career.update');
+    Route::get('/admin/career/disable/{id}', [CareersController::class, 'disable'])->name('career.disable');
 
     Route::get('/admin/packages', [PackagesController::class, 'index'])->name('packages.list');
     Route::get('/admin/packages/add', [PackagesController::class, 'add'])->name('packages.add');

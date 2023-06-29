@@ -10,7 +10,7 @@
         <!-- Inner Banner html start-->
         <section class="inner-banner-wrap">
             <div class="inner-baner-container"
-                style="background-image: url('{{ asset('assets/images/default/default-tour-banner3.jpg') }}');">
+                style="background-image: url('{{ asset('assets/images/default/testimonial-banner.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
                         <h1 class="inner-title">Testimonials</h1>
@@ -25,6 +25,9 @@
                 <div class="container">
                     <div class="row" id="testimonials-post">
 
+                    </div>
+                    <div id="preload" class="preloader-content" style="display: none;">
+                        <img src="{{ asset('assets/images/loader1.gif') }}" alt="">
                     </div>
                     <div class="text-center m-3">
                         <button class="btn btn-primary" id="load-more-testimonials" data-paginate5="2">Load more...</button>

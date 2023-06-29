@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="dashboard-box">
-                    <h4>Testimonials</h4>
-                    <p>Here change the Testimonials of <strong>GoTours</strong></p>
+                    <h4>Jobs List</h4>
+                    {{-- <p>Here change the Testimonials of <strong>GoTours</strong></p> --}}
                     <p></p>
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
@@ -36,26 +36,32 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>Occupation</th>
+                                        <th>Photo</th>
+                                        <th>Post</th>
+                                        <th>Type</th>
+                                        <th>Salary</th>
+                                        <th># Vacancy</th>
                                         <th>Description</th>
-                                        <th>Rating</th>
+                                        <th>Experience</th>
+                                        <th>Requirement</th>
                                         <th>Status</th>
                                         <th>Added On</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($testimonials as $dnn)
+                                    @foreach ($careers as $dnn)
                                         <tr>
                                             <td class=""><span class="cartImage"><img
-                                                        src="{{ URL::asset('/images/testimonials/' . $dnn->photo) }}"
+                                                        src="{{ URL::asset('/images/careers/' . $dnn->photo) }}"
                                                         alt="image" width="200"></span></td>
-                                            <td data-column="name">{{ $dnn->name }}</td>
-                                            <td data-column="occupation">{{ $dnn->occupation }}</td>
+                                            <td data-column="post">{{ $dnn->post }}</td>
+                                            <td data-column="type">{{ $dnn->type }}</td>.
+                                            <td data-column="salarty">{{ $dnn->salarty }}</td>
+                                            <td data-column="vacancy">{{ $dnn->vacancy }}</td>
                                             <td data-column="description">{!! html_entity_decode($dnn->description) !!}</td>
-                                            <td data-column="rating">{{ $dnn->rating }} stars / 5</td>
+                                            <td data-column="experience">{!! html_entity_decode($dnn->experience) !!}</td>
+                                            <td data-column="requirement">{!! html_entity_decode($dnn->requirement) !!}</td>
                                             <td data-column="status" class="count-input">
                                                 @if ($dnn->status == 1)
                                                     Active
@@ -66,9 +72,9 @@
                                             <td data-column="added_on">{{ date('dS M, Y', strtotime($dnn->created_at)) }}
                                             </td>
                                             <td data-column="action">
-                                                <a href="{{ URL::route('testimonials.edit', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('career.edit', [$dnn->id]) }}"><i
                                                         class="fas fa-edit"></i></a> |
-                                                <a href="{{ URL::route('testimonials.disable', [$dnn->id]) }}"><i
+                                                <a href="{{ URL::route('career.disable', [$dnn->id]) }}"><i
                                                         class="fas fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

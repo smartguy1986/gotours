@@ -10,14 +10,10 @@
         <!-- Inner Banner html start-->
         <section class="inner-banner-wrap">
             <div class="inner-baner-container"
-                style="background-image: url('{{ asset('assets/images/default/default-tour-banner2.jpg') }}');">
+                style="background-image: url('{{ asset('assets/images/default/destination-banner.jpg') }}');">
                 <div class="container">
                     <div class="inner-banner-content">
-                        {{-- @if (count($packages) > 0)
-                            <h1 class="inner-title">{{ ucfirst(trans($packages[0]->dname)) }} Packages</h1>
-                        @else
-                            <h1 class="inner-title">Tour Packages</h1>
-                        @endif --}}
+                        <h1 class="inner-title">{{ ucfirst($destname) }}</h1>
                     </div>
                 </div>
             </div>
