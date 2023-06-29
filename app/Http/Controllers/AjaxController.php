@@ -28,4 +28,26 @@ class AjaxController extends Controller
 
         return response()->json(array('msg'=> $msg), 200);
     }
+
+    public function jointeam(Request $request)
+    {
+        $validatedData = $request->validate([
+            'usermail' => 'required|email|max:255'
+        ]);
+
+        $user = DB::table('subscriber_list')->where('usermail', '=', $request->usermail)->first();
+        if ($user === null) {
+            $check = DB::table('subscriber_list')->insertGetId(array(
+                'usermail'      => $request->usermail,
+                'status'          => '1'
+            ));
+            $msg = '<div class="alert alert-primary" role="alert">You have subscribed to GoTours NewsLetter successfully.</div>';
+        }
+        else
+        {
+            $msg = '<div class="alert alert-danger" role="alert">You have already subscribed.</div>';
+        }
+
+        return response()->json(array('msg'=> $msg), 200);
+    }
 }

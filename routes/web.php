@@ -58,10 +58,12 @@ Route::get('testimonials', [TestimonialController::class, 'frontendlists'])->nam
 Route::get('faqs', [FaqsController::class, 'faqlists'])->name('faqpage');
 
 Route::get('careers', [CareersController::class, 'index'])->name('careerhome');
+Route::get('careerdetails/{id}', [CareersController::class, 'show'])->name('careerdetails');
 
 
 // ============ AJAX Controller ===================================
 Route::post('subscribeuser', [AjaxController::class, 'subscription']);
+Route::post('jointeam', [AjaxController::class, 'jointeam']);
 // ================================================================
 
 Route::get('logout', function () {

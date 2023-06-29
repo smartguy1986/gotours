@@ -41,42 +41,26 @@
                                 <div class="col-lg-7">
                                     <div class="vacancy-content-wrap">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="vacancy-content">
-                                                    <h5>Full Time / Part Time</h5>
-                                                    <h3>Travel Agent</h3>
-                                                    <p>Magna voluptatum dolorem! Dolores! Sociosqu commodo nobis imperdiet
-                                                        lacinia? Magni! Felis, elementum nobis.</p>
-                                                    <a href="#" class="button-primary">APPLY NOW</a>
+                                            {{-- {{ $careers }} --}}
+                                            @foreach ($careers as $crc)
+                                                <div class="col-md-6">
+                                                    <div class="vacancy-content">
+                                                        <h5>
+                                                            @if ($crc->type == '1')
+                                                                Part Time
+                                                            @elseif($crc->type = '2')
+                                                                Full Time
+                                                            @else
+                                                                Contractual
+                                                            @endif
+                                                        </h5>
+                                                        <h3>{{ $crc->post }}</h3>
+                                                        <p>{!! html_entity_decode(Str::limit($crc->description, 150)) !!}</p>
+                                                        <a href="{{ URL::route('careerdetails', $crc->id) }}"
+                                                            class="button-primary">APPLY NOW</a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="vacancy-content">
-                                                    <h5>Full Time</h5>
-                                                    <h3>Front Desk</h3>
-                                                    <p>Magna voluptatum dolorem! Dolores! Sociosqu commodo nobis imperdiet
-                                                        lacinia? Magni! Felis, elementum nobis.</p>
-                                                    <a href="#" class="button-primary">APPLY NOW</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="vacancy-content">
-                                                    <h5>Part Time</h5>
-                                                    <h3>Travel Guide</h3>
-                                                    <p>Magna voluptatum dolorem! Dolores! Sociosqu commodo nobis imperdiet
-                                                        lacinia? Magni! Felis, elementum nobis.</p>
-                                                    <a href="#" class="button-primary">APPLY NOW</a>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="vacancy-content">
-                                                    <h5>Full Time / Part Time</h5>
-                                                    <h3>Tour Supervisor</h3>
-                                                    <p>Magna voluptatum dolorem! Dolores! Sociosqu commodo nobis imperdiet
-                                                        lacinia? Magni! Felis, elementum nobis.</p>
-                                                    <a href="#" class="button-primary">APPLY NOW</a>
-                                                </div>
-                                            </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>
@@ -85,21 +69,27 @@
                                         <h3>JOIN OUR TEAM</h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus
                                         </p>
-                                        <form>
+                                        <form class="form-horizontal" method="POST" id="jointheteamform"
+                                            action="javascript:void(0)" enctype="multipart/form-data">
+                                            @csrf
                                             <p>
-                                                <input type="text" name="name" placeholder="Your Name">
+                                                <input type="text" name="username" id="username"
+                                                    placeholder="Your Name">
                                             </p>
                                             <p>
-                                                <input type="text" name="name" placeholder="Your Name">
+                                                <input type="email" name="usermail" id="usermail"
+                                                    placeholder="Your Mail">
                                             </p>
                                             <p>
-                                                <input type="text" name="name" placeholder="Your Name">
+                                                <input type="text" name="userphone" id="userphone"
+                                                    placeholder="Your Phone">
                                             </p>
                                             <p>
-                                                <textarea rows="7" placeholder="Enter your messafe"></textarea>
+                                                <textarea rows="7" name="usermessage" id="usermessage" placeholder="Enter your message"></textarea>
                                             </p>
                                             <p>
-                                                <input type="submit" name="submit" value="SEND APPLICATION">
+                                                <button type="submit" id="joinformsubmit" class="btn btn-danger">SEND
+                                                    APPLICATION</button>
                                             </p>
                                         </form>
                                     </div>

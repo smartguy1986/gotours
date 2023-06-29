@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\BlogController;
+use Validator;
+use File;
 
 class CareersController extends Controller
 {
@@ -20,6 +22,7 @@ class CareersController extends Controller
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
         $data['destinations'] = $destinationsController->index();
+        $data['careers'] = Careers::select('*')->orderBy('created_at', 'DESC')->get();
         return view('layouts.pages.careerpage', $data);
     }
 
@@ -47,7 +50,38 @@ class CareersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = Validator::make($request->all(), [
+            'post' => 'required',
+            'type' => 'required',
+            'salary' => 'required',
+            'vacancy' => 'required',
+            'description' => 'required',
+            'experience' => 'required',
+            'requirement' => 'required',
+            'job_image' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
+        ]);
+
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            return redirect('/admin/career')->with('error', $errors);
+        }
+
+        $fileName = time() . '.' . $request->job_image->extension();
+        $request->job_image->move(public_path('images/careers'), $fileName);
+
+        $save = new Careers;
+        $save->post = $request->post;
+        $save->type = $request->type;
+        $save->salary = $request->salary;
+        $save->vacancy = $request->vacancy;
+        $save->photo = $fileName;
+        $save->description = $request->description;
+        $save->experience = $request->experience;
+        $save->requirement = $request->requirement;
+        $save->status = '1';
+        $save->save();
+
+        return redirect('/admin/career')->with('success', 'Job Has been posted');
     }
 
     /**
@@ -56,9 +90,13 @@ class CareersController extends Controller
      * @param  \App\Models\Careers  $careers
      * @return \Illuminate\Http\Response
      */
-    public function show(Careers $careers)
+    public function show(CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController, Careers $careers, $id)
     {
-        //
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+        $data['destinations'] = $destinationsController->index();
+        $data['careers'] = Careers::select('*')->where('id', $id)->get();
+        return view('layouts.pages.careerdetailpage', $data);
     }
 
     /**
@@ -67,9 +105,10 @@ class CareersController extends Controller
      * @param  \App\Models\Careers  $careers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Careers $careers)
+    public function edit(Careers $careers, $id)
     {
-        //
+        $data['careers'] = Careers::select('*')->where('id', $id)->get();
+        return view('layouts.admin.career.editjobs', $data);
     }
 
     /**
@@ -81,7 +120,44 @@ class CareersController extends Controller
      */
     public function update(Request $request, Careers $careers)
     {
-        //
+        $validatedData = Validator::make($request->all(), [
+            'post' => 'required',
+            'type' => 'required',
+            'salary' => 'required',
+            'vacancy' => 'required',
+            'description' => 'required',
+            'experience' => 'required',
+            'requirement' => 'required'
+        ]);
+
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            return redirect('/admin/career')->with('error', $errors);
+        }
+
+        if (isset($request->job_image)) {
+            $fileName = time() . '.' . $request->job_image->extension();
+            $request->job_image->move(public_path('images/careers'), $fileName);
+
+            if ($request->old_image) {
+                $file_path = public_path() . '/images/careers/' . $request->old_image;
+                if (File::exists($file_path)) {
+                    unlink($file_path);
+                }
+            }
+        } else {
+            $fileName = $request->old_image;
+        }
+
+        $values = array('post' => $request->post, 'type' => $request->type, 'salary' => $request->salary, 'vacancy' => $request->vacancy, 'description' => $request->description, 'experience' => $request->experience, 'requirement' => $request->requirement, 'photo' => $fileName);
+
+        $affected_row = Careers::where('id', $request->jobid)->update($values);
+
+        if ($affected_row) {
+            return redirect('/admin/career')->with('success', 'Job successfully updated');
+        } else {
+            return redirect('/admin/career')->with('error', 'Job not updated');
+        }
     }
 
     /**

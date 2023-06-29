@@ -56,12 +56,12 @@
                                                         src="{{ URL::asset('/images/careers/' . $dnn->photo) }}"
                                                         alt="image" width="200"></span></td>
                                             <td data-column="post">{{ $dnn->post }}</td>
-                                            <td data-column="type">{{ $dnn->type }}</td>.
-                                            <td data-column="salarty">{{ $dnn->salarty }}</td>
+                                            <td data-column="type">@if($dnn->type=='1') Part Time @elseif($dnn->type='2') Full Time @else Contractual @endif</td>.
+                                            <td data-column="salarty">{{ $dnn->salary }}</td>
                                             <td data-column="vacancy">{{ $dnn->vacancy }}</td>
-                                            <td data-column="description">{!! html_entity_decode($dnn->description) !!}</td>
-                                            <td data-column="experience">{!! html_entity_decode($dnn->experience) !!}</td>
-                                            <td data-column="requirement">{!! html_entity_decode($dnn->requirement) !!}</td>
+                                            <td data-column="description">{!! html_entity_decode(Str::limit($dnn->description, 100)) !!}</td>
+                                            <td data-column="experience">{!! html_entity_decode(Str::limit($dnn->experience, 100)) !!}</td>
+                                            <td data-column="requirement">{!! html_entity_decode(Str::limit($dnn->requirement, 100)) !!}</td>
                                             <td data-column="status" class="count-input">
                                                 @if ($dnn->status == 1)
                                                     Active

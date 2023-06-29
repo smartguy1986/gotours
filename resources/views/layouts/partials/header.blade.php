@@ -27,6 +27,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
       <title>GoTours | Travel & Tour organiser </title>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
    </head>
    <body class="home">
       <div id="siteLoader" class="site-loader">

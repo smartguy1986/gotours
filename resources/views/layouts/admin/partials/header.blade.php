@@ -20,6 +20,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
     <title>GoTours | Travel & Tour Organiser </title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
