@@ -69,6 +69,7 @@
                                         <h3>JOIN OUR TEAM</h3>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus
                                         </p>
+                                        <div id="jointeamerrors"></div>
                                         <form class="form-horizontal" method="POST" id="jointheteamform"
                                             action="javascript:void(0)" enctype="multipart/form-data">
                                             @csrf
@@ -88,8 +89,8 @@
                                                 <textarea rows="7" name="usermessage" id="usermessage" placeholder="Enter your message"></textarea>
                                             </p>
                                             <p>
-                                                <button type="submit" id="joinformsubmit" class="btn btn-danger">SEND
-                                                    APPLICATION</button>
+                                                <input type="submit" id="joinformsubmit" class="btn btn-danger"
+                                                    value="SEND APPLICATION">
                                             </p>
                                         </form>
                                     </div>

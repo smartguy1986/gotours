@@ -54,11 +54,12 @@
                         @if (\Auth::user()->type == 'admin')
                             <a href="{{ URL::route('admin.dashboard') }}">Admin Dashboard</a>
                         @elseif (\Auth::user()->type == 'manager')
-                            <a href="admin/dashboard.html">Manager Dashboard</a>
+                            <a href="{{ URL::route('manager.dashboard') }}">Manager Dashboard</a>
                         @else
                             <a href="admin/dashboard.html">User Dashboard</a>
                         @endif
                     </li>
+                    @if (\Auth::user()->type == 'user')
                     <li class="menu-item-has-children">
                         <a href="#">User</a>
                         <ul>
@@ -73,9 +74,11 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li>
                         <a href="admin/db-booking.html">Booking</a>
                     </li>
+                    @if (\Auth::user()->type == 'admin')
                     <li class="menu-item-has-children">
                         <a href="admin/db-package.html">Package</a>
                         <ul>
@@ -90,12 +93,15 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
                     <li>
                         <a href="admin/db-comment.html">Comments</a>
                     </li>
+                    @if (\Auth::user()->type == 'user')
                     <li>
                         <a href="admin/db-wishlist.html">Wishlist</a>
                     </li>
+                    @endif
                     <li>
                         <a href="{{ URL::route('logout') }}">Logout</a>
                     </li>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2023 at 04:35 PM
+-- Generation Time: Jun 30, 2023 at 11:12 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -20,6 +20,38 @@ SET time_zone = "+00:00";
 --
 -- Database: `mylaravel`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `agencies`
+--
+
+CREATE TABLE `agencies` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `agency_id` varchar(255) NOT NULL,
+  `manager_id` varchar(255) NOT NULL,
+  `agency_name` varchar(255) NOT NULL,
+  `agency_logo` varchar(255) NOT NULL,
+  `agency_banner` varchar(255) NOT NULL,
+  `agency_bio` longtext NOT NULL,
+  `agency_description` longtext NOT NULL,
+  `agency_email` varchar(255) NOT NULL,
+  `agency_phone` varchar(255) NOT NULL,
+  `agency_address` varchar(255) NOT NULL,
+  `agency_contact` varchar(255) NOT NULL,
+  `agency_gstnumber` varchar(255) NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `agencies`
+--
+
+INSERT INTO `agencies` (`id`, `agency_id`, `manager_id`, `agency_name`, `agency_logo`, `agency_banner`, `agency_bio`, `agency_description`, `agency_email`, `agency_phone`, `agency_address`, `agency_contact`, `agency_gstnumber`, `status`, `created_at`, `updated_at`) VALUES
+(2, '', '7', 'Thomas Cook', '1688158941.jpg', '1688158942.jpg', '<p>Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam. Morbi porttitor sit amet sem id consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.</p>', '<p>Sed sed dolor aliquet, volutpat leo et, malesuada quam. Integer et scelerisque ante. Phasellus lacinia rutrum nisi, et finibus nisl maximus ac. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque sapien diam, luctus et metus sollicitudin, ullamcorper porttitor quam. Vestibulum id posuere orci, et eleifend leo. Donec commodo gravida lacus, sit amet fermentum tortor vulputate vel. Mauris tellus eros, semper sed luctus sed, eleifend ut magna. Cras lobortis ex diam, tempus viverra justo suscipit sit amet. Quisque finibus quis sapien id dapibus. Pellentesque efficitur posuere velit. Ut congue gravida lobortis. Nullam euismod rhoncus vestibulum.</p>\r\n\r\n<p>Etiam tristique justo at tellus elementum convallis. Ut interdum et nunc pharetra placerat. Nullam vitae dolor quis nibh pulvinar cursus. Integer non finibus felis, id luctus lorem. Nulla sed tempus ligula, elementum semper diam. Morbi porttitor sit amet sem id consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Sed nec faucibus ligula. Curabitur condimentum mattis libero at mollis. Morbi convallis nisl arcu, vel laoreet leo semper nec. Phasellus lacinia metus urna, ut tempus dui varius quis. Donec eget condimentum lacus. Donec ut dui vel elit fermentum gravida. Fusce sed scelerisque lacus, et placerat dolor.</p>', 'manager@thomas.com', '9875478574', '1/2/3 Abcd Road, Mumbai - 48', 'Manoj Shahstri', 'MH7438GDHF098ND', '1', '2023-06-30 15:32:21', '2023-06-30 15:32:21');
 
 -- --------------------------------------------------------
 
@@ -77,6 +109,23 @@ CREATE TABLE `blog_comment` (
   `published_on` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_on` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `careerqueries`
+--
+
+CREATE TABLE `careerqueries` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `response` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -303,7 +352,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (24, '2023_06_28_135824_add_status_column_to_services_table', 21),
 (25, '2023_06_29_082336_create_faqs_table', 22),
 (26, '2023_06_29_114043_create_careers_table', 23),
-(27, '2023_06_30_124430_create_contacts_table', 24);
+(27, '2023_06_30_124430_create_contacts_table', 24),
+(28, '2023_06_30_182239_create_careerqueries_table', 25),
+(29, '2023_06_30_200702_create_agencies_table', 26);
 
 -- --------------------------------------------------------
 
@@ -693,11 +744,18 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `type`, `profileimage`, `dob`, `address`, `phonenum`, `bio`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin User', 'admin@gotours.com', NULL, '$2y$10$raAjpzEHSCpsF3.qMbnI4uDbdjXMybYNrPT2Tyfj4zyeLhmrQaJDy', 1, '', '0000-00-00 00:00:00', '', '', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi.', 'Y', NULL, '2022-03-25 00:22:16', '2022-03-25 00:22:16'),
 (2, 'Manager User', 'manager@gotours.com', NULL, '$2y$10$J7er1gZmkQHZ.8K8D2RUCeYV35ybt3pd5r57Nx53pKSRaN.mJz4gq', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2022-03-25 00:22:16', '2022-03-25 00:22:16'),
-(3, 'User', 'user@gotours.com', NULL, '$2y$10$hzPwiagTUmQgINXcBojYHume7SXcRaeMI/Bd7mn74/Zrqt3M19D7.', 0, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2022-03-25 00:22:16', '2022-03-25 00:22:16');
+(3, 'User', 'user@gotours.com', NULL, '$2y$10$hzPwiagTUmQgINXcBojYHume7SXcRaeMI/Bd7mn74/Zrqt3M19D7.', 0, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2022-03-25 00:22:16', '2022-03-25 00:22:16'),
+(7, 'Robert Holland', 'robert@gmail.com', NULL, '$2y$10$n/k1SdJVXfvk0CUlW3dPYucfv/xfn1ivPLJlgD8O7Z3xU5qr8JoBC', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-06-30 13:55:05', '2023-06-30 13:55:05');
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `agencies`
+--
+ALTER TABLE `agencies`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `blogs`
@@ -709,6 +767,12 @@ ALTER TABLE `blogs`
 -- Indexes for table `blog_comment`
 --
 ALTER TABLE `blog_comment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `careerqueries`
+--
+ALTER TABLE `careerqueries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -834,6 +898,12 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `agencies`
+--
+ALTER TABLE `agencies`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
@@ -844,6 +914,12 @@ ALTER TABLE `blogs`
 --
 ALTER TABLE `blog_comment`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `careerqueries`
+--
+ALTER TABLE `careerqueries`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `careers`
@@ -867,7 +943,7 @@ ALTER TABLE `company_details`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `destinations`
@@ -891,7 +967,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -951,7 +1027,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

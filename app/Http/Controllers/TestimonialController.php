@@ -22,11 +22,6 @@ class TestimonialController extends Controller
 
     public function frontendlists(Request $request, CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController)
     {
-        // $data['company_details'] = $companyController->commonComponent();
-        // $data['destinations'] = $destinationsController->index();
-        // $data['blogs'] = $blogController->last3blogs();
-        // $data['testimonials'] = Testimonial::select('*')->orderBy('id', 'DESC')->get();
-        // return view('layouts.pages.testimonialpage', $data);
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
         $data['destinations'] = $destinationsController->index();

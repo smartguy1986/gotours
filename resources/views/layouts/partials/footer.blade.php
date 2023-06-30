@@ -439,11 +439,40 @@
             url: "contactsubmit",
             type: "POST",
             data: $('#contactform').serialize(),
+            beforeSend: function() {
+                $('#contactbutton').val('Submitting your message...');
+            },
             success: function(response) {
-                $('#contactbutton').html('SUBMIT MESSAGE');
+                $('#contactbutton').val('SUBMIT MESSAGE');
                 $("#contactbutton").attr("disabled", false);
                 $('#contacterrors').html(response.msg);
-                document.getElementById("contactform").reset();
+                if (response.status) {
+                    document.getElementById("contactform").reset();
+                }
+            }
+        });
+    });
+
+    $('#joinformsubmit').on('click', function() {
+        $('#joinformsubmit').val('Please Wait...');
+        $("#joinformsubmit").attr("disabled", true);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "careerquery",
+            type: "POST",
+            data: $('#jointheteamform').serialize(),
+            beforeSend: function() {
+                $('#joinformsubmit').val('Sending application...');
+            },
+            success: function(response) {
+                $('#joinformsubmit').val('SEND APPLICATION');
+                $("#joinformsubmit").attr("disabled", false);
+                $('#jointeamerrors').html(response.msg);
+                if (response.status) {
+                    document.getElementById("jointheteamform").reset();
+                }
             }
         });
     });

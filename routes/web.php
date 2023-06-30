@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AgenciesController;
 use App\Http\Controllers\CareersController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +70,7 @@ Route::get('contact', [ContactsController::class, 'index'])->name('contactpage')
 Route::post('subscribeuser', [AjaxController::class, 'subscription']);
 Route::post('jointeam', [AjaxController::class, 'jointeam']);
 Route::post('contactsubmit', [AjaxController::class, 'contactsubmit']);
+Route::post('careerquery', [AjaxController::class, 'careerquery']);
 // ================================================================
 
 Route::get('logout', function () {
@@ -167,6 +170,13 @@ Route::middleware(['auth', 'user-access:admin'])->group(function () {
     Route::get('/admin/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
     Route::post('/admin/blog/update', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/admin/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
+
+    Route::get('/admin/users', [FaqsController::class, 'index'])->name('user.list');
+    Route::get('/admin/user/add', [FaqsController::class, 'create'])->name('user.add');
+    Route::post('/admin/user/create', [FaqsController::class, 'store'])->name('user.create');
+    Route::get('/admin/user/edit/{id}', [FaqsController::class, 'edit'])->name('user.edit');
+    Route::post('/admin/user/update', [FaqsController::class, 'update'])->name('user.update');
+    Route::get('/admin/user/disable/{id}', [FaqsController::class, 'disable'])->name('user.disable');
 });
 
 /*------------------------------------------
@@ -177,4 +187,11 @@ All Admin Routes List
 
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    Route::get('/manager/dashboard', [ManagerController::class, 'index'])->name('manager.dashboard');
+
+    Route::get('/manager/agencies', [AgenciesController::class, 'index'])->name('agencies');
+    Route::post('/manager/agencies/save', [AgenciesController::class, 'store'])->name('agencies.save');
+    Route::get('/manager/agencies/edit/{id}', [AgenciesController::class, 'edit'])->name('agencies.edit');
+    Route::post('/manager/agencies/update', [AgenciesController::class, 'update'])->name('agencies.update');
+    Route::get('/manager/agencies/delete/{id}', [AgenciesController::class, 'delete'])->name('agencies.delete');
 });

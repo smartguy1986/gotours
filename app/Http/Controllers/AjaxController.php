@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Validator;
 use App\Models\Contacts;
+use App\Models\Careerquery;
 
 class AjaxController extends Controller
 {
@@ -60,16 +61,58 @@ class AjaxController extends Controller
             foreach ($errors->all() as $error)
                 $msg .= "<li>".$error."</li>";
             $msg .= '</ul></div>';
+            $status = false;
         } else {
             $save = new Contacts;
             $save->name = $request->contactname;
             $save->email = $request->contactmail;
             $save->message = $request->contactmessage;
-            $save->response = 0;
+            $save->response = '0';
             $save->save();
 
+            $status = true;
             $msg = '<div class="alert alert-primary" role="alert">Thank you for leaving your message with us and we will get you back very soon.</div>';
         }
-        return response()->json(array('msg' => $msg), 200);
+        return response()->json(array('msg' => $msg, 'status' => $status), 200);
+    }
+
+    public function careerquery(Request $request)
+    {
+        $msg = "";
+        $validatedData = Validator::make(
+            $request->all(),
+            [
+                'username' => 'required',
+                'usermail' => 'required|email|max:255',
+                'usermessage' => 'required'
+            ],
+            [
+                'username.required' => "Please enter your name.",
+                'usermail.required' => "Please enter your email",
+                'usermail.email' => "Please enter a valid email",
+                'usermessage.required' => "Please enter your message"
+            ]
+        );
+
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            $msg .= '<div class="alert alert-danger" role="alert"><ul>';
+            foreach ($errors->all() as $error)
+                $msg .= "<li>".$error."</li>";
+            $msg .= '</ul></div>';
+            $status = false;
+        } else {
+            $save = new Careerquery;
+            $save->name = $request->username;
+            $save->email = $request->usermail;
+            $save->phone = $request->userphone;
+            $save->message = $request->usermessage;
+            $save->response = '0';
+            $save->save();
+
+            $status = true;
+            $msg = '<div class="alert alert-primary" role="alert">Thank you for applying. If it\'s a good match we will get you back very soon.</div>';
+        }
+        return response()->json(array('msg' => $msg, 'status' => $status), 200);
     }
 }

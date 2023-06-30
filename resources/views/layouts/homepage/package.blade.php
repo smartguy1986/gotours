@@ -17,7 +17,7 @@
                <div class="col-lg-4 col-md-6">
                   <div class="package-wrap">
                      <figure class="feature-image">
-                        <a href="{{ URL::route('packages.details',$pckg->id) }}">
+                        <a href="{{ URL::route('packages.details',$pckg->slug) }}">
                            <img src="{{asset('images/packages/'.$pckg->imageURL)}}" alt="{{ $pckg->title }}" class="package-image">
                         </a>
                      </figure>

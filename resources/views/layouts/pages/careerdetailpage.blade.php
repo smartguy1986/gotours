@@ -162,7 +162,7 @@
                                         <p>Do you want to work with us? Please, send your CV to <a
                                                 href="#">domain123@gmail.com</a></p>
                                         <span class="or-style">OR</span>
-                                        <a href="#" class="button-primary">CONTACT US</a>
+                                        <a href="{{ URL::route('contactpage') }}" class="button-primary">CONTACT US</a>
                                     </div>
                                 </div>
                             </div>
