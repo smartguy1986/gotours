@@ -144,6 +144,7 @@
 <script src="{{ asset('assets/vendors/slick/slick.min.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.slicknav.js') }}"></script>
 <script src="{{ asset('assets/js/custom.js') }}"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 {{-- <script src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js"></script> --}}
 <script>
     // function getMessage() {
@@ -428,6 +429,24 @@
         }
     }
 
+    $('#contactbutton').on('click', function() {
+        $('#contactbutton').html('Please Wait...');
+        $("#contactbutton").attr("disabled", true);
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "contactsubmit",
+            type: "POST",
+            data: $('#contactform').serialize(),
+            success: function(response) {
+                $('#contactbutton').html('SUBMIT MESSAGE');
+                $("#contactbutton").attr("disabled", false);
+                $('#contacterrors').html(response.msg);
+                document.getElementById("contactform").reset();
+            }
+        });
+    });
 </script>
 </body>
 

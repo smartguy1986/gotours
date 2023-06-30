@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CareersController;
+use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
@@ -60,10 +61,13 @@ Route::get('faqs', [FaqsController::class, 'faqlists'])->name('faqpage');
 Route::get('careers', [CareersController::class, 'index'])->name('careerhome');
 Route::get('careerdetails/{id}', [CareersController::class, 'show'])->name('careerdetails');
 
+Route::get('contact', [ContactsController::class, 'index'])->name('contactpage');
+
 
 // ============ AJAX Controller ===================================
 Route::post('subscribeuser', [AjaxController::class, 'subscription']);
 Route::post('jointeam', [AjaxController::class, 'jointeam']);
+Route::post('contactsubmit', [AjaxController::class, 'contactsubmit']);
 // ================================================================
 
 Route::get('logout', function () {

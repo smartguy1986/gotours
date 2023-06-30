@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2023 at 04:19 PM
+-- Generation Time: Jun 30, 2023 at 04:35 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -87,17 +87,25 @@ CREATE TABLE `blog_comment` (
 CREATE TABLE `careers` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `post` varchar(255) NOT NULL,
-  `type` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL COMMENT '1.Part Time                                        2.Full Time                                        3.Contractual',
   `salary` varchar(255) NOT NULL,
   `vacancy` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `experience` varchar(255) NOT NULL,
-  `requirement` varchar(255) NOT NULL,
+  `description` longtext NOT NULL,
+  `experience` longtext NOT NULL,
+  `requirement` longtext NOT NULL,
   `status` enum('0','1') NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `careers`
+--
+
+INSERT INTO `careers` (`id`, `post`, `type`, `salary`, `vacancy`, `photo`, `description`, `experience`, `requirement`, `status`, `created_at`, `updated_at`) VALUES
+(2, 'Travel Guide', '2', '₹ 50,000/-', '10', '1688054980.jpg', '<p>Reprehenderit hic bibendum repellendus, repellat auctor! Integer temporibus, facilisis iaculis alias senectus, non quam molestiae incidunt cubilia, fuga? Quasi natoque dicta a fuga dapibus dolore molestie sociis erat, convallis quibusdam possimus semper nonummy mattis, quasi.</p>\r\n\r\n<p>Autem nec quaerat cubilia magnam eu mauris hic hac nisi eos nobis officiis corrupti consequuntur molestie urna volutpat! Quos diamlorem convallis vestibulum doloremque iste facilisi.</p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n	<li>Lobortis facere accusamus nemo, ipsum ad morbi.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n</ul>', '<p><strong>#OVERVIEW</strong></p>\r\n\r\n<p>Reprehenderit hic bibendum repellendus, repellat auctor! Integer temporibus, facilisis iaculis alias senectus, non quam molestiae incidunt cubilia, fuga? Quasi natoque dicta a fuga dapibus dolore molestie sociis erat, convallis quibusdam possimus semper nonummy mattis, quasi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>#EXPERIENCE</strong></p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n</ul>', '<p>Culpa cupidatat occaecat neque hic sollicitudin provident nascetur felis, sollicitudin nonummy class explicabo litora sed. Sapien, nobis consequatur consequatur eaque. Incidunt. Ex? Repellat voluptates dignissim! Aliquam velit natoque aspernatur maiores.</p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n</ul>', '1', '2023-06-29 09:42:46', '2023-06-29 10:39:40'),
+(3, 'Front Desk', '2', '₹ 30,000/-', '2', '1688055147.jpg', '<p>Culpa cupidatat occaecat neque hic sollicitudin provident nascetur felis, sollicitudin nonummy class explicabo litora sed. Sapien, nobis consequatur consequatur eaque. Incidunt. Ex? Repellat voluptates dignissim! Aliquam velit natoque aspernatur maiores.</p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n</ul>', '<p><strong>#OVERVIEW</strong></p>\r\n\r\n<p>Reprehenderit hic bibendum repellendus, repellat auctor! Integer temporibus, facilisis iaculis alias senectus, non quam molestiae incidunt cubilia, fuga? Quasi natoque dicta a fuga dapibus dolore molestie sociis erat, convallis quibusdam possimus semper nonummy mattis, quasi.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>#EXPERIENCE</strong></p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n</ul>', '<p>Reprehenderit hic bibendum repellendus, repellat auctor! Integer temporibus, facilisis iaculis alias senectus, non quam molestiae incidunt cubilia, fuga? Quasi natoque dicta a fuga dapibus dolore molestie sociis erat, convallis quibusdam possimus semper nonummy mattis, quasi.</p>\r\n\r\n<p>Autem nec quaerat cubilia magnam eu mauris hic hac nisi eos nobis officiis corrupti consequuntur molestie urna volutpat! Quos diamlorem convallis vestibulum doloremque iste facilisi.</p>\r\n\r\n<ul>\r\n	<li>Nunc minima aspernatur dignissimos, sit adipiscing? Cupidatat cursus.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n	<li>Mus quasi aute non, at, saepe? Commodi sodales aliquam voluptatum.</li>\r\n	<li>Adipisicing ullamcorper dapibus, consequatur itaque eros orci odio.</li>\r\n	<li>Lobortis facere accusamus nemo, ipsum ad morbi.</li>\r\n	<li>Netus donec justo mauris etiam velit.</li>\r\n	<li>Quis dolorum habitasse accusantium hic consequat.</li>\r\n</ul>', '1', '2023-06-29 10:42:27', '2023-06-29 10:42:27');
 
 -- --------------------------------------------------------
 
@@ -148,6 +156,22 @@ CREATE TABLE `company_details` (
 
 INSERT INTO `company_details` (`id`, `company_name`, `company_address`, `company_phone`, `company_email`, `company_bio`, `created_at`, `updated_at`) VALUES
 (1, 'GoTours Pvt. Ltd.', '1/23 A.B.C. Road, Kolkata - 700001', '+91 9856365892', 'contact@gotours.com', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia volupta.', NULL, '2022-03-28 09:04:34');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contacts`
+--
+
+CREATE TABLE `contacts` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `message` varchar(255) NOT NULL,
+  `response` enum('0','1') NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -278,7 +302,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (23, '2023_06_28_133542_create_testimonials_table', 20),
 (24, '2023_06_28_135824_add_status_column_to_services_table', 21),
 (25, '2023_06_29_082336_create_faqs_table', 22),
-(26, '2023_06_29_114043_create_careers_table', 23);
+(26, '2023_06_29_114043_create_careers_table', 23),
+(27, '2023_06_30_124430_create_contacts_table', 24);
 
 -- --------------------------------------------------------
 
@@ -705,6 +730,12 @@ ALTER TABLE `company_details`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contacts`
+--
+ALTER TABLE `contacts`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `destinations`
 --
 ALTER TABLE `destinations`
@@ -818,7 +849,7 @@ ALTER TABLE `blog_comment`
 -- AUTO_INCREMENT for table `careers`
 --
 ALTER TABLE `careers`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `company_banners`
@@ -831,6 +862,12 @@ ALTER TABLE `company_banners`
 --
 ALTER TABLE `company_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `contacts`
+--
+ALTER TABLE `contacts`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `destinations`
@@ -854,7 +891,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `packages`

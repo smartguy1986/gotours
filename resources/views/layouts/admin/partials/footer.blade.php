@@ -33,64 +33,6 @@
 
         $('.table').DataTable();
     });
-
-    $('#joinformsubmit').on('click', function() {
-        alert('abcd');
-        if ($("#jointheteamform").length > 0) {
-            $("#jointheteamform").validate({
-                rules: {
-                    username: {
-                        required: true,
-                        maxlength: 100
-                    },
-                    usermail: {
-                        required: true,
-                        maxlength: 100,
-                        email: true,
-                    },
-                    usermessage: {
-                        required: true,
-                        maxlength: 5000
-                    },
-                },
-                messages: {
-                    name: {
-                        required: "Please enter name",
-                        maxlength: "Your name maxlength should be 100 characters long."
-                    },
-                    email: {
-                        required: "Please enter valid email",
-                        email: "Please enter valid email",
-                        maxlength: "The email name should less than or equal to 100 characters",
-                    },
-                    message: {
-                        required: "Please enter message",
-                        maxlength: "Your message name maxlength should be 5000 characters long."
-                    },
-                },
-                submitHandler: function(form) {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $('#joinformsubmit').html('Please Wait...');
-                    $("#joinformsubmit").attr("disabled", true);
-                    $.ajax({
-                        url: "{{ url('jointeam') }}",
-                        type: "POST",
-                        data: $('#jointheteamform').serialize(),
-                        success: function(response) {
-                            $('#joinformsubmit').html('Submit');
-                            $("#joinformsubmit").attr("disabled", false);
-                            alert('Ajax form has been submitted successfully');
-                            document.getElementById("jointheteamform").reset();
-                        }
-                    });
-                }
-            })
-        }
-    });
 </script>
 
 </body>
