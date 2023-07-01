@@ -476,6 +476,50 @@
             }
         });
     });
+
+    if ((window.location.pathname).indexOf('tour-operator') > -1) {
+        // /alert(window.location.pathname);
+        var paginateo = 1;
+        loadMoreDatao(paginateo);
+        // var urlpath4 = window.location.pathname;
+        $('#load-more-operator').click(function() {
+            var pageo = $(this).data('paginateo');
+            loadMoreDatao(pageo);
+            $(this).data('paginateo', pageo + 1);
+        });
+        // run function when user click load more button
+        function loadMoreDatao(paginateo) {
+            $.ajax({
+                    url: 'tour-operator?page=' + paginateo,
+                    type: 'get',
+                    datatype: 'html',
+                    beforeSend: function() {
+                        $('#preload').show();
+                        $('#load-more-operator').text('Loading...');
+                    }
+                })
+                .done(function(datao) {
+                    if (datao.agencies.length == 0) {
+                        $('.invisible').removeClass('invisible');
+                        $('#load-more-operator').hide();
+                        $('#preload').hide();
+                        return;
+                    } else if (datao.agencies.length < 6) {
+                        $('.invisible').addClass('invisible');
+                        $('#load-more-operator').hide();
+                        $('#preload').hide();
+                        return;
+                    } else {
+                        $('#load-more-operator').text('Load more...');
+                        $('#operator-post').append(datao.agencies);
+                        $('#preload').hide();
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+        }
+    }
 </script>
 </body>
 

@@ -26,7 +26,7 @@
                     </li>
                 </ul>
             </li>
-
+{{-- 
             <li class="@if (\Request::is('*testimonials')) active-menu @endif"><a><i class="fas fa-globe"></i>
                     Testimonials</a>
                 <ul>
@@ -37,7 +37,7 @@
                         <a href="{{ URL::route('testimonials.add') }}">Add Testimonials</a>
                     </li>
                 </ul>
-            </li>
+            </li> --}}
 
             <li class="@if (\Request::is('*blog')) active-menu @endif"><a><i class="fas fa-book"></i> Blog
                     Articles</a>

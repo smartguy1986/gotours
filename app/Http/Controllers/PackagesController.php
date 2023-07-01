@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Spatie\Backtrace\File;
 use Illuminate\Support\Str;
 use Laravel\Ui\Presets\React;
+use Validator;
 
 class PackagesController extends Controller
 {
@@ -18,7 +19,7 @@ class PackagesController extends Controller
      */
     public function index()
     {
-        $data['packages'] = DB::table('packages')->select('*')->orderBy('id', 'DESC')->get();
+        $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name')->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->get();
         return view('layouts.admin.packages.lists', $data);
     }
 
@@ -53,14 +54,31 @@ class PackagesController extends Controller
         return view('layouts.pages.packages')->with($data);
     }
 
-    public function getpackagedetails($link, BlogController $blogController)
+    public function getpackagedetails($link, BlogController $blogController, CompanyController $companyController)
     {
-        $data['company_details'] = DB::table('company_details')->select('*')->get();
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
         $data['packages'] = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['packages.slug', '=', $link]])->get();
         $data['programme'] = DB::table('package_programme')->select('*')->where('package_id', $data['packages'][0]->id)->get();
         $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', $data['packages'][0]->id)->get();
-        $data['blogs'] = $blogController->last3blogs();
+
         return view('layouts.pages.packagedetails')->with($data);
+    }
+
+    public function tourop(Request $request, BlogController $blogController, CompanyController $companyController)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
+        $resultso = DB::table('agencies')->select('*')->where('status', '=', '1')->orderBy('agencies.created_at', 'desc')->paginate(6);
+
+        if ($request->ajax()) {
+            $view = view('layouts.pages.operators', compact('resultso'))->render();
+            $data['agencies'] = $view;
+            return response()->json(['agencies' => $view]);
+        }
+
+        return view('layouts.pages.touroperators')->with($data);
     }
     public function packagebytheme($link, Request $request, CompanyController $companyController, BlogController $blogController)
     {
@@ -126,15 +144,6 @@ class PackagesController extends Controller
     }
 
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
     public function category()
     {
         $data['categories'] = DB::table('package_category')->select('*')->get();
@@ -145,16 +154,6 @@ class PackagesController extends Controller
     {
         $data['categories'] = DB::table('package_category')->select('*')->get();
         return view('layouts.admin.packages.addcat', $data);
-    }
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     public function add(Request $request)
@@ -206,7 +205,8 @@ class PackagesController extends Controller
 
     public function save_package(Request $request)
     {
-        $validatedData = $request->validate([
+        $validatedData = Validator::make($request->all(), [
+            'agency_id' => 'required',
             'title' => 'required',
             'banner' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
             'imageURL' => 'required|mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -224,6 +224,11 @@ class PackagesController extends Controller
             'category' => 'required'
         ]);
 
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            return redirect('/admin/packages/add')->with('errors', $errors);
+        }
+
         $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
         $fileName1 = time() . $pass . '.' . $request->banner->extension();
         $request->banner->move(public_path('images/packages'), $fileName1);
@@ -233,6 +238,7 @@ class PackagesController extends Controller
         $request->imageURL->move(public_path('images/packages'), $fileName2);
 
         $save = new Packages;
+        $save->agency_id = $request->agency_id;
         $save->title = strtoupper($request->title);
         $save->slug = Str::slug($request->title, '-');
         $save->tagline = $request->tagline;
@@ -304,16 +310,6 @@ class PackagesController extends Controller
 
         return redirect('/admin/packages')->with('success', 'Programme successfully added');
     }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Packages  $packages
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Packages $packages)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -368,9 +364,10 @@ class PackagesController extends Controller
 
     public function edit(Packages $packages, $pid)
     {
-        $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
+        $data['packages'] = Packages::select('*')->where('id', '=', $pid)->get();
         $data['destinations'] = DB::table('destinations')->select('*')->get();
         $data['categories'] = DB::table('package_category')->select('*')->get();
+        $data['agencies'] = DB::table('agencies')->select('*')->orderBy('agency_name', 'ASC')->get();
         return view('layouts.admin.packages.editpackage', $data);
     }
 
@@ -384,7 +381,8 @@ class PackagesController extends Controller
     public function update(Request $request)
     {
         //dd($request);
-        $validatedData = $request->validate([
+        $validatedData = validator::make($request->all(), [
+            'agency_id' => 'required',
             'title' => 'required',
             'tagline' => 'required',
             'banner' => 'mimes:jpg,png,jpeg,gif,svg|max:2048',
@@ -402,6 +400,11 @@ class PackagesController extends Controller
             'status' => 'required',
             'category' => 'required'
         ]);
+
+        if ($validatedData->fails()) {
+            $errors = $validatedData->errors();
+            return redirect('/admin/packages/edit/' . $request->package_id)->with('errors', $errors);
+        }
 
         if (isset($request->banner)) {
             $pass = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
@@ -430,6 +433,7 @@ class PackagesController extends Controller
         }
 
         $data = array(
+            'agency_id' => $request->agency_id,
             'title' => $request->title,
             'slug' => Str::slug($request->title, '-'),
             'tagline' => $request->tagline,

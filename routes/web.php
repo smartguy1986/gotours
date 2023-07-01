@@ -65,6 +65,8 @@ Route::get('careerdetails/{id}', [CareersController::class, 'show'])->name('care
 
 Route::get('contact', [ContactsController::class, 'index'])->name('contactpage');
 
+Route::get('tour-operator', [PackagesController::class, 'tourop'])->name('touroperator');
+
 
 // ============ AJAX Controller ===================================
 Route::post('subscribeuser', [AjaxController::class, 'subscription']);

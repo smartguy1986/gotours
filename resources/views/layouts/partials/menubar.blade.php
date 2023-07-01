@@ -15,6 +15,9 @@
                 <li>
                     <a href="{{ URL::route('package-offers') }}">Package Offer</a>
                 </li>
+                <li>
+                    <a href="{{ URL::route('touroperator') }}">Tour Operators</a>
+                </li>
             </ul>
         </li>
         <li class="menu-item-has-children">
