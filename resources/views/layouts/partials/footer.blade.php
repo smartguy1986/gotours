@@ -520,6 +520,28 @@
                 });
         }
     }
+
+    $('#searchdesti').on('keyup', function() {
+        var value = $(this).val();
+        console.log(value);
+        $.ajax({
+            type: 'get',
+            url: '{{ URL::to('searchd') }}',
+            data: {
+                'search': value
+            },
+            success: function(data) {
+                if (data.msg) {
+                    $('#search-result').show();
+                    $('#search-result').html(data.msg);
+                }
+                else
+                {
+                    $('#search-result').hide();
+                }
+            }
+        });
+    })
 </script>
 </body>
 

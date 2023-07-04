@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 05:04 PM
+-- Generation Time: Jul 04, 2023 at 10:43 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -265,7 +265,8 @@ INSERT INTO `destinations` (`id`, `name`, `slug`, `head_office_address`, `head_o
 (12, 'UTTARAKHAND', 'uttarakhand', '7/9 M.B S.T Road, Srinagar', '2563584788', 'Yoga Capital of the World', '1658393817.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '0', '2022-07-21 03:26:57', '2022-07-21 03:26:57'),
 (13, 'HIMACHAL PRADESH', 'himachal-pradesh', '14/63 R.P.J Road, Kerala', '2563584784', 'A Destination for All Seasons and All Reasons', '1658394942.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '1', '2022-07-21 03:45:42', '2022-07-21 03:45:42'),
 (14, 'LADAKH', 'ladakh', '11/63 Hang XII Road, Delhi', '4785265455', 'Atithi Devo Bhava', '1658395375.jpg', '1', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', '0', '2022-07-21 03:52:55', '2022-07-21 03:52:55'),
-(15, 'SIKKIM', 'sikkim', '1/2 Namchi Garden, Thung Lwo', '7845784500', 'Culture, nature and adventure!', '1688479840.jpg', '1', 'Sikkim is one of the most famous tourist destinations in North East India. Its marvellous landscape is dotted with high altitude lakes, rolling green mountains, colourful rhododendron groves, azure rivers, milky waterfalls, beautiful monasteries and unparalleled views of Mt. Kanchenjunga/Khangchendzonga, the third highest mountain in the world.\r\n\r\nThe state is divided into 4 districts: North, South, East and West. There are 4 district capitals: Gangtok (East Sikkim), Mangan (North Sikkim), Namchi (South Sikkim) & Gyalshing (West Sikkim). The main capital of the state is Gangtok. Each of these districts has something unique to offer to the tourists.', '1', '2023-07-04 08:40:40', '2023-07-04 08:40:40');
+(15, 'SIKKIM', 'sikkim', '1/2 Namchi Garden, Thung Lwo', '7845784500', 'Culture, nature and adventure!', '1688479840.jpg', '1', 'Sikkim is one of the most famous tourist destinations in North East India. Its marvellous landscape is dotted with high altitude lakes, rolling green mountains, colourful rhododendron groves, azure rivers, milky waterfalls, beautiful monasteries and unparalleled views of Mt. Kanchenjunga/Khangchendzonga, the third highest mountain in the world.\r\n\r\nThe state is divided into 4 districts: North, South, East and West. There are 4 district capitals: Gangtok (East Sikkim), Mangan (North Sikkim), Namchi (South Sikkim) & Gyalshing (West Sikkim). The main capital of the state is Gangtok. Each of these districts has something unique to offer to the tourists.', '1', '2023-07-04 08:40:40', '2023-07-04 08:40:40'),
+(16, 'ANDAMAN & NICOBAR', 'andaman-nicobar', '24B, Pwaradwip', '8745120003', 'Emerald, Blue and You', '1688498586.jpg', '1', 'Integer vel sodales justo. Pellentesque neque quam, tempor sagittis est in, posuere tristique metus. Donec maximus eros at mi aliquet, sed tincidunt magna ultrices. Nam vitae vehicula sapien, id maximus sem. Quisque consequat semper leo, a finibus felis sagittis ac. Sed non semper quam. In ut purus tellus. Ut vel gravida dolor. Mauris eu libero at nisi bibendum venenatis. Praesent a maximus nulla. Mauris sem metus, tempor at pretium non, vulputate et erat. Vestibulum ut eleifend odio, quis dapibus elit. Vivamus eu leo turpis. Mauris id libero nec augue facilisis suscipit. In et auctor enim, in tincidunt urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '0', '2023-07-04 13:53:06', '2023-07-04 13:53:06');
 
 -- --------------------------------------------------------
 
@@ -411,7 +412,8 @@ INSERT INTO `packages` (`id`, `category`, `agency_id`, `title`, `slug`, `tagline
 (16, 7, 5, 'LADAKH', 'ladakh', 'Solo Tour', '1658395413xb1y6p.jpg', '1658395413093xky.jpg', 'Solo', 14, '<p>There is no place like Ladakh in the world. In fact, due to its varied landscape and exotic natural beauty, Ladakh is often referred to as broken moon land. EaseMyTrip.com brings this exclusive 5 nights and 6 days holiday package of Ladakh through which you will get to explore the exotic beauty of Ladakh. The tour includes visits to many prominent attractions like ancient monasteries, palaces and highest mountain passes in the world</p>', 6, 5, 'Arijit Nandi', '965748596', '1/3 Bulhamia, Himachal Pradesh - 900052', '65999', '1', '60999', '1', '2022-07-21 03:53:33', '2022-07-21 03:53:33'),
 (17, 4, 4, 'Rajasthan New Year 2023', 'rajasthan-new-year-2023', 'Padharo Mhare Desh', '1662703499zysgik.jpg', '1662703499f08vim.jpg', 'Couple', 6, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', 9, 8, 'Niraj Kumar', '8745125487', '1/3 Bulhamia, Jodhpur- 470004', '32500', '1', '27500', '1', '2022-09-09 00:34:59', '2022-09-09 00:34:59'),
 (18, 7, 4, 'AMAZING SHILLONG TOUR PACKAGE', 'amazing-shillong-tour-package', 'Scotland of the East', '1664349424hxnac1.jpg', '1664349424wdj38g.jpg', 'Customizable Group', 8, 'Looking for an exciting vacation to Shillong? Go Tours has got an amazing holiday package just for you. In this 3 Night and 4 Day Package, you will not only get Shillong to explore but also Cherrapunji and Guwahati. These are such beautiful destinations where you can have a relaxing stay or an adventure holiday as per your desire. Explore Wards Lake, Lady Hyderi Park, Elephant Falls, Single Decker root Bridge, Balancing Rock, Maa Kamakhya Temple, and more with your loved ones. Experience the best of flea markets, picturesque sceneries, beautiful churches, and more on your Shillong Tour. Book your Shillong holiday package with Go Tours and grab the best deal!', 5, 4, 'Rebecca Umnling', '8457965232', '2/9 Gb Bazaar, Shillong, Meghalaya', '43999', '1', '39499', '1', '2022-09-28 01:47:04', '2022-09-28 01:47:04'),
-(19, 1, 5, 'NORTH EAST DELIGHT WITH PELLING AND DARJEELING', 'north-east-delight-with-pelling-and-darjeeling', 'Culture, nature and adventure!', '1688482872zkxdqt.jpg', '1688482872j62ez0.jpg', 'Family', 15, '<p>Pellentesque vitae sapien nunc. Morbi porttitor consectetur nisi, a tincidunt eros lacinia eget. Cras blandit, velit facilisis lacinia malesuada, magna nisl mollis elit, in rutrum mi massa sed nisi. Curabitur gravida rhoncus nulla vel rutrum. Maecenas congue nisi vitae nibh pharetra, quis hendrerit eros elementum. Morbi elementum nibh mauris, ut molestie quam sagittis vel. Vestibulum ut euismod purus, sed laoreet metus. Phasellus quis dui ac neque placerat cursus. Suspendisse vitae dui eleifend, molestie ipsum ut, fermentum metus. Nulla pharetra quis turpis eu ornare. Donec non enim mi.</p>', 7, 6, 'TaoJung Nau', '8585858580', '1/3, Namchi Road', '49500', '1', '44383', '1', '2023-07-04 09:31:12', '2023-07-04 09:31:12');
+(19, 1, 5, 'NORTH EAST DELIGHT WITH PELLING AND DARJEELING', 'north-east-delight-with-pelling-and-darjeeling', 'Culture, nature and adventure!', '1688482872zkxdqt.jpg', '1688482872j62ez0.jpg', 'Family', 15, '<p>Pellentesque vitae sapien nunc. Morbi porttitor consectetur nisi, a tincidunt eros lacinia eget. Cras blandit, velit facilisis lacinia malesuada, magna nisl mollis elit, in rutrum mi massa sed nisi. Curabitur gravida rhoncus nulla vel rutrum. Maecenas congue nisi vitae nibh pharetra, quis hendrerit eros elementum. Morbi elementum nibh mauris, ut molestie quam sagittis vel. Vestibulum ut euismod purus, sed laoreet metus. Phasellus quis dui ac neque placerat cursus. Suspendisse vitae dui eleifend, molestie ipsum ut, fermentum metus. Nulla pharetra quis turpis eu ornare. Donec non enim mi.</p>', 7, 6, 'TaoJung Nau', '8585858580', '1/3, Namchi Road', '49500', '1', '44383', '1', '2023-07-04 09:31:12', '2023-07-04 09:31:12'),
+(20, 2, 7, '5 NIGHTS IN ANDAMAN - PORT BLAIR, HAVELOCK AND NEIL ISLAND WITH SEAKART', '5-nights-in-andaman-port-blair-havelock-and-neil-island-with-seakart', 'Emerald, Blue and You', '1688499360q4280w.jpg', '1688499360zqpje3.jpg', 'Family', 16, 'Home to some of the cleanest islands, the pristine white sands of the beautiful Andaman and Nicobar Islands beckon you to explore this beauty further. From visiting the capital Port Blair Gotours have packed all the fun in 6 days for you.\r\nVisit the picturesque island of Havelock that is home to more than 1000 varieties of fish. Enjoy a day of majestic beauty at the Radhanagar Beach and revel in the beauty of stunning corals at the island of Neil or just enjoy your time with sand and surf. It\'s a promise that this will be one of the most memorable holidays of your life, for our Gotours travel specialists have put their best expertise to create this lucrative package for you. Book today!', 6, 5, 'Rajat Sharma', '7412587410', '32/A/4 Neil Anderson Road', '28999', '0', NULL, '1', '2023-07-04 14:06:00', '2023-07-04 14:06:00');
 
 -- --------------------------------------------------------
 
@@ -489,7 +491,27 @@ INSERT INTO `package_gallery` (`id`, `package_id`, `imageURL`, `created_at`, `up
 (36, 18, '1664349511skm72h.jpg', NULL, NULL),
 (37, 18, '16643495115761sp.jpg', NULL, NULL),
 (38, 18, '1664349511zd9ecf.jpg', NULL, NULL),
-(39, 18, '1664349511jil2fz.jpg', NULL, NULL);
+(39, 18, '1664349511jil2fz.jpg', NULL, NULL),
+(40, 19, '1688496980pl40wi.jpg', NULL, NULL),
+(41, 19, '1688496980w01p7d.jpg', NULL, NULL),
+(42, 19, '1688496980lfghn4.webp', NULL, NULL),
+(43, 19, '16884969800m24sj.jpg', NULL, NULL),
+(44, 19, '1688496980vzjbco.webp', NULL, NULL),
+(45, 19, '16884969809fwyme.webp', NULL, NULL),
+(46, 19, '1688496980d208ha.webp', NULL, NULL),
+(47, 19, '1688496980gdix5b.jpg', NULL, NULL),
+(48, 19, '1688496980ja3iv4.jpg', NULL, NULL),
+(49, 19, '16884969809kbiz1.jpg', NULL, NULL),
+(50, 19, '168849698012y48n.webp', NULL, NULL),
+(51, 19, '1688496981tjidn7.webp', NULL, NULL),
+(52, 20, '1688499657g2jb76.jpg', NULL, NULL),
+(53, 20, '1688499657apcoxe.jpg', NULL, NULL),
+(54, 20, '16884996576k478g.jpg', NULL, NULL),
+(55, 20, '1688499657xeboqp.jpg', NULL, NULL),
+(56, 20, '1688499657w1dpin.jpg', NULL, NULL),
+(57, 20, '1688499657i8dxs9.jpg', NULL, NULL),
+(58, 20, '1688499657lyedpj.jpg', NULL, NULL),
+(59, 20, '1688499657ozi9bs.jpg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -585,7 +607,20 @@ INSERT INTO `package_programme` (`id`, `package_id`, `day`, `title`, `descriptio
 (87, 18, 2, 'City Tour', 'After breakfast, check out from the hotel proceed to Shillong. Photography opportunity at Lake Umiam. Visit Wards Lake & Lady Hyderi Park. Evening free for leisure. City tour of Shillong, Overnight stay at Shillong.', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
 (88, 18, 3, 'Cherrapunjee', 'Today after breakfast check out & drive to Cherrapunjee Enroute visit Elephant Falls. Evening drive to Cherrapunjee and night stay at Cherrapunjee', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
 (89, 18, 4, 'Guwahati', 'Today after breakfast check out the hotel and transfer to Guwahati. Check in to the hotel. Visit Kamakhya Temple, Tirupati Balaji Temple, Nabagraha Temple, Assam State Museum, State Zoo cum Botanical Garden, Regional Science Centre and Sukreswar Temple (The 6th Jyotirlinga of Shiva). Afternoon we suggest an optional tour of Golden sunset cruise on the Brahmaputra (Direct Payment by own). Overnight stay at Guwahati', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
-(90, 18, 5, 'Kamakhya Temple', 'Today after breakfast check out & visit Maa Kamakhya Temple (if time permits). Later drive to Guwahati Airport/Railway Station for your onward destination. Tour ends with everlasting memories', '2022-09-28 07:18:13', '2022-09-28 07:18:13');
+(90, 18, 5, 'Kamakhya Temple', 'Today after breakfast check out & visit Maa Kamakhya Temple (if time permits). Later drive to Guwahati Airport/Railway Station for your onward destination. Tour ends with everlasting memories', '2022-09-28 07:18:13', '2022-09-28 07:18:13'),
+(91, 19, 1, 'Arrival in Bagdogra', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et est a justo dictum placerat. Nulla facilisi. Etiam eget dui nisi. Suspendisse sollicitudin velit nisi, convallis sollicitudin dolor egestas eu. Etiam turpis nibh, rutrum non accumsan sed, pretium eleifend leo. Praesent id dapibus nunc, quis laoreet ipsum. Suspendisse commodo leo congue, molestie nunc vel, vestibulum ipsum. Nullam tristique eros quis hendrerit aliquet. Sed interdum ligula accumsan magna dapibus, vitae semper est mattis. Aliquam ac elit in enim volutpat tristique ut vitae leo. Vivamus maximus posuere tempus. Mauris lobortis suscipit nunc, ac gravida leo sodales eget.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(92, 19, 2, 'Gangtok', 'Vivamus ullamcorper neque ut egestas egestas. Cras imperdiet lectus vitae urna ultrices eleifend. Aliquam sagittis a mi viverra tempor. Duis eu lorem sed magna finibus vulputate vitae in justo. Cras vulputate sagittis fringilla. Ut aliquet tortor eu consectetur ornare. Fusce ornare dignissim sem at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam non laoreet augue. Vestibulum sed justo eu lacus vestibulum efficitur sit amet sed mauris. Praesent sodales ante at orci lobortis venenatis. Cras id urna porta nisi commodo efficitur. Morbi malesuada tortor a aliquet aliquet. Nam sapien dolor, lobortis sit amet dolor at, porttitor sodales orci. Fusce porta ex quis ante tristique mollis.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(93, 19, 3, 'Gangtok', 'Curabitur vitae dolor et magna interdum maximus. Donec vitae nisi id purus dapibus ullamcorper vel nec neque. In ullamcorper placerat dui imperdiet consectetur. Pellentesque ac viverra dolor. Sed vel sodales erat. Cras sit amet efficitur lectus, a scelerisque orci. Nulla malesuada enim tortor, eget malesuada mi hendrerit vitae. Phasellus auctor vestibulum elit.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(94, 19, 4, 'Gangtok to Pelling', 'Pellentesque commodo in dui nec semper. Proin mauris felis, pharetra viverra leo a, hendrerit fermentum nunc. Phasellus vel mauris id tortor accumsan ultrices quis tempor magna. Nulla non maximus ante, suscipit mattis metus. In a arcu in tortor molestie consectetur quis eu risus. Pellentesque hendrerit nunc quis malesuada volutpat. Phasellus placerat, tortor id tincidunt faucibus, purus urna rutrum sapien, ac faucibus ex est non dui. Nunc in nulla aliquet, consequat massa vel, blandit dui. Mauris eu cursus purus.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(95, 19, 5, 'Pelling to Darjeeling', 'Pellentesque vitae sapien nunc. Morbi porttitor consectetur nisi, a tincidunt eros lacinia eget. Cras blandit, velit facilisis lacinia malesuada, magna nisl mollis elit, in rutrum mi massa sed nisi. Curabitur gravida rhoncus nulla vel rutrum. Maecenas congue nisi vitae nibh pharetra, quis hendrerit eros elementum. Morbi elementum nibh mauris, ut molestie quam sagittis vel. Vestibulum ut euismod purus, sed laoreet metus. Phasellus quis dui ac neque placerat cursus. Suspendisse vitae dui eleifend, molestie ipsum ut, fermentum metus. Nulla pharetra quis turpis eu ornare. Donec non enim mi.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(96, 19, 6, 'Darjeeling', 'Integer vel sodales justo. Pellentesque neque quam, tempor sagittis est in, posuere tristique metus. Donec maximus eros at mi aliquet, sed tincidunt magna ultrices. Nam vitae vehicula sapien, id maximus sem. Quisque consequat semper leo, a finibus felis sagittis ac. Sed non semper quam. In ut purus tellus. Ut vel gravida dolor. Mauris eu libero at nisi bibendum venenatis. Praesent a maximus nulla. Mauris sem metus, tempor at pretium non, vulputate et erat. Vestibulum ut eleifend odio, quis dapibus elit. Vivamus eu leo turpis. Mauris id libero nec augue facilisis suscipit. In et auctor enim, in tincidunt urna. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(97, 19, 7, 'Departure from Bagdogra', 'Nulla eget leo volutpat, blandit ipsum ut, sodales magna. Integer eu mattis metus, mollis varius lectus. Pellentesque congue dictum leo ac aliquet. Curabitur pellentesque, purus ac efficitur tincidunt, tellus turpis luctus massa, sed congue orci felis consectetur nisl. Proin non posuere nibh. Pellentesque sit amet aliquam nunc, a consequat risus. Sed eget ex id ligula fringilla pharetra. Pellentesque in vestibulum lectus. Phasellus cursus elit ex, nec tristique mi rutrum a.', '2023-07-04 18:44:30', '2023-07-04 18:44:30'),
+(98, 20, 1, 'Arrival in Port Blair', 'Vivamus ullamcorper neque ut egestas egestas. Cras imperdiet lectus vitae urna ultrices eleifend. Aliquam sagittis a mi viverra tempor. Duis eu lorem sed magna finibus vulputate vitae in justo. Cras vulputate sagittis fringilla. Ut aliquet tortor eu consectetur ornare. Fusce ornare dignissim sem at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam non laoreet augue. Vestibulum sed justo eu lacus vestibulum efficitur sit amet sed mauris. Praesent sodales ante at orci lobortis venenatis. Cras id urna porta nisi commodo efficitur. Morbi malesuada tortor a aliquet aliquet. Nam sapien dolor, lobortis sit amet dolor at, porttitor sodales orci. Fusce porta ex quis ante tristique mollis.', '2023-07-04 19:40:37', '2023-07-04 19:40:37'),
+(99, 20, 2, 'Radhanagar Beach', 'Pellentesque commodo in dui nec semper. Proin mauris felis, pharetra viverra leo a, hendrerit fermentum nunc. Phasellus vel mauris id tortor accumsan ultrices quis tempor magna. Nulla non maximus ante, suscipit mattis metus. In a arcu in tortor molestie consectetur quis eu risus. Pellentesque hendrerit nunc quis malesuada volutpat. Phasellus placerat, tortor id tincidunt faucibus, purus urna rutrum sapien, ac faucibus ex est non dui. Nunc in nulla aliquet, consequat massa vel, blandit dui. Mauris eu cursus purus.', '2023-07-04 19:40:37', '2023-07-04 19:40:37'),
+(100, 20, 3, 'Elephant Beach', 'Vivamus ullamcorper neque ut egestas egestas. Cras imperdiet lectus vitae urna ultrices eleifend. Aliquam sagittis a mi viverra tempor. Duis eu lorem sed magna finibus vulputate vitae in justo. Cras vulputate sagittis fringilla. Ut aliquet tortor eu consectetur ornare. Fusce ornare dignissim sem at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam non laoreet augue. Vestibulum sed justo eu lacus vestibulum efficitur sit amet sed mauris. Praesent sodales ante at orci lobortis venenatis. Cras id urna porta nisi commodo efficitur. Morbi malesuada tortor a aliquet aliquet. Nam sapien dolor, lobortis sit amet dolor at, porttitor sodales orci. Fusce porta ex quis ante tristique mollis.', '2023-07-04 19:40:37', '2023-07-04 19:40:37'),
+(101, 20, 4, 'Neil Island', 'Pellentesque commodo in dui nec semper. Proin mauris felis, pharetra viverra leo a, hendrerit fermentum nunc. Phasellus vel mauris id tortor accumsan ultrices quis tempor magna. Nulla non maximus ante, suscipit mattis metus. In a arcu in tortor molestie consectetur quis eu risus. Pellentesque hendrerit nunc quis malesuada volutpat. Phasellus placerat, tortor id tincidunt faucibus, purus urna rutrum sapien, ac faucibus ex est non dui. Nunc in nulla aliquet, consequat massa vel, blandit dui. Mauris eu cursus purus.', '2023-07-04 19:40:37', '2023-07-04 19:40:37'),
+(102, 20, 5, 'Sitapur, Bharatpur Beach', 'Vivamus ullamcorper neque ut egestas egestas. Cras imperdiet lectus vitae urna ultrices eleifend. Aliquam sagittis a mi viverra tempor. Duis eu lorem sed magna finibus vulputate vitae in justo. Cras vulputate sagittis fringilla. Ut aliquet tortor eu consectetur ornare. Fusce ornare dignissim sem at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam non laoreet augue. Vestibulum sed justo eu lacus vestibulum efficitur sit amet sed mauris. Praesent sodales ante at orci lobortis venenatis. Cras id urna porta nisi commodo efficitur. Morbi malesuada tortor a aliquet aliquet. Nam sapien dolor, lobortis sit amet dolor at, porttitor sodales orci. Fusce porta ex quis ante tristique mollis.', '2023-07-04 19:40:37', '2023-07-04 19:40:37'),
+(103, 20, 6, 'Departure from Port Blair', 'Pellentesque commodo in dui nec semper. Proin mauris felis, pharetra viverra leo a, hendrerit fermentum nunc. Phasellus vel mauris id tortor accumsan ultrices quis tempor magna. Nulla non maximus ante, suscipit mattis metus. In a arcu in tortor molestie consectetur quis eu risus. Pellentesque hendrerit nunc quis malesuada volutpat. Phasellus placerat, tortor id tincidunt faucibus, purus urna rutrum sapien, ac faucibus ex est non dui. Nunc in nulla aliquet, consequat massa vel, blandit dui. Mauris eu cursus purus.', '2023-07-04 19:40:37', '2023-07-04 19:40:37');
 
 -- --------------------------------------------------------
 
@@ -754,7 +789,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 (7, 'Robert Holland', 'robert@gmail.com', NULL, '$2y$10$n/k1SdJVXfvk0CUlW3dPYucfv/xfn1ivPLJlgD8O7Z3xU5qr8JoBC', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-06-30 13:55:05', '2023-06-30 13:55:05'),
 (8, 'John Williams', 'john@sotc.holiday', NULL, '$2y$10$i5Zclz0Hff/mtXMtDoiO.elbraneIDBCXJnSN9FoZ7RvlQWsZAsUi', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:26:37', '2023-07-01 07:26:37'),
 (9, 'Manmohan Tiwari', 'manmohan@shikhar.com', NULL, '$2y$10$He/9XiUHbRGAujW2GRwIie.jLaf6EmFgEvcvaueVgTlhVsC8NTfKu', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:31:21', '2023-07-01 07:31:21'),
-(10, 'Alison Hobb', 'alison@kundu.com', NULL, '$2y$10$wYQ9w6hqCaVlRLW6scGs7e7NZ66Kf2.pPUF3ffivTLwbr6YG.nsHq', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:44:04', '2023-07-01 07:44:04');
+(10, 'Alison Hobb', 'alison@kundu.com', NULL, '$2y$10$wYQ9w6hqCaVlRLW6scGs7e7NZ66Kf2.pPUF3ffivTLwbr6YG.nsHq', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:44:04', '2023-07-01 07:44:04'),
+(11, 'Animesh Sah', 'animesh.10@gmail.com', NULL, '$2y$10$LoCDtwHKeVbA1vQ/Y04t9Ojil.0WQBN2NwWBuhtrVx9UruEzFdN3m', 0, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-04 14:12:32', '2023-07-04 14:12:32');
 
 --
 -- Indexes for dumped tables
@@ -958,7 +994,7 @@ ALTER TABLE `contacts`
 -- AUTO_INCREMENT for table `destinations`
 --
 ALTER TABLE `destinations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -982,7 +1018,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `packages`
 --
 ALTER TABLE `packages`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `package_category`
@@ -994,13 +1030,13 @@ ALTER TABLE `package_category`
 -- AUTO_INCREMENT for table `package_gallery`
 --
 ALTER TABLE `package_gallery`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `package_programme`
 --
 ALTER TABLE `package_programme`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `package_review`
@@ -1036,7 +1072,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

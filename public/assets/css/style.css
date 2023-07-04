@@ -9990,3 +9990,16 @@ product checkout css
   top: -20%;
   z-index: -1;
 }
+
+.search-result {
+  display: none;
+}
+
+#search-result {
+  position: absolute;
+  z-index: 105;
+  top: 95px;
+  background-color: aliceblue;
+  width: 192%;
+  padding: 10px 0;
+}

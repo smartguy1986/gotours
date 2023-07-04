@@ -1,45 +1,53 @@
-@extends('layouts.admin.adminLayout')
+@extends('layouts.manager.managerLayout')
 
 @section('content')
 
-<div class="db-info-wrap">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="dashboard-box">
-                {{-- {{ $packages }} --}}
-                <h4><a href="{{ URL:: route('packages.list') }}" class="orange-link">Packages</a> <i class="fas fa-angle-double-left"></i>  Add Programme</h4>
-                <p>Here add the programme schedule of <strong>{{ $packages[0]->title }}</strong></p>                
-                <p></p>
+    <div class="db-info-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="dashboard-box">
+                    {{-- {{ $packages }} --}}
+                    <h4>Add Programme</h4>
+                    <p>Here add the programme schedule of <strong>{{ $packages[0]->title }}</strong></p>
+                    <p></p>
 
-                @if($packages[0]->nights > $packages[0]->days) 
-                    @php
-                        $duration = $packages[0]->nights
-                    @endphp 
-                @else
-                    @php
-                        $duration = $packages[0]->days
-                    @endphp
-                @endif
+                    @if ($packages[0]->nights > $packages[0]->days)
+                        @php
+                            $duration = $packages[0]->nights;
+                        @endphp
+                    @else
+                        @php
+                            $duration = $packages[0]->days;
+                        @endphp
+                    @endif
 
-                @if (Session::get('error'))
-                    <ul class="alert alert-success">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                @endif
+                    @if (Session::get('error'))
+                        <ul class="alert alert-success">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
 
-                <h4>Add Programme</h4>
-                <form class="form-horizontal" method="POST" action="{{ route('packages.programme.save') }}" enctype="multipart/form-data">
-                    @csrf               
+                    <h4>Add Programme</h4>
+                    @if (Auth::user()->type == 'manager')
+                        <form class="form-horizontal" method="POST" action="{{ route('packages.programme.save.manager') }}"
+                            enctype="multipart/form-data">
+                        @else
+                            <form class="form-horizontal" method="POST" action="{{ route('packages.programme.save') }}"
+                                enctype="multipart/form-data">
+                    @endif
+
+                    @csrf
                     <div class="row">
                         <input type="hidden" name="package_id" value="{{ $packages[0]->id }}">
                         <input type="hidden" name="total_loop" value="{{ $duration }}">
-                        @for ($i = 1; $i<= $duration; $i++)
+                        @for ($i = 1; $i <= $duration; $i++)
                             <div class="col-sm-2">
                                 <div class="form-group">
                                     <label>Day</label>
-                                    <input name="day[]" class="form-control" type="number" value="{{ $i }}" readonly>
+                                    <input name="day[]" class="form-control" type="number" value="{{ $i }}"
+                                        readonly>
                                 </div>
                             </div>
                             <div class="col-sm-4">
@@ -54,17 +62,17 @@
                                     <textarea name="description[]" class="form-control"></textarea>
                                 </div>
                             </div>
-                        @endfor 
+                        @endfor
 
                     </div>
                     <br>
                     <input type="submit" name="Submit" value="Upload Programme">
-                </form>
-                
+                    </form>
+
+                </div>
             </div>
-        </div>  
+        </div>
     </div>
-</div>
-<!-- Content / End -->
+    <!-- Content / End -->
 
 @endsection

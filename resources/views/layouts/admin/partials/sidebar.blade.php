@@ -123,7 +123,7 @@
             </li>
 
             <li><a href="db-booking.html"><i class="fas fa-ticket-alt"></i> Booking & Enquiry</a></li>
-            <li><a href="db-wishlist.html"><i class="far fa-heart"></i>Wishlist</a></li>
+            {{-- <li><a href="db-wishlist.html"><i class="far fa-heart"></i>Wishlist</a></li> --}}
             <li><a href="db-comment.html"><i class="fas fa-comments"></i>Comments</a></li>
             <li><a href="{{ URL::route('logout') }}"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
         </ul>

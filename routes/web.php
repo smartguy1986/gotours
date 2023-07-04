@@ -67,12 +67,15 @@ Route::get('contact', [ContactsController::class, 'index'])->name('contactpage')
 
 Route::get('tour-operator', [PackagesController::class, 'tourop'])->name('touroperator');
 
+Route::get('searchpackage', [PackagesController::class, 'searchpackage'])->name('searchpackage');
+
 
 // ============ AJAX Controller ===================================
 Route::post('subscribeuser', [AjaxController::class, 'subscription']);
 Route::post('jointeam', [AjaxController::class, 'jointeam']);
 Route::post('contactsubmit', [AjaxController::class, 'contactsubmit']);
 Route::post('careerquery', [AjaxController::class, 'careerquery']);
+Route::get('searchd', [AjaxController::class, 'searchd']);
 // ================================================================
 
 Route::get('logout', function () {

@@ -32,8 +32,8 @@ class HomeController extends Controller
     {
         $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->orderBy('id', 'DESC')->get();
         $data['company_details'] = $companyController->commonComponent();
-        $data['destinations'] = $destinationsController->alldestinationlist(0,2,1);
-        $data['destinations2'] =  $destinationsController->alldestinationlist(2,2,1);        
+        $data['destinations'] = $destinationsController->alldestinationlist('0','2','1');
+        $data['destinations2'] =  $destinationsController->alldestinationlist('2','2','1');        
         $data['packages'] = $packagesController->last3package();
         $data['packagesoffers'] = $packagesController->last3packageoffers();
         $data['blogs'] = $blogController->last3blogs();

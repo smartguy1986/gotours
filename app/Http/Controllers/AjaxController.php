@@ -59,7 +59,7 @@ class AjaxController extends Controller
             $errors = $validatedData->errors();
             $msg .= '<div class="alert alert-danger" role="alert"><ul>';
             foreach ($errors->all() as $error)
-                $msg .= "<li>".$error."</li>";
+                $msg .= "<li>" . $error . "</li>";
             $msg .= '</ul></div>';
             $status = false;
         } else {
@@ -98,7 +98,7 @@ class AjaxController extends Controller
             $errors = $validatedData->errors();
             $msg .= '<div class="alert alert-danger" role="alert"><ul>';
             foreach ($errors->all() as $error)
-                $msg .= "<li>".$error."</li>";
+                $msg .= "<li>" . $error . "</li>";
             $msg .= '</ul></div>';
             $status = false;
         } else {
@@ -114,5 +114,27 @@ class AjaxController extends Controller
             $msg = '<div class="alert alert-primary" role="alert">Thank you for applying. If it\'s a good match we will get you back very soon.</div>';
         }
         return response()->json(array('msg' => $msg, 'status' => $status), 200);
+    }
+
+    public function searchd(Request $request)
+    {
+        $msg = '';
+        $keyword = $request->search;
+        if ($keyword) {
+            $results = DB::table('destinations')
+                ->select('id', 'name', 'slug')
+                ->where('name', 'like', '%' . $keyword . '%')
+                ->orWhere('slug', 'like', '%' . $keyword . '%')
+                ->get();
+            // dd($results);
+            $msg .= "<ul>";
+            foreach ($results as $res) {
+                $msg .= "<li><a href='" . url('packages-by-destination/' . $res->slug) . "'>Destinations - " . $res->name . "</a></li>";
+            }
+            $msg .= "</ul>";
+            return response()->json(array('msg' => $msg), 200);
+        } else {
+            return response()->json(array('msg' => $msg), 200);
+        }
     }
 }

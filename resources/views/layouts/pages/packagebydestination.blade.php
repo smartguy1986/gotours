@@ -39,7 +39,7 @@
                             <span style="width: 60%"></span>
                         </div>
                     </div>
-                    <p>{{ substr($post->descriptions, 0, 200) }}</p>
+                    <p>{!! html_entity_decode(substr($post->descriptions, 0, 200)) !!}</p>
                     <div class="btn-wrap">
                         <a href="/packages/details/{{ $post->slug }}" class="button-text width-6">Book Now<i
                                 class="fas fa-arrow-right"></i></a>

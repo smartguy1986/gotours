@@ -120,16 +120,17 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $resultsd = DB::table('packages')
-            ->select('packages.*', 'destinations.name as dname', 'destinations.id')
+            ->select('packages.*', 'destinations.name as dname', 'destinations.id', 'destinations.imageURL as destimg')
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
         if (count($resultsd) > 0) {
+            $data['banner'] = $resultsd[0]->destimg;
             $data['destname'] = $resultsd[0]->dname;
-        }
-        else{
+        } else {
             $data['destname'] = ucfirst($dslug);
+            $data['banner'] = 'destination-banner.jpg';
         }
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebydestination', compact('resultsd'))->render();
@@ -182,7 +183,11 @@ class PackagesController extends Controller
         // echo "<pre>";
         // print_r($data);
         // echo "</pre>";
-        return view('layouts.admin.packages.editprogramme', $data);
+        if (Auth::user()->type == 'manager') {
+            return view('layouts.manager.packages.editprogramme', $data);
+        } else {
+            return view('layouts.admin.packages.editprogramme', $data);
+        }
     }
 
     public function save_category(Request $request)
@@ -339,7 +344,12 @@ class PackagesController extends Controller
     public function programme(Request $request, $id)
     {
         $data['packages'] = DB::table('packages')->select('*')->where('id', $id)->get();
-        return view('layouts.admin.packages.addprogramme', $data);
+        if (Auth::user()->type == 'manager') {
+            return view('layouts.manager.packages.addprogramme', $data);
+        } else {
+            return view('layouts.admin.packages.addprogramme', $data);
+        }
+        
     }
 
     public function save_programme(Request $request)
@@ -355,7 +365,12 @@ class PackagesController extends Controller
         }
 
         if (DB::table('package_programme')->insert($data)) {
-            return redirect('/admin/packages')->with('success', 'Programme successfully added');
+            if (Auth::user()->type == 'manager') {
+                return redirect('/manager/packages')->with('success', 'Programme successfully added');
+            } else {
+                return redirect('/admin/packages')->with('success', 'Programme successfully added');
+            }
+
         }
     }
 
@@ -382,7 +397,11 @@ class PackagesController extends Controller
             $data = array();
         }
 
-        return redirect('/admin/packages')->with('success', 'Programme successfully added');
+        if (Auth::user()->type == 'manager') {
+            return redirect('/manager/packages')->with('success', 'Programme successfully added');
+        } else {
+            return redirect('/admin/packages')->with('success', 'Programme successfully added');
+        }
     }
 
     /**
@@ -506,7 +525,11 @@ class PackagesController extends Controller
     {
         $data['packages'] = DB::table('packages')->select('*')->where('id', '=', $pid)->get();
         $data['gallery'] = DB::table('package_gallery')->select('*')->where('package_id', '=', $pid)->orderBy('id', 'DESC')->get();
-        return view('layouts.admin.packages.addpackagegallery', $data);
+        if (Auth::user()->type == 'manager') {
+            return view('layouts.manager.packages.addpackagegallery', $data);
+        } else {
+            return view('layouts.admin.packages.addpackagegallery', $data);
+        }
     }
 
     public function save_gallery(Request $request)
@@ -528,7 +551,11 @@ class PackagesController extends Controller
             DB::table('package_gallery')->insert($data);
         }
 
-        return redirect('/admin/packages/gallery/show/' . $request->packageid)->with('success', 'Gallery Images successfully added');
+        if (Auth::user()->type == 'manager') {
+            return redirect('/manager/packages/gallery/show/' . $request->packageid)->with('success', 'Gallery Images successfully added');
+        } else {
+            return redirect('/admin/packages/gallery/show/' . $request->packageid)->with('success', 'Gallery Images successfully added');
+        }
     }
 
     public function delete_gallery(Request $request)
