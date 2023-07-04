@@ -1,28 +1,29 @@
-@extends('layouts.admin.adminLayout')
+@extends('layouts.manager.managerLayout')
 
 @section('content')
+    <div class="db-info-wrap">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="dashboard-box">
+                    <h4>Package </h4>
+                    <p>Here add the package of <strong>{{ $managerData->agency_name }}</strong></p>
+                    <p></p>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <h4>Add Packages</h4>
+                    @if (Auth::user()->type == 'manager')
+                        <form class="form-horizontal" method="POST" action="{{ route('packages.save.manager') }}"
+                            enctype="multipart/form-data">
+                        @else
+                            <form class="form-horizontal" method="POST" action="{{ route('packages.save') }}"
+                                enctype="multipart/form-data">
+                    @endif
 
-<div class="db-info-wrap">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="dashboard-box">
-                <h4>Package </h4>
-                <p>Here add the package of <strong>GoTours</strong></p>                
-                <p></p>
-                {{-- @if ($message = Session::get('error'))
-                <div class="alert alert-success">
-                <p>{{ $message }}</p>
-                </div>
-                <p></p>
-                @endif --}}
-                <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-                <h4>Add Packages</h4>
-                <form class="form-horizontal" method="POST" action="{{ route('packages.save') }}" enctype="multipart/form-data">
-                    @csrf               
+                    @csrf
+                    <input type="hidden" name="agency_id" value="{{ Session::get('managerData')->id }}">
                     <div class="row">
                         <div class="col-sm-2">
                             <div class="form-group">
@@ -54,7 +55,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>   
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Banner Image</label>
@@ -80,7 +81,7 @@
                                 <label>Duration Days</label>
                                 <select class="form-control dropdown" name="days">
                                     @for ($i = 1; $i <= 15; $i++)
-                                    <option value="{{ $i }}">{{ $i }} Days</option>
+                                        <option value="{{ $i }}">{{ $i }} Days</option>
                                     @endfor
                                 </select>
                                 @error('days')
@@ -93,7 +94,7 @@
                                 <label>Duration Nights</label>
                                 <select class="form-control dropdown" name="nights">
                                     @for ($j = 1; $j <= 15; $j++)
-                                    <option value="{{ $j }}">{{ $j }} Nights</option>
+                                        <option value="{{ $j }}">{{ $j }} Nights</option>
                                     @endfor
                                 </select>
                                 @error('nights')
@@ -157,7 +158,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Address</label>
@@ -166,7 +167,7 @@
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div> 
+                        </div>
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Price</label>
@@ -179,8 +180,10 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Is Sale</label>
-                                No <input class="form-input-control" type="radio" name="is_sale" value="0" style="width: auto !important;"> | 
-                                Yes <input class="form-input-control" type="radio" name="is_sale" value="1" style="width: auto !important;">
+                                No <input class="form-input-control" type="radio" name="is_sale" value="0"
+                                    style="width: auto !important;"> |
+                                Yes <input class="form-input-control" type="radio" name="is_sale" value="1"
+                                    style="width: auto !important;">
                                 @error('is_sale')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
@@ -199,22 +202,23 @@
                         <div class="col-sm-3">
                             <div class="form-group">
                                 <label>Status</label>
-                                Active <input class="form-input-control" type="radio" name="status" value="1" style="width: auto !important;"> | 
-                                Inactive <input class="form-input-control" type="radio" name="status" value="0" style="width: auto !important;">
+                                Active <input class="form-input-control" type="radio" name="status" value="1"
+                                    style="width: auto !important;"> |
+                                Inactive <input class="form-input-control" type="radio" name="status" value="0"
+                                    style="width: auto !important;">
                                 @error('status')
                                     <div class="alert alert-danger">{{ $message }}</div>
                                 @enderror
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <br>
                     <input type="submit" name="Submit" value="Create Package">
-                </form>
-                
-            </div>
-        </div>  
-    </div>
-</div>
-<!-- Content / End -->
+                    </form>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Content / End -->
 @endsection

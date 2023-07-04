@@ -19,10 +19,10 @@
                 Packages
                 <ul>
                     <li class="@if (\Request::is('*packages*')) active-menu @endif">
-                        <a href="{{ URL::route('packages.add') }}">Add Packages</a>
+                        <a href="{{ URL::route('packages.add.manager') }}">Add Packages</a>
                     </li>
                     <li class="@if (\Request::is('*packages*')) active-menu @endif">
-                        <a href="{{ URL::route('packages.list') }}">Packages List</a>
+                        <a href="{{ URL::route('packages.list.manager') }}">Packages List</a>
                     </li>
                 </ul>
             </li>

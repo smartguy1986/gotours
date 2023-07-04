@@ -1,4 +1,4 @@
-@extends('layouts.admin.adminLayout')
+@extends('layouts.manager.managerLayout')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="dashboard-box">
                 <h4>Packages</h4>
-                <p>Here list of all the packages of <strong>GoTours</strong></p>                
+                <p>Here list of all the packages of <strong>{{ $managerData }}</strong></p>                
                 <p></p>
                 @if ($message = Session::get('success'))
                 <div class="alert alert-success">
@@ -61,11 +61,11 @@
                                     <td data-column="status" class="count-input">@if($pck->is_sale == 1) Yes @else No @endif</td>
                                     <td data-column="description">{{ $pck->sale_price }}</td>
                                     <td data-column="featured" class="count-input">@if($pck->status == 1) Active @else Inactive @endif</td>
-                                    <td data-column="description"><a href="{{ URL:: route('packages.programme.editprog', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Programme</a></td>
-                                    <td data-column="description"><a href="{{ URL:: route('packages.gallery.show', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Gallery</a></td>
+                                    <td data-column="description"><a href="{{ URL:: route('packages.programme.editprog.manager', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Programme</a></td>
+                                    <td data-column="description"><a href="{{ URL:: route('packages.gallery.show.manager', [$pck->id])}}"><i class="fa-solid fa-list-check"></i> View/Edit Gallery</a></td>
                                     <td data-column="added_on">{{ date('dS M, Y', strtotime($pck->created_at)) }}</td>
                                     <td data-column="action">
-                                        <a href="{{ URL:: route('packages.edit', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
+                                        <a href="{{ URL:: route('packages.edit.manager', [$pck->id])}}"><i class="fas fa-edit"></i></a> | 
                                         <a href="{{ URL:: route('destinations.disable', [$pck->id])}}"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                 </tr>

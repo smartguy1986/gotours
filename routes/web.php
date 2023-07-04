@@ -196,4 +196,20 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
     Route::get('/manager/agencies/edit/{id}', [AgenciesController::class, 'edit'])->name('agencies.edit');
     Route::post('/manager/agencies/update', [AgenciesController::class, 'update'])->name('agencies.update');
     Route::get('/manager/agencies/delete/{id}', [AgenciesController::class, 'delete'])->name('agencies.delete');
+
+    Route::get('/manager/packages', [PackagesController::class, 'index'])->name('packages.list.manager');
+    Route::get('/manager/packages/add', [PackagesController::class, 'add'])->name('packages.add.manager');
+    Route::get('/manager/packages/edit/{id}', [PackagesController::class, 'edit'])->name('packages.edit.manager');
+    Route::post('/manager/packages/update', [PackagesController::class, 'update'])->name('packages.update.manager');
+    Route::post('/manager/packages/save/package', [PackagesController::class, 'save_package'])->name('packages.save.manager');
+   
+    Route::get('/manager/packages/programme/add/{id}', [PackagesController::class, 'programme'])->name('packages.programme.add.manager');
+    Route::get('/manager/packages/programme/edit/{id}', [PackagesController::class, 'editprog'])->name('packages.programme.editprog.manager');
+    Route::post('/manager/packages/programme/save', [PackagesController::class, 'save_programme'])->name('packages.programme.save.manager');
+    Route::post('/manager/packages/programme/update', [PackagesController::class, 'update_programme'])->name('packages.programme.update.manager');
+    Route::get('/manager/packages/gallery/show/{id}', [PackagesController::class, 'show_gallery'])->name('packages.gallery.show.manager');
+    Route::post('/manager/packages/gallery/save', [PackagesController::class, 'save_gallery'])->name('packages.gallery.save.manager');
+    Route::post('/manager/packages/gallery/edit/{id}', [PackagesController::class, 'edit_gallery'])->name('packages.gallery.edit.manager');
+    Route::post('/manager/packages/gallery/update', [PackagesController::class, 'update_gallery'])->name('packages.gallery.update.manager');
+    Route::post('/manager/packages/gallery/delete', [PackagesController::class, 'delete_gallery'])->name('packages.gallery.delete.manager');
 });

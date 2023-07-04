@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use DB;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -36,8 +38,32 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    // public function login(Request $request)
+    // {   
+    //     $input = $request->all();
+
+    //     $this->validate($request, [
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+
+    //     if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+    //     {
+    //         if (auth()->user()->type == 'admin') {
+    //             return redirect()->route('admin.dashboard');
+    //         }else if (auth()->user()->type == 'manager') {
+    //             return redirect()->route('manager.home');
+    //         }else{
+    //             return redirect()->route('user.home');
+    //         }
+    //     }else{
+    //         return redirect()->route('login')
+    //             ->with('error','Email-Address And Password Are Wrong.');
+    //     }
+    // }
+
     public function login(Request $request)
-    {   
+    {
         $input = $request->all();
 
         $this->validate($request, [
@@ -45,18 +71,21 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
-        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
-        {
-            if (auth()->user()->type == 'admin') {
+        if (auth()->attempt(array('email' => $input['email'], 'password' => $input['password']))) {
+            $user = auth()->user();
+
+            if ($user->type == 'admin') {
                 return redirect()->route('admin.dashboard');
-            }else if (auth()->user()->type == 'manager') {
+            } else if ($user->type == 'manager') {
+                $managerData = DB::table('agencies')->where('manager_id', $user->id)->first();
+                Session::put('managerData', $managerData); // Store managerData in session
                 return redirect()->route('manager.home');
-            }else{
+            } else {
                 return redirect()->route('user.home');
             }
-        }else{
+        } else {
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error', 'Email-Address and Password are wrong.');
         }
     }
 }
