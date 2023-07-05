@@ -81,7 +81,7 @@ class LoginController extends Controller
                 Session::put('managerData', $managerData); // Store managerData in session
                 return redirect()->route('manager.home');
             } else {
-                return redirect()->route('user.home');
+                return redirect('/');
             }
         } else {
             return redirect()->route('login')

@@ -90,7 +90,6 @@ h1 {
   font-weight: 900 !important;
   line-height: 1.1 !important;
 }
-}
 
 hr {
   box-sizing: content-box;
@@ -10002,4 +10001,10 @@ product checkout css
   background-color: aliceblue;
   width: 192%;
   padding: 10px 0;
+}
+
+.alert {
+  width: 25% !important;
+  right: 30px !important;
+  position: fixed !important;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2023 at 10:43 PM
+-- Generation Time: Jul 05, 2023 at 03:50 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -359,7 +359,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (26, '2023_06_29_114043_create_careers_table', 23),
 (27, '2023_06_30_124430_create_contacts_table', 24),
 (28, '2023_06_30_182239_create_careerqueries_table', 25),
-(29, '2023_06_30_200702_create_agencies_table', 26);
+(29, '2023_06_30_200702_create_agencies_table', 26),
+(30, '2023_07_05_081350_create_wishlists_table', 27);
 
 -- --------------------------------------------------------
 
@@ -790,7 +791,21 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ty
 (8, 'John Williams', 'john@sotc.holiday', NULL, '$2y$10$i5Zclz0Hff/mtXMtDoiO.elbraneIDBCXJnSN9FoZ7RvlQWsZAsUi', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:26:37', '2023-07-01 07:26:37'),
 (9, 'Manmohan Tiwari', 'manmohan@shikhar.com', NULL, '$2y$10$He/9XiUHbRGAujW2GRwIie.jLaf6EmFgEvcvaueVgTlhVsC8NTfKu', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:31:21', '2023-07-01 07:31:21'),
 (10, 'Alison Hobb', 'alison@kundu.com', NULL, '$2y$10$wYQ9w6hqCaVlRLW6scGs7e7NZ66Kf2.pPUF3ffivTLwbr6YG.nsHq', 2, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-01 07:44:04', '2023-07-01 07:44:04'),
-(11, 'Animesh Sah', 'animesh.10@gmail.com', NULL, '$2y$10$LoCDtwHKeVbA1vQ/Y04t9Ojil.0WQBN2NwWBuhtrVx9UruEzFdN3m', 0, '', '0000-00-00 00:00:00', '', '', '', 'Y', NULL, '2023-07-04 14:12:32', '2023-07-04 14:12:32');
+(11, 'Animesh Saha', 'animesh.10@gmail.com', NULL, '$2y$10$LoCDtwHKeVbA1vQ/Y04t9Ojil.0WQBN2NwWBuhtrVx9UruEzFdN3m', 0, '1688560319pz43an.jpg', '1985-10-09 00:00:00', '1B/19, Dum Dum Road', '9865410002', '<p>Vivamus ullamcorper neque ut egestas egestas. Cras imperdiet lectus vitae urna ultrices eleifend. Aliquam sagittis a mi viverra tempor. Duis eu lorem sed magna finibus vulputate vitae in justo. Cras vulputate sagittis fringilla. Ut aliquet tortor eu consectetur ornare. Fusce ornare dignissim sem at vulputate. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nullam non laoreet augue. Vestibulum sed justo eu lacus vestibulum efficitur sit amet sed mauris. Praesent sodales ante at orci lobortis venenatis. Cras id urna porta nisi commodo efficitur. Morbi malesuada tortor a aliquet aliquet. Nam sapien dolor, lobortis sit amet dolor at, porttitor sodales orci. Fusce porta ex quis ante tristique mollis.</p>', 'Y', NULL, '2023-07-04 14:12:32', '2023-07-04 14:12:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `wishlists`
+--
+
+CREATE TABLE `wishlists` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `package_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Indexes for dumped tables
@@ -939,6 +954,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
+-- Indexes for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1012,7 +1033,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `packages`
@@ -1073,6 +1094,12 @@ ALTER TABLE `testimonials`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `wishlists`
+--
+ALTER TABLE `wishlists`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
