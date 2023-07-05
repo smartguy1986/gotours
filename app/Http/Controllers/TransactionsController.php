@@ -2,23 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contacts;
+use App\Models\Transactions;
 use Illuminate\Http\Request;
 
-class ContactsController extends Controller
+class TransactionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CompanyController $companyController, DestinationsController $destinationsController, BlogController $blogController)
+    public function index()
     {
-        $data['company_details'] = $companyController->commonComponent();
-        $data['destinations'] = $destinationsController->index();
-        $data['blogs'] = $blogController->last3blogs();
-        
-        return view('layouts.pages.contactpage')->with($data);
+        //
     }
 
     /**
@@ -45,10 +41,10 @@ class ContactsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Contacts  $contacts
+     * @param  \App\Models\Transactions  $transactions
      * @return \Illuminate\Http\Response
      */
-    public function show(Contacts $contacts)
+    public function show(Transactions $transactions)
     {
         //
     }
@@ -56,10 +52,10 @@ class ContactsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Contacts  $contacts
+     * @param  \App\Models\Transactions  $transactions
      * @return \Illuminate\Http\Response
      */
-    public function edit(Contacts $contacts)
+    public function edit(Transactions $transactions)
     {
         //
     }
@@ -68,10 +64,10 @@ class ContactsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Contacts  $contacts
+     * @param  \App\Models\Transactions  $transactions
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Contacts $contacts)
+    public function update(Request $request, Transactions $transactions)
     {
         //
     }
@@ -79,10 +75,10 @@ class ContactsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Contacts  $contacts
+     * @param  \App\Models\Transactions  $transactions
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contacts $contacts)
+    public function destroy(Transactions $transactions)
     {
         //
     }

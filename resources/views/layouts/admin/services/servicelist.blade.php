@@ -9,16 +9,19 @@
                     <h4>Services</h4>
                     <p>Here change the Services of <strong>GoTours</strong></p>
                     <p></p>
+                    
                     @if ($message = Session::get('success'))
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('success') }}
                         <p></p>
                     @endif
                     @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('error') }}
                         <p></p>
                     @endif
                     @if ($errors->any())

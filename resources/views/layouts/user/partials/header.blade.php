@@ -32,7 +32,7 @@
             <div class="dashboard-header sticky-header">
                 <div class="content-left  logo-section pull-left">
                     <h1><a href="{{ URL::to('/') }}"><img src="{{ asset('admin_assets/images/logo.png') }}"
-                            alt=""></a></h1>
+                                alt=""></a></h1>
                 </div>
                 <div class="heaer-content-right pull-right">
                     <div class="search-field">
@@ -44,7 +44,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a class="dropdown-toggle" id="notifyDropdown" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <div class="dropdown-item">
@@ -138,12 +138,16 @@
                             </ul>
                             <a href="#" class="all-button">See all messages</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <div class="dropdown-item profile-sec">
-                                <img src="{{ asset('admin_assets/images/comment.jpg') }}" alt="">
-                                <span>My Account </span>
+                                @if (Auth::user()->profileimage)
+                                    <img src="{{ asset('images/users/' . Auth::user()->profileimage) }}" alt="">
+                                @else
+                                    <img src="{{ asset('assets/images/default/default-no-image.png') }}" alt="">
+                                @endif
+                                <span>{{ Auth::user()->name }}</span>
                                 <i class="fas fa-caret-down"></i>
                             </div>
                         </a>
@@ -153,8 +157,8 @@
                                 <li><a href="{{ route('user.profile') }}"><i class="fas fa-user-tie"></i>Profile</a>
                                 </li>
                                 <li><a href="#"><i class="fas fa-key"></i>Password</a></li>
-                                <li><a href="{{ URL::route('logout') }}"><i
-                                            class="fas fa-sign-out-alt"></i>Logout</a></li>
+                                <li><a href="{{ URL::route('logout') }}"><i class="fas fa-sign-out-alt"></i>Logout</a>
+                                </li>
                             </ul>
                         </div>
                     </div>

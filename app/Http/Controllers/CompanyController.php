@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\CompanyDetails;
+use Session;
 
 class CompanyController extends Controller
 {
@@ -98,7 +99,8 @@ class CompanyController extends Controller
         $company->company_bio = $request->company_bio;
         $company->save();
 
-        return redirect()->route('admin.dashboard')->with('success', 'Company Has Been updated successfully');
+        Session::flash('success', 'Company Has Been updated successfully');
+        return redirect()->route('admin.dashboard');
     }
 
     /**

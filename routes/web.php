@@ -100,7 +100,8 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/user/home', [HomeController::class, 'userHome'])->name('user.home');
     Route::get('/user/profile', [UserController::class, 'profile'])->name('user.profile');
     Route::post('/user/update', [UserController::class, 'update'])->name('user.update');
-    Route::get('/user/wishlist/{id}', [WishlistsController::class, 'showwishlist'])->name('user.wishlist');
+    Route::get('/user/wishlist', [WishlistsController::class, 'showwishlist'])->name('user.wishlist');
+    Route::get('/user/whishlistremove/{id}', [WishlistsController::class, 'whishlistremove'])->name('user.whishlistremove');
 });
 
 /*------------------------------------------

@@ -26,10 +26,18 @@ class PackagesController extends Controller
             if (Session::get('managerData')) {
                 $data['managerData'] = Session::get('managerData')->agency_name;
             }
-            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name')->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->where('packages.agency_id', $aid)->get();
+            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+                ->leftJoin('wishlists', function ($join) {
+                    $join->on('wishlists.package_id', '=', 'packages.id')
+                        ->where('wishlists.user_id', '=', Auth::user()->id);
+                })->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->where('packages.agency_id', $aid)->get();
             return view('layouts.manager.packages.lists', $data);
         } else {
-            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name')->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->get();
+            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+                ->leftJoin('wishlists', function ($join) {
+                    $join->on('wishlists.package_id', '=', 'packages.id')
+                        ->where('wishlists.user_id', '=', Auth::user()->id);
+                })->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->get();
             return view('layouts.admin.packages.lists', $data);
         }
 
@@ -37,12 +45,20 @@ class PackagesController extends Controller
 
     public function last3package()
     {
-        return DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+        return DB::table('packages')->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->leftJoin('wishlists', function ($join) {
+                $join->on('wishlists.package_id', '=', 'packages.id')
+                    ->where('wishlists.user_id', '=', Auth::user()->id);
+            })->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     }
 
     public function last3packageoffers()
     {
-        return DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname')->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+        return DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->leftJoin('wishlists', function ($join) {
+                $join->on('wishlists.package_id', '=', 'packages.id')
+                    ->where('wishlists.user_id', '=', Auth::user()->id);
+            })->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
     }
 
     public function packagecat()
@@ -55,7 +71,17 @@ class PackagesController extends Controller
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
 
-        $results = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->paginate(6);
+        // $results = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->paginate(6);
+        $results = DB::table('packages')
+            ->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->leftJoin('wishlists', function ($join) {
+                $join->on('wishlists.package_id', '=', 'packages.id')
+                    ->where('wishlists.user_id', '=', Auth::user()->id);
+            })
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->where('packages.status', '=', '1')
+            ->orderBy('packages.created_at', 'desc')
+            ->paginate(6);
 
         if ($request->ajax()) {
             $view = view('layouts.pages.packagesdata', compact('results'))->render();
@@ -99,12 +125,17 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $results2 = DB::table('packages')
-            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name')
+            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->leftJoin('wishlists', function ($join) {
+                $join->on('wishlists.package_id', '=', 'packages.id')
+                    ->where('wishlists.user_id', '=', Auth::user()->id);
+            })
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->join('package_category', 'package_category.id', '=', 'packages.category')
             ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
+
         $data['themename'] = $results2[0]->cat_name;
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebytheme', compact('results2'))->render();
@@ -120,7 +151,11 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $resultsd = DB::table('packages')
-            ->select('packages.*', 'destinations.name as dname', 'destinations.id', 'destinations.imageURL as destimg')
+            ->select('packages.*', 'destinations.name as dname', 'destinations.id', 'destinations.imageURL as destimg', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->leftJoin('wishlists', function ($join) {
+                $join->on('wishlists.package_id', '=', 'packages.id')
+                    ->where('wishlists.user_id', '=', Auth::user()->id);
+            })
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])
             ->orderBy('packages.created_at', 'desc')
@@ -349,7 +384,7 @@ class PackagesController extends Controller
         } else {
             return view('layouts.admin.packages.addprogramme', $data);
         }
-        
+
     }
 
     public function save_programme(Request $request)

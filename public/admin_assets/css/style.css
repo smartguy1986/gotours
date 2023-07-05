@@ -1255,6 +1255,8 @@ input:checked ~ .custom-input-field:before {
   margin-right: 10px;
   border-radius: 35px;
   border: 2px solid #a1adb3;
+  height: 35px;
+  object-fit: cover;
 }
 .dropdown-item.profile-sec i {
   margin-left: 10px;

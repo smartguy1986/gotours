@@ -102,7 +102,7 @@
                     </li>
                     @if (\Auth::user()->type == 'user')
                         <li>
-                            <a href="{{ URL::route('user.wishlist', Auth::user()->id) }}">Wishlist</a>
+                            <a href="{{ URL::route('user.wishlist') }}">Wishlist</a>
                         </li>
                     @endif
                     <li>

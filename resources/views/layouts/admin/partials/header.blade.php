@@ -42,7 +42,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="dropdown">
+                    {{-- <div class="dropdown">
                         <a class="dropdown-toggle" id="notifyDropdown" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false">
                             <div class="dropdown-item">
@@ -136,7 +136,7 @@
                             </ul>
                             <a href="#" class="all-button">See all messages</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="dropdown">
                         <a class="dropdown-toggle" data-toggle="dropdown">
                             <div class="dropdown-item profile-sec">

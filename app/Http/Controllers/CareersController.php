@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\DestinationsController;
 use App\Http\Controllers\BlogController;
+use Session;
 use Validator;
 use File;
 
@@ -63,7 +64,8 @@ class CareersController extends Controller
 
         if ($validatedData->fails()) {
             $errors = $validatedData->errors();
-            return redirect('/admin/career')->with('error', $errors);
+            Session::flash('error', $errors);
+            return redirect('/admin/career');
         }
 
         $fileName = time() . '.' . $request->job_image->extension();
@@ -81,7 +83,8 @@ class CareersController extends Controller
         $save->status = '1';
         $save->save();
 
-        return redirect('/admin/career')->with('success', 'Job Has been posted');
+        Session::flash('success', 'Job Has been posted');
+        return redirect('/admin/career');
     }
 
     /**
@@ -132,7 +135,8 @@ class CareersController extends Controller
 
         if ($validatedData->fails()) {
             $errors = $validatedData->errors();
-            return redirect('/admin/career')->with('error', $errors);
+            Session::flash('error', $errors);
+            return redirect('/admin/career');
         }
 
         if (isset($request->job_image)) {
@@ -154,9 +158,11 @@ class CareersController extends Controller
         $affected_row = Careers::where('id', $request->jobid)->update($values);
 
         if ($affected_row) {
-            return redirect('/admin/career')->with('success', 'Job successfully updated');
+            Session::flash('success', 'Job successfully updated');
+            return redirect('/admin/career');
         } else {
-            return redirect('/admin/career')->with('error', 'Job not updated');
+            Session::flash('success', 'Job not updated');
+            return redirect('/admin/career');
         }
     }
 

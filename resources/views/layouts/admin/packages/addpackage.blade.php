@@ -13,12 +13,14 @@
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('success') }}
                         <p></p>
                     @endif
                     @if ($message = Session::get('error'))
                         <div class="alert alert-danger">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('error') }}
                         <p></p>
                     @endif
                     @if ($errors->any())
@@ -30,7 +32,6 @@
                             </ul>
                         </div>
                     @endif
-
                     <h4>Add Packages</h4>
                     <form class="form-horizontal" method="POST" action="{{ route('packages.save') }}"
                         enctype="multipart/form-data">

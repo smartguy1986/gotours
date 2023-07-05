@@ -24,37 +24,7 @@ class CompanyDetailsController extends Controller
         return view('layouts.admin.company.basicinfo', $data);
     }
 
-    // public function banners()
-    // {
-    //     $data['banners'] = DB::table('company_banners')->select('*')->get();
-    //     return view('layouts.admin.company.banners', $data);
-    // }
 
-    // public function banners_store(Request $request)
-    // {
-    //     $validatedData = $request->validate([
-    //         'banner_image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-    //     ]);
-    
-    //     // if ($validator->fails()) {
-    //     //     return redirect('company.banners')->with('error', 'Image type is not supported or the size is greater than 2MB');
-    //     // }
-
-    //     // $name = $request->file('banner_image')->getClientOriginalName();
-    //     // $path = $request->file('banner_image')->store('public/images/banners');
-
-    //     $imageName = time().'.'.$request->banner_image->extension();
-    //     $request->banner_image->move(public_path('public/images/banners'), $imageName);
-
-    //     $save = new company_banners;
-    //     $save->imageURL = $imageName;
-    //     $save->tagline = $request->tagline;
-    //     $save->description = $request->description;
-    //     $save->status = 1;
-    //     $save->save();
-    
-    //     //return redirect('image-upload')->with('status', 'Banner Has been uploaded');
-    // }
     /**
      * Show the form for creating a new resource.
      *
@@ -114,7 +84,7 @@ class CompanyDetailsController extends Controller
             'company_address' => 'required',
             'company_bio' => 'required',
         ]);
-        
+
         $company = CompanyDetails::find($id);
         $company->company_name = $request->company_name;
         $company->company_email = $request->company_email;
@@ -123,8 +93,8 @@ class CompanyDetailsController extends Controller
         $company->company_bio = $request->company_bio;
         $company->save();
 
-        return redirect()->route('company.basic')
-        ->with('success','Company Has Been updated successfully');
+        Session::flash('success', 'Company Has Been updated successfully');
+        return redirect()->route('company.basic');
     }
 
     /**

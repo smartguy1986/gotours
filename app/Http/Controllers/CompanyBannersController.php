@@ -34,13 +34,6 @@ class CompanyBannersController extends Controller
             'description' => 'required'
         ]);
     
-        // if ($validatedData->fails()) {
-        //     return redirect('company.banners')->with('error', 'Image type is not supported or the size is greater than 2MB');
-        // }
-
-        // $name = $request->file('banner_image')->getClientOriginalName();
-        // $path = $request->file('banner_image')->store('public/images/banners');
-
         $fileName = time().'.'.$request->banner_image->extension();  
         $request->banner_image->move(public_path('images/banners'), $fileName);
 
@@ -50,8 +43,9 @@ class CompanyBannersController extends Controller
         $save->description = $request->description;
         $save->status = 1;
         $save->save();
-    
-        return redirect('/admin/company/banners')->with('success', 'Banner Has been uploaded');
+
+        Session::flash('success', 'Banner Has been uploaded');
+        return redirect('/admin/company/banners');
     }
 
     public function delete_banners(Request $request, $id, $filename)
@@ -59,6 +53,7 @@ class CompanyBannersController extends Controller
         DB::table('company_banners')->where('id', $id)->delete();
         $file_path = public_path().'/images/banners/'.$filename;
         unlink($file_path);
-        return redirect('/admin/company/banners')->with('success', 'Banner Has been deleted');
+        Session::flash('success', 'Banner Has been deleted');
+        return redirect('/admin/company/banners');
     }
 }

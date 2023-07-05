@@ -20,8 +20,8 @@
                         <div class="package-wrap">
                             <figure class="feature-image">
                                 <a href="{{ URL::route('packages.details', $pckg->slug) }}">
-                                    <img src="{{ asset('images/packages/' . $pckg->imageURL) }}" alt="{{ $pckg->title }}"
-                                        class="package-image">
+                                    <img src="{{ asset('images/packages/' . $pckg->imageURL) }}"
+                                        alt="{{ $pckg->title }}" class="package-image">
                                 </a>
                             </figure>
                             <div class="package-price">
@@ -65,8 +65,14 @@
                                     <div class="btn-wrap">
                                         <a href="{{ URL::route('packages.details', $pckg->slug) }}"
                                             class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                                        <a href="{{ URL::route('packages.whishlist', $pckg->id) }}"
-                                            class="button-text width-6">Wish List<i class="far fa-heart"></i></a>
+                                        @if ($pckg->wishlisted == '1')
+                                            <a href="{{ URL::route('user.whishlistremove', $pckg->id) }}"
+                                                class="button-text width-6">Remove from List</a>
+                                        @else
+                                            <a href="{{ URL::route('packages.whishlist', $pckg->id) }}"
+                                                class="button-text width-6">Wish
+                                                List<i class="far fa-heart"></i></a>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

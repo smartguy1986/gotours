@@ -12,28 +12,25 @@
                         <div class="alert alert-success">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('success') }}
                         <p></p>
                     @endif
                     @if ($message = Session::get('error'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-danger">
                             <p>{{ $message }}</p>
                         </div>
+                        {{ Session::forget('error') }}
                         <p></p>
                     @endif
-                    <div class="row">
-                        @if ($agencies)
-                            <div class="col-sm-6">
-                                <span class="pull-righ"><img
-                                        src="{{ URL::asset('/images/agencies/' . $agencies->agency_logo) }}"
-                                        alt="image" width="200"></span>
-                            </div>
-                            <div class="col-sm-6">
-                                <span class="pull-righ"><img
-                                        src="{{ URL::asset('/images/agencies/' . $agencies->agency_banner) }}"
-                                        alt="image" width="200"></span>
-                            </div>
-                        @endif
-                    </div>
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <p>Your Agency details are empty, please add them below</p>
                     <p></p>
                     <form class="form-horizontal" method="POST"

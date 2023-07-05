@@ -3,7 +3,8 @@
         <div class="package-wrap">
             <figure class="feature-image">
                 <a href="/packages/details/{{ $post->slug }}">
-                    <img src="{{ asset('images/packages/'.$post->imageURL) }}" alt="{{ $post->title }}" class="package-image">
+                    <img src="{{ asset('images/packages/' . $post->imageURL) }}" alt="{{ $post->title }}"
+                        class="package-image">
                 </a>
             </figure>
             <div class="package-price">
@@ -42,8 +43,14 @@
                     <div class="btn-wrap">
                         <a href="/packages/details/{{ $post->slug }}" class="button-text width-6">Book Now<i
                                 class="fas fa-arrow-right"></i></a>
-                        <a href="/packages/details/{{ $post->id }}" class="button-text width-6">Wish List<i
-                                class="far fa-heart"></i></a>
+                        @if ($post->wishlisted == '1')
+                            <a href="{{ URL::route('user.whishlistremove', $post->id) }}"
+                                class="button-text width-6">Remove from List</a>
+                        @else
+                            <a href="{{ URL::route('packages.whishlist', $post->id) }}"
+                                class="button-text width-6">Wish
+                                List<i class="far fa-heart"></i></a>
+                        @endif
                     </div>
                 </div>
             </div>

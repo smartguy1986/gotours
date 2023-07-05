@@ -110,7 +110,8 @@ class DestinationsController extends Controller
         $save->featured = $request->featured;
         $save->save();
 
-        return redirect('/admin/destinations')->with('success', 'Destination Has been uploaded');
+        Session::flash('success', 'Destination Has been uploaded');
+        return redirect('/admin/destinations');
     }
 
     /**

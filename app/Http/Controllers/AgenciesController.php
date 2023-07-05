@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Agencies;
 use Illuminate\Http\Request;
 use Auth;
+use Session;
 use Validator;
 use File;
 use Str;
@@ -55,7 +56,7 @@ class AgenciesController extends Controller
 
         if ($validatedData->fails()) {
             $errors = $validatedData->errors();
-            return redirect('/manager/agencies')->with('error', $errors);
+            return redirect('/manager/agencies');
         }
 
         $fileName1 = time() . '.' . $request->agn_image->extension();
@@ -80,7 +81,8 @@ class AgenciesController extends Controller
         $save->status = '1';
         $save->save();
 
-        return redirect('/manager/agencies')->with('success', 'Agency Details updated successfully');
+        Session::flash('success', 'Agency Details updated successfully');
+        return redirect('/manager/agencies');
     }
 
     /**
@@ -127,7 +129,8 @@ class AgenciesController extends Controller
 
         if ($validatedData->fails()) {
             $errors = $validatedData->errors();
-            return redirect('/manager/agencies')->with('error', $errors);
+            Session::flash('error', $errors);
+            return redirect('/manager/agencies');
         }
 
         if ($request->agn_image) {
@@ -168,9 +171,11 @@ class AgenciesController extends Controller
         $affected_row = Agencies::where('id', $request->agn_id)->update($values);
 
         if ($affected_row) {
-            return redirect('/manager/agencies')->with('success', 'Agency Details successfully updated');
+            Session::flash('success', 'Agency Details updated successfully');
+            return redirect('/manager/agencies');
         } else {
-            return redirect('/manager/agencies')->with('error', 'Agency details not updated');
+            Session::flash('success', 'Agency Details not updated');
+            return redirect('/manager/agencies');
         }
     }
 
