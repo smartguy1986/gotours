@@ -5,17 +5,22 @@ namespace App\Http\Controllers;
 use App\Models\Wishlists;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Redirect;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use DB;
 
 class WishlistsController extends Controller
 {
-    public function __construct()
-    {
-        if (!Auth::check()) {
-            return Redirect::back()->with('error', 'Please login to wishlist tour packages!');
-        }
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware(function ($request, $next) {
+    //         if (!auth()->check()) {
+    //             return redirect('login')->with('error', 'Please login to make a wishlist');
+    //         }
+
+    //         return $next($request);
+    //     });
+    // }
     /**
      * Display a listing of the resource.
      *
@@ -31,27 +36,32 @@ class WishlistsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $pid)
+    public function create(Request $request, $pid): RedirectResponse
     {
+        $uid = null; // Initialize with a default value
+
         if (Auth::check()) {
             $uid = Auth::user()->id;
-        }
-        $records = Wishlists::where('user_id', $uid)->where('package_id', $pid)->first();
 
-        if ($records) {
-            return redirect('/user/wishlist')->with('error', 'Package already added to your wishlist');
-        } else {
-            $check = Wishlists::insertGetId(
-                array(
-                    'user_id' => $uid,
-                    'package_id' => $pid
-                )
-            );
-            if ($check) {
-                return redirect('/user/wishlist')->with('success', 'Package added to your wishlist');
+            $records = Wishlists::where('user_id', $uid)->where('package_id', $pid)->first();
+
+            if ($records) {
+                return Redirect::back()->with('success', 'Package already added to your wishlist');
             } else {
-                return redirect('/user/wishlist')->with('error', 'Error. Please try again!');
+                $check = Wishlists::insert(
+                    array(
+                        'user_id' => $uid,
+                        'package_id' => $pid
+                    )
+                );
+                if ($check) {
+                    return Redirect::back()->with('success', 'Package added to your wishlist');
+                } else {
+                    return Redirect::back()->with('error', 'Error. Please try again!');
+                }
             }
+        } else {
+            return Redirect::back()->with('error', 'Login to wishlisht package');
         }
     }
 
@@ -91,9 +101,20 @@ class WishlistsController extends Controller
         return view('layouts.pages.wishlistpage', $data);
     }
 
-    public function whishlistremove(Request $request)
+    public function whishlistremove(Request $request, $packageId)
     {
+        $userId = Auth::user()->id;
+        $wishlist = Wishlists::where('user_id', $userId)
+            ->where('package_id', $packageId)
+            ->first();
 
+        if ($wishlist) {
+            // Delete the wishlist record
+            $wishlist->delete();
+            return Redirect::back()->with('success', 'Wishlist deleted successfully.');
+        } else {
+            return Redirect::back()->with('error', 'Wishlist not found.');
+        }
     }
 
     /**

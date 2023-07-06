@@ -45,20 +45,47 @@ class PackagesController extends Controller
 
     public function last3package()
     {
-        return DB::table('packages')->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+        return DB::table('packages')
+            ->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL, 0, IF(wishlists.user_id IS NULL, 0, 1)) as wishlisted'))
             ->leftJoin('wishlists', function ($join) {
-                $join->on('wishlists.package_id', '=', 'packages.id')
-                    ->where('wishlists.user_id', '=', Auth::user()->id);
-            })->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+                $join->on('wishlists.package_id', '=', 'packages.id');
+
+                if (Auth::check()) {
+                    $join->where('wishlists.user_id', '=', Auth::user()->id);
+                } else {
+                    $join->whereNull('wishlists.user_id');
+                }
+            })
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->where('packages.status', '=', '1')
+            ->orderBy('packages.created_at', 'desc')
+            ->skip(0)
+            ->take(3)
+            ->get();
     }
 
     public function last3packageoffers()
     {
-        return DB::table('packages')->select('packages.*', 'destinations.name', 'destinations.slug as dname', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+        return DB::table('packages')
+            ->select('packages.*', 'destinations.name', 'destinations.slug as dname', DB::raw('IF(wishlists.package_id IS NULL, 0, IF(wishlists.user_id IS NULL, 0, 1)) as wishlisted'))
             ->leftJoin('wishlists', function ($join) {
-                $join->on('wishlists.package_id', '=', 'packages.id')
-                    ->where('wishlists.user_id', '=', Auth::user()->id);
-            })->join('destinations', 'destinations.id', '=', 'packages.destination')->where([['packages.status', '=', '1'], ['is_sale', '=', '1']])->orderBy('packages.created_at', 'desc')->skip(0)->take(3)->get();
+                $join->on('wishlists.package_id', '=', 'packages.id');
+
+                if (Auth::check()) {
+                    $join->where('wishlists.user_id', '=', Auth::user()->id);
+                } else {
+                    $join->whereNull('wishlists.user_id');
+                }
+            })
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
+            ->where([
+                ['packages.status', '=', '1'],
+                ['is_sale', '=', '1']
+            ])
+            ->orderBy('packages.created_at', 'desc')
+            ->skip(0)
+            ->take(3)
+            ->get();
     }
 
     public function packagecat()
@@ -73,10 +100,13 @@ class PackagesController extends Controller
 
         // $results = DB::table('packages')->select('packages.*', 'destinations.name')->join('destinations', 'destinations.id', '=', 'packages.destination')->where('packages.status', '=', '1')->orderBy('packages.created_at', 'desc')->paginate(6);
         $results = DB::table('packages')
-            ->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->select('packages.*', 'destinations.name', DB::raw('IF(wishlists.package_id IS NULL OR wishlists.user_id IS NULL, 0, 1) as wishlisted'))
             ->leftJoin('wishlists', function ($join) {
-                $join->on('wishlists.package_id', '=', 'packages.id')
-                    ->where('wishlists.user_id', '=', Auth::user()->id);
+                $join->on('wishlists.package_id', '=', 'packages.id');
+
+                if (Auth::check()) {
+                    $join->where('wishlists.user_id', '=', Auth::user()->id);
+                }
             })
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->where('packages.status', '=', '1')
@@ -125,14 +155,20 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $results2 = DB::table('packages')
-            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name', DB::raw('IF(wishlists.package_id IS NULL OR wishlists.user_id IS NULL, 0, 1) as wishlisted'))
             ->leftJoin('wishlists', function ($join) {
-                $join->on('wishlists.package_id', '=', 'packages.id')
-                    ->where('wishlists.user_id', '=', Auth::user()->id);
+                $join->on('wishlists.package_id', '=', 'packages.id');
+
+                if (Auth::check()) {
+                    $join->where('wishlists.user_id', '=', Auth::user()->id);
+                }
             })
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->join('package_category', 'package_category.id', '=', 'packages.category')
-            ->where([['packages.status', '=', '1'], ['package_category.slug', '=', $link]])
+            ->where([
+                ['packages.status', '=', '1'],
+                ['package_category.slug', '=', $link]
+            ])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
 
@@ -153,8 +189,10 @@ class PackagesController extends Controller
         $resultsd = DB::table('packages')
             ->select('packages.*', 'destinations.name as dname', 'destinations.id', 'destinations.imageURL as destimg', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
             ->leftJoin('wishlists', function ($join) {
-                $join->on('wishlists.package_id', '=', 'packages.id')
-                    ->where('wishlists.user_id', '=', Auth::user()->id);
+                $join->on('wishlists.package_id', '=', 'packages.id');
+                if (Auth::check()) {
+                    $join->where('wishlists.user_id', '=', Auth::user()->id);
+                }
             })
             ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])

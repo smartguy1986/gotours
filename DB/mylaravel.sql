@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 05, 2023 at 10:03 PM
+-- Generation Time: Jul 06, 2023 at 04:14 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -219,11 +219,20 @@ CREATE TABLE `contacts` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `source` varchar(255) NOT NULL,
   `message` varchar(255) NOT NULL,
   `response` enum('0','1') NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `contacts`
+--
+
+INSERT INTO `contacts` (`id`, `name`, `email`, `subject`, `source`, `message`, `response`, `created_at`, `updated_at`) VALUES
+(3, 'Arijit Nandi', 'arijit.nandi.2008@gmail.com', 'Contact Page Enquiry', 'Contact Page', 'This is a demo message.', '0', '2023-07-06 06:17:54', '2023-07-06 06:17:54');
 
 -- --------------------------------------------------------
 
@@ -812,7 +821,8 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `package_id`, `created_at`, `updated_at`) VALUES
-(1, 11, 18, '2023-07-05 20:25:38', '2023-07-05 20:25:38');
+(5, 11, 20, '2023-07-06 19:10:35', '2023-07-06 19:10:35'),
+(6, 11, 18, '2023-07-06 19:35:45', '2023-07-06 19:35:45');
 
 --
 -- Indexes for dumped tables
@@ -1016,7 +1026,7 @@ ALTER TABLE `company_details`
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `destinations`
@@ -1106,7 +1116,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

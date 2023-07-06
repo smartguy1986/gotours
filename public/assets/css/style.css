@@ -10003,7 +10003,7 @@ product checkout css
   padding: 10px 0;
 }
 
-.alert {
+.smallboxright {
   width: 25% !important;
   right: 30px !important;
   position: fixed !important;

@@ -102,14 +102,14 @@
             </div>
             <div class="mobile-menu-container sticky2"></div>
             @if ($message = Session::get('success'))
-                <div class="alert alert-success">
+                <div class="alert alert-success smallboxright">
                     <p>{{ $message }}</p>
                 </div>
                 {{ Session::forget('success') }}
             @endif
 
             @if ($message = Session::get('error'))
-                <div class="alert alert-danger">
+                <div class="alert alert-danger smallboxright">
                     <p>{{ $message }}</p>
                 </div>
                 {{ Session::forget('error') }}

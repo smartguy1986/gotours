@@ -61,17 +61,24 @@
                                             <span style="width: 60%"></span>
                                         </div>
                                     </div>
-                                    <p>{{ Str::limit($pckg->descriptions, 200) }}</p>
+                                    <p>{!! html_entity_decode(Str::limit($pckg->descriptions, 200)) !!}</p>
                                     <div class="btn-wrap">
                                         <a href="{{ URL::route('packages.details', $pckg->slug) }}"
                                             class="button-text width-6">Book Now<i class="fas fa-arrow-right"></i></a>
-                                        @if ($pckg->wishlisted == '1')
+                                        @if ($pckg->wishlisted == '1' && Auth::check())
                                             <a href="{{ URL::route('user.whishlistremove', $pckg->id) }}"
                                                 class="button-text width-6">Remove from List</a>
                                         @else
-                                            <a href="{{ URL::route('packages.whishlist', $pckg->id) }}"
-                                                class="button-text width-6">Wish
-                                                List<i class="far fa-heart"></i></a>
+                                            @if (Auth::check())
+                                                <a href="{{ URL::route('packages.whishlist', $pckg->id) }}"
+                                                    class="button-text width-6">Wish List<i
+                                                        class="far fa-heart"></i></a>
+                                            @else
+                                                <a href="#"
+                                                    onclick="alert('Please log in to add to your wishlist')"
+                                                    class="button-text width-6">Wish List<i
+                                                        class="far fa-heart"></i></a>
+                                            @endif
                                         @endif
                                     </div>
                                 </div>

@@ -18,11 +18,19 @@
         <div class="login-from-wrap">
             <h2>Welcome to <a href="{{ URL::to('/') }}">GoTours</a></h2>
             <h4>Login to your account</h4>
-            @error('error')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success">
+                    <p>{{ $message }}</p>
+                </div>
+                {{ Session::forget('success') }}
+            @endif
+
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger">
+                    <p>{{ $message }}</p>
+                </div>
+                {{ Session::forget('error') }}
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="form-group">

@@ -66,6 +66,8 @@ class AjaxController extends Controller
             $save = new Contacts;
             $save->name = $request->contactname;
             $save->email = $request->contactmail;
+            $save->subject = "Contact Page Enquiry";
+            $save->source = "Contact Page";
             $save->message = $request->contactmessage;
             $save->response = '0';
             $save->save();
