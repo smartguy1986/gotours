@@ -41,8 +41,8 @@
                     </div>
                     <p>{!! html_entity_decode(substr($post->descriptions, 0, 200)) !!}</p>
                     <div class="btn-wrap">
-                        <a href="/packages/details/{{ $post->slug }}" class="button-text width-6">Book Now<i
-                                class="fas fa-arrow-right"></i></a>
+                        <a href="{{ URL::route('packages.details', $post->slug) }}" class="button-text width-6">Book
+                            Now<i class="fas fa-arrow-right"></i></a>
                         @if ($post->wishlisted == '1' && Auth::check())
                             <a href="{{ URL::route('user.whishlistremove', $post->id) }}"
                                 class="button-text width-6">Remove from List</a>

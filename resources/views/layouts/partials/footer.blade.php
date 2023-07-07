@@ -526,7 +526,7 @@
         console.log(value);
         $.ajax({
             type: 'get',
-            url: '{{ URL::to('searchd') }}',
+            url: 'searchd',
             data: {
                 'search': value
             },

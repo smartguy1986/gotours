@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 06, 2023 at 04:14 PM
+-- Generation Time: Jul 07, 2023 at 10:22 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -821,8 +821,12 @@ CREATE TABLE `wishlists` (
 --
 
 INSERT INTO `wishlists` (`id`, `user_id`, `package_id`, `created_at`, `updated_at`) VALUES
-(5, 11, 20, '2023-07-06 19:10:35', '2023-07-06 19:10:35'),
-(6, 11, 18, '2023-07-06 19:35:45', '2023-07-06 19:35:45');
+(8, 11, 19, '2023-07-07 18:43:58', '2023-07-07 18:43:58'),
+(9, 11, 12, '2023-07-07 18:46:44', '2023-07-07 18:46:44'),
+(13, 11, 13, '2023-07-08 00:51:23', '2023-07-08 01:32:25'),
+(14, 11, 15, '2023-07-08 01:33:22', '2023-07-08 01:33:22'),
+(15, 11, 18, '2023-07-08 01:34:27', '2023-07-08 01:34:27'),
+(17, 11, 9, '2023-07-08 01:37:56', '2023-07-08 01:37:56');
 
 --
 -- Indexes for dumped tables
@@ -1116,7 +1120,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -62,7 +62,7 @@
                             <a href="{{ URL::route('user.home') }}">User Dashboard</a>
                         @endif
                     </li>
-                    @if (\Auth::user()->type == 'user')
+                    @if (\Auth::user()->type == 'admin')
                         <li class="menu-item-has-children">
                             <a href="#">User</a>
                             <ul>

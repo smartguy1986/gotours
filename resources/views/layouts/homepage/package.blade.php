@@ -53,7 +53,7 @@
                                 <div class="package-content">
                                     <h3>
                                         <a
-                                            href="{{ URL::route('packages.details', $pckg->slug) }}">{{ $pckg->title }}</a>
+                                            href="{{ URL::route('packages.details', $pckg->slug) }}">{{ Str::limit($pckg->title, 50) }}</a>
                                     </h3>
                                     <div class="review-area">
                                         <span class="review-text">(25 reviews)</span>

@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Wishlists;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Redirect;
 use DB;
+use Auth;
 
 class WishlistsController extends Controller
 {
@@ -38,30 +38,24 @@ class WishlistsController extends Controller
      */
     public function create(Request $request, $pid): RedirectResponse
     {
-        $uid = null; // Initialize with a default value
+        $uid = Auth::user()->id;
 
-        if (Auth::check()) {
-            $uid = Auth::user()->id;
+        $records = Wishlists::where('user_id', $uid)->where('package_id', $pid)->first();
 
-            $records = Wishlists::where('user_id', $uid)->where('package_id', $pid)->first();
-
-            if ($records) {
-                return Redirect::back()->with('success', 'Package already added to your wishlist');
-            } else {
-                $check = Wishlists::insert(
-                    array(
-                        'user_id' => $uid,
-                        'package_id' => $pid
-                    )
-                );
-                if ($check) {
-                    return Redirect::back()->with('success', 'Package added to your wishlist');
-                } else {
-                    return Redirect::back()->with('error', 'Error. Please try again!');
-                }
-            }
+        if ($records) {
+            return Redirect::back()->with('success', 'Package already added to your wishlist');
         } else {
-            return Redirect::back()->with('error', 'Login to wishlisht package');
+            $check = Wishlists::insert(
+                array(
+                    'user_id' => $uid,
+                    'package_id' => $pid
+                )
+            );
+            if ($check) {
+                return Redirect::back()->with('success', 'Package added to your wishlist');
+            } else {
+                return Redirect::back()->with('error', 'Error. Please try again!');
+            }
         }
     }
 

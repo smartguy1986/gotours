@@ -155,15 +155,16 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $results2 = DB::table('packages')
-            ->select('packages.*', 'destinations.name', 'destinations.id', 'package_category.cat_name', DB::raw('IF(wishlists.package_id IS NULL OR wishlists.user_id IS NULL, 0, 1) as wishlisted'))
+            ->select('packages.*', 'destinations.name as dname', 'destinations.id as did', 'package_category.cat_name', 'destinations.imageURL as destimg', DB::raw('COALESCE(wishlists.package_id IS NOT NULL, 1, 0) as wishlisted'))
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->leftJoin('wishlists', function ($join) {
                 $join->on('wishlists.package_id', '=', 'packages.id');
-
                 if (Auth::check()) {
                     $join->where('wishlists.user_id', '=', Auth::user()->id);
                 }
+                // ->where('wishlists.user_id', '=', Auth::user()->id)
+                // ->on('wishlists.package_id', '=', 'packages.id');
             })
-            ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->join('package_category', 'package_category.id', '=', 'packages.category')
             ->where([
                 ['packages.status', '=', '1'],
@@ -171,7 +172,7 @@ class PackagesController extends Controller
             ])
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
-
+        // dd(Auth::user()->id, $results2);
         $data['themename'] = $results2[0]->cat_name;
         if ($request->ajax()) {
             $view = view('layouts.pages.packagebytheme', compact('results2'))->render();
@@ -187,17 +188,22 @@ class PackagesController extends Controller
         $data['blogs'] = $blogController->last3blogs();
 
         $resultsd = DB::table('packages')
-            ->select('packages.*', 'destinations.name as dname', 'destinations.id', 'destinations.imageURL as destimg', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            ->select('packages.*', 'destinations.name as dname', 'destinations.id as did', 'destinations.imageURL as destimg', DB::raw('COALESCE(wishlists.package_id IS NOT NULL, 1, 0) as wishlisted'))
+            ->join('destinations', 'destinations.id', '=', 'packages.destination')
             ->leftJoin('wishlists', function ($join) {
                 $join->on('wishlists.package_id', '=', 'packages.id');
                 if (Auth::check()) {
                     $join->where('wishlists.user_id', '=', Auth::user()->id);
                 }
+                // ->where('wishlists.user_id', '=', Auth::user()->id)
+                // ->on('wishlists.package_id', '=', 'packages.id');
             })
-            ->join('destinations', 'destinations.id', '=', 'packages.destination')
-            ->where([['packages.status', '=', '1'], ['destinations.slug', '=', $dslug]])
+            ->where('packages.status', '=', 1)
+            ->where('destinations.slug', '=', $dslug)
             ->orderBy('packages.created_at', 'desc')
             ->paginate(6);
+
+        // dd(Auth::user()->id, $resultsd);
         if (count($resultsd) > 0) {
             $data['banner'] = $resultsd[0]->destimg;
             $data['destname'] = $resultsd[0]->dname;
