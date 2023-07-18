@@ -521,6 +521,50 @@
         }
     }
 
+    if ((window.location.pathname).indexOf('blogs') > -1) {
+        // /alert(window.location.pathname);
+        var paginatea = 1;
+        loadMoreDatao(paginatea);
+        // var urlpath4 = window.location.pathname;
+        $('#load-more-articles').click(function() {
+            var pagea = $(this).data('paginatea');
+            loadMoreDatao(pagea);
+            $(this).data('paginatea', pagea + 1);
+        });
+        // run function when user click load more button
+        function loadMoreDatao(paginateo) {
+            $.ajax({
+                    url: 'blogs?page=' + paginateo,
+                    type: 'get',
+                    datatype: 'html',
+                    beforeSend: function() {
+                        $('#preload').show();
+                        $('#load-more-articles').text('Loading...');
+                    }
+                })
+                .done(function(dataa) {
+                    if (dataa.blogs.length == 0) {
+                        $('.invisible').removeClass('invisible');
+                        $('#load-more-articles').hide();
+                        $('#preload').hide();
+                        return;
+                    } else if (dataa.blogs.length < 6) {
+                        $('.invisible').addClass('invisible');
+                        $('#load-more-articles').hide();
+                        $('#preload').hide();
+                        return;
+                    } else {
+                        $('#load-more-articles').text('Load more...');
+                        $('#articles-post').append(dataa.blogs);
+                        $('#preload').hide();
+                    }
+                })
+                .fail(function(jqXHR, ajaxOptions, thrownError) {
+                    alert('Something went wrong.');
+                });
+        }
+    }
+
     $('#searchdesti').on('keyup', function() {
         var value = $(this).val();
         console.log(value);

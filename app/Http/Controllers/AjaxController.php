@@ -20,9 +20,9 @@ class AjaxController extends Controller
             $errors = $validatedData->errors();
             $msg = '<div class="alert alert-danger" role="alert">' . $errors . '</div>';
         } else {
-            $user = DB::table('subscriber_list')->where('usermail', '=', $request->usermail)->first();
+            $user = DB::connection('mysql')->table('subscriber_list')->where('usermail', '=', $request->usermail)->first();
             if ($user === null) {
-                $check = DB::table('subscriber_list')->insertGetId(
+                $check = DB::connection('mysql')->table('subscriber_list')->insertGetId(
                     array(
                         'usermail' => $request->usermail,
                         'status' => '1'
@@ -123,7 +123,7 @@ class AjaxController extends Controller
         $msg = '';
         $keyword = $request->search;
         if ($keyword) {
-            $results = DB::table('destinations')
+            $results = DB::connection('mysql')->table('destinations')
                 ->select('id', 'name', 'slug')
                 ->where('name', 'like', '%' . $keyword . '%')
                 ->orWhere('slug', 'like', '%' . $keyword . '%')

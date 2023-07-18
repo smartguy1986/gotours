@@ -26,14 +26,14 @@ class PackagesController extends Controller
             if (Session::get('managerData')) {
                 $data['managerData'] = Session::get('managerData')->agency_name;
             }
-            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            $data['packages'] = DB::connection('mysql')->table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
                 ->leftJoin('wishlists', function ($join) {
                     $join->on('wishlists.package_id', '=', 'packages.id')
                         ->where('wishlists.user_id', '=', Auth::user()->id);
                 })->leftJoin('agencies', 'agencies.id', '=', 'packages.agency_id')->orderBy('packages.id', 'DESC')->where('packages.agency_id', $aid)->get();
             return view('layouts.manager.packages.lists', $data);
         } else {
-            $data['packages'] = DB::table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
+            $data['packages'] = DB::connection('mysql')->table('packages')->select('packages.*', 'agencies.agency_name', DB::raw('IF(wishlists.package_id IS NULL, 0, 1) as wishlisted'))
                 ->leftJoin('wishlists', function ($join) {
                     $join->on('wishlists.package_id', '=', 'packages.id')
                         ->where('wishlists.user_id', '=', Auth::user()->id);

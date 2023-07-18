@@ -24,7 +24,7 @@ class UserController extends Controller
     public function profile()
     {
         $uid = Auth::user()->id;
-        $data['user'] = DB::table('users')->select('*')->where('id', $uid)->first();
+        $data['user'] = DB::connection('mysql')->table('users')->select('*')->where('id', $uid)->first();
         return view('layouts.user.userprofile', $data);
     }
     /**
@@ -116,7 +116,7 @@ class UserController extends Controller
             'profileimage' => $fileName
         );
 
-        if (DB::table('users')->where("id", $request->uid)->update($data)) {
+        if (DB::connection('mysql')->table('users')->where("id", $request->uid)->update($data)) {
             return redirect('/user/profile/')->with('success', 'profile updated Successfully');
         } else {
             return redirect('/user/profile/')->with('error', 'profile not updated');

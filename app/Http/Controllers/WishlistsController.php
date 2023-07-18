@@ -82,7 +82,7 @@ class WishlistsController extends Controller
         $data['company_details'] = $companyController->commonComponent();
         $data['blogs'] = $blogController->last3blogs();
 
-        $result = DB::table('wishlists')
+        $result = DB::connection('mysql')->table('wishlists')
             ->select('wishlists.*', 'packages.*', 'destinations.name', 'destinations.slug as dname')
             ->join('packages', 'packages.id', '=', 'wishlists.package_id')
             ->join('destinations', 'destinations.id', '=', 'packages.destination')

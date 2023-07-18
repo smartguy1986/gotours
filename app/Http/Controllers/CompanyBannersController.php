@@ -16,7 +16,7 @@ class CompanyBannersController extends Controller
      */
     public function index()
     {
-        $data['banners'] = DB::table('company_banners')->select('*')->get();
+        $data['banners'] = DB::connection('mysql')->table('company_banners')->select('*')->get();
         return view('layouts.admin.company.banners', $data);
     }
 
@@ -50,7 +50,7 @@ class CompanyBannersController extends Controller
 
     public function delete_banners(Request $request, $id, $filename)
     {
-        DB::table('company_banners')->where('id', $id)->delete();
+        DB::connection('mysql')->table('company_banners')->where('id', $id)->delete();
         $file_path = public_path().'/images/banners/'.$filename;
         unlink($file_path);
         Session::flash('success', 'Banner Has been deleted');

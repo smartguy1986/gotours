@@ -30,7 +30,7 @@ class HomeController extends Controller
 
     public function index(CompanyController $companyController, DestinationsController $destinationsController, PackagesController $packagesController, BlogController $blogController)
     {
-        $data['company_banners'] = DB::table('company_banners')->select('*')->where('status', '1')->orderBy('id', 'DESC')->get();
+        $data['company_banners'] = DB::connection('mysql')->table('company_banners')->select('*')->where('status', '1')->orderBy('id', 'DESC')->get();
         $data['company_details'] = $companyController->commonComponent();
         $data['destinations'] = $destinationsController->alldestinationlist('0','2','1');
         $data['destinations2'] =  $destinationsController->alldestinationlist('2','2','1');        

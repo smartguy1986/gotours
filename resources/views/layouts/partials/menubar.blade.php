@@ -47,7 +47,8 @@
             <a href="single-page.html">Shop</a>
         </li>
         <li class="menu-item">
-            <a href="#">Articles</a>
+            {{-- <a href="#">Articles</a> --}}
+            <a href="{{ URL::route('blog.lists') }}">Articles</a>
         </li>
         @auth
             <li class="menu-item-has-children">

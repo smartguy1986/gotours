@@ -77,7 +77,7 @@ class LoginController extends Controller
             if ($user->type == 'admin') {
                 return redirect()->route('admin.dashboard');
             } else if ($user->type == 'manager') {
-                $managerData = DB::table('agencies')->where('manager_id', $user->id)->first();
+                $managerData = DB::connection('mysql')->table('agencies')->where('manager_id', $user->id)->first();
                 Session::put('managerData', $managerData); // Store managerData in session
                 return redirect()->route('manager.home');
             } else {

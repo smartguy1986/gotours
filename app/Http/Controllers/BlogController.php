@@ -18,13 +18,39 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $data['blogs'] = DB::table('blogs')->select('blogs.*', 'users.name', 'users.email')->join('users', 'users.id', '=', 'blogs.author')->orderBy('blogs.id', 'DESC')->get();
+        $data['blogs'] = DB::connection('mysql')->table('blogs')->select('blogs.*', 'users.name', 'users.email')->join('users', 'users.id', '=', 'blogs.author')->orderBy('blogs.id', 'DESC')->get();
         return view('layouts.admin.blogs.lists', $data);
     }
 
+    public function showarticles(Request $request, CompanyController $companyController, BlogController $blogController)
+    {
+        $data['company_details'] = $companyController->commonComponent();
+        $data['blogs'] = $blogController->last3blogs();
+
+        $resultsa = DB::connection('mysql')
+            ->table('blogs')
+            ->selectRaw("blogs.*, users.name, users.email, COUNT(blog_comment.blog_id) AS totcm")
+            ->leftJoin('users', 'users.id', '=', 'blogs.author')
+            ->leftJoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")
+            ->where("blogs.status", "=", '2')
+            ->groupBy('blogs.id')
+            ->orderBy('blogs.id', 'DESC')
+            ->paginate(4);
+
+
+        if ($request->ajax()) {
+            $view = view('layouts.pages.articlesblocks', compact('resultsa'))->render();
+            $data['blogs'] = $view;
+            return response()->json(['blogs' => $view]);
+        }
+
+        return view('layouts.pages.articlelists')->with($data);
+    }
+
+
     public function last3blogs()
     {
-        return DB::table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
+        return DB::connection('mysql')->table("blogs")->selectRaw("blogs.*, COUNT('blog_comment.blog_id') AS totcm, users.name")->leftjoin("blog_comment", "blog_comment.blog_id", "=", "blogs.id")->leftjoin('users', 'users.id', '=', 'blogs.author')->where("blogs.status", "=", '2')->groupBy('blogs.id')->orderBy("blogs.id", "desc")->take(3)->get();
     }
 
     /**
@@ -34,7 +60,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        $data['destinations'] = DB::table('destinations')->select('*')->get();
+        $data['destinations'] = DB::connection('mysql')->table('destinations')->select('*')->get();
         return view('layouts.admin.blogs.addblog', $data);
     }
 
@@ -96,13 +122,13 @@ class BlogController extends Controller
 
     public function showfront(Request $request, $link)
     {
-        $data['company_details'] = DB::table('company_details')->select('*')->get();
+        $data['company_details'] = DB::connection('mysql')->table('company_details')->select('*')->get();
 
-        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id', '=', 'blogs.author')->where('blogs.slug', '=', $link)->get();
+        $data['blogs'] = DB::connection('mysql')->table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id', '=', 'blogs.author')->where('blogs.slug', '=', $link)->get();
 
-        $data['blog_comments'] = DB::table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id', '=', $data['blogs'][0]->id)->get();
+        $data['blog_comments'] = DB::connection('mysql')->table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id', '=', $data['blogs'][0]->id)->get();
 
-        $data['related_blogs'] = DB::table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $data['blogs'][0]->id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
+        $data['related_blogs'] = DB::connection('mysql')->table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $data['blogs'][0]->id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
         return view('layouts.pages.blogdetails', $data);
     }
 
@@ -125,13 +151,13 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        $data['company_details'] = DB::table('company_details')->select('*')->get();
+        $data['company_details'] = DB::connection('mysql')->table('company_details')->select('*')->get();
 
-        $data['blogs'] = DB::table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id', '=', 'blogs.author')->where('blogs.id', '=', $id)->get();
+        $data['blogs'] = DB::connection('mysql')->table("blogs")->selectRaw("blogs.*, users.name, users.bio")->leftjoin('users', 'users.id', '=', 'blogs.author')->where('blogs.id', '=', $id)->get();
 
-        $data['blog_comments'] = DB::table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id', '=', $id)->get();
+        $data['blog_comments'] = DB::connection('mysql')->table("blog_comment")->selectRaw("blog_comment.*")->where('blog_comment.blog_id', '=', $id)->get();
 
-        $data['related_blogs'] = DB::table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
+        $data['related_blogs'] = DB::connection('mysql')->table("blogs")->select("blogs.*")->where("blogs.status", "=", "2")->where("blogs.id", "!=", $id)->groupBy('blogs.id')->orderBy("blogs.id", "DESC")->inRandomOrder()->limit(4)->get();
 
         return view('layouts.admin.blogs.editblog', $data);
     }
@@ -188,7 +214,7 @@ class BlogController extends Controller
             'blog_content' => $request->blog_content
         );
 
-        DB::table('blogs')->where("id", $request->id)->update($data);
+        DB::connection('mysql')->table('blogs')->where("id", $request->id)->update($data);
 
         Session::flash('success', 'Blog updated Successfully');
         return redirect('/admin/blog');

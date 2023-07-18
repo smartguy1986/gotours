@@ -52,6 +52,8 @@ Route::get('/packages-by-destination/{link}', [PackagesController::class, 'packa
 
 Route::get('/package-offers', [PackagesController::class, 'packagebyoffer'])->name('package-offers');
 
+Route::get('/blogs', [BlogController::class, 'showarticles'])->name('blog.lists');
+
 Route::get('/blog/details/{link}', [BlogController::class, 'showfront'])->name('blog.details');
 
 Route::get('about-us', [PageController::class, 'aboutus'])->name('about-us');

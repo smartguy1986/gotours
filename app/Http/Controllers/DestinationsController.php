@@ -19,19 +19,19 @@ class DestinationsController extends Controller
      */
     public function index()
     {
-        return $data['destinations'] = DB::table('destinations')->select('*')->orderBy('id', 'DESC')->get();
+        return $data['destinations'] = DB::connection('mysql')->table('destinations')->select('*')->orderBy('id', 'DESC')->get();
     }
 
     public function adminlist()
     {
-        $data['destinations'] = DB::table('destinations')->select('*')->orderBy('id', 'DESC')->get();
+        $data['destinations'] = DB::connection('mysql')->table('destinations')->select('*')->orderBy('id', 'DESC')->get();
         return view('layouts.admin.destinations.lists', $data);
     }
 
     public function alldestinationlist($x = 0, $y = 0, $z = 0)
     {
         if ($x) {
-            return DB::table('destinations')
+            return DB::connection('mysql')->table('destinations')
                 ->select('*')
                 ->where([
                     ['status', '=', '1'],
@@ -42,7 +42,7 @@ class DestinationsController extends Controller
                 ->take($y)
                 ->get();
         } else {
-            return DB::table('destinations')
+            return DB::connection('mysql')->table('destinations')
                 ->select('*')
                 ->where([
                     ['status', '=', '1'],
@@ -133,7 +133,7 @@ class DestinationsController extends Controller
      */
     public function edit(Destinations $destinations, $id)
     {
-        $data['destinations'] = DB::table('destinations')->select('*')->where('id', $id)->get();
+        $data['destinations'] = DB::connection('mysql')->table('destinations')->select('*')->where('id', $id)->get();
         return view('layouts.admin.destinations.editdest', $data);
     }
 

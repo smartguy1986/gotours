@@ -22,13 +22,13 @@ class CompanyController extends Controller
 
     public function index()
     {
-        $data['company'] = DB::table('company_details')->select('*')->get();
+        $data['company'] = DB::connection('mysql')->table('company_details')->select('*')->get();
         return view('layouts.admin.company.basicinfo', $data);
     }
 
     public function commonComponent()
     {
-        return DB::table('company_details')->select('*')->get();
+        return DB::connection('mysql')->table('company_details')->select('*')->get();
     }
 
     /**

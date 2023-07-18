@@ -10008,3 +10008,7 @@ product checkout css
   right: 30px !important;
   position: fixed !important;
 }
+
+.article-list-image{
+  height: 305px !important;
+}
