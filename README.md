@@ -22,7 +22,11 @@ Then import the database from DB folder to your local phpmyadmin. <br/> <br/>
 Then go to terminal or command prompt and make sure you are inside the gotours folder. <br/>
 Type ***npm install*** <br/> <br/>
 
-once its done, type ***php artisan serve*** and run the project in browser. <br/> <br/>
+once its done, copy ***.env.example*** and rename it to ***.env*** file, change DB parameters base url inside it <br/> <br/>
+
+once done, type ***composer update*** so that it will generate ***vendor*** and ***autoload*** <br/> <br/>
+
+now, type ***php artisan serve*** and run the project in browser. <br/> <br/>
 
 For admin purpose use <br/>
 username : **admin@gotours.com** <br/>
